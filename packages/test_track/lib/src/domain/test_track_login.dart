@@ -16,7 +16,7 @@ import 'package:test_track/test_track.dart';
 /// be returned for subsequent calls to [Login]
 ///
 /// If the linking fails, throws an
-/// [FailedToLoginException].
+/// [TestTrackLoginFailureException].
 ///
 /// If the linking is successful, the [Visitor] and [SplitRegistry]
 /// contained within the associated [AppVisitorConfig] are persisted.
@@ -52,7 +52,7 @@ class Login {
         isIdempotent: true,
       );
     } on DioError catch (e) {
-      throw FailedToLoginException(
+      throw TestTrackLoginFailureException(
         message: e.message,
       );
     }

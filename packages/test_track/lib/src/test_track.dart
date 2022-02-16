@@ -157,7 +157,7 @@ class TestTrack {
         appVersionBuild: _appVersionBuild,
       );
       _updateAppVisitorConfig(appVisitorConfig);
-    } on FailedToLoginException catch (e) {
+    } on TestTrackLoginFailureException catch (e) {
       _logger.info(
         'Failed to login user, continuing to use existing app visitor config',
         error: e.message,

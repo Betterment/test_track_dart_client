@@ -117,7 +117,7 @@ void main() {
           );
         });
 
-        test('throws FailedToLoginException when network request fails',
+        test('throws TestTrackLoginFailureException when network request fails',
             () async {
           expect(
             () => subject.call(
@@ -125,7 +125,7 @@ void main() {
               visitorId: visitorId,
               appVersionBuild: appVersionBuild,
             ),
-            throwsA(isA<FailedToLoginException>()),
+            throwsA(isA<TestTrackLoginFailureException>()),
           );
         });
       });

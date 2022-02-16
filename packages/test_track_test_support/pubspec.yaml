@@ -1,0 +1,17 @@
+name: test_track_test_support
+description: Test utilities for working with package:test_track
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: ">=2.15.0 <3.0.0"
+
+dependencies:
+  test_track:
+    path: ../test_track
+  random_string: ^2.2.0-nullsafety
+
+dev_dependencies:
+  coverage: ^1.0.3
+  test: ^1.16.0
+  lints: ^1.0.1

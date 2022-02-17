@@ -13,8 +13,8 @@ on:
 
 jobs:
   build:
-    uses: ./.github/workflows/build.yml
-    with: dir: test_track
+    - uses: ./.github/workflows/build.yml
+      with: dir: test_track
 
   # pana:
   #   runs-on: ubuntu-latest

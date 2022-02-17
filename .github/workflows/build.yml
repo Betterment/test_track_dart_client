@@ -1,0 +1,51 @@
+name: Build
+
+on:
+  workflow_call:
+    inputs:
+      dir:
+        required: true
+        type: string
+    secrets:
+      token:
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2.3.5
+      - uses: dart-lang/setup-dart@v1.3
+
+      - name: Install dependencies
+        run: dart pub get
+          working-directory: ${{ inputs.dir }}
+
+      - name: Run build_runner
+        run: dart run build_runner build --delete-conflicting-outputs
+          working-directory: ${{ inputs.dir }}
+
+      - name: Ensure clean git status
+        run: ./tool/ensure_git_clean.sh
+
+      - name: Verify formatting
+        run: dart format --output=none --set-exit-if-changed .
+          working-directory: ${{ inputs.dir }}
+
+      - name: Analyze project source
+        uses: invertase/github-action-dart-analyzer@v1
+          working-directory: ${{ inputs.dir }}
+
+      - name: Run tests and generate coverage report
+        run: ../tool/generate_code_coverage.sh
+          working-directory: ${{ inputs.dir }}
+
+      - name: Report code coverage
+        uses: zgosalvez/github-actions-report-lcov@v1.4.0
+        with:
+          coverage-files: coverage/lcov.info
+          minimum-coverage: 90
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          artifact-name: code-coverage-report
+          working-directory: ${{ inputs.dir }}

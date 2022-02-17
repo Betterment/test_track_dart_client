@@ -12,10 +12,15 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  build_test_track:
     uses: ./.github/workflows/build.yml
     with:
-      dir: test_track
+      dir: packages/test_track
+
+  build_test_track_test_support:
+    uses: ./.github/workflows/build.yml
+    with:
+      dir: packages/test_track_test_support
 
   # pana:
   #   runs-on: ubuntu-latest

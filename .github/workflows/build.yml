@@ -22,7 +22,6 @@ jobs:
       - name: Run build_runner
         working-directory: ${{ inputs.dir }}
         run: dart run build_runner build --delete-conflicting-outputs
-          
 
       - name: Ensure clean git status
         run: ./tool/ensure_git_clean.sh

@@ -35,7 +35,6 @@ jobs:
         run: dart format --output=none --set-exit-if-changed .
 
       - name: Analyze project source
-        working-directory: ${{ inputs.dir }}
         uses: invertase/github-action-dart-analyzer@v1
 
       - name: Run tests and generate coverage report

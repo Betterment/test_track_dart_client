@@ -43,7 +43,7 @@ void main() {
             '/api/v2/visitors/$visitorId/assignment_overrides',
             (request) {
               final data = request.body as Map<String, Object?>?;
-              assignmentsFromRequest =
+              return assignmentsFromRequest =
                   data?['assignments'] as List<Map<String, Object?>>?;
             },
             statusCode: 204,

@@ -30,7 +30,7 @@ void main() {
               final data = request.body as Map<String, Object?>?;
               assignmentEventFromRequest =
                   data != null ? AssignmentEvent.fromJson(data) : null;
-              isIdempotent =
+              return isIdempotent =
                   request.requestOptions.extra['is_idempotent'] as bool;
             },
           );

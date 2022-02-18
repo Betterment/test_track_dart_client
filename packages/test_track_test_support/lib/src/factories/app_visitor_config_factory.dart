@@ -6,7 +6,7 @@ import 'package:test_track_test_support/test_track_test_support.dart';
 /// testing
 /// {@endtemplate}
 class AppVisitorConfigFactory {
-    /// {@macro app_visitor_config_factory}
+  /// {@macro app_visitor_config_factory}
   static AppVisitorConfig build() {
     return AppVisitorConfig(
       splits: List.generate(10, (index) => SplitFactory.build()),

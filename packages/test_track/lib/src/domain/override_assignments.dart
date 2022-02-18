@@ -10,12 +10,14 @@ class OverrideAssignments {
   final HttpClient _client;
   final GetVisitorConfig _getVisitorConfig;
 
+  /// {@macro override_assignments}
   OverrideAssignments({
     required HttpClient client,
     required GetVisitorConfig getVisitorConfig,
   })  : _client = client,
         _getVisitorConfig = getVisitorConfig;
 
+  /// {@macro override_assignments}
   Future<AppVisitorConfig> call({
     required AppVersionBuild appVersionBuild,
     required String visitorId,

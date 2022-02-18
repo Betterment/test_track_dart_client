@@ -21,8 +21,10 @@ import 'package:test_track/src/models/models.dart';
 class RunAb {
   final RunVary _runVary;
 
+  /// {@macro run_ab}
   RunAb({required RunVary runVary}) : _runVary = runVary;
 
+  /// {@macro run_ab}
   RunAbResult call({
     required Visitor visitor,
     required Split split,
@@ -55,4 +57,23 @@ class RunAb {
       runVaryResult.visitor,
     );
   }
+}
+
+/// {@template invalid_split_configuration_for_ab_testing_exception}
+/// [TestTrackException] thrown when the [Split] used to
+/// calculate the `ab` contains more than 2 [Variant]s
+/// {@endtemplate}
+class InvalidSplitConfigurationForAbTestingException
+    implements TestTrackException {
+  /// The name of the misconfigured [Split]
+  final String splitName;
+
+  /// {@macro invalid_split_configuration_for_ab_testing_exception}
+  InvalidSplitConfigurationForAbTestingException({
+    required this.splitName,
+  });
+
+  @override
+  String toString() =>
+      'InvalidSplitConfigurationForAbTestingException: splitName: $splitName';
 }

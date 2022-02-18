@@ -10,6 +10,22 @@ import 'package:test_track/test_track.dart';
 /// If this has already been executed for the same [Visitor]
 /// and [Split], will return the existing assigned [Variant].
 ///
+/// If the [Visitor] has not yet been assigned a [Variant]
+/// within the [Split], a new [Assignment] will be created,
+/// and that assignment will be tracked via
+/// [AnalyticsProvider.trackAssignment] as well as reported
+/// via [ReportAssignmentEvent].
+///
+/// If the [Visitor] has an existing [Assignment] to a [Variant]
+/// that is no longer valid per the provided [Split], the
+/// default [Variant] supplied will be used.
+///
+/// The [Visitor] returned will contain [Assignment]s
+/// that are reflective of this invoking this calculation.
+/// Note that [Assignment]s are deterministic based on the
+/// [Visitor] id and [Split] configuration, so this calculation
+/// is idempotent when those two inputs remain the same.
+///
 /// {@endtemplate}
 class RunVary {
   final CalculateVariant _calculateVariant;
@@ -17,6 +33,7 @@ class RunVary {
   final ReportAssignmentEvent _reportAssignmentEvent;
   final DataStorageProvider _dataStorageProvider;
 
+  /// {@macro run_vary}
   RunVary({
     required CalculateVariant calculateVariant,
     required AnalyticsProvider analyticsProvider,
@@ -27,6 +44,7 @@ class RunVary {
         _reportAssignmentEvent = reportAssignmentEvent,
         _dataStorageProvider = dataStorageProvider;
 
+  /// {@macro run_vary}
   RunVaryResult call({
     required Visitor visitor,
     required Split split,

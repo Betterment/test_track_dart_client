@@ -27,6 +27,7 @@ class Login {
   final DataStorageProvider _dataStorageProvider;
   final AnalyticsProvider _analyticsProvider;
 
+  /// {@macro test_track_login}
   Login({
     required HttpClient httpClient,
     required DataStorageProvider dataStorageProvider,
@@ -35,6 +36,7 @@ class Login {
         _dataStorageProvider = dataStorageProvider,
         _analyticsProvider = analyticsProvider;
 
+  /// {@macro test_track_login}
   Future<AppVisitorConfig> call({
     required Identifier identifier,
     required String visitorId,
@@ -67,4 +69,16 @@ class Login {
 
     return appVisitorConfig;
   }
+}
+
+/// {@template test_track_login_failure_exception}
+/// [TestTrackException] thrown when an attempt to [Login] fails
+/// {@endtemplate}
+class TestTrackLoginFailureException implements TestTrackException {
+  /// A message associated with the [Login] failure, generally
+  /// the reason for the failure
+  final String? message;
+
+  /// {@macro test_track_login_failure_exception}
+  TestTrackLoginFailureException({this.message});
 }

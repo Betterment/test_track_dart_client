@@ -6,13 +6,13 @@
 
 This repository hosts the [TestTrack dart client](packages/test_track/) as well as its [testing support package](packages/test_track_test_support/).
 
-[### Test Track Dart Client](packages/test_track/)
+### [Test Track Dart Client](packages/test_track/)
 
 This is the dart client library for the [TestTrack](https://github.com/Betterment/test_track) system.
 
 It provides client-side split-testing and feature-toggling through a simple API.
 
-[### Test Track Test Support](packages/test_track_test_support/)
+### [Test Track Test Support](packages/test_track_test_support/)
 
 This is the testing support package intended to facilitate easy integration testing with the TestTrack dart client.
 

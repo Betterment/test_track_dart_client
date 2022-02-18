@@ -81,8 +81,11 @@ void main() {
         }
 
         group('and the retry request succeeds', () {
-          test('it retries the request with dio and returns the successful response', () async {
-            final successResponse = Response<dynamic>(requestOptions: error.requestOptions);
+          test(
+              'it retries the request with dio and returns the successful response',
+              () async {
+            final successResponse =
+                Response<dynamic>(requestOptions: error.requestOptions);
             whenDioRequests().thenAnswer((_) async => successResponse);
 
             expect(await subject.onError(error, handler), successResponse);
@@ -94,8 +97,11 @@ void main() {
         });
 
         group('and the request fails', () {
-          test('it retries the request with dio and calls next on the handler with the retry request error', () async {
-            final retryError = DioError(requestOptions: RequestOptions(path: 'errorPath'));
+          test(
+              'it retries the request with dio and calls next on the handler with the retry request error',
+              () async {
+            final retryError =
+                DioError(requestOptions: RequestOptions(path: 'errorPath'));
             whenDioRequests().thenThrow(retryError);
 
             await subject.onError(error, handler);
@@ -116,7 +122,8 @@ void main() {
           );
         });
         test('it calls next on the handler with the error', () async {
-          final error = DioError(requestOptions: RequestOptions(path: 'test.com'));
+          final error =
+              DioError(requestOptions: RequestOptions(path: 'test.com'));
 
           await subject.onError(error, handler);
 

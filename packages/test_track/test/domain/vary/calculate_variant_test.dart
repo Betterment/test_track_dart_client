@@ -25,7 +25,10 @@ void main() {
 
         final subject = CalculateVariant();
 
-        expect(subject.call(visitorId: visitorId, split: split).name, 'miniscule');
+        expect(
+          subject.call(visitorId: visitorId, split: split).name,
+          'miniscule',
+        );
       });
 
       test('throws exception when no variants are present', () {

@@ -28,8 +28,10 @@ void main() {
             '/api/v1/assignment_event',
             (request) {
               final data = request.body as Map<String, Object?>?;
-              assignmentEventFromRequest = data != null ? AssignmentEvent.fromJson(data) : null;
-              isIdempotent = request.requestOptions.extra['is_idempotent'] as bool;
+              assignmentEventFromRequest =
+                  data != null ? AssignmentEvent.fromJson(data) : null;
+              return isIdempotent =
+                  request.requestOptions.extra['is_idempotent'] as bool;
             },
           );
       });
@@ -44,7 +46,8 @@ void main() {
         );
       }
 
-      test('it makes a POST request to the correct url with the correct body', () async {
+      test('it makes a POST request to the correct url with the correct body',
+          () async {
         final subject = buildSubject();
         await subject.call(assignmentEvent);
         expect(assignmentEventFromRequest, assignmentEvent);

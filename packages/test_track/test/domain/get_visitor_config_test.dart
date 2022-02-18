@@ -36,7 +36,9 @@ void main() {
         );
       });
 
-      test('it makes a GET request to the correct url and returns an AppVisitorConfig', () async {
+      test(
+          'it makes a GET request to the correct url and returns an AppVisitorConfig',
+          () async {
         final result = await subject.call(
           visitorId: visitorId,
           appVersionBuild: appVersionBuild,
@@ -44,7 +46,8 @@ void main() {
         expect(result, appVisitorConfig);
       });
 
-      test('it stores new visitor and split registry in data storage', () async {
+      test('it stores new visitor and split registry in data storage',
+          () async {
         final initialVisitor = Visitor.build();
         await dataStorageProvider.storeVisitor(initialVisitor);
         await dataStorageProvider.storeSplitRegistry(SplitRegistry.empty());
@@ -53,7 +56,8 @@ void main() {
           appVersionBuild: appVersionBuild,
         );
         final storedVisitor = await dataStorageProvider.fetchVisitor();
-        final storedSplitRegistry = await dataStorageProvider.fetchSplitRegistry();
+        final storedSplitRegistry =
+            await dataStorageProvider.fetchSplitRegistry();
         expect(initialVisitor.id == storedVisitor!.id, isFalse);
         expect(storedSplitRegistry!.splits, isNotEmpty);
       });

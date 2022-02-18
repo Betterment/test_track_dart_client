@@ -5,7 +5,8 @@ class FakeDataStorageProvider implements DataStorageProvider {
   SplitRegistry? _splitRegistry;
   Visitor? _visitor;
 
-  FakeDataStorageProvider({void Function()? onInitialize}) : _onInitialize = onInitialize;
+  FakeDataStorageProvider({void Function()? onInitialize})
+      : _onInitialize = onInitialize;
 
   @override
   Future<SplitRegistry?> fetchSplitRegistry() async {

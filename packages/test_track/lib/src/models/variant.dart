@@ -10,5 +10,6 @@ class Variant with _$Variant {
     required int weight,
   }) = _Variant;
 
-  factory Variant.fromJson(Map<String, dynamic> json) => _$VariantFromJson(json);
+  factory Variant.fromJson(Map<String, dynamic> json) =>
+      _$VariantFromJson(json);
 }

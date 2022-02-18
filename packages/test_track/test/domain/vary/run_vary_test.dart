@@ -54,8 +54,10 @@ void main() {
     group('call(visitor:, split:, context:)', () {
       group('when a previous assignment exists', () {
         test('it returns the existing assigned variant if it exists', () {
-          final existingAssignedVariant = VariantFactory.build().withName('existing');
-          final split = SplitFactory.build().withName('fake-split').withVariants([
+          final existingAssignedVariant =
+              VariantFactory.build().withName('existing');
+          final split =
+              SplitFactory.build().withName('fake-split').withVariants([
             existingAssignedVariant,
             VariantFactory.build(),
             VariantFactory.build(),
@@ -79,19 +81,26 @@ void main() {
           // Ensure the updated visitor assignments doesn't contain a duplicated
           // existing assignment
           expect(
-            runVaryResult.visitor.assignments.where((element) => element.variant == 'existing').length,
+            runVaryResult.visitor.assignments
+                .where((element) => element.variant == 'existing')
+                .length,
             1,
           );
         });
 
-        test('it returns the default variant if the existing assignment variant no longer exists', () {
-          final split = SplitFactory.build().withName('fake-split').withVariants([
+        test(
+            'it returns the default variant if the existing assignment variant no longer exists',
+            () {
+          final split =
+              SplitFactory.build().withName('fake-split').withVariants([
             VariantFactory.build().withName('iExist'),
             VariantFactory.build().withName('iAlsoExist'),
             VariantFactory.build().withName('iExistAsWell')
           ]);
           final visitor = VisitorFactory.build().withAssignments([
-            AssignmentFactory.build().withSplitName('fake-split').withVariant('iNoLongerExist'),
+            AssignmentFactory.build()
+                .withSplitName('fake-split')
+                .withVariant('iNoLongerExist'),
           ]);
 
           final runVaryResult = buildSubject().call(
@@ -105,11 +114,13 @@ void main() {
           // Ensure the updated visitor assignments were correctly updated
           // with the default variant
           expect(
-            runVaryResult.visitor.assignments.where((a) => a.variant == 'expectedDefault'),
+            runVaryResult.visitor.assignments
+                .where((a) => a.variant == 'expectedDefault'),
             isNotEmpty,
           );
           expect(
-            runVaryResult.visitor.assignments.where((a) => a.variant == 'iNoLongerExist'),
+            runVaryResult.visitor.assignments
+                .where((a) => a.variant == 'iNoLongerExist'),
             isEmpty,
           );
         });
@@ -117,7 +128,8 @@ void main() {
 
       group('when a previous assignment does not exist', () {
         test('it calculates a new variant', () {
-          final expectedAssignedVariant = VariantFactory.build().withName('pickMe').withWeight(100);
+          final expectedAssignedVariant =
+              VariantFactory.build().withName('pickMe').withWeight(100);
           final split = SplitFactory.build().withVariants([
             expectedAssignedVariant,
             VariantFactory.build().withName('doNotPickMe').withWeight(0),
@@ -173,7 +185,8 @@ void main() {
           );
         });
 
-        test('it reports assignment events for non-feature-gate assignments', () async {
+        test('it reports assignment events for non-feature-gate assignments',
+            () async {
           final visitor = VisitorFactory.build().withAssignments([]);
           final split = SplitFactory.build(isFeatureGate: false).withVariants([
             const Variant(name: 'true', weight: 100),
@@ -183,7 +196,8 @@ void main() {
           var reportAssignmentEventCalled = false;
           // Use a fake `ReportAssignmentEvent` because in source code its
           // invocation is not awaited and the test will fail
-          final reportAssignmentEvent = FakeReportAssignmentEvent(onInvoked: () {
+          final reportAssignmentEvent =
+              FakeReportAssignmentEvent(onInvoked: () {
             reportAssignmentEventCalled = true;
           });
           buildSubject(
@@ -218,14 +232,17 @@ void main() {
           );
         });
 
-        test('it does not report assignment events for feature gate assignments ', () async {
+        test(
+            'it does not report assignment events for feature gate assignments ',
+            () async {
           final visitor = VisitorFactory.build().withAssignments([]);
           final split = SplitFactory.build(isFeatureGate: true);
 
           var reportAssignmentEventCalled = false;
           // Use a fake `ReportAssignmentEvent` because in source code its
           // invocation is not awaited and the test will fail
-          final reportAssignmentEvent = FakeReportAssignmentEvent(onInvoked: () {
+          final reportAssignmentEvent =
+              FakeReportAssignmentEvent(onInvoked: () {
             reportAssignmentEventCalled = true;
           });
           buildSubject(
@@ -243,8 +260,11 @@ void main() {
           );
         });
 
-        test('it returns the updated visitor with new assignment added to existing ones', () {
-          final expectedAssignedVariant = VariantFactory.build().withName('pickMe').withWeight(100);
+        test(
+            'it returns the updated visitor with new assignment added to existing ones',
+            () {
+          final expectedAssignedVariant =
+              VariantFactory.build().withName('pickMe').withWeight(100);
           final split = SplitFactory.build().withVariants([
             expectedAssignedVariant,
             VariantFactory.build().withName('doNotPickMe').withWeight(0),
@@ -280,7 +300,8 @@ void main() {
         });
 
         test('it stores the updated visitor in data storage', () async {
-          final expectedAssignedVariant = VariantFactory.build().withName('pickMe').withWeight(100);
+          final expectedAssignedVariant =
+              VariantFactory.build().withName('pickMe').withWeight(100);
           final split = SplitFactory.build().withVariants([
             expectedAssignedVariant,
             VariantFactory.build().withName('doNotPickMe').withWeight(0),

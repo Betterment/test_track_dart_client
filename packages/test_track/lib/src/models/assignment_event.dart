@@ -11,5 +11,6 @@ class AssignmentEvent with _$AssignmentEvent {
     required String context,
   }) = _AssignmentEvent;
 
-  factory AssignmentEvent.fromJson(Map<String, dynamic> json) => _$AssignmentEventFromJson(json);
+  factory AssignmentEvent.fromJson(Map<String, dynamic> json) =>
+      _$AssignmentEventFromJson(json);
 }

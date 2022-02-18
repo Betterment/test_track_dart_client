@@ -16,8 +16,11 @@ class RetryInterceptor extends Interceptor {
 
   @override
   Future onError(DioError err, ErrorInterceptorHandler handler) async {
-    var extra = RetryOptions.fromRequestOptions(err.requestOptions) ?? _retryOptions;
-    final isIdempotent = err.requestOptions.extra[HttpClient.isIdempotentOptionsKey] as bool? ?? false;
+    var extra =
+        RetryOptions.fromRequestOptions(err.requestOptions) ?? _retryOptions;
+    final isIdempotent =
+        err.requestOptions.extra[HttpClient.isIdempotentOptionsKey] as bool? ??
+            false;
 
     if (extra.shouldRetry(err, isIdempotent: isIdempotent)) {
       if (extra.retryInterval.inMilliseconds > 0) {

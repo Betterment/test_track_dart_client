@@ -14,8 +14,10 @@ class FakeAnalyticsProvider implements AnalyticsProvider {
   /// [Pair] of visitor id to [Assignment]
   final _trackAssignmentInvocations = <Pair<String, Assignment>>[];
 
-  List<Pair<String, Assignment>> get trackAssignmentInvocations => UnmodifiableListView(_trackAssignmentInvocations);
-  List<String> get identifyInvocations => UnmodifiableListView(_identifyInvocations);
+  List<Pair<String, Assignment>> get trackAssignmentInvocations =>
+      UnmodifiableListView(_trackAssignmentInvocations);
+  List<String> get identifyInvocations =>
+      UnmodifiableListView(_identifyInvocations);
 
   @override
   Future<void> identify({required String visitorId}) async {
@@ -31,7 +33,8 @@ class FakeAnalyticsProvider implements AnalyticsProvider {
   }
 
   /// True if [identify] was invoked with the provided visitor id
-  bool identifyCalledWith(String visitorId) => _identifyInvocations.contains(visitorId);
+  bool identifyCalledWith(String visitorId) =>
+      _identifyInvocations.contains(visitorId);
 
   /// True if [identify] has not been called for the life of this
   /// [FakeAnalyticsProvider]

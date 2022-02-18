@@ -24,7 +24,8 @@ class FakeTestTrackLogger implements TestTrackLogger {
     required this.shouldEnableNetworkLogging,
   });
 
-  factory FakeTestTrackLogger.withoutNetworkLogging() => FakeTestTrackLogger(shouldEnableNetworkLogging: false);
+  factory FakeTestTrackLogger.withoutNetworkLogging() =>
+      FakeTestTrackLogger(shouldEnableNetworkLogging: false);
 
   @override
   void debug(String message, {Object? error, StackTrace? stackTrace}) {

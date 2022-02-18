@@ -14,5 +14,6 @@ class Visitor with _$Visitor {
 
   factory Visitor.build() => Visitor(id: const Uuid().v4(), assignments: []);
 
-  factory Visitor.fromJson(Map<String, dynamic> json) => _$VisitorFromJson(json);
+  factory Visitor.fromJson(Map<String, dynamic> json) =>
+      _$VisitorFromJson(json);
 }

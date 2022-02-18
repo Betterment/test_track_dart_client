@@ -23,7 +23,8 @@ class Assignment with _$Assignment {
     );
   }
 
-  factory Assignment.fromJson(Map<String, dynamic> json) => _$AssignmentFromJson(json);
+  factory Assignment.fromJson(Map<String, dynamic> json) =>
+      _$AssignmentFromJson(json);
 }
 
 extension AssignmentExtensions on Assignment {

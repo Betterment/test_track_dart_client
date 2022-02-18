@@ -25,7 +25,8 @@ class GetVisitorConfig {
     final appVisitorConfig = AppVisitorConfig.fromJson(response.data!);
 
     await _dataStorageProvider.storeVisitor(appVisitorConfig.visitor);
-    await _dataStorageProvider.storeSplitRegistry(appVisitorConfig.splitRegistry);
+    await _dataStorageProvider
+        .storeSplitRegistry(appVisitorConfig.splitRegistry);
 
     await _analyticsProvider.identify(visitorId: appVisitorConfig.visitor.id);
 

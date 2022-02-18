@@ -24,7 +24,8 @@ class ReportAssignmentEvent {
         isIdempotent: true,
       );
     } on Exception catch (error) {
-      _logger.error('Unable to report assignment event: $assignmentEvent with error: $error');
+      _logger.error(
+          'Unable to report assignment event: $assignmentEvent with error: $error');
     }
   }
 }

@@ -13,7 +13,7 @@ on:
 
 jobs:
   validate_test_track:
-    uses: ./.github/workflows/build.yml
+    uses: ./.github/workflows/validate.yml
     with:
       dir: packages/test_track
       code-gen: true
@@ -21,7 +21,7 @@ jobs:
       min-pana-score: 130
 
   validate_test_track_test_support:
-    uses: ./.github/workflows/build.yml
+    uses: ./.github/workflows/validate.yml
     with:
       dir: packages/test_track_test_support
       code-gen: false

@@ -1,29 +1,34 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:test_track/test_track.dart';
 
+/// {@template fake_test_track_logger}
 /// A fake [TestTrackLogger] that internally tracks
-/// [LogEvent]s to [debug] and [error]
+/// [LogEvent]s
+/// {@endtemplate}
 class FakeTestTrackLogger implements TestTrackLogger {
   @override
   final bool shouldEnableNetworkLogging;
 
-  /// Contains all [LogEvent]s that were produced from calls to [debug]
   final _debugLogs = <LogEvent>[];
-
-  /// Contains all [LogEvent]s that were produced from calls to [info]
   final _infoLogs = <LogEvent>[];
-
-  /// Contains all [LogEvent]s that were produced from calls to [error]
   final _errorLogs = <LogEvent>[];
 
+  /// All [LogEvent]s produced by calls to [debug]
   List<LogEvent> get debugLogs => UnmodifiableListView(_debugLogs);
+
+  /// All [LogEvent]s produced by calls to [info]
   List<LogEvent> get infoLogs => UnmodifiableListView(_infoLogs);
+
+  /// All [LogEvent]s produced by calls to [error]
   List<LogEvent> get errorLogs => UnmodifiableListView(_errorLogs);
 
+  ///{@macro fake_test_track_logger}
   FakeTestTrackLogger({
     required this.shouldEnableNetworkLogging,
   });
 
+  /// A convenience constructor to produce a [FakeTestTrackLogger]
+  /// with [shouldEnableNetworkLogging] set to false
   factory FakeTestTrackLogger.withoutNetworkLogging() =>
       FakeTestTrackLogger(shouldEnableNetworkLogging: false);
 
@@ -55,10 +60,21 @@ class FakeTestTrackLogger implements TestTrackLogger {
   bool get noErrorLogs => errorLogs.isEmpty;
 }
 
+/// {@template log_event}
+/// A representation of an invocation to one of the
+/// logging functions on a [TestTrackLogger], used
+/// by [FakeTestTrackLogger]
+/// {@endtemplate}
 class LogEvent {
+  /// The message of the log
   final String message;
+
+  /// A nullable error associated with the log
   final Object? error;
+
+  /// A nullable [StackTrace] associated with the log
   final StackTrace? stackTrace;
 
+  /// {@macro log_event}
   LogEvent(this.message, this.error, this.stackTrace);
 }

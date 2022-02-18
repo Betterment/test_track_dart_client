@@ -6,16 +6,20 @@ import 'package:test_track_test_support/src/helpers/pair.dart';
 /// [identify] and [trackAssignment] and provides a simple API for
 /// querying those invocations
 class FakeAnalyticsProvider implements AnalyticsProvider {
-  /// Contains all visitor ids that were passed along with
-  /// invocations of [identify]
   final _identifyInvocations = <String>[];
-
-  /// Contains all invocations of [trackAssignment] represented as a
-  /// [Pair] of visitor id to [Assignment]
   final _trackAssignmentInvocations = <Pair<String, Assignment>>[];
 
+  /// Returns a list of [Pair]s representing invocations produced
+  /// by calls to [trackAssignment] where the first item in each
+  /// [Pair] is the id of the [Visitor] with the new assignment
+  /// and the second item in the [Pair] is the [Assignment] that was
+  /// created
   List<Pair<String, Assignment>> get trackAssignmentInvocations =>
       UnmodifiableListView(_trackAssignmentInvocations);
+
+  /// Returns a list of [String]s representing invocations produced
+  /// by calls to [identify] where each [String] is the id
+  /// of the [Visitor]
   List<String> get identifyInvocations =>
       UnmodifiableListView(_identifyInvocations);
 

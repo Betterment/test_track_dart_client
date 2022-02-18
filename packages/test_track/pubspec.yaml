@@ -1,7 +1,9 @@
 name: test_track
-description: Dart client for the TestTrack system.
+description: The dart client for the TestTrack system. It provides client-side split-testing and feature-toggling through a simple API.
 version: 0.0.1
 publish_to: none
+homepage: https://github.com/Betterment/test_track_dart_client
+repository: https://github.com/Betterment/test_track_dart_client
 
 environment:
   sdk: ">=2.15.0 <3.0.0"

@@ -12,6 +12,9 @@ on:
       min-code-coverage:
         required: true
         type: number
+      min-pana-score:
+        required: true
+        type: number
 
 jobs:
   build:
@@ -54,3 +57,20 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           artifact-name: code-coverage-report
           working-directory: ${{ inputs.dir }}
+
+  pana:
+      runs-on: ubuntu-latest
+
+      steps:
+        - uses: actions/checkout@v2.3.5
+        - uses: dart-lang/setup-dart@v1.3
+
+        - name: Install dependencies
+          working-directory: ${{ inputs.dir }}
+          run: |
+            dart pub get
+            dart pub global activate pana
+        
+        - name: Verify pub score
+          working-directory: ${{ inputs.dir }}
+          run: ../../tool/verify_pub_score.sh ${{ inputs.min-pana-score }}

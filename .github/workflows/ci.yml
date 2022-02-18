@@ -12,28 +12,18 @@ on:
     branches: [ main ]
 
 jobs:
-  build_test_track:
+  validate_test_track:
     uses: ./.github/workflows/build.yml
     with:
       dir: packages/test_track
       code-gen: true
       min-code-coverage: 89
+      min-pana-score: 130
 
-  build_test_track_test_support:
+  validate_test_track_test_support:
     uses: ./.github/workflows/build.yml
     with:
       dir: packages/test_track_test_support
       code-gen: false
       min-code-coverage: 21
-
-  verify_pana_test_track:
-    uses: ./.github/workflows/pana.yml
-    with:
-      dir: packages/test_track
-      min-pana-score: 130
-
-  verify_pana_test_track_test_support:
-    uses: ./.github/workflows/pana.yml
-    with:
-      dir: packages/test_track_test_support
       min-pana-score: 130

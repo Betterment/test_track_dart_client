@@ -13,6 +13,3 @@ dart test --coverage=coverage && pub run coverage:format_coverage --lcov --in=co
 # Don't report coverage on `.g.` and `.freezed.` files
 pub global run remove_from_coverage:remove_from_coverage -f coverage/lcov.info -r '.freezed.dart$'
 pub global run remove_from_coverage:remove_from_coverage -f coverage/lcov.info -r '.g.dart$'
-
-# Create a report
-genhtml coverage/lcov.info -o coverage

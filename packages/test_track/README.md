@@ -59,7 +59,7 @@ final isFeatureGateEnabled = testTrack.ab(
 ```
 The `ab` method is used exclusively for two-way splits and feature toggles. It takes 2 arguments.
 
-- `split_name` -- The first argument is the name of the split. This will be a snake_case string, e.g. `"homepage_chat_bubble_enabled"`.
+- `splitName` -- The first argument is the name of the split. This will be a snake_case string, e.g. `"homepage_chat_bubble_enabled"`.
 - `context` -- is a string that the developer provides so that the test track server can record where an assignment was first created. If a call to `ab` is made in more than one place for a given split, you'll be able to see which codepath was hit first.
 - `trueVariant` -- an optional parameter that specifies which variant is the "true" variant and the other variant will be used as the default. Without the true variant, `ab` will assume that the variants for the split are named `'true'` and `'false'`.
 

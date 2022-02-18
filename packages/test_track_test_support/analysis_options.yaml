@@ -1,1 +1,7 @@
 include: package:lints/recommended.yaml
+
+linter:
+  rules:
+    - package_api_docs
+    - public_member_api_docs
+    - sort_pub_dependencies

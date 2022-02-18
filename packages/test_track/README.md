@@ -46,8 +46,6 @@ The `vary` method is used to perform a split. It takes 3 arguments.
 - `defaultVariant` -- The default variant is used if the user is assigned to a variant that is not represented in the `variants` object. When this happens, Test Track will return the default variant and re-assign the user to the default variant. **You should not rely on this defaulting behavior, it is merely provided to ensure we don't break the customer experience.** You should instead make sure that you represent all variants of the split in your `variants` and if variants are added to the split on the backend, update your code to reflect the new variants. Because this defaulting behavior re-assigns the user to the `defaultVariant`, no data will be recorded for the variant that is not represented. This will impede our ability to collect meaningful data for the split.
 - `context` -- is a string that the developer provides so that the test track server can record where an assignment was first created. If a call to `vary` is made in more than one place for a given split, you'll be able to see which codepath was hit first.
 
-Here is an example of a 4-way split where `'variant_4'` is the default variant. Let's say `'variant_5'` was added to this split on the backend but this code did not change to reflect that new variant. Any users that Test Track assigns to `'variant_5'` will be re-assigned to `'variant_4'`.
-
 #### Ab
 
 ```dart

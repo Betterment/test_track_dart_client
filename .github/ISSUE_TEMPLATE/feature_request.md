@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest an idea for fake_http
+about: Suggest an idea for test_track_dart_client
 title: ""
 labels: enhancement
 ---

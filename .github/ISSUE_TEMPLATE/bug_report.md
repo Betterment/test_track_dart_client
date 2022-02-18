@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: There is a problem in how fake_http behaves
+about: There is a problem in how test_track_dart_client behaves
 title: ""
 labels: bug
 ---

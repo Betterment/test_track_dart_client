@@ -9,6 +9,9 @@ on:
       code-gen:
         required: true
         type: boolean
+      min-code-coverage:
+        required: true
+        type: number
 
 jobs:
   build:
@@ -41,13 +44,13 @@ jobs:
 
       - name: Run tests and generate coverage report
         working-directory: ${{ inputs.dir }}
-        run: ../../tool/dart_code_coverage.sh
+        run: ../../tool/generate_code_coverage.sh
 
       - name: Report code coverage
         uses: zgosalvez/github-actions-report-lcov@v1.4.0
         with:
           coverage-files: ${{ inputs.dir }}/coverage/lcov.info
-          minimum-coverage: 90
+          minimum-coverage: ${{ inputs.min-code-coverage }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
           artifact-name: code-coverage-report
           working-directory: ${{ inputs.dir }}

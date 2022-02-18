@@ -17,12 +17,14 @@ jobs:
     with:
       dir: packages/test_track
       code-gen: true
+      min-code-coverage: 89
 
   build_test_track_test_support:
     uses: ./.github/workflows/build.yml
     with:
       dir: packages/test_track_test_support
       code-gen: false
+      min-code-coverage: 21
 
   # pana:
   #   runs-on: ubuntu-latest

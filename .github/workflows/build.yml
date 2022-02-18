@@ -24,6 +24,7 @@ jobs:
         run: dart run build_runner build --delete-conflicting-outputs
 
       - name: Ensure clean git status
+        working-directory: ${{ inputs.dir }}
         run: ./tool/ensure_git_clean.sh
 
       - name: Verify formatting
@@ -32,6 +33,8 @@ jobs:
 
       - name: Analyze project source
         uses: invertase/github-action-dart-analyzer@v1
+        with:
+          working-directory: ${{ inputs.dir }}
 
       - name: Run tests and generate coverage report
         working-directory: ${{ inputs.dir }}
@@ -44,3 +47,4 @@ jobs:
           minimum-coverage: 90
           github-token: ${{ secrets.GITHUB_TOKEN }}
           artifact-name: code-coverage-report
+          working-directory: ${{ inputs.dir }}

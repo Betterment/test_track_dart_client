@@ -124,8 +124,7 @@ void main() {
           );
         });
 
-        test(
-            'throws UnableToFetchAppVisitorConfigDefaultingToCacheException when network request fails',
+        test('throws TestTrackLoginFailureException when network request fails',
             () async {
           expect(
             () => subject.call(
@@ -133,8 +132,7 @@ void main() {
               visitorId: visitorId,
               appVersionBuild: appVersionBuild,
             ),
-            throwsA(
-                isA<UnableToFetchAppVisitorConfigDefaultingToCacheException>()),
+            throwsA(isA<TestTrackLoginFailureException>()),
           );
         });
       });

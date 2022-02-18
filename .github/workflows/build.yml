@@ -41,7 +41,7 @@ jobs:
 
       - name: Run tests and generate coverage report
         working-directory: ${{ inputs.dir }}
-        run: ../../tool/generate_code_coverage.sh
+        run: ../../tool/dart_code_coverage.sh
 
       - name: Report code coverage
         uses: zgosalvez/github-actions-report-lcov@v1.4.0

@@ -100,9 +100,10 @@ void main() {
           expect(
             result.visitor.assignments.single,
             Assignment(
-                splitName: split.name,
-                variant: trueVariant.name,
-                context: 'none'),
+              splitName: split.name,
+              variant: trueVariant.name,
+              context: 'none',
+            ),
           );
         });
       });

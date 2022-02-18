@@ -6,6 +6,9 @@ on:
       dir:
         required: true
         type: string
+      code-gen:
+        required: true
+        type: bool
 
 jobs:
   build:
@@ -20,12 +23,12 @@ jobs:
         run: dart pub get
           
       - name: Run build_runner
+        if: ${{ inputs.code-gen }}
         working-directory: ${{ inputs.dir }}
         run: dart run build_runner build --delete-conflicting-outputs
 
       - name: Ensure clean git status
-        working-directory: ${{ inputs.dir }}
-        run: ./tool/ensure_git_clean.sh
+        run: ../tool/ensure_git_clean.sh
 
       - name: Verify formatting
         working-directory: ${{ inputs.dir }}
@@ -38,7 +41,7 @@ jobs:
 
       - name: Run tests and generate coverage report
         working-directory: ${{ inputs.dir }}
-        run: ../tool/generate_code_coverage.sh
+        run: ../../tool/generate_code_coverage.sh
 
       - name: Report code coverage
         uses: zgosalvez/github-actions-report-lcov@v1.4.0

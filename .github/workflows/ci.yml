@@ -16,11 +16,13 @@ jobs:
     uses: ./.github/workflows/build.yml
     with:
       dir: packages/test_track
+      code-gen: true
 
   build_test_track_test_support:
     uses: ./.github/workflows/build.yml
     with:
       dir: packages/test_track_test_support
+      code-gen: false
 
   # pana:
   #   runs-on: ubuntu-latest

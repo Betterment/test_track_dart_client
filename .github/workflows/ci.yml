@@ -26,17 +26,14 @@ jobs:
       code-gen: false
       min-code-coverage: 21
 
-  # pana:
-  #   runs-on: ubuntu-latest
+  verify_pana_test_track:
+    uses: ./.github/workflows/pana.yml
+    with:
+      dir: packages/test_track
+      min-pana-score: 130
 
-  #   steps:
-  #     - uses: actions/checkout@v2.3.5
-  #     - uses: dart-lang/setup-dart@v1.3
-
-  #     - name: Install dependencies
-  #       run: |
-  #         dart pub get
-  #         dart pub global activate pana
-      
-  #     - name: Verify pub score
-  #       run: ./tool/verify_pub_score.sh 110
+  verify_pana_test_track_test_support:
+    uses: ./.github/workflows/pana.yml
+    with:
+      dir: packages/test_track_test_support
+      min-pana-score: 130

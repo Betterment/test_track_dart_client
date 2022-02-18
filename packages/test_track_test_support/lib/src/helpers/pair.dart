@@ -8,7 +8,9 @@ class Pair<T1, T2> {
 
   @override
   bool operator ==(final Object other) {
-    return other is Pair<T1, T2> && first == other.first && second == other.second;
+    return other is Pair<T1, T2> &&
+        first == other.first &&
+        second == other.second;
   }
 
   @override

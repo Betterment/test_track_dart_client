@@ -15,7 +15,8 @@ class SplitFactory {
         ];
       } else {
         final firstWeight = Random().nextInt(80);
-        final secondWeight = ((100 - firstWeight) / max(2, Random().nextInt(9))).floor();
+        final secondWeight =
+            ((100 - firstWeight) / max(2, Random().nextInt(9))).floor();
         final thirdWeight = 100 - firstWeight - secondWeight;
 
         return [
@@ -27,7 +28,9 @@ class SplitFactory {
     }();
 
     return Split(
-      name: _isFeatureGate ? 'split-${randomAlphaNumeric(10)}_enabled' : 'split-${randomAlphaNumeric(10)}_experiment',
+      name: _isFeatureGate
+          ? 'split-${randomAlphaNumeric(10)}_enabled'
+          : 'split-${randomAlphaNumeric(10)}_experiment',
       variants: variants,
       isFeatureGate: _isFeatureGate,
     );

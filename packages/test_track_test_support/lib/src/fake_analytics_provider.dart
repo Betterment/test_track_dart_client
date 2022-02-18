@@ -6,26 +6,26 @@ import 'package:test_track_test_support/src/helpers/pair.dart';
 /// [identify] and [trackAssignment] and provides a simple API for
 /// querying those invocations
 class FakeAnalyticsProvider implements AnalyticsProvider {
-  final _identifyInvocations = <String>[];
-  final _trackAssignmentInvocations = <Pair<String, Assignment>>[];
+  final _visitorsIdentified = <String>[];
+  final _assignmentsTracked = <Pair<String, Assignment>>[];
 
   /// Returns a list of [Pair]s representing invocations produced
   /// by calls to [trackAssignment] where the first item in each
   /// [Pair] is the id of the [Visitor] with the new assignment
   /// and the second item in the [Pair] is the [Assignment] that was
   /// created
-  List<Pair<String, Assignment>> get trackAssignmentInvocations =>
-      UnmodifiableListView(_trackAssignmentInvocations);
+  List<Pair<String, Assignment>> get assignmentsTracked =>
+      UnmodifiableListView(_assignmentsTracked);
 
   /// Returns a list of [String]s representing invocations produced
   /// by calls to [identify] where each [String] is the id
   /// of the [Visitor]
-  List<String> get identifyInvocations =>
-      UnmodifiableListView(_identifyInvocations);
+  List<String> get visitorsIdentified =>
+      UnmodifiableListView(_visitorsIdentified);
 
   @override
   Future<void> identify({required String visitorId}) async {
-    _identifyInvocations.add(visitorId);
+    _visitorsIdentified.add(visitorId);
   }
 
   @override
@@ -33,23 +33,23 @@ class FakeAnalyticsProvider implements AnalyticsProvider {
     required String visitorId,
     required Assignment assignment,
   }) async {
-    _trackAssignmentInvocations.add(Pair(visitorId, assignment));
+    _assignmentsTracked.add(Pair(visitorId, assignment));
   }
 
   /// True if [identify] was invoked with the provided visitor id
-  bool identifyCalledWith(String visitorId) =>
-      _identifyInvocations.contains(visitorId);
+  bool identified({required String visitorId}) =>
+      _visitorsIdentified.contains(visitorId);
 
   /// True if [identify] has not been called for the life of this
   /// [FakeAnalyticsProvider]
-  bool identifyNotCalled() => _identifyInvocations.isEmpty;
+  bool noVisitorsIdentified() => _visitorsIdentified.isEmpty;
 
   /// True if [trackAssignment] was invoked with this exact pair of
   /// visitor id and [Assignment]
-  bool trackAssignmentCalledWith(Pair<String, Assignment> invocation) =>
-      _trackAssignmentInvocations.contains(invocation);
+  bool tracked({required Pair<String, Assignment> assignment}) =>
+      _assignmentsTracked.contains(assignment);
 
   /// True if [trackAssignment] has not been called for the life
   /// of this [FakeAnalyticsProvider]
-  bool trackAssignmentNotCalled() => _trackAssignmentInvocations.isEmpty;
+  bool noAssignmentsTracked() => _assignmentsTracked.isEmpty;
 }

@@ -34,11 +34,11 @@ void main() {
       });
 
       test('it notifies analytics provider of new visitor', () async {
-        expect(analyticsProvider.identifyInvocations, isEmpty);
+        expect(analyticsProvider.visitorsIdentified, isEmpty);
 
         final newVisitor = await subject.call();
 
-        expect(analyticsProvider.identifyInvocations.single, newVisitor.id);
+        expect(analyticsProvider.visitorsIdentified.single, newVisitor.id);
       });
     });
   });

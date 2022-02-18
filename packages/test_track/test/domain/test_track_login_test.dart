@@ -104,7 +104,7 @@ void main() {
         });
 
         test('it invokes identify on the analytics provider', () async {
-          expect(analyticsProvider.identifyNotCalled(), isTrue);
+          expect(analyticsProvider.noVisitorsIdentified(), isTrue);
 
           await subject.call(
             identifier: identifier,
@@ -112,7 +112,7 @@ void main() {
             appVersionBuild: appVersionBuild,
           );
 
-          expect(analyticsProvider.identifyInvocations.length, 1);
+          expect(analyticsProvider.visitorsIdentified.length, 1);
         });
       });
 

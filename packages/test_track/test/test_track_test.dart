@@ -69,9 +69,11 @@ void main() {
         });
 
         test('it calls identify on AnalyticsProvider', () async {
-          expect(analyticsProvider.identifyInvocations.length, 1);
+          expect(analyticsProvider.visitorsIdentified.length, 1);
           expect(
-            analyticsProvider.identifyCalledWith(appVisitorConfig.visitor.id),
+            analyticsProvider.identified(
+              visitorId: appVisitorConfig.visitor.id,
+            ),
             isTrue,
           );
         });
@@ -112,7 +114,7 @@ void main() {
         test('it does not call identify on AnalyticsProvider', () async {
           subject = await buildSubject();
 
-          expect(analyticsProvider.identifyInvocations, isEmpty);
+          expect(analyticsProvider.visitorsIdentified, isEmpty);
         });
       });
     });

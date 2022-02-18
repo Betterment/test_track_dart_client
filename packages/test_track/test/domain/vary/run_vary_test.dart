@@ -171,8 +171,8 @@ void main() {
           );
 
           expect(
-            analyticsProvider.trackAssignmentCalledWith(
-              Pair(
+            analyticsProvider.tracked(
+              assignment: Pair(
                 visitor.id,
                 Assignment(
                   splitName: split.name,
@@ -227,7 +227,7 @@ void main() {
           );
 
           expect(
-            analyticsProvider.trackAssignmentInvocations,
+            analyticsProvider.assignmentsTracked,
             isEmpty,
           );
         });

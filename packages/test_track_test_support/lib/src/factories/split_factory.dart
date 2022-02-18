@@ -4,7 +4,12 @@ import 'package:random_string/random_string.dart';
 import 'package:test_track/test_track.dart';
 import 'package:test_track_test_support/test_track_test_support.dart';
 
+/// {@template split_factory}
+/// Produces [Split]s to be used for
+/// testing
+/// {@endtemplate}
 class SplitFactory {
+  /// {@macro split_factory}
   static Split build({bool? isFeatureGate}) {
     final _isFeatureGate = isFeatureGate ?? Random().nextBool();
     final variants = () {
@@ -37,11 +42,14 @@ class SplitFactory {
   }
 }
 
+/// Supported modifications for [Split]s
 extension SplitExtensions on Split {
+  /// Returns a copy of this [Split] with the new name
   Split withName(String name) {
     return copyWith(name: name);
   }
 
+  /// Returns a copy of this [Split] with the new [Variant]s
   Split withVariants(List<Variant> variants) {
     return copyWith(variants: variants);
   }

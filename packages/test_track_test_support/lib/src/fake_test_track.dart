@@ -1,6 +1,18 @@
 import 'package:test_track/test_track.dart';
 
+/// A function representing the invocation of an
+/// `ab` where the first parameter is the name of
+/// the [Split], the second parameter is the context
+/// of the call site performing the `ab`, and the
+/// third parameter is the nullable name of the
+///  default [Variant]
 typedef Ab = bool Function(String, String, String?);
+
+/// A function representing the invocation of a
+/// `vary` where the first parameter is the name of
+/// the [Split], the second parameter is the name of the
+/// default [Variant] and the third parameter is the
+/// context of the call site performing the `vary`
 typedef Vary = String Function(String, String, String);
 
 /// {@template fake_test_track}
@@ -40,24 +52,18 @@ class FakeTestTrack implements TestTrack {
         _ab = ab,
         _vary = vary;
 
-  /// The [Visitor] currently being tracked, defaults
-  /// to the result of [Visitor.build]
   Visitor _visitor;
 
-  /// The [SplitRegistry] containing the [Split]s
-  /// that [FakeTestTrack] is aware of.
   final SplitRegistry _splitRegistry;
 
-  /// Logic to be invoked when an [ab] operation
-  /// is requested
   final Ab _ab;
 
-  /// Logic to be invoked when a [vary] operation
-  /// is requested
   final Vary _vary;
 
-  /// Simple tracking of authentication state
   var _isLoggedIn = false;
+
+  /// Returns true if [login] has been invoked
+  /// but [logout] has not been invoked
   bool get isLoggedIn => _isLoggedIn;
 
   @override

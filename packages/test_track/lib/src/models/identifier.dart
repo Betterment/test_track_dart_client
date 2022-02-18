@@ -10,5 +10,6 @@ class Identifier with _$Identifier {
     required String value,
   }) = _Identifier;
 
-  factory Identifier.fromJson(Map<String, dynamic> json) => _$IdentifierFromJson(json);
+  factory Identifier.fromJson(Map<String, dynamic> json) =>
+      _$IdentifierFromJson(json);
 }

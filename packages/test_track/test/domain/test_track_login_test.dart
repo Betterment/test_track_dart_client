@@ -17,7 +17,8 @@ void main() {
       late Login subject;
 
       final visitorId = VisitorFactory.build().id;
-      final identifier = const Identifier(identifierType: 'foo_id', value: '123');
+      final identifier =
+          const Identifier(identifierType: 'foo_id', value: '123');
       final appVersionBuild = AppVersionBuildFactory.build();
 
       setUp(() async {
@@ -48,13 +49,15 @@ void main() {
               identifierTypeFromRequest = data?['identifier_type'] as String?;
               identifierValueFromRequest = data?['value'] as String?;
               visitorIdFromRequest = data?['visitor_id'] as String?;
-              isIdempotent = request.requestOptions.extra['is_idempotent'] as bool;
+              isIdempotent =
+                  request.requestOptions.extra['is_idempotent'] as bool;
               return appVisitorConfig;
             },
           );
         });
 
-        test('it makes a POST request to the correct url with the correct body and returns an AppVisitorConfig',
+        test(
+            'it makes a POST request to the correct url with the correct body and returns an AppVisitorConfig',
             () async {
           final appVisitorConfig = await subject.call(
             identifier: identifier,
@@ -68,7 +71,8 @@ void main() {
           expect(appVisitorConfig, isA<AppVisitorConfig>());
         });
 
-        test('it stores the visitor from the returned AppVisitorConfig', () async {
+        test('it stores the visitor from the returned AppVisitorConfig',
+            () async {
           final visitorBefore = await dataStorageProvider.fetchVisitor();
           expect(visitorBefore, isNull);
 
@@ -82,8 +86,10 @@ void main() {
           expect(visitorAfter, isNotNull);
         });
 
-        test('it stores the splitRegistry from the returned AppVisitorConfig', () async {
-          final splitRegistryBefore = await dataStorageProvider.fetchSplitRegistry();
+        test('it stores the splitRegistry from the returned AppVisitorConfig',
+            () async {
+          final splitRegistryBefore =
+              await dataStorageProvider.fetchSplitRegistry();
           expect(splitRegistryBefore, isNull);
 
           await subject.call(
@@ -92,7 +98,8 @@ void main() {
             appVersionBuild: appVersionBuild,
           );
 
-          final splitRegistryAfter = await dataStorageProvider.fetchSplitRegistry();
+          final splitRegistryAfter =
+              await dataStorageProvider.fetchSplitRegistry();
           expect(splitRegistryAfter, isNotNull);
         });
 
@@ -117,14 +124,17 @@ void main() {
           );
         });
 
-        test('throws UnableToFetchAppVisitorConfigDefaultingToCacheException when network request fails', () async {
+        test(
+            'throws UnableToFetchAppVisitorConfigDefaultingToCacheException when network request fails',
+            () async {
           expect(
             () => subject.call(
               identifier: identifier,
               visitorId: visitorId,
               appVersionBuild: appVersionBuild,
             ),
-            throwsA(isA<UnableToFetchAppVisitorConfigDefaultingToCacheException>()),
+            throwsA(
+                isA<UnableToFetchAppVisitorConfigDefaultingToCacheException>()),
           );
         });
       });

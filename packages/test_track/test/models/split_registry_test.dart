@@ -5,7 +5,8 @@ import 'package:test_track_test_support/test_track_test_support.dart';
 void main() {
   group('SplitRegistry', () {
     group('findSplitByName', () {
-      group('when given a split name that does not exist in the split registy', () {
+      group('when given a split name that does not exist in the split registy',
+          () {
         test('it throws a SplitNotFoundException', () {
           final split = SplitFactory.build().withName('name');
           final subject = SplitRegistryFactory.build().withSplits([split]);

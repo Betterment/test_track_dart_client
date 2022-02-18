@@ -13,7 +13,8 @@ class AppVisitorConfig with _$AppVisitorConfig {
     required Visitor visitor,
   }) = _AppVisitorConfig;
 
-  factory AppVisitorConfig.fromJson(Map<String, dynamic> json) => _$AppVisitorConfigFromJson(json);
+  factory AppVisitorConfig.fromJson(Map<String, dynamic> json) =>
+      _$AppVisitorConfigFromJson(json);
 }
 
 extension AppVisitorConfigExtension on AppVisitorConfig {

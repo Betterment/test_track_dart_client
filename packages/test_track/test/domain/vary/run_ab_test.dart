@@ -62,7 +62,8 @@ void main() {
           );
         });
 
-        test('it returns false if calculated variant is not the true variant', () {
+        test('it returns false if calculated variant is not the true variant',
+            () {
           final trueVariant = const Variant(name: 'thisOneIsTrue', weight: 0);
           final split = SplitFactory.build().withVariants([
             trueVariant,
@@ -98,7 +99,10 @@ void main() {
           );
           expect(
             result.visitor.assignments.single,
-            Assignment(splitName: split.name, variant: trueVariant.name, context: 'none'),
+            Assignment(
+                splitName: split.name,
+                variant: trueVariant.name,
+                context: 'none'),
           );
         });
       });
@@ -138,7 +142,8 @@ void main() {
           );
         });
 
-        test('it returns false if the single variant is not the true variant', () {
+        test('it returns false if the single variant is not the true variant',
+            () {
           final result = subject.call(
             visitor: visitor,
             split: split,

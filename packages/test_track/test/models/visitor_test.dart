@@ -4,7 +4,9 @@ import 'package:test_track/src/models/models.dart';
 void main() {
   group('Visitor', () {
     group('build', () {
-      test('it returns a new Visitor with a randomly generated id and empty assignments', () {
+      test(
+          'it returns a new Visitor with a randomly generated id and empty assignments',
+          () {
         final subject = Visitor.build();
         final anotherVisitor = Visitor.build();
         final uuidV4Regexp = RegExp(

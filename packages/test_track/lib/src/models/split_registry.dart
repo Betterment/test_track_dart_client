@@ -9,7 +9,8 @@ part 'split_registry.g.dart';
 class SplitRegistry with _$SplitRegistry {
   factory SplitRegistry({required List<Split> splits}) = _SplitRegistry;
 
-  factory SplitRegistry.fromJson(Map<String, dynamic> json) => _$SplitRegistryFromJson(json);
+  factory SplitRegistry.fromJson(Map<String, dynamic> json) =>
+      _$SplitRegistryFromJson(json);
 
   factory SplitRegistry.empty() => SplitRegistry(splits: []);
 }

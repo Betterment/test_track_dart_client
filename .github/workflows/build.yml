@@ -8,7 +8,7 @@ on:
         type: string
       code-gen:
         required: true
-        type: bool
+        type: boolean
 
 jobs:
   build:

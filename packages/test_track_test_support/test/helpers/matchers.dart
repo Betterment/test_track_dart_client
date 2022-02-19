@@ -1,7 +1,7 @@
 import 'package:test/expect.dart';
 
 /// Returns a matcher that matches if the match argument *only*
-/// contains the expect items
+/// contains the expected items
 Matcher onlyContains<T>(List<T> expected) {
   return _OnlyContains(expected);
 }

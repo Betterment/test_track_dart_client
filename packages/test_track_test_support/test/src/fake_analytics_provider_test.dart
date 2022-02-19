@@ -111,14 +111,14 @@ void main() {
     });
 
     group('noVisitorsIdentified', () {
-      test('it returns true if no visitories were identified', () {
+      test('it returns true if no visitors were identified', () {
         expect(
           subject.noVisitorsIdentified(),
           isTrue,
         );
       });
 
-      test('it returns false if any visitories were identified', () {
+      test('it returns false if any visitors were identified', () {
         subject.identify(visitorId: '123');
 
         expect(

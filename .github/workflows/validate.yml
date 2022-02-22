@@ -53,7 +53,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: ${{ inputs.package-name }}-code-coverage
-          path: packages/${{ inputs.package-name }}/coverage/${{ inputs.package-name }}-lcov.info
+          path: packages/${{ inputs.package-name }}/coverage/lcov.info
 
   pana:
       runs-on: ubuntu-latest
@@ -63,11 +63,11 @@ jobs:
         - uses: dart-lang/setup-dart@v1.3
 
         - name: Install dependencies
-          working-directory: ${{ inputs.package-name }}
+          working-directory: packages/${{ inputs.package-name }}
           run: |
             dart pub get
             dart pub global activate pana
         
         - name: Verify pub score
-          working-directory: ${{ inputs.package-name }}
+          working-directory: packages/${{ inputs.package-name }}
           run: ../../tool/verify_pub_score.sh ${{ inputs.min-pana-score }}

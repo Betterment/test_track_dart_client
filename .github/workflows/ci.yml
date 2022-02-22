@@ -10,7 +10,7 @@ jobs:
   validate_test_track:
     uses: ./.github/workflows/validate.yml
     with:
-      dir: packages/test_track
+      package-name: test_track
       code-gen: true
       min-code-coverage: 89
       min-pana-score: 90
@@ -18,7 +18,24 @@ jobs:
   validate_test_track_test_support:
     uses: ./.github/workflows/validate.yml
     with:
-      dir: packages/test_track_test_support
+      package-name: test_track_test_support
       code-gen: false
       min-code-coverage: 21
       min-pana-score: 100
+
+  validate_overall_test_coverage:
+    name: Validate Test Coverage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+      - name: Combine coverages
+        run: |
+          lcov --add-tracefile packages/test_track_test_support/coverage/test_track_test_support-lcov.info -a packages/test_track/coverage/test_track-lcov.info -o coverage/lcov.info
+      - name: Report code coverage
+        uses: zgosalvez/github-actions-report-lcov@v1.4.0
+        with:
+          coverage-files: coverage/lcov.info
+          minimum-coverage: 90
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          artifact-name: merged-code-coverage-report

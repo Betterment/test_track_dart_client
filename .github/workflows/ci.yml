@@ -42,11 +42,11 @@ jobs:
           path: test_track_test_support/coverage
       - name: Combine coverages
         run: |
-          lcov --add-tracefile test_track/coverage/lcov.info -a test_track_test_support/coverage/lcov.info -o merged-coverage/lcov.info
+          lcov --add-tracefile test_track/coverage/lcov.info -a test_track_test_support/coverage/lcov.info -o final-lcov.info
       - name: Report code overall coverage
         uses: zgosalvez/github-actions-report-lcov@v1.4.0
         with:
-          coverage-files: coverage/lcov.info
+          coverage-files: final-lcov.info
           minimum-coverage: 90
           github-token: ${{ secrets.GITHUB_TOKEN }}
           artifact-name: merged-code-coverage-report

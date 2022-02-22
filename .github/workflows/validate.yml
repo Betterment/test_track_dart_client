@@ -9,9 +9,6 @@ on:
       code-gen:
         required: true
         type: boolean
-      min-code-coverage:
-        required: true
-        type: number
       min-pana-score:
         required: true
         type: number

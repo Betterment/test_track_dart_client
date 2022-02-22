@@ -13,7 +13,6 @@ jobs:
     with:
       package-name: test_track
       code-gen: true
-      min-code-coverage: 89
       min-pana-score: 90
 
   validate_test_track_test_support:
@@ -22,7 +21,6 @@ jobs:
     with:
       package-name: test_track_test_support
       code-gen: false
-      min-code-coverage: 21
       min-pana-score: 100
 
   validate_overall_test_coverage:
@@ -31,6 +29,8 @@ jobs:
     needs: [validate_test_track, validate_test_track_test_support]
     steps:
       - uses: dart-lang/setup-dart@v1.3
+      - name: Install dependencies
+        run: dart pub get
       - name: Activate coverage
         run: dart pub global activate coverage
       - name: Download artifacts

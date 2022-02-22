@@ -31,6 +31,8 @@ jobs:
     needs: [validate_test_track, validate_test_track_test_support]
     steps:
       - uses: dart-lang/setup-dart@v1.3
+      - name: Activate coverage
+        run: dart pub global activate coverage
       - name: Download artifacts
         uses: actions/download-artifact@v2
       - name: Combine coverages

@@ -40,7 +40,7 @@ jobs:
       - name: Analyze project source
         uses: invertase/github-action-dart-analyzer@v1
         with:
-          working-directory: packages/${{ inputs.dir }}
+          working-directory: packages/${{ inputs.package-name }}
 
       - name: Run tests and generate coverage report
         run: ../../tool/generate_code_coverage.sh

@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:test_track/test_track.dart';
 
@@ -65,7 +66,7 @@ class FakeTestTrackLogger implements TestTrackLogger {
 /// logging functions on a [TestTrackLogger], used
 /// by [FakeTestTrackLogger]
 /// {@endtemplate}
-class LogEvent {
+class LogEvent extends Equatable {
   /// The message of the log
   final String message;
 
@@ -77,4 +78,7 @@ class LogEvent {
 
   /// {@macro log_event}
   LogEvent(this.message, this.error, this.stackTrace);
+
+  @override
+  List<Object?> get props => [message, error, stackTrace];
 }

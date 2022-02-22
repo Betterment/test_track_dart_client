@@ -8,6 +8,7 @@ on:
 
 jobs:
   validate_test_track:
+    name: Validate test_track
     uses: ./.github/workflows/validate.yml
     with:
       package-name: test_track
@@ -16,6 +17,7 @@ jobs:
       min-pana-score: 90
 
   validate_test_track_test_support:
+    name: Validate test_track_test_support
     uses: ./.github/workflows/validate.yml
     with:
       package-name: test_track_test_support
@@ -26,6 +28,7 @@ jobs:
   validate_overall_test_coverage:
     name: Validate Test Coverage
     runs-on: ubuntu-latest
+    needs: [validate_test_track, validate_test_track_test_support]
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v2

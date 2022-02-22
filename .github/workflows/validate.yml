@@ -52,8 +52,8 @@ jobs:
   pana:
       runs-on: ubuntu-latest
       defaults:
-      run:
-        working-directory: packages/${{ inputs.package-name }}
+        run:
+          working-directory: packages/${{ inputs.package-name }}
 
       steps:
         - uses: actions/checkout@v2.3.5

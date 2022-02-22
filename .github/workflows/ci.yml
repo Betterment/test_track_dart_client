@@ -28,6 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [validate_test_track, validate_test_track_test_support]
     steps:
+      - uses: actions/checkout@v2.3.5
       - name: Install lcov
         run: sudo apt-get install lcov
       - name: Download test_track test coverage

@@ -63,12 +63,12 @@ void main() {
       });
 
       test('it invokes identify on the analytics provider ', () async {
-        expect(analyticsProvider.identifyInvocations, isEmpty);
+        expect(analyticsProvider.visitorsIdentified, isEmpty);
         await subject.call(
           visitorId: visitorId,
           appVersionBuild: appVersionBuild,
         );
-        expect(analyticsProvider.identifyInvocations.length, 1);
+        expect(analyticsProvider.visitorsIdentified.length, 1);
       });
     });
   });

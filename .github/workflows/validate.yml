@@ -16,10 +16,6 @@ on:
         required: true
         type: number
 
-defaults:
-  run:
-    working-directory: packages/${{ inputs.package-name }}
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -29,22 +25,28 @@ jobs:
       - uses: dart-lang/setup-dart@v1.3
 
       - name: Install dependencies
+        working-directory: packages/packages/${{ inputs.package-name }}
         run: dart pub get
           
       - name: Run build_runner
         if: ${{ inputs.code-gen }}
+        working-directory: packages/${{ inputs.package-name }}
         run: dart run build_runner build --delete-conflicting-outputs
 
       - name: Ensure clean git status
         run: ./tool/ensure_git_clean.sh
 
       - name: Verify formatting
+        working-directory: packages/${{ inputs.package-name }}
         run: dart format --output=none --set-exit-if-changed .
 
       - name: Analyze project source
         uses: invertase/github-action-dart-analyzer@v1
+        with:
+          working-directory: packages/${{ inputs.package-name }}
 
       - name: Run tests and generate coverage report
+        working-directory: packages/${{ inputs.package-name }}
         run: ../../tool/generate_code_coverage.sh
 
       - name: Archive code coverage results
@@ -61,11 +63,11 @@ jobs:
         - uses: dart-lang/setup-dart@v1.3
 
         - name: Install dependencies
-          working-directory: ${{ inputs.dir }}
+          working-directory: ${{ inputs.package-name }}
           run: |
             dart pub get
             dart pub global activate pana
         
         - name: Verify pub score
-          working-directory: ${{ inputs.dir }}
+          working-directory: ${{ inputs.package-name }}
           run: ../../tool/verify_pub_score.sh ${{ inputs.min-pana-score }}

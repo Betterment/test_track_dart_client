@@ -37,7 +37,6 @@ jobs:
 
       - name: Ensure clean git status
         run: ./tool/ensure_git_clean.sh
-          working-directory: .
 
       - name: Verify formatting
         run: dart format --output=none --set-exit-if-changed .

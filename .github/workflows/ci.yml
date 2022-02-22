@@ -34,7 +34,7 @@ jobs:
         uses: actions/download-artifact@v2
       - name: Combine coverages
         run: |
-          lcov --add-tracefile packages/test_track_test_support/coverage/test_track_test_support-lcov.info -a packages/test_track/coverage/test_track-lcov.info -o coverage/lcov.info
+          lcov --add-tracefile packages/test_track_test_support/coverage/lcov.info -a packages/test_track/coverage/lcov.info -o coverage/lcov.info
       - name: Report code coverage
         uses: zgosalvez/github-actions-report-lcov@v1.4.0
         with:

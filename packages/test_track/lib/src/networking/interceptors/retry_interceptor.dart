@@ -4,10 +4,15 @@ import 'package:dio/dio.dart';
 import 'package:test_track/src/networking/http_client.dart';
 import 'package:test_track/src/networking/interceptors/retry_options.dart';
 
+/// {@template retry_interceptor}
+/// An [Interceptor] responsible for performing retry
+/// operations in the case of a failed network request
+/// {@endtemplate}
 class RetryInterceptor extends Interceptor {
   final Dio _dio;
   final RetryOptions _retryOptions;
 
+  /// {@macro retry_interceptor}
   RetryInterceptor({
     required Dio dio,
     RetryOptions? retryOptions,

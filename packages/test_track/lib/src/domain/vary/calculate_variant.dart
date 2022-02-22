@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:crypto/crypto.dart';
 import 'package:test_track/test_track.dart';
 
+/// {@template calculate_variant}
 /// Given a visitor id and [Split], calculates the [Variant]
 /// that should be assigned to the [TestTrack] visitor.
 ///
@@ -15,7 +16,9 @@ import 'package:test_track/test_track.dart';
 /// do not push the visitor into the calculated assignment
 /// bucket, which indicates the weights have been mis-
 /// configured.
+/// {@endtemplate}
 class CalculateVariant {
+  /// {@macro calculate_variant}
   Variant call({
     required String visitorId,
     required Split split,
@@ -60,3 +63,10 @@ class CalculateVariant {
       );
   }
 }
+
+/// {@template test_track_login_failure_exception}
+/// [TestTrackException] thrown when an attempt to [CalculateVariant]
+/// fails because the [Variant]s on the provided [Split] are
+/// not configured correctly
+/// {@endtemplate}
+class AssignmentBucketOutOfRangeException implements TestTrackException {}

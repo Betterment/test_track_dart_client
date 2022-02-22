@@ -1,10 +1,17 @@
 import 'package:dio/dio.dart';
 import 'package:test_track/src/logging/test_track_logger.dart';
 
+/// {@template logging_interceptor}
+/// An [Interceptor] responsible for logging network
+/// activity via the provided [TestTrackLogger]
+/// {@endtemplate}
 class LoggingInterceptor extends Interceptor {
   final TestTrackLogger _logger;
 
-  LoggingInterceptor({required TestTrackLogger logger}) : _logger = logger;
+  /// {@macro logging_interceptor}
+  LoggingInterceptor({
+    required TestTrackLogger logger,
+  }) : _logger = logger;
 
   @override
   Future onRequest(

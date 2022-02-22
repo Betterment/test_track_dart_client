@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:dio/dio.dart';
 import 'package:test_track/src/analytics/analytics_provider.dart';
 import 'package:test_track/src/domain/domain.dart';
-import 'package:test_track/src/domain/test_track_logout.dart';
-import 'package:test_track/src/errors/test_track_login_failure_exception.dart';
 import 'package:test_track/src/logging/default_test_track_logger.dart';
 import 'package:test_track/src/logging/test_track_logger.dart';
 import 'package:test_track/src/models/models.dart';

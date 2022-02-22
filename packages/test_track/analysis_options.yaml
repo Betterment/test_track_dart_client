@@ -7,13 +7,9 @@ analyzer:
   strong-mode:
     implicit-casts: false
     implicit-dynamic: false
-  errors:
-    missing_return: error
-    missing_required_param: error
 
 linter:
   rules:
     - package_api_docs
-    # Will turn this on in future PR
-    # - public_member_api_docs
+    - public_member_api_docs
     - sort_pub_dependencies

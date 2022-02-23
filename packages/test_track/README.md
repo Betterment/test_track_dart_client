@@ -28,7 +28,7 @@ final testTrack = await TestTrack.initialize(
 
 Initializing the TestTrack client will automatically fetch the existing cached visitor's configuration if it exists. If a cached visitor does not exist, an anonymous visitor will be generated and stored, and the latest split configurations will be fetched.
 
-_Read more about the `dataStorageProvider` and `analyticsProvider` arguments [below](#DataStorageProvider])._
+_Read more about the `dataStorageProvider` and `analyticsProvider` arguments [below](#datastorageprovider)._
 
 ### API
 
@@ -72,11 +72,11 @@ The `logIn` method is used to ensure a consistent experience across devices. For
 
 ### DataStorageProvider
 
-The [`DataStorageProvider`](lib/src/persistence/data_storage_provider.dart) is a required argument when instantiating `TestTrack`. The client will use your implementation to store the `Visitor` and their associated `SplitRegistry`. It will attempt to use these cached values when initialized in the future, and update them as the `Visitor` and `SplitRegistry` change.
+The [`DataStorageProvider`][data_storage_provider] is a required argument when instantiating `TestTrack`. The client will use your implementation to store the `Visitor` and their associated `SplitRegistry`. It will attempt to use these cached values when initialized in the future, and update them as the `Visitor` and `SplitRegistry` change.
 
 ### AnalyticsProvider
 
-The [`AnalyticsProvider`](lib/src/analytics/analytics_provider.dart) is a required argument when instantiating `TestTrack`.
+The [`AnalyticsProvider`][analytics_provider] is a required argument when instantiating `TestTrack`.
 
 #### `identify`
 
@@ -85,3 +85,6 @@ The client will notify you via `identify` with the id of the current `Visitor` s
 #### `trackAssignment`
 
 The client will notify you via `trackAssignment` when an assignment has been created for the current `Visitor`. This happens when either `ab` or `vary` is invoked and the current `Visitor` has not yet been assigned to the calculated variant.
+
+[data_storage_provider]: https://github.com/Betterment/test_track_dart_client/blob/main/packages/test_track/lib/src/persistence/data_storage_provider.dart
+[analytics_provider]: https://github.com/Betterment/test_track_dart_client/blob/main/packages/test_track/lib/src/analytics/analytics_provider.dart

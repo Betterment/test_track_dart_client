@@ -1,5 +1,6 @@
+import 'dart:collection';
+
 import 'package:equatable/equatable.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:test_track/test_track.dart';
 
 /// {@template fake_test_track_logger}

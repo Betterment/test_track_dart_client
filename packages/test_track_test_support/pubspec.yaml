@@ -9,6 +9,7 @@ environment:
 
 dependencies:
   equatable: ^2.0.3
+  meta: ^1.7.0
   random_string: ^2.2.0-nullsafety
   test_track: ^0.0.1
 

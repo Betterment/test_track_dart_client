@@ -10,15 +10,16 @@ jobs:
   validate_test_track:
     uses: ./.github/workflows/validate.yml
     with:
-      dir: packages/test_track
+      package-name: test_track
       code-gen: true
-      min-code-coverage: 89
+      min-code-coverage: 90
       min-pana-score: 90
 
   validate_test_track_test_support:
     uses: ./.github/workflows/validate.yml
     with:
-      dir: packages/test_track_test_support
+      package-name: test_track_test_support
       code-gen: false
-      min-code-coverage: 21
+      min-code-coverage: 90
       min-pana-score: 100
+

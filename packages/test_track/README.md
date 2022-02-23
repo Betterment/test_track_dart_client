@@ -28,7 +28,7 @@ final testTrack = await TestTrack.initialize(
 
 Initializing the TestTrack client will automatically fetch the existing cached visitor's configuration if it exists. If a cached visitor does not exist, an anonymous visitor will be generated and stored, and the latest split configurations will be fetched.
 
-_Read more about the `dataStorageProvider` and `analyticsProvider` arguments [below](#DataStorageProvider])._
+_Read more about the `dataStorageProvider` and `analyticsProvider` arguments [below](#DataStorageProvider)._
 
 ### API
 

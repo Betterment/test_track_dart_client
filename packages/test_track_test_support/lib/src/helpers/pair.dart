@@ -1,11 +1,10 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-
-@immutable
+import 'package:meta/meta.dart';
 
 /// {@template pair}
 /// A simple Pair implementation because that's
 /// not a thing in the dart language
 /// {@endtemplate}
+@immutable
 class Pair<T1, T2> {
   /// The first element of the pair
   final T1 first;

@@ -1,4 +1,5 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'dart:collection';
+
 import 'package:test_track/test_track.dart';
 import 'package:test_track_test_support/src/helpers/pair.dart';
 

@@ -44,13 +44,13 @@ jobs:
 
       - name: Run tests and generate coverage report
         working-directory: packages/${{ inputs.package-name }}
-        run: ../../tool/generate_code_coverage.sh
+        run: ../../tool/generate_code_coverage.sh ${{ inputs.package-name }}-lcov.info
 
       - name: Archive code coverage results
         uses: actions/upload-artifact@v2
         with:
           name: ${{ inputs.package-name }}-code-coverage
-          path: packages/${{ inputs.package-name }}/coverage/lcov.info
+          path: packages/${{ inputs.package-name }}/coverage/${{ inputs.package-name }}-lcov.info
 
   pana:
       runs-on: ubuntu-latest

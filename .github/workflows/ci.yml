@@ -30,21 +30,23 @@ jobs:
         run: sudo apt-get install lcov
       - name: Download test_track test coverage
         uses: actions/download-artifact@v2
-        with:
-          name: test_track-code-coverage
-          path: coverage/test_track-lcov.info
-      - name: Download test_track_test_support test coverage
-        uses: actions/download-artifact@v2
-        with:
-          name: test_track_test_support-code-coverage
-          path: coverage/test_track_test_support-lcov.info
+          with:
+            path: coverage
+      #   with:
+      #     name: test_track-code-coverage
+      #     path: coverage/test_track-lcov.info
+      # - name: Download test_track_test_support test coverage
+      #   uses: actions/download-artifact@v2
+      #   with:
+      #     name: test_track_test_support-code-coverage
+      #     path: coverage/test_track_test_support-lcov.info
       # - name: Combine coverages
       #   run: |
       #     lcov --add-tracefile test_track/coverage/lcov.info -a test_track_test_support/coverage/lcov.info -o final-lcov.info
       - name: Report code overall coverage
         uses: zgosalvez/github-actions-report-lcov@v1.4.0
         with:
-          coverage-files: coverage/*-lcov.info
+          coverage-files: coverage/*lcov.info
           minimum-coverage: 90
           github-token: ${{ secrets.GITHUB_TOKEN }}
           artifact-name: merged-code-coverage-report

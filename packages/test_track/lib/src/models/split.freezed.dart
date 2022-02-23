@@ -44,8 +44,7 @@ const $Split = _$SplitTearOff();
 /// @nodoc
 mixin _$Split {
   String get name => throw _privateConstructorUsedError;
-  List<Variant> get variants =>
-      throw _privateConstructorUsedError; // ignore: invalid_annotation_target
+  List<Variant> get variants => throw _privateConstructorUsedError;
   @JsonKey(name: 'feature_gate')
   bool get isFeatureGate => throw _privateConstructorUsedError;
 
@@ -153,7 +152,7 @@ class _$_Split implements _Split {
   final String name;
   @override
   final List<Variant> variants;
-  @override // ignore: invalid_annotation_target
+  @override
   @JsonKey(name: 'feature_gate')
   final bool isFeatureGate;
 
@@ -203,7 +202,7 @@ abstract class _Split implements Split {
   String get name;
   @override
   List<Variant> get variants;
-  @override // ignore: invalid_annotation_target
+  @override
   @JsonKey(name: 'feature_gate')
   bool get isFeatureGate;
   @override

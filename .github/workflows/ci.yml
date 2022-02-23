@@ -30,8 +30,6 @@ jobs:
         run: sudo apt-get install lcov
       - name: Download test_track test coverage
         uses: actions/download-artifact@v2
-        with:
-          path: coverage
       #   with:
       #     name: test_track-code-coverage
       #     path: coverage/test_track-lcov.info
@@ -46,7 +44,7 @@ jobs:
       - name: Report code overall coverage
         uses: zgosalvez/github-actions-report-lcov@v1.4.0
         with:
-          coverage-files: coverage/*lcov.info
+          coverage-files: ./*lcov.info
           minimum-coverage: 90
           github-token: ${{ secrets.GITHUB_TOKEN }}
           artifact-name: merged-code-coverage-report

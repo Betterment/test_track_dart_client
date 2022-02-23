@@ -8,5 +8,5 @@
 
 ### Reviewers
 <!-- This is used by us to signal to the correct people that your PR needs review -->
-/domain @Betterment/test-track-dart-client-maintainers
-/platform @Betterment/test-track-dart-client-maintainers
+/domain @Betterment/test-track-core  
+/platform @Betterment/test-track-core

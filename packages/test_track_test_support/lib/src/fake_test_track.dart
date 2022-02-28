@@ -6,14 +6,22 @@ import 'package:test_track/test_track.dart';
 /// of the call site performing the `ab`, and the
 /// third parameter is the nullable name of the
 ///  default [Variant]
-typedef Ab = bool Function(String, String, String?);
+typedef Ab = bool Function(
+  String splitName,
+  String context,
+  String? trueVariant,
+);
 
 /// A function representing the invocation of a
 /// `vary` where the first parameter is the name of
 /// the [Split], the second parameter is the name of the
 /// default [Variant] and the third parameter is the
 /// context of the call site performing the `vary`
-typedef Vary = String Function(String, String, String);
+typedef Vary = String Function(
+  String splitName,
+  String defaultVariant,
+  String context,
+);
 
 /// {@template fake_test_track}
 /// A fake [TestTrack] that offers sane default functionality

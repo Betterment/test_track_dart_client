@@ -47,21 +47,11 @@ jobs:
 
       - name: Run tests and generate coverage report
         run: ../../tool/generate_code_coverage.sh
-
-      - name: Report code coverage
-        uses: zgosalvez/github-actions-report-lcov@v1.4.0
+        
+      - uses: codecov/codecov-action@v2
         with:
-          coverage-files: packages/${{ inputs.package-name }}/coverage/lcov.info
-          minimum-coverage: ${{ inputs.min-code-coverage }}
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          artifact-name: code-coverage-report
+          files: packages/${{ inputs.package-name }}/coverage/lcov.info
           working-directory: packages/${{ inputs.package-name }}
-
-      - name: Archive code coverage results
-        uses: actions/upload-artifact@v2
-        with:
-          name: ${{ inputs.package-name }}-code-coverage
-          path: packages/${{ inputs.package-name }}/coverage/lcov.info
 
   pana:
       runs-on: ubuntu-latest

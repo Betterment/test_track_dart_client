@@ -5,7 +5,7 @@ coverage:
       test_track_dart_client:
         target: 92
         paths:
-          - packages/test_track_dart_client/*
+          - packages/test_track/*
       test_track_test_support:
         target: 100
         paths:

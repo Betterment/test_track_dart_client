@@ -1,0 +1,12 @@
+coverage:
+  range: "90...100"
+  status:
+    project:
+      target: 92
+      test_track_dart_client:
+        paths:
+          - packages/test_track_dart_client/*
+      test_track_test_support:
+        target: 100
+        paths:
+          - packages/test_track_test_support/*

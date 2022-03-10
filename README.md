@@ -25,7 +25,7 @@ This is the testing support package intended to facilitate easy integration test
 [build_status_badge]: https://github.com/Betterment/test_track_dart_client/actions/workflows/ci.yml/badge.svg?branch=main
 [build_status_link]: https://github.com/Betterment/test_track_dart_client/actions/workflows/ci.yml?query=branch%3Amain
 [code_coverage_badge]: https://codecov.io/gh/Betterment/test_track_dart_client/branch/main/graph/badge.svg?token=T1EJRQVZFH
-[code_coverage_badge_link]: https://codecov.io/gh/Betterment/test_track_dart_client/branch/main/graph/badge.svg?token=T1EJRQVZFH)](https://codecov.io/gh/Betterment/test_track_dart_client
+[code_coverage_badge_link]:https://codecov.io/gh/Betterment/test_track_dart_client
 [license_badge]: https://img.shields.io/badge/License-MIT-yellow.svg
 [license_link]: https://opensource.org/licenses/MIT
 [maintenance_badge]: https://img.shields.io/badge/Maintained%3F-yes-green.svg

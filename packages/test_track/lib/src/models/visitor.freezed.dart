@@ -146,7 +146,9 @@ class _$_Visitor implements _Visitor {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_VisitorToJson(this);
+    return _$$_VisitorToJson(
+      this,
+    );
   }
 }
 

@@ -170,7 +170,9 @@ class _$_Split implements _Split {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SplitToJson(this);
+    return _$$_SplitToJson(
+      this,
+    );
   }
 }
 

@@ -159,7 +159,9 @@ class _$_Assignment implements _Assignment {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AssignmentToJson(this);
+    return _$$_AssignmentToJson(
+      this,
+    );
   }
 }
 

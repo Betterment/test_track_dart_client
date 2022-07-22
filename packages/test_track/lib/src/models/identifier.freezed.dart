@@ -143,7 +143,9 @@ class _$_Identifier implements _Identifier {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_IdentifierToJson(this);
+    return _$$_IdentifierToJson(
+      this,
+    );
   }
 }
 

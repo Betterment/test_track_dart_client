@@ -163,7 +163,9 @@ class _$_AppVisitorConfig implements _AppVisitorConfig {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AppVisitorConfigToJson(this);
+    return _$$_AppVisitorConfigToJson(
+      this,
+    );
   }
 }
 

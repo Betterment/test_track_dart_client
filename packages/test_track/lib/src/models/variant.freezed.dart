@@ -138,7 +138,9 @@ class _$_Variant implements _Variant {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_VariantToJson(this);
+    return _$$_VariantToJson(
+      this,
+    );
   }
 }
 

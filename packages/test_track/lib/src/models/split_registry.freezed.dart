@@ -132,7 +132,9 @@ class _$_SplitRegistry implements _SplitRegistry {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SplitRegistryToJson(this);
+    return _$$_SplitRegistryToJson(
+      this,
+    );
   }
 }
 

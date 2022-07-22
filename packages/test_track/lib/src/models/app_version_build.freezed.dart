@@ -164,7 +164,9 @@ class _$_AppVersionBuild implements _AppVersionBuild {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AppVersionBuildToJson(this);
+    return _$$_AppVersionBuildToJson(
+      this,
+    );
   }
 }
 

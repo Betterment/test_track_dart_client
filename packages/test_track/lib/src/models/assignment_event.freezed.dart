@@ -162,7 +162,9 @@ class _$_AssignmentEvent implements _AssignmentEvent {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AssignmentEventToJson(this);
+    return _$$_AssignmentEventToJson(
+      this,
+    );
   }
 }
 

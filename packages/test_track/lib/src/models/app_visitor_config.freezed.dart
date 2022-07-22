@@ -12,31 +12,11 @@ part of 'app_visitor_config.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 AppVisitorConfig _$AppVisitorConfigFromJson(Map<String, dynamic> json) {
   return _AppVisitorConfig.fromJson(json);
 }
-
-/// @nodoc
-class _$AppVisitorConfigTearOff {
-  const _$AppVisitorConfigTearOff();
-
-  _AppVisitorConfig call(
-      {required List<Split> splits, required Visitor visitor}) {
-    return _AppVisitorConfig(
-      splits: splits,
-      visitor: visitor,
-    );
-  }
-
-  AppVisitorConfig fromJson(Map<String, Object?> json) {
-    return AppVisitorConfig.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $AppVisitorConfig = _$AppVisitorConfigTearOff();
 
 /// @nodoc
 mixin _$AppVisitorConfig {
@@ -94,11 +74,11 @@ class _$AppVisitorConfigCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$AppVisitorConfigCopyWith<$Res>
+abstract class _$$_AppVisitorConfigCopyWith<$Res>
     implements $AppVisitorConfigCopyWith<$Res> {
-  factory _$AppVisitorConfigCopyWith(
-          _AppVisitorConfig value, $Res Function(_AppVisitorConfig) then) =
-      __$AppVisitorConfigCopyWithImpl<$Res>;
+  factory _$$_AppVisitorConfigCopyWith(
+          _$_AppVisitorConfig value, $Res Function(_$_AppVisitorConfig) then) =
+      __$$_AppVisitorConfigCopyWithImpl<$Res>;
   @override
   $Res call({List<Split> splits, Visitor visitor});
 
@@ -107,24 +87,24 @@ abstract class _$AppVisitorConfigCopyWith<$Res>
 }
 
 /// @nodoc
-class __$AppVisitorConfigCopyWithImpl<$Res>
+class __$$_AppVisitorConfigCopyWithImpl<$Res>
     extends _$AppVisitorConfigCopyWithImpl<$Res>
-    implements _$AppVisitorConfigCopyWith<$Res> {
-  __$AppVisitorConfigCopyWithImpl(
-      _AppVisitorConfig _value, $Res Function(_AppVisitorConfig) _then)
-      : super(_value, (v) => _then(v as _AppVisitorConfig));
+    implements _$$_AppVisitorConfigCopyWith<$Res> {
+  __$$_AppVisitorConfigCopyWithImpl(
+      _$_AppVisitorConfig _value, $Res Function(_$_AppVisitorConfig) _then)
+      : super(_value, (v) => _then(v as _$_AppVisitorConfig));
 
   @override
-  _AppVisitorConfig get _value => super._value as _AppVisitorConfig;
+  _$_AppVisitorConfig get _value => super._value as _$_AppVisitorConfig;
 
   @override
   $Res call({
     Object? splits = freezed,
     Object? visitor = freezed,
   }) {
-    return _then(_AppVisitorConfig(
+    return _then(_$_AppVisitorConfig(
       splits: splits == freezed
-          ? _value.splits
+          ? _value._splits
           : splits // ignore: cast_nullable_to_non_nullable
               as List<Split>,
       visitor: visitor == freezed
@@ -138,13 +118,20 @@ class __$AppVisitorConfigCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_AppVisitorConfig implements _AppVisitorConfig {
-  const _$_AppVisitorConfig({required this.splits, required this.visitor});
+  const _$_AppVisitorConfig(
+      {required final List<Split> splits, required this.visitor})
+      : _splits = splits;
 
   factory _$_AppVisitorConfig.fromJson(Map<String, dynamic> json) =>
       _$$_AppVisitorConfigFromJson(json);
 
+  final List<Split> _splits;
   @override
-  final List<Split> splits;
+  List<Split> get splits {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_splits);
+  }
+
   @override
   final Visitor visitor;
 
@@ -157,21 +144,22 @@ class _$_AppVisitorConfig implements _AppVisitorConfig {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _AppVisitorConfig &&
-            const DeepCollectionEquality().equals(other.splits, splits) &&
+            other is _$_AppVisitorConfig &&
+            const DeepCollectionEquality().equals(other._splits, _splits) &&
             const DeepCollectionEquality().equals(other.visitor, visitor));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(splits),
+      const DeepCollectionEquality().hash(_splits),
       const DeepCollectionEquality().hash(visitor));
 
   @JsonKey(ignore: true)
   @override
-  _$AppVisitorConfigCopyWith<_AppVisitorConfig> get copyWith =>
-      __$AppVisitorConfigCopyWithImpl<_AppVisitorConfig>(this, _$identity);
+  _$$_AppVisitorConfigCopyWith<_$_AppVisitorConfig> get copyWith =>
+      __$$_AppVisitorConfigCopyWithImpl<_$_AppVisitorConfig>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -181,8 +169,8 @@ class _$_AppVisitorConfig implements _AppVisitorConfig {
 
 abstract class _AppVisitorConfig implements AppVisitorConfig {
   const factory _AppVisitorConfig(
-      {required List<Split> splits,
-      required Visitor visitor}) = _$_AppVisitorConfig;
+      {required final List<Split> splits,
+      required final Visitor visitor}) = _$_AppVisitorConfig;
 
   factory _AppVisitorConfig.fromJson(Map<String, dynamic> json) =
       _$_AppVisitorConfig.fromJson;
@@ -193,6 +181,6 @@ abstract class _AppVisitorConfig implements AppVisitorConfig {
   Visitor get visitor;
   @override
   @JsonKey(ignore: true)
-  _$AppVisitorConfigCopyWith<_AppVisitorConfig> get copyWith =>
+  _$$_AppVisitorConfigCopyWith<_$_AppVisitorConfig> get copyWith =>
       throw _privateConstructorUsedError;
 }

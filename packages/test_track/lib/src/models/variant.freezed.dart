@@ -12,30 +12,11 @@ part of 'variant.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 Variant _$VariantFromJson(Map<String, dynamic> json) {
   return _Variant.fromJson(json);
 }
-
-/// @nodoc
-class _$VariantTearOff {
-  const _$VariantTearOff();
-
-  _Variant call({required String name, required int weight}) {
-    return _Variant(
-      name: name,
-      weight: weight,
-    );
-  }
-
-  Variant fromJson(Map<String, Object?> json) {
-    return Variant.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Variant = _$VariantTearOff();
 
 /// @nodoc
 mixin _$Variant {
@@ -81,28 +62,29 @@ class _$VariantCopyWithImpl<$Res> implements $VariantCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$VariantCopyWith<$Res> implements $VariantCopyWith<$Res> {
-  factory _$VariantCopyWith(_Variant value, $Res Function(_Variant) then) =
-      __$VariantCopyWithImpl<$Res>;
+abstract class _$$_VariantCopyWith<$Res> implements $VariantCopyWith<$Res> {
+  factory _$$_VariantCopyWith(
+          _$_Variant value, $Res Function(_$_Variant) then) =
+      __$$_VariantCopyWithImpl<$Res>;
   @override
   $Res call({String name, int weight});
 }
 
 /// @nodoc
-class __$VariantCopyWithImpl<$Res> extends _$VariantCopyWithImpl<$Res>
-    implements _$VariantCopyWith<$Res> {
-  __$VariantCopyWithImpl(_Variant _value, $Res Function(_Variant) _then)
-      : super(_value, (v) => _then(v as _Variant));
+class __$$_VariantCopyWithImpl<$Res> extends _$VariantCopyWithImpl<$Res>
+    implements _$$_VariantCopyWith<$Res> {
+  __$$_VariantCopyWithImpl(_$_Variant _value, $Res Function(_$_Variant) _then)
+      : super(_value, (v) => _then(v as _$_Variant));
 
   @override
-  _Variant get _value => super._value as _Variant;
+  _$_Variant get _value => super._value as _$_Variant;
 
   @override
   $Res call({
     Object? name = freezed,
     Object? weight = freezed,
   }) {
-    return _then(_Variant(
+    return _then(_$_Variant(
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -137,11 +119,12 @@ class _$_Variant implements _Variant {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Variant &&
+            other is _$_Variant &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.weight, weight));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -150,8 +133,8 @@ class _$_Variant implements _Variant {
 
   @JsonKey(ignore: true)
   @override
-  _$VariantCopyWith<_Variant> get copyWith =>
-      __$VariantCopyWithImpl<_Variant>(this, _$identity);
+  _$$_VariantCopyWith<_$_Variant> get copyWith =>
+      __$$_VariantCopyWithImpl<_$_Variant>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -160,8 +143,8 @@ class _$_Variant implements _Variant {
 }
 
 abstract class _Variant implements Variant {
-  const factory _Variant({required String name, required int weight}) =
-      _$_Variant;
+  const factory _Variant(
+      {required final String name, required final int weight}) = _$_Variant;
 
   factory _Variant.fromJson(Map<String, dynamic> json) = _$_Variant.fromJson;
 
@@ -171,6 +154,6 @@ abstract class _Variant implements Variant {
   int get weight;
   @override
   @JsonKey(ignore: true)
-  _$VariantCopyWith<_Variant> get copyWith =>
+  _$$_VariantCopyWith<_$_Variant> get copyWith =>
       throw _privateConstructorUsedError;
 }

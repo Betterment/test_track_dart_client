@@ -1,5 +1,13 @@
 ## 0.0.3
 
+* ci: Use codecov instead of the lcov reporter by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/27
+* fix: fix target spec location for codecov yml by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/28
+* chore: setup policy-bot to replace nanda by @samandmoore in https://github.com/Betterment/test_track_dart_client/pull/29
+* chore: upgrade dependencies by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/30
+
+
+**Full Changelog**: https://github.com/Betterment/test_track_dart_client/compare/v0.0.2...v0.0.3
+
 ## 0.0.2
 
 * chore: Update badges now that both packages are published by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/20

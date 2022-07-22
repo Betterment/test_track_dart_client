@@ -12,34 +12,11 @@ part of 'assignment_event.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 AssignmentEvent _$AssignmentEventFromJson(Map<String, dynamic> json) {
   return _AssignmentEvent.fromJson(json);
 }
-
-/// @nodoc
-class _$AssignmentEventTearOff {
-  const _$AssignmentEventTearOff();
-
-  _AssignmentEvent call(
-      {required String visitorId,
-      required String splitName,
-      required String context}) {
-    return _AssignmentEvent(
-      visitorId: visitorId,
-      splitName: splitName,
-      context: context,
-    );
-  }
-
-  AssignmentEvent fromJson(Map<String, Object?> json) {
-    return AssignmentEvent.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $AssignmentEvent = _$AssignmentEventTearOff();
 
 /// @nodoc
 mixin _$AssignmentEvent {
@@ -94,25 +71,25 @@ class _$AssignmentEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$AssignmentEventCopyWith<$Res>
+abstract class _$$_AssignmentEventCopyWith<$Res>
     implements $AssignmentEventCopyWith<$Res> {
-  factory _$AssignmentEventCopyWith(
-          _AssignmentEvent value, $Res Function(_AssignmentEvent) then) =
-      __$AssignmentEventCopyWithImpl<$Res>;
+  factory _$$_AssignmentEventCopyWith(
+          _$_AssignmentEvent value, $Res Function(_$_AssignmentEvent) then) =
+      __$$_AssignmentEventCopyWithImpl<$Res>;
   @override
   $Res call({String visitorId, String splitName, String context});
 }
 
 /// @nodoc
-class __$AssignmentEventCopyWithImpl<$Res>
+class __$$_AssignmentEventCopyWithImpl<$Res>
     extends _$AssignmentEventCopyWithImpl<$Res>
-    implements _$AssignmentEventCopyWith<$Res> {
-  __$AssignmentEventCopyWithImpl(
-      _AssignmentEvent _value, $Res Function(_AssignmentEvent) _then)
-      : super(_value, (v) => _then(v as _AssignmentEvent));
+    implements _$$_AssignmentEventCopyWith<$Res> {
+  __$$_AssignmentEventCopyWithImpl(
+      _$_AssignmentEvent _value, $Res Function(_$_AssignmentEvent) _then)
+      : super(_value, (v) => _then(v as _$_AssignmentEvent));
 
   @override
-  _AssignmentEvent get _value => super._value as _AssignmentEvent;
+  _$_AssignmentEvent get _value => super._value as _$_AssignmentEvent;
 
   @override
   $Res call({
@@ -120,7 +97,7 @@ class __$AssignmentEventCopyWithImpl<$Res>
     Object? splitName = freezed,
     Object? context = freezed,
   }) {
-    return _then(_AssignmentEvent(
+    return _then(_$_AssignmentEvent(
       visitorId: visitorId == freezed
           ? _value.visitorId
           : visitorId // ignore: cast_nullable_to_non_nullable
@@ -164,12 +141,13 @@ class _$_AssignmentEvent implements _AssignmentEvent {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _AssignmentEvent &&
+            other is _$_AssignmentEvent &&
             const DeepCollectionEquality().equals(other.visitorId, visitorId) &&
             const DeepCollectionEquality().equals(other.splitName, splitName) &&
             const DeepCollectionEquality().equals(other.context, context));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -179,20 +157,22 @@ class _$_AssignmentEvent implements _AssignmentEvent {
 
   @JsonKey(ignore: true)
   @override
-  _$AssignmentEventCopyWith<_AssignmentEvent> get copyWith =>
-      __$AssignmentEventCopyWithImpl<_AssignmentEvent>(this, _$identity);
+  _$$_AssignmentEventCopyWith<_$_AssignmentEvent> get copyWith =>
+      __$$_AssignmentEventCopyWithImpl<_$_AssignmentEvent>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AssignmentEventToJson(this);
+    return _$$_AssignmentEventToJson(
+      this,
+    );
   }
 }
 
 abstract class _AssignmentEvent implements AssignmentEvent {
   const factory _AssignmentEvent(
-      {required String visitorId,
-      required String splitName,
-      required String context}) = _$_AssignmentEvent;
+      {required final String visitorId,
+      required final String splitName,
+      required final String context}) = _$_AssignmentEvent;
 
   factory _AssignmentEvent.fromJson(Map<String, dynamic> json) =
       _$_AssignmentEvent.fromJson;
@@ -205,6 +185,6 @@ abstract class _AssignmentEvent implements AssignmentEvent {
   String get context;
   @override
   @JsonKey(ignore: true)
-  _$AssignmentEventCopyWith<_AssignmentEvent> get copyWith =>
+  _$$_AssignmentEventCopyWith<_$_AssignmentEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }

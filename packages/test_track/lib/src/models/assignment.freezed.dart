@@ -12,34 +12,11 @@ part of 'assignment.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 Assignment _$AssignmentFromJson(Map<String, dynamic> json) {
   return _Assignment.fromJson(json);
 }
-
-/// @nodoc
-class _$AssignmentTearOff {
-  const _$AssignmentTearOff();
-
-  _Assignment call(
-      {required String splitName,
-      required String variant,
-      String context = ''}) {
-    return _Assignment(
-      splitName: splitName,
-      variant: variant,
-      context: context,
-    );
-  }
-
-  Assignment fromJson(Map<String, Object?> json) {
-    return Assignment.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Assignment = _$AssignmentTearOff();
 
 /// @nodoc
 mixin _$Assignment {
@@ -93,23 +70,24 @@ class _$AssignmentCopyWithImpl<$Res> implements $AssignmentCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$AssignmentCopyWith<$Res> implements $AssignmentCopyWith<$Res> {
-  factory _$AssignmentCopyWith(
-          _Assignment value, $Res Function(_Assignment) then) =
-      __$AssignmentCopyWithImpl<$Res>;
+abstract class _$$_AssignmentCopyWith<$Res>
+    implements $AssignmentCopyWith<$Res> {
+  factory _$$_AssignmentCopyWith(
+          _$_Assignment value, $Res Function(_$_Assignment) then) =
+      __$$_AssignmentCopyWithImpl<$Res>;
   @override
   $Res call({String splitName, String variant, String context});
 }
 
 /// @nodoc
-class __$AssignmentCopyWithImpl<$Res> extends _$AssignmentCopyWithImpl<$Res>
-    implements _$AssignmentCopyWith<$Res> {
-  __$AssignmentCopyWithImpl(
-      _Assignment _value, $Res Function(_Assignment) _then)
-      : super(_value, (v) => _then(v as _Assignment));
+class __$$_AssignmentCopyWithImpl<$Res> extends _$AssignmentCopyWithImpl<$Res>
+    implements _$$_AssignmentCopyWith<$Res> {
+  __$$_AssignmentCopyWithImpl(
+      _$_Assignment _value, $Res Function(_$_Assignment) _then)
+      : super(_value, (v) => _then(v as _$_Assignment));
 
   @override
-  _Assignment get _value => super._value as _Assignment;
+  _$_Assignment get _value => super._value as _$_Assignment;
 
   @override
   $Res call({
@@ -117,7 +95,7 @@ class __$AssignmentCopyWithImpl<$Res> extends _$AssignmentCopyWithImpl<$Res>
     Object? variant = freezed,
     Object? context = freezed,
   }) {
-    return _then(_Assignment(
+    return _then(_$_Assignment(
       splitName: splitName == freezed
           ? _value.splitName
           : splitName // ignore: cast_nullable_to_non_nullable
@@ -147,8 +125,8 @@ class _$_Assignment implements _Assignment {
   final String splitName;
   @override
   final String variant;
-  @JsonKey()
   @override
+  @JsonKey()
   final String context;
 
   @override
@@ -160,12 +138,13 @@ class _$_Assignment implements _Assignment {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Assignment &&
+            other is _$_Assignment &&
             const DeepCollectionEquality().equals(other.splitName, splitName) &&
             const DeepCollectionEquality().equals(other.variant, variant) &&
             const DeepCollectionEquality().equals(other.context, context));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -175,20 +154,22 @@ class _$_Assignment implements _Assignment {
 
   @JsonKey(ignore: true)
   @override
-  _$AssignmentCopyWith<_Assignment> get copyWith =>
-      __$AssignmentCopyWithImpl<_Assignment>(this, _$identity);
+  _$$_AssignmentCopyWith<_$_Assignment> get copyWith =>
+      __$$_AssignmentCopyWithImpl<_$_Assignment>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AssignmentToJson(this);
+    return _$$_AssignmentToJson(
+      this,
+    );
   }
 }
 
 abstract class _Assignment implements Assignment {
   const factory _Assignment(
-      {required String splitName,
-      required String variant,
-      String context}) = _$_Assignment;
+      {required final String splitName,
+      required final String variant,
+      final String context}) = _$_Assignment;
 
   factory _Assignment.fromJson(Map<String, dynamic> json) =
       _$_Assignment.fromJson;
@@ -201,6 +182,6 @@ abstract class _Assignment implements Assignment {
   String get context;
   @override
   @JsonKey(ignore: true)
-  _$AssignmentCopyWith<_Assignment> get copyWith =>
+  _$$_AssignmentCopyWith<_$_Assignment> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,30 +12,11 @@ part of 'identifier.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 Identifier _$IdentifierFromJson(Map<String, dynamic> json) {
   return _Identifier.fromJson(json);
 }
-
-/// @nodoc
-class _$IdentifierTearOff {
-  const _$IdentifierTearOff();
-
-  _Identifier call({required String identifierType, required String value}) {
-    return _Identifier(
-      identifierType: identifierType,
-      value: value,
-    );
-  }
-
-  Identifier fromJson(Map<String, Object?> json) {
-    return Identifier.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Identifier = _$IdentifierTearOff();
 
 /// @nodoc
 mixin _$Identifier {
@@ -83,30 +64,31 @@ class _$IdentifierCopyWithImpl<$Res> implements $IdentifierCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$IdentifierCopyWith<$Res> implements $IdentifierCopyWith<$Res> {
-  factory _$IdentifierCopyWith(
-          _Identifier value, $Res Function(_Identifier) then) =
-      __$IdentifierCopyWithImpl<$Res>;
+abstract class _$$_IdentifierCopyWith<$Res>
+    implements $IdentifierCopyWith<$Res> {
+  factory _$$_IdentifierCopyWith(
+          _$_Identifier value, $Res Function(_$_Identifier) then) =
+      __$$_IdentifierCopyWithImpl<$Res>;
   @override
   $Res call({String identifierType, String value});
 }
 
 /// @nodoc
-class __$IdentifierCopyWithImpl<$Res> extends _$IdentifierCopyWithImpl<$Res>
-    implements _$IdentifierCopyWith<$Res> {
-  __$IdentifierCopyWithImpl(
-      _Identifier _value, $Res Function(_Identifier) _then)
-      : super(_value, (v) => _then(v as _Identifier));
+class __$$_IdentifierCopyWithImpl<$Res> extends _$IdentifierCopyWithImpl<$Res>
+    implements _$$_IdentifierCopyWith<$Res> {
+  __$$_IdentifierCopyWithImpl(
+      _$_Identifier _value, $Res Function(_$_Identifier) _then)
+      : super(_value, (v) => _then(v as _$_Identifier));
 
   @override
-  _Identifier get _value => super._value as _Identifier;
+  _$_Identifier get _value => super._value as _$_Identifier;
 
   @override
   $Res call({
     Object? identifierType = freezed,
     Object? value = freezed,
   }) {
-    return _then(_Identifier(
+    return _then(_$_Identifier(
       identifierType: identifierType == freezed
           ? _value.identifierType
           : identifierType // ignore: cast_nullable_to_non_nullable
@@ -141,12 +123,13 @@ class _$_Identifier implements _Identifier {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Identifier &&
+            other is _$_Identifier &&
             const DeepCollectionEquality()
                 .equals(other.identifierType, identifierType) &&
             const DeepCollectionEquality().equals(other.value, value));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -155,18 +138,21 @@ class _$_Identifier implements _Identifier {
 
   @JsonKey(ignore: true)
   @override
-  _$IdentifierCopyWith<_Identifier> get copyWith =>
-      __$IdentifierCopyWithImpl<_Identifier>(this, _$identity);
+  _$$_IdentifierCopyWith<_$_Identifier> get copyWith =>
+      __$$_IdentifierCopyWithImpl<_$_Identifier>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_IdentifierToJson(this);
+    return _$$_IdentifierToJson(
+      this,
+    );
   }
 }
 
 abstract class _Identifier implements Identifier {
   const factory _Identifier(
-      {required String identifierType, required String value}) = _$_Identifier;
+      {required final String identifierType,
+      required final String value}) = _$_Identifier;
 
   factory _Identifier.fromJson(Map<String, dynamic> json) =
       _$_Identifier.fromJson;
@@ -177,6 +163,6 @@ abstract class _Identifier implements Identifier {
   String get value;
   @override
   @JsonKey(ignore: true)
-  _$IdentifierCopyWith<_Identifier> get copyWith =>
+  _$$_IdentifierCopyWith<_$_Identifier> get copyWith =>
       throw _privateConstructorUsedError;
 }

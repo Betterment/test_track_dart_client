@@ -12,34 +12,11 @@ part of 'split.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 Split _$SplitFromJson(Map<String, dynamic> json) {
   return _Split.fromJson(json);
 }
-
-/// @nodoc
-class _$SplitTearOff {
-  const _$SplitTearOff();
-
-  _Split call(
-      {required String name,
-      required List<Variant> variants,
-      @JsonKey(name: 'feature_gate') required bool isFeatureGate}) {
-    return _Split(
-      name: name,
-      variants: variants,
-      isFeatureGate: isFeatureGate,
-    );
-  }
-
-  Split fromJson(Map<String, Object?> json) {
-    return Split.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Split = _$SplitTearOff();
 
 /// @nodoc
 mixin _$Split {
@@ -95,9 +72,9 @@ class _$SplitCopyWithImpl<$Res> implements $SplitCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$SplitCopyWith<$Res> implements $SplitCopyWith<$Res> {
-  factory _$SplitCopyWith(_Split value, $Res Function(_Split) then) =
-      __$SplitCopyWithImpl<$Res>;
+abstract class _$$_SplitCopyWith<$Res> implements $SplitCopyWith<$Res> {
+  factory _$$_SplitCopyWith(_$_Split value, $Res Function(_$_Split) then) =
+      __$$_SplitCopyWithImpl<$Res>;
   @override
   $Res call(
       {String name,
@@ -106,13 +83,13 @@ abstract class _$SplitCopyWith<$Res> implements $SplitCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$SplitCopyWithImpl<$Res> extends _$SplitCopyWithImpl<$Res>
-    implements _$SplitCopyWith<$Res> {
-  __$SplitCopyWithImpl(_Split _value, $Res Function(_Split) _then)
-      : super(_value, (v) => _then(v as _Split));
+class __$$_SplitCopyWithImpl<$Res> extends _$SplitCopyWithImpl<$Res>
+    implements _$$_SplitCopyWith<$Res> {
+  __$$_SplitCopyWithImpl(_$_Split _value, $Res Function(_$_Split) _then)
+      : super(_value, (v) => _then(v as _$_Split));
 
   @override
-  _Split get _value => super._value as _Split;
+  _$_Split get _value => super._value as _$_Split;
 
   @override
   $Res call({
@@ -120,13 +97,13 @@ class __$SplitCopyWithImpl<$Res> extends _$SplitCopyWithImpl<$Res>
     Object? variants = freezed,
     Object? isFeatureGate = freezed,
   }) {
-    return _then(_Split(
+    return _then(_$_Split(
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       variants: variants == freezed
-          ? _value.variants
+          ? _value._variants
           : variants // ignore: cast_nullable_to_non_nullable
               as List<Variant>,
       isFeatureGate: isFeatureGate == freezed
@@ -142,16 +119,22 @@ class __$SplitCopyWithImpl<$Res> extends _$SplitCopyWithImpl<$Res>
 class _$_Split implements _Split {
   const _$_Split(
       {required this.name,
-      required this.variants,
-      @JsonKey(name: 'feature_gate') required this.isFeatureGate});
+      required final List<Variant> variants,
+      @JsonKey(name: 'feature_gate') required this.isFeatureGate})
+      : _variants = variants;
 
   factory _$_Split.fromJson(Map<String, dynamic> json) =>
       _$$_SplitFromJson(json);
 
   @override
   final String name;
+  final List<Variant> _variants;
   @override
-  final List<Variant> variants;
+  List<Variant> get variants {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_variants);
+  }
+
   @override
   @JsonKey(name: 'feature_gate')
   final bool isFeatureGate;
@@ -165,36 +148,40 @@ class _$_Split implements _Split {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Split &&
+            other is _$_Split &&
             const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.variants, variants) &&
+            const DeepCollectionEquality().equals(other._variants, _variants) &&
             const DeepCollectionEquality()
                 .equals(other.isFeatureGate, isFeatureGate));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(variants),
+      const DeepCollectionEquality().hash(_variants),
       const DeepCollectionEquality().hash(isFeatureGate));
 
   @JsonKey(ignore: true)
   @override
-  _$SplitCopyWith<_Split> get copyWith =>
-      __$SplitCopyWithImpl<_Split>(this, _$identity);
+  _$$_SplitCopyWith<_$_Split> get copyWith =>
+      __$$_SplitCopyWithImpl<_$_Split>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SplitToJson(this);
+    return _$$_SplitToJson(
+      this,
+    );
   }
 }
 
 abstract class _Split implements Split {
   const factory _Split(
-      {required String name,
-      required List<Variant> variants,
-      @JsonKey(name: 'feature_gate') required bool isFeatureGate}) = _$_Split;
+          {required final String name,
+          required final List<Variant> variants,
+          @JsonKey(name: 'feature_gate') required final bool isFeatureGate}) =
+      _$_Split;
 
   factory _Split.fromJson(Map<String, dynamic> json) = _$_Split.fromJson;
 
@@ -207,5 +194,6 @@ abstract class _Split implements Split {
   bool get isFeatureGate;
   @override
   @JsonKey(ignore: true)
-  _$SplitCopyWith<_Split> get copyWith => throw _privateConstructorUsedError;
+  _$$_SplitCopyWith<_$_Split> get copyWith =>
+      throw _privateConstructorUsedError;
 }

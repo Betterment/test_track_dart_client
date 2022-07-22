@@ -1,3 +1,5 @@
+## 0.0.3
+
 ## 0.0.2
 
 * chore: Update badges now that both packages are published by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/20

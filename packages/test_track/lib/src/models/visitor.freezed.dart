@@ -12,30 +12,11 @@ part of 'visitor.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 Visitor _$VisitorFromJson(Map<String, dynamic> json) {
   return _Visitor.fromJson(json);
 }
-
-/// @nodoc
-class _$VisitorTearOff {
-  const _$VisitorTearOff();
-
-  _Visitor call({required List<Assignment> assignments, required String id}) {
-    return _Visitor(
-      assignments: assignments,
-      id: id,
-    );
-  }
-
-  Visitor fromJson(Map<String, Object?> json) {
-    return Visitor.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Visitor = _$VisitorTearOff();
 
 /// @nodoc
 mixin _$Visitor {
@@ -81,30 +62,31 @@ class _$VisitorCopyWithImpl<$Res> implements $VisitorCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$VisitorCopyWith<$Res> implements $VisitorCopyWith<$Res> {
-  factory _$VisitorCopyWith(_Visitor value, $Res Function(_Visitor) then) =
-      __$VisitorCopyWithImpl<$Res>;
+abstract class _$$_VisitorCopyWith<$Res> implements $VisitorCopyWith<$Res> {
+  factory _$$_VisitorCopyWith(
+          _$_Visitor value, $Res Function(_$_Visitor) then) =
+      __$$_VisitorCopyWithImpl<$Res>;
   @override
   $Res call({List<Assignment> assignments, String id});
 }
 
 /// @nodoc
-class __$VisitorCopyWithImpl<$Res> extends _$VisitorCopyWithImpl<$Res>
-    implements _$VisitorCopyWith<$Res> {
-  __$VisitorCopyWithImpl(_Visitor _value, $Res Function(_Visitor) _then)
-      : super(_value, (v) => _then(v as _Visitor));
+class __$$_VisitorCopyWithImpl<$Res> extends _$VisitorCopyWithImpl<$Res>
+    implements _$$_VisitorCopyWith<$Res> {
+  __$$_VisitorCopyWithImpl(_$_Visitor _value, $Res Function(_$_Visitor) _then)
+      : super(_value, (v) => _then(v as _$_Visitor));
 
   @override
-  _Visitor get _value => super._value as _Visitor;
+  _$_Visitor get _value => super._value as _$_Visitor;
 
   @override
   $Res call({
     Object? assignments = freezed,
     Object? id = freezed,
   }) {
-    return _then(_Visitor(
+    return _then(_$_Visitor(
       assignments: assignments == freezed
-          ? _value.assignments
+          ? _value._assignments
           : assignments // ignore: cast_nullable_to_non_nullable
               as List<Assignment>,
       id: id == freezed
@@ -118,13 +100,20 @@ class __$VisitorCopyWithImpl<$Res> extends _$VisitorCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_Visitor implements _Visitor {
-  const _$_Visitor({required this.assignments, required this.id});
+  const _$_Visitor(
+      {required final List<Assignment> assignments, required this.id})
+      : _assignments = assignments;
 
   factory _$_Visitor.fromJson(Map<String, dynamic> json) =>
       _$$_VisitorFromJson(json);
 
+  final List<Assignment> _assignments;
   @override
-  final List<Assignment> assignments;
+  List<Assignment> get assignments {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_assignments);
+  }
+
   @override
   final String id;
 
@@ -137,32 +126,36 @@ class _$_Visitor implements _Visitor {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Visitor &&
+            other is _$_Visitor &&
             const DeepCollectionEquality()
-                .equals(other.assignments, assignments) &&
+                .equals(other._assignments, _assignments) &&
             const DeepCollectionEquality().equals(other.id, id));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(assignments),
+      const DeepCollectionEquality().hash(_assignments),
       const DeepCollectionEquality().hash(id));
 
   @JsonKey(ignore: true)
   @override
-  _$VisitorCopyWith<_Visitor> get copyWith =>
-      __$VisitorCopyWithImpl<_Visitor>(this, _$identity);
+  _$$_VisitorCopyWith<_$_Visitor> get copyWith =>
+      __$$_VisitorCopyWithImpl<_$_Visitor>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_VisitorToJson(this);
+    return _$$_VisitorToJson(
+      this,
+    );
   }
 }
 
 abstract class _Visitor implements Visitor {
   const factory _Visitor(
-      {required List<Assignment> assignments, required String id}) = _$_Visitor;
+      {required final List<Assignment> assignments,
+      required final String id}) = _$_Visitor;
 
   factory _Visitor.fromJson(Map<String, dynamic> json) = _$_Visitor.fromJson;
 
@@ -172,6 +165,6 @@ abstract class _Visitor implements Visitor {
   String get id;
   @override
   @JsonKey(ignore: true)
-  _$VisitorCopyWith<_Visitor> get copyWith =>
+  _$$_VisitorCopyWith<_$_Visitor> get copyWith =>
       throw _privateConstructorUsedError;
 }

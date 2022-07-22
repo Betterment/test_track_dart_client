@@ -12,29 +12,11 @@ part of 'split_registry.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 SplitRegistry _$SplitRegistryFromJson(Map<String, dynamic> json) {
   return _SplitRegistry.fromJson(json);
 }
-
-/// @nodoc
-class _$SplitRegistryTearOff {
-  const _$SplitRegistryTearOff();
-
-  _SplitRegistry call({required List<Split> splits}) {
-    return _SplitRegistry(
-      splits: splits,
-    );
-  }
-
-  SplitRegistry fromJson(Map<String, Object?> json) {
-    return SplitRegistry.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $SplitRegistry = _$SplitRegistryTearOff();
 
 /// @nodoc
 mixin _$SplitRegistry {
@@ -77,33 +59,33 @@ class _$SplitRegistryCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$SplitRegistryCopyWith<$Res>
+abstract class _$$_SplitRegistryCopyWith<$Res>
     implements $SplitRegistryCopyWith<$Res> {
-  factory _$SplitRegistryCopyWith(
-          _SplitRegistry value, $Res Function(_SplitRegistry) then) =
-      __$SplitRegistryCopyWithImpl<$Res>;
+  factory _$$_SplitRegistryCopyWith(
+          _$_SplitRegistry value, $Res Function(_$_SplitRegistry) then) =
+      __$$_SplitRegistryCopyWithImpl<$Res>;
   @override
   $Res call({List<Split> splits});
 }
 
 /// @nodoc
-class __$SplitRegistryCopyWithImpl<$Res>
+class __$$_SplitRegistryCopyWithImpl<$Res>
     extends _$SplitRegistryCopyWithImpl<$Res>
-    implements _$SplitRegistryCopyWith<$Res> {
-  __$SplitRegistryCopyWithImpl(
-      _SplitRegistry _value, $Res Function(_SplitRegistry) _then)
-      : super(_value, (v) => _then(v as _SplitRegistry));
+    implements _$$_SplitRegistryCopyWith<$Res> {
+  __$$_SplitRegistryCopyWithImpl(
+      _$_SplitRegistry _value, $Res Function(_$_SplitRegistry) _then)
+      : super(_value, (v) => _then(v as _$_SplitRegistry));
 
   @override
-  _SplitRegistry get _value => super._value as _SplitRegistry;
+  _$_SplitRegistry get _value => super._value as _$_SplitRegistry;
 
   @override
   $Res call({
     Object? splits = freezed,
   }) {
-    return _then(_SplitRegistry(
+    return _then(_$_SplitRegistry(
       splits: splits == freezed
-          ? _value.splits
+          ? _value._splits
           : splits // ignore: cast_nullable_to_non_nullable
               as List<Split>,
     ));
@@ -113,13 +95,17 @@ class __$SplitRegistryCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$_SplitRegistry implements _SplitRegistry {
-  _$_SplitRegistry({required this.splits});
+  _$_SplitRegistry({required final List<Split> splits}) : _splits = splits;
 
   factory _$_SplitRegistry.fromJson(Map<String, dynamic> json) =>
       _$$_SplitRegistryFromJson(json);
 
+  final List<Split> _splits;
   @override
-  final List<Split> splits;
+  List<Split> get splits {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_splits);
+  }
 
   @override
   String toString() {
@@ -130,27 +116,31 @@ class _$_SplitRegistry implements _SplitRegistry {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _SplitRegistry &&
-            const DeepCollectionEquality().equals(other.splits, splits));
+            other is _$_SplitRegistry &&
+            const DeepCollectionEquality().equals(other._splits, _splits));
   }
-
-  @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(splits));
 
   @JsonKey(ignore: true)
   @override
-  _$SplitRegistryCopyWith<_SplitRegistry> get copyWith =>
-      __$SplitRegistryCopyWithImpl<_SplitRegistry>(this, _$identity);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_splits));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$_SplitRegistryCopyWith<_$_SplitRegistry> get copyWith =>
+      __$$_SplitRegistryCopyWithImpl<_$_SplitRegistry>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SplitRegistryToJson(this);
+    return _$$_SplitRegistryToJson(
+      this,
+    );
   }
 }
 
 abstract class _SplitRegistry implements SplitRegistry {
-  factory _SplitRegistry({required List<Split> splits}) = _$_SplitRegistry;
+  factory _SplitRegistry({required final List<Split> splits}) =
+      _$_SplitRegistry;
 
   factory _SplitRegistry.fromJson(Map<String, dynamic> json) =
       _$_SplitRegistry.fromJson;
@@ -159,6 +149,6 @@ abstract class _SplitRegistry implements SplitRegistry {
   List<Split> get splits;
   @override
   @JsonKey(ignore: true)
-  _$SplitRegistryCopyWith<_SplitRegistry> get copyWith =>
+  _$$_SplitRegistryCopyWith<_$_SplitRegistry> get copyWith =>
       throw _privateConstructorUsedError;
 }

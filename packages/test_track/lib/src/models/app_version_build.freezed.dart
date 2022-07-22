@@ -12,34 +12,11 @@ part of 'app_version_build.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 AppVersionBuild _$AppVersionBuildFromJson(Map<String, dynamic> json) {
   return _AppVersionBuild.fromJson(json);
 }
-
-/// @nodoc
-class _$AppVersionBuildTearOff {
-  const _$AppVersionBuildTearOff();
-
-  _AppVersionBuild call(
-      {required String appName,
-      required String version,
-      required String buildTimestamp}) {
-    return _AppVersionBuild(
-      appName: appName,
-      version: version,
-      buildTimestamp: buildTimestamp,
-    );
-  }
-
-  AppVersionBuild fromJson(Map<String, Object?> json) {
-    return AppVersionBuild.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $AppVersionBuild = _$AppVersionBuildTearOff();
 
 /// @nodoc
 mixin _$AppVersionBuild {
@@ -94,25 +71,25 @@ class _$AppVersionBuildCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$AppVersionBuildCopyWith<$Res>
+abstract class _$$_AppVersionBuildCopyWith<$Res>
     implements $AppVersionBuildCopyWith<$Res> {
-  factory _$AppVersionBuildCopyWith(
-          _AppVersionBuild value, $Res Function(_AppVersionBuild) then) =
-      __$AppVersionBuildCopyWithImpl<$Res>;
+  factory _$$_AppVersionBuildCopyWith(
+          _$_AppVersionBuild value, $Res Function(_$_AppVersionBuild) then) =
+      __$$_AppVersionBuildCopyWithImpl<$Res>;
   @override
   $Res call({String appName, String version, String buildTimestamp});
 }
 
 /// @nodoc
-class __$AppVersionBuildCopyWithImpl<$Res>
+class __$$_AppVersionBuildCopyWithImpl<$Res>
     extends _$AppVersionBuildCopyWithImpl<$Res>
-    implements _$AppVersionBuildCopyWith<$Res> {
-  __$AppVersionBuildCopyWithImpl(
-      _AppVersionBuild _value, $Res Function(_AppVersionBuild) _then)
-      : super(_value, (v) => _then(v as _AppVersionBuild));
+    implements _$$_AppVersionBuildCopyWith<$Res> {
+  __$$_AppVersionBuildCopyWithImpl(
+      _$_AppVersionBuild _value, $Res Function(_$_AppVersionBuild) _then)
+      : super(_value, (v) => _then(v as _$_AppVersionBuild));
 
   @override
-  _AppVersionBuild get _value => super._value as _AppVersionBuild;
+  _$_AppVersionBuild get _value => super._value as _$_AppVersionBuild;
 
   @override
   $Res call({
@@ -120,7 +97,7 @@ class __$AppVersionBuildCopyWithImpl<$Res>
     Object? version = freezed,
     Object? buildTimestamp = freezed,
   }) {
-    return _then(_AppVersionBuild(
+    return _then(_$_AppVersionBuild(
       appName: appName == freezed
           ? _value.appName
           : appName // ignore: cast_nullable_to_non_nullable
@@ -165,13 +142,14 @@ class _$_AppVersionBuild implements _AppVersionBuild {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _AppVersionBuild &&
+            other is _$_AppVersionBuild &&
             const DeepCollectionEquality().equals(other.appName, appName) &&
             const DeepCollectionEquality().equals(other.version, version) &&
             const DeepCollectionEquality()
                 .equals(other.buildTimestamp, buildTimestamp));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -181,20 +159,22 @@ class _$_AppVersionBuild implements _AppVersionBuild {
 
   @JsonKey(ignore: true)
   @override
-  _$AppVersionBuildCopyWith<_AppVersionBuild> get copyWith =>
-      __$AppVersionBuildCopyWithImpl<_AppVersionBuild>(this, _$identity);
+  _$$_AppVersionBuildCopyWith<_$_AppVersionBuild> get copyWith =>
+      __$$_AppVersionBuildCopyWithImpl<_$_AppVersionBuild>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AppVersionBuildToJson(this);
+    return _$$_AppVersionBuildToJson(
+      this,
+    );
   }
 }
 
 abstract class _AppVersionBuild implements AppVersionBuild {
   const factory _AppVersionBuild(
-      {required String appName,
-      required String version,
-      required String buildTimestamp}) = _$_AppVersionBuild;
+      {required final String appName,
+      required final String version,
+      required final String buildTimestamp}) = _$_AppVersionBuild;
 
   factory _AppVersionBuild.fromJson(Map<String, dynamic> json) =
       _$_AppVersionBuild.fromJson;
@@ -207,6 +187,6 @@ abstract class _AppVersionBuild implements AppVersionBuild {
   String get buildTimestamp;
   @override
   @JsonKey(ignore: true)
-  _$AppVersionBuildCopyWith<_AppVersionBuild> get copyWith =>
+  _$$_AppVersionBuildCopyWith<_$_AppVersionBuild> get copyWith =>
       throw _privateConstructorUsedError;
 }

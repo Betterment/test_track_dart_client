@@ -23,8 +23,8 @@ class HttpClient {
   }) : this._(
           Dio()
             ..options.baseUrl = baseUrl
-            ..options.connectTimeout = 10000
-            ..options.receiveTimeout = 20000
+            ..options.connectTimeout = const Duration(seconds: 10)
+            ..options.receiveTimeout = const Duration(seconds: 20)
             ..map((dio) {
               final interceptors = [
                 LoggingInterceptor(logger: logger),

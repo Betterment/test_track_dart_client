@@ -94,7 +94,7 @@ void main() {
 
           expect(
             logger.infoLogs.single.error,
-            'Http status error [500]',
+            'The request returned an invalid status code of 500.',
           );
         });
 
@@ -272,7 +272,7 @@ void main() {
 
           expect(
             logger.infoLogs.single.error,
-            'Http status error [500]',
+            'The request returned an invalid status code of 500.',
           );
         });
       });

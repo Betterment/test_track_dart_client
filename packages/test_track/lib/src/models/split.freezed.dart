@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'split.dart';
 
@@ -33,7 +33,8 @@ mixin _$Split {
 /// @nodoc
 abstract class $SplitCopyWith<$Res> {
   factory $SplitCopyWith(Split value, $Res Function(Split) then) =
-      _$SplitCopyWithImpl<$Res>;
+      _$SplitCopyWithImpl<$Res, Split>;
+  @useResult
   $Res call(
       {String name,
       List<Variant> variants,
@@ -41,33 +42,36 @@ abstract class $SplitCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$SplitCopyWithImpl<$Res> implements $SplitCopyWith<$Res> {
+class _$SplitCopyWithImpl<$Res, $Val extends Split>
+    implements $SplitCopyWith<$Res> {
   _$SplitCopyWithImpl(this._value, this._then);
 
-  final Split _value;
   // ignore: unused_field
-  final $Res Function(Split) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? variants = freezed,
-    Object? isFeatureGate = freezed,
+    Object? name = null,
+    Object? variants = null,
+    Object? isFeatureGate = null,
   }) {
     return _then(_value.copyWith(
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      variants: variants == freezed
+      variants: null == variants
           ? _value.variants
           : variants // ignore: cast_nullable_to_non_nullable
               as List<Variant>,
-      isFeatureGate: isFeatureGate == freezed
+      isFeatureGate: null == isFeatureGate
           ? _value.isFeatureGate
           : isFeatureGate // ignore: cast_nullable_to_non_nullable
               as bool,
-    ));
+    ) as $Val);
   }
 }
 
@@ -76,6 +80,7 @@ abstract class _$$_SplitCopyWith<$Res> implements $SplitCopyWith<$Res> {
   factory _$$_SplitCopyWith(_$_Split value, $Res Function(_$_Split) then) =
       __$$_SplitCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String name,
       List<Variant> variants,
@@ -83,30 +88,28 @@ abstract class _$$_SplitCopyWith<$Res> implements $SplitCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_SplitCopyWithImpl<$Res> extends _$SplitCopyWithImpl<$Res>
+class __$$_SplitCopyWithImpl<$Res> extends _$SplitCopyWithImpl<$Res, _$_Split>
     implements _$$_SplitCopyWith<$Res> {
   __$$_SplitCopyWithImpl(_$_Split _value, $Res Function(_$_Split) _then)
-      : super(_value, (v) => _then(v as _$_Split));
+      : super(_value, _then);
 
-  @override
-  _$_Split get _value => super._value as _$_Split;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? variants = freezed,
-    Object? isFeatureGate = freezed,
+    Object? name = null,
+    Object? variants = null,
+    Object? isFeatureGate = null,
   }) {
     return _then(_$_Split(
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      variants: variants == freezed
+      variants: null == variants
           ? _value._variants
           : variants // ignore: cast_nullable_to_non_nullable
               as List<Variant>,
-      isFeatureGate: isFeatureGate == freezed
+      isFeatureGate: null == isFeatureGate
           ? _value.isFeatureGate
           : isFeatureGate // ignore: cast_nullable_to_non_nullable
               as bool,
@@ -131,6 +134,7 @@ class _$_Split implements _Split {
   final List<Variant> _variants;
   @override
   List<Variant> get variants {
+    if (_variants is EqualUnmodifiableListView) return _variants;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_variants);
   }
@@ -149,22 +153,20 @@ class _$_Split implements _Split {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Split &&
-            const DeepCollectionEquality().equals(other.name, name) &&
+            (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality().equals(other._variants, _variants) &&
-            const DeepCollectionEquality()
-                .equals(other.isFeatureGate, isFeatureGate));
+            (identical(other.isFeatureGate, isFeatureGate) ||
+                other.isFeatureGate == isFeatureGate));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(_variants),
-      const DeepCollectionEquality().hash(isFeatureGate));
+  int get hashCode => Object.hash(runtimeType, name,
+      const DeepCollectionEquality().hash(_variants), isFeatureGate);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SplitCopyWith<_$_Split> get copyWith =>
       __$$_SplitCopyWithImpl<_$_Split>(this, _$identity);
 

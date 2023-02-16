@@ -33,11 +33,11 @@ class TestTrack {
     HttpClientAdapter? customHttpAdapter,
     TestTrackLogger? logger,
   }) async {
-    final _logger = logger ?? const SilentTestTrackLogger();
+    logger ??= const SilentTestTrackLogger();
 
     final client = HttpClient(
       baseUrl: baseUrl,
-      logger: _logger,
+      logger: logger,
       customAdapter: customHttpAdapter,
     );
 
@@ -48,7 +48,7 @@ class TestTrack {
     );
     final reportAssignmentEvent = ReportAssignmentEvent(
       client: client,
-      logger: _logger,
+      logger: logger,
     );
     final overrideAssignments = OverrideAssignments(
       client: client,
@@ -90,7 +90,7 @@ class TestTrack {
       visitor = appVisitorConfig.visitor;
       splitRegistry = appVisitorConfig.splitRegistry;
     } on DioError catch (e) {
-      _logger.info(
+      logger.info(
         'Failed to fetch app visitor config from server, using cached data',
         error: e.message,
         stackTrace: e.stackTrace,
@@ -107,7 +107,7 @@ class TestTrack {
       logout,
       runVary,
       runAb,
-      _logger,
+      logger,
       visitor,
       splitRegistry,
     );

@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'assignment_event.dart';
 
@@ -34,39 +34,42 @@ mixin _$AssignmentEvent {
 abstract class $AssignmentEventCopyWith<$Res> {
   factory $AssignmentEventCopyWith(
           AssignmentEvent value, $Res Function(AssignmentEvent) then) =
-      _$AssignmentEventCopyWithImpl<$Res>;
+      _$AssignmentEventCopyWithImpl<$Res, AssignmentEvent>;
+  @useResult
   $Res call({String visitorId, String splitName, String context});
 }
 
 /// @nodoc
-class _$AssignmentEventCopyWithImpl<$Res>
+class _$AssignmentEventCopyWithImpl<$Res, $Val extends AssignmentEvent>
     implements $AssignmentEventCopyWith<$Res> {
   _$AssignmentEventCopyWithImpl(this._value, this._then);
 
-  final AssignmentEvent _value;
   // ignore: unused_field
-  final $Res Function(AssignmentEvent) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? visitorId = freezed,
-    Object? splitName = freezed,
-    Object? context = freezed,
+    Object? visitorId = null,
+    Object? splitName = null,
+    Object? context = null,
   }) {
     return _then(_value.copyWith(
-      visitorId: visitorId == freezed
+      visitorId: null == visitorId
           ? _value.visitorId
           : visitorId // ignore: cast_nullable_to_non_nullable
               as String,
-      splitName: splitName == freezed
+      splitName: null == splitName
           ? _value.splitName
           : splitName // ignore: cast_nullable_to_non_nullable
               as String,
-      context: context == freezed
+      context: null == context
           ? _value.context
           : context // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -77,36 +80,35 @@ abstract class _$$_AssignmentEventCopyWith<$Res>
           _$_AssignmentEvent value, $Res Function(_$_AssignmentEvent) then) =
       __$$_AssignmentEventCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String visitorId, String splitName, String context});
 }
 
 /// @nodoc
 class __$$_AssignmentEventCopyWithImpl<$Res>
-    extends _$AssignmentEventCopyWithImpl<$Res>
+    extends _$AssignmentEventCopyWithImpl<$Res, _$_AssignmentEvent>
     implements _$$_AssignmentEventCopyWith<$Res> {
   __$$_AssignmentEventCopyWithImpl(
       _$_AssignmentEvent _value, $Res Function(_$_AssignmentEvent) _then)
-      : super(_value, (v) => _then(v as _$_AssignmentEvent));
+      : super(_value, _then);
 
-  @override
-  _$_AssignmentEvent get _value => super._value as _$_AssignmentEvent;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? visitorId = freezed,
-    Object? splitName = freezed,
-    Object? context = freezed,
+    Object? visitorId = null,
+    Object? splitName = null,
+    Object? context = null,
   }) {
     return _then(_$_AssignmentEvent(
-      visitorId: visitorId == freezed
+      visitorId: null == visitorId
           ? _value.visitorId
           : visitorId // ignore: cast_nullable_to_non_nullable
               as String,
-      splitName: splitName == freezed
+      splitName: null == splitName
           ? _value.splitName
           : splitName // ignore: cast_nullable_to_non_nullable
               as String,
-      context: context == freezed
+      context: null == context
           ? _value.context
           : context // ignore: cast_nullable_to_non_nullable
               as String,
@@ -142,21 +144,20 @@ class _$_AssignmentEvent implements _AssignmentEvent {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AssignmentEvent &&
-            const DeepCollectionEquality().equals(other.visitorId, visitorId) &&
-            const DeepCollectionEquality().equals(other.splitName, splitName) &&
-            const DeepCollectionEquality().equals(other.context, context));
+            (identical(other.visitorId, visitorId) ||
+                other.visitorId == visitorId) &&
+            (identical(other.splitName, splitName) ||
+                other.splitName == splitName) &&
+            (identical(other.context, context) || other.context == context));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(visitorId),
-      const DeepCollectionEquality().hash(splitName),
-      const DeepCollectionEquality().hash(context));
+  int get hashCode => Object.hash(runtimeType, visitorId, splitName, context);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AssignmentEventCopyWith<_$_AssignmentEvent> get copyWith =>
       __$$_AssignmentEventCopyWithImpl<_$_AssignmentEvent>(this, _$identity);
 

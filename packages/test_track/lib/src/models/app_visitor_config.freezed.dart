@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'app_visitor_config.dart';
 
@@ -33,42 +33,46 @@ mixin _$AppVisitorConfig {
 abstract class $AppVisitorConfigCopyWith<$Res> {
   factory $AppVisitorConfigCopyWith(
           AppVisitorConfig value, $Res Function(AppVisitorConfig) then) =
-      _$AppVisitorConfigCopyWithImpl<$Res>;
+      _$AppVisitorConfigCopyWithImpl<$Res, AppVisitorConfig>;
+  @useResult
   $Res call({List<Split> splits, Visitor visitor});
 
   $VisitorCopyWith<$Res> get visitor;
 }
 
 /// @nodoc
-class _$AppVisitorConfigCopyWithImpl<$Res>
+class _$AppVisitorConfigCopyWithImpl<$Res, $Val extends AppVisitorConfig>
     implements $AppVisitorConfigCopyWith<$Res> {
   _$AppVisitorConfigCopyWithImpl(this._value, this._then);
 
-  final AppVisitorConfig _value;
   // ignore: unused_field
-  final $Res Function(AppVisitorConfig) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? splits = freezed,
-    Object? visitor = freezed,
+    Object? splits = null,
+    Object? visitor = null,
   }) {
     return _then(_value.copyWith(
-      splits: splits == freezed
+      splits: null == splits
           ? _value.splits
           : splits // ignore: cast_nullable_to_non_nullable
               as List<Split>,
-      visitor: visitor == freezed
+      visitor: null == visitor
           ? _value.visitor
           : visitor // ignore: cast_nullable_to_non_nullable
               as Visitor,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $VisitorCopyWith<$Res> get visitor {
     return $VisitorCopyWith<$Res>(_value.visitor, (value) {
-      return _then(_value.copyWith(visitor: value));
+      return _then(_value.copyWith(visitor: value) as $Val);
     });
   }
 }
@@ -80,6 +84,7 @@ abstract class _$$_AppVisitorConfigCopyWith<$Res>
           _$_AppVisitorConfig value, $Res Function(_$_AppVisitorConfig) then) =
       __$$_AppVisitorConfigCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({List<Split> splits, Visitor visitor});
 
   @override
@@ -88,26 +93,24 @@ abstract class _$$_AppVisitorConfigCopyWith<$Res>
 
 /// @nodoc
 class __$$_AppVisitorConfigCopyWithImpl<$Res>
-    extends _$AppVisitorConfigCopyWithImpl<$Res>
+    extends _$AppVisitorConfigCopyWithImpl<$Res, _$_AppVisitorConfig>
     implements _$$_AppVisitorConfigCopyWith<$Res> {
   __$$_AppVisitorConfigCopyWithImpl(
       _$_AppVisitorConfig _value, $Res Function(_$_AppVisitorConfig) _then)
-      : super(_value, (v) => _then(v as _$_AppVisitorConfig));
+      : super(_value, _then);
 
-  @override
-  _$_AppVisitorConfig get _value => super._value as _$_AppVisitorConfig;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? splits = freezed,
-    Object? visitor = freezed,
+    Object? splits = null,
+    Object? visitor = null,
   }) {
     return _then(_$_AppVisitorConfig(
-      splits: splits == freezed
+      splits: null == splits
           ? _value._splits
           : splits // ignore: cast_nullable_to_non_nullable
               as List<Split>,
-      visitor: visitor == freezed
+      visitor: null == visitor
           ? _value.visitor
           : visitor // ignore: cast_nullable_to_non_nullable
               as Visitor,
@@ -128,6 +131,7 @@ class _$_AppVisitorConfig implements _AppVisitorConfig {
   final List<Split> _splits;
   @override
   List<Split> get splits {
+    if (_splits is EqualUnmodifiableListView) return _splits;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_splits);
   }
@@ -146,18 +150,17 @@ class _$_AppVisitorConfig implements _AppVisitorConfig {
         (other.runtimeType == runtimeType &&
             other is _$_AppVisitorConfig &&
             const DeepCollectionEquality().equals(other._splits, _splits) &&
-            const DeepCollectionEquality().equals(other.visitor, visitor));
+            (identical(other.visitor, visitor) || other.visitor == visitor));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_splits),
-      const DeepCollectionEquality().hash(visitor));
+      runtimeType, const DeepCollectionEquality().hash(_splits), visitor);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AppVisitorConfigCopyWith<_$_AppVisitorConfig> get copyWith =>
       __$$_AppVisitorConfigCopyWithImpl<_$_AppVisitorConfig>(this, _$identity);
 

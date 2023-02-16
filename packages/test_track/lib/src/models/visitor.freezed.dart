@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'visitor.dart';
 
@@ -31,33 +31,37 @@ mixin _$Visitor {
 /// @nodoc
 abstract class $VisitorCopyWith<$Res> {
   factory $VisitorCopyWith(Visitor value, $Res Function(Visitor) then) =
-      _$VisitorCopyWithImpl<$Res>;
+      _$VisitorCopyWithImpl<$Res, Visitor>;
+  @useResult
   $Res call({List<Assignment> assignments, String id});
 }
 
 /// @nodoc
-class _$VisitorCopyWithImpl<$Res> implements $VisitorCopyWith<$Res> {
+class _$VisitorCopyWithImpl<$Res, $Val extends Visitor>
+    implements $VisitorCopyWith<$Res> {
   _$VisitorCopyWithImpl(this._value, this._then);
 
-  final Visitor _value;
   // ignore: unused_field
-  final $Res Function(Visitor) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? assignments = freezed,
-    Object? id = freezed,
+    Object? assignments = null,
+    Object? id = null,
   }) {
     return _then(_value.copyWith(
-      assignments: assignments == freezed
+      assignments: null == assignments
           ? _value.assignments
           : assignments // ignore: cast_nullable_to_non_nullable
               as List<Assignment>,
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -67,29 +71,29 @@ abstract class _$$_VisitorCopyWith<$Res> implements $VisitorCopyWith<$Res> {
           _$_Visitor value, $Res Function(_$_Visitor) then) =
       __$$_VisitorCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({List<Assignment> assignments, String id});
 }
 
 /// @nodoc
-class __$$_VisitorCopyWithImpl<$Res> extends _$VisitorCopyWithImpl<$Res>
+class __$$_VisitorCopyWithImpl<$Res>
+    extends _$VisitorCopyWithImpl<$Res, _$_Visitor>
     implements _$$_VisitorCopyWith<$Res> {
   __$$_VisitorCopyWithImpl(_$_Visitor _value, $Res Function(_$_Visitor) _then)
-      : super(_value, (v) => _then(v as _$_Visitor));
+      : super(_value, _then);
 
-  @override
-  _$_Visitor get _value => super._value as _$_Visitor;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? assignments = freezed,
-    Object? id = freezed,
+    Object? assignments = null,
+    Object? id = null,
   }) {
     return _then(_$_Visitor(
-      assignments: assignments == freezed
+      assignments: null == assignments
           ? _value._assignments
           : assignments // ignore: cast_nullable_to_non_nullable
               as List<Assignment>,
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
@@ -110,6 +114,7 @@ class _$_Visitor implements _Visitor {
   final List<Assignment> _assignments;
   @override
   List<Assignment> get assignments {
+    if (_assignments is EqualUnmodifiableListView) return _assignments;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_assignments);
   }
@@ -129,18 +134,17 @@ class _$_Visitor implements _Visitor {
             other is _$_Visitor &&
             const DeepCollectionEquality()
                 .equals(other._assignments, _assignments) &&
-            const DeepCollectionEquality().equals(other.id, id));
+            (identical(other.id, id) || other.id == id));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_assignments),
-      const DeepCollectionEquality().hash(id));
+      runtimeType, const DeepCollectionEquality().hash(_assignments), id);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_VisitorCopyWith<_$_Visitor> get copyWith =>
       __$$_VisitorCopyWithImpl<_$_Visitor>(this, _$identity);
 

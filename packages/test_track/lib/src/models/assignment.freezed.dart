@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'assignment.dart';
 
@@ -34,38 +34,42 @@ mixin _$Assignment {
 abstract class $AssignmentCopyWith<$Res> {
   factory $AssignmentCopyWith(
           Assignment value, $Res Function(Assignment) then) =
-      _$AssignmentCopyWithImpl<$Res>;
+      _$AssignmentCopyWithImpl<$Res, Assignment>;
+  @useResult
   $Res call({String splitName, String variant, String context});
 }
 
 /// @nodoc
-class _$AssignmentCopyWithImpl<$Res> implements $AssignmentCopyWith<$Res> {
+class _$AssignmentCopyWithImpl<$Res, $Val extends Assignment>
+    implements $AssignmentCopyWith<$Res> {
   _$AssignmentCopyWithImpl(this._value, this._then);
 
-  final Assignment _value;
   // ignore: unused_field
-  final $Res Function(Assignment) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? splitName = freezed,
-    Object? variant = freezed,
-    Object? context = freezed,
+    Object? splitName = null,
+    Object? variant = null,
+    Object? context = null,
   }) {
     return _then(_value.copyWith(
-      splitName: splitName == freezed
+      splitName: null == splitName
           ? _value.splitName
           : splitName // ignore: cast_nullable_to_non_nullable
               as String,
-      variant: variant == freezed
+      variant: null == variant
           ? _value.variant
           : variant // ignore: cast_nullable_to_non_nullable
               as String,
-      context: context == freezed
+      context: null == context
           ? _value.context
           : context // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -76,35 +80,35 @@ abstract class _$$_AssignmentCopyWith<$Res>
           _$_Assignment value, $Res Function(_$_Assignment) then) =
       __$$_AssignmentCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String splitName, String variant, String context});
 }
 
 /// @nodoc
-class __$$_AssignmentCopyWithImpl<$Res> extends _$AssignmentCopyWithImpl<$Res>
+class __$$_AssignmentCopyWithImpl<$Res>
+    extends _$AssignmentCopyWithImpl<$Res, _$_Assignment>
     implements _$$_AssignmentCopyWith<$Res> {
   __$$_AssignmentCopyWithImpl(
       _$_Assignment _value, $Res Function(_$_Assignment) _then)
-      : super(_value, (v) => _then(v as _$_Assignment));
+      : super(_value, _then);
 
-  @override
-  _$_Assignment get _value => super._value as _$_Assignment;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? splitName = freezed,
-    Object? variant = freezed,
-    Object? context = freezed,
+    Object? splitName = null,
+    Object? variant = null,
+    Object? context = null,
   }) {
     return _then(_$_Assignment(
-      splitName: splitName == freezed
+      splitName: null == splitName
           ? _value.splitName
           : splitName // ignore: cast_nullable_to_non_nullable
               as String,
-      variant: variant == freezed
+      variant: null == variant
           ? _value.variant
           : variant // ignore: cast_nullable_to_non_nullable
               as String,
-      context: context == freezed
+      context: null == context
           ? _value.context
           : context // ignore: cast_nullable_to_non_nullable
               as String,
@@ -139,21 +143,19 @@ class _$_Assignment implements _Assignment {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Assignment &&
-            const DeepCollectionEquality().equals(other.splitName, splitName) &&
-            const DeepCollectionEquality().equals(other.variant, variant) &&
-            const DeepCollectionEquality().equals(other.context, context));
+            (identical(other.splitName, splitName) ||
+                other.splitName == splitName) &&
+            (identical(other.variant, variant) || other.variant == variant) &&
+            (identical(other.context, context) || other.context == context));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(splitName),
-      const DeepCollectionEquality().hash(variant),
-      const DeepCollectionEquality().hash(context));
+  int get hashCode => Object.hash(runtimeType, splitName, variant, context);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AssignmentCopyWith<_$_Assignment> get copyWith =>
       __$$_AssignmentCopyWithImpl<_$_Assignment>(this, _$identity);
 

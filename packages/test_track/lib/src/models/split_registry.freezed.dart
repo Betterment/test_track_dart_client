@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'split_registry.dart';
 
@@ -32,29 +32,32 @@ mixin _$SplitRegistry {
 abstract class $SplitRegistryCopyWith<$Res> {
   factory $SplitRegistryCopyWith(
           SplitRegistry value, $Res Function(SplitRegistry) then) =
-      _$SplitRegistryCopyWithImpl<$Res>;
+      _$SplitRegistryCopyWithImpl<$Res, SplitRegistry>;
+  @useResult
   $Res call({List<Split> splits});
 }
 
 /// @nodoc
-class _$SplitRegistryCopyWithImpl<$Res>
+class _$SplitRegistryCopyWithImpl<$Res, $Val extends SplitRegistry>
     implements $SplitRegistryCopyWith<$Res> {
   _$SplitRegistryCopyWithImpl(this._value, this._then);
 
-  final SplitRegistry _value;
   // ignore: unused_field
-  final $Res Function(SplitRegistry) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? splits = freezed,
+    Object? splits = null,
   }) {
     return _then(_value.copyWith(
-      splits: splits == freezed
+      splits: null == splits
           ? _value.splits
           : splits // ignore: cast_nullable_to_non_nullable
               as List<Split>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -65,26 +68,25 @@ abstract class _$$_SplitRegistryCopyWith<$Res>
           _$_SplitRegistry value, $Res Function(_$_SplitRegistry) then) =
       __$$_SplitRegistryCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({List<Split> splits});
 }
 
 /// @nodoc
 class __$$_SplitRegistryCopyWithImpl<$Res>
-    extends _$SplitRegistryCopyWithImpl<$Res>
+    extends _$SplitRegistryCopyWithImpl<$Res, _$_SplitRegistry>
     implements _$$_SplitRegistryCopyWith<$Res> {
   __$$_SplitRegistryCopyWithImpl(
       _$_SplitRegistry _value, $Res Function(_$_SplitRegistry) _then)
-      : super(_value, (v) => _then(v as _$_SplitRegistry));
+      : super(_value, _then);
 
-  @override
-  _$_SplitRegistry get _value => super._value as _$_SplitRegistry;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? splits = freezed,
+    Object? splits = null,
   }) {
     return _then(_$_SplitRegistry(
-      splits: splits == freezed
+      splits: null == splits
           ? _value._splits
           : splits // ignore: cast_nullable_to_non_nullable
               as List<Split>,
@@ -103,6 +105,7 @@ class _$_SplitRegistry implements _SplitRegistry {
   final List<Split> _splits;
   @override
   List<Split> get splits {
+    if (_splits is EqualUnmodifiableListView) return _splits;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_splits);
   }
@@ -127,6 +130,7 @@ class _$_SplitRegistry implements _SplitRegistry {
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_SplitRegistryCopyWith<_$_SplitRegistry> get copyWith =>
       __$$_SplitRegistryCopyWithImpl<_$_SplitRegistry>(this, _$identity);
 

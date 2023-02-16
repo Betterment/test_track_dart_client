@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'variant.dart';
 
@@ -31,33 +31,37 @@ mixin _$Variant {
 /// @nodoc
 abstract class $VariantCopyWith<$Res> {
   factory $VariantCopyWith(Variant value, $Res Function(Variant) then) =
-      _$VariantCopyWithImpl<$Res>;
+      _$VariantCopyWithImpl<$Res, Variant>;
+  @useResult
   $Res call({String name, int weight});
 }
 
 /// @nodoc
-class _$VariantCopyWithImpl<$Res> implements $VariantCopyWith<$Res> {
+class _$VariantCopyWithImpl<$Res, $Val extends Variant>
+    implements $VariantCopyWith<$Res> {
   _$VariantCopyWithImpl(this._value, this._then);
 
-  final Variant _value;
   // ignore: unused_field
-  final $Res Function(Variant) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? weight = freezed,
+    Object? name = null,
+    Object? weight = null,
   }) {
     return _then(_value.copyWith(
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      weight: weight == freezed
+      weight: null == weight
           ? _value.weight
           : weight // ignore: cast_nullable_to_non_nullable
               as int,
-    ));
+    ) as $Val);
   }
 }
 
@@ -67,29 +71,29 @@ abstract class _$$_VariantCopyWith<$Res> implements $VariantCopyWith<$Res> {
           _$_Variant value, $Res Function(_$_Variant) then) =
       __$$_VariantCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String name, int weight});
 }
 
 /// @nodoc
-class __$$_VariantCopyWithImpl<$Res> extends _$VariantCopyWithImpl<$Res>
+class __$$_VariantCopyWithImpl<$Res>
+    extends _$VariantCopyWithImpl<$Res, _$_Variant>
     implements _$$_VariantCopyWith<$Res> {
   __$$_VariantCopyWithImpl(_$_Variant _value, $Res Function(_$_Variant) _then)
-      : super(_value, (v) => _then(v as _$_Variant));
+      : super(_value, _then);
 
-  @override
-  _$_Variant get _value => super._value as _$_Variant;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = freezed,
-    Object? weight = freezed,
+    Object? name = null,
+    Object? weight = null,
   }) {
     return _then(_$_Variant(
-      name: name == freezed
+      name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      weight: weight == freezed
+      weight: null == weight
           ? _value.weight
           : weight // ignore: cast_nullable_to_non_nullable
               as int,
@@ -120,19 +124,17 @@ class _$_Variant implements _Variant {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Variant &&
-            const DeepCollectionEquality().equals(other.name, name) &&
-            const DeepCollectionEquality().equals(other.weight, weight));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.weight, weight) || other.weight == weight));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(name),
-      const DeepCollectionEquality().hash(weight));
+  int get hashCode => Object.hash(runtimeType, name, weight);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_VariantCopyWith<_$_Variant> get copyWith =>
       __$$_VariantCopyWithImpl<_$_Variant>(this, _$identity);
 

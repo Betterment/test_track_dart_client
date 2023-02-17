@@ -1,3 +1,10 @@
+## 0.0.4
+
+* chore: upgrade dio to 5.0.0 by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/32
+
+
+**Full Changelog**: https://github.com/Betterment/test_track_dart_client/compare/v0.0.3...v0.0.4
+
 ## 0.0.3
 
 * ci: Use codecov instead of the lcov reporter by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/27

@@ -11,7 +11,7 @@ void main() {
         test('it returns true', () {
           final subject = RetryOptions(attempts: 2);
           final error = DioError(
-            type: DioErrorType.connectTimeout,
+            type: DioErrorType.connectionTimeout,
             requestOptions: RequestOptions(path: ''),
           );
 
@@ -51,7 +51,7 @@ void main() {
         test('it returns false', () {
           final subject = RetryOptions(attempts: 0);
           final error = DioError(
-            type: DioErrorType.connectTimeout,
+            type: DioErrorType.connectionTimeout,
             requestOptions: RequestOptions(path: ''),
           );
 

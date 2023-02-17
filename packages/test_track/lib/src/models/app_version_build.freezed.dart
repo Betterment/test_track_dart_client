@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'app_version_build.dart';
 
@@ -34,39 +34,42 @@ mixin _$AppVersionBuild {
 abstract class $AppVersionBuildCopyWith<$Res> {
   factory $AppVersionBuildCopyWith(
           AppVersionBuild value, $Res Function(AppVersionBuild) then) =
-      _$AppVersionBuildCopyWithImpl<$Res>;
+      _$AppVersionBuildCopyWithImpl<$Res, AppVersionBuild>;
+  @useResult
   $Res call({String appName, String version, String buildTimestamp});
 }
 
 /// @nodoc
-class _$AppVersionBuildCopyWithImpl<$Res>
+class _$AppVersionBuildCopyWithImpl<$Res, $Val extends AppVersionBuild>
     implements $AppVersionBuildCopyWith<$Res> {
   _$AppVersionBuildCopyWithImpl(this._value, this._then);
 
-  final AppVersionBuild _value;
   // ignore: unused_field
-  final $Res Function(AppVersionBuild) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? appName = freezed,
-    Object? version = freezed,
-    Object? buildTimestamp = freezed,
+    Object? appName = null,
+    Object? version = null,
+    Object? buildTimestamp = null,
   }) {
     return _then(_value.copyWith(
-      appName: appName == freezed
+      appName: null == appName
           ? _value.appName
           : appName // ignore: cast_nullable_to_non_nullable
               as String,
-      version: version == freezed
+      version: null == version
           ? _value.version
           : version // ignore: cast_nullable_to_non_nullable
               as String,
-      buildTimestamp: buildTimestamp == freezed
+      buildTimestamp: null == buildTimestamp
           ? _value.buildTimestamp
           : buildTimestamp // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -77,36 +80,35 @@ abstract class _$$_AppVersionBuildCopyWith<$Res>
           _$_AppVersionBuild value, $Res Function(_$_AppVersionBuild) then) =
       __$$_AppVersionBuildCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({String appName, String version, String buildTimestamp});
 }
 
 /// @nodoc
 class __$$_AppVersionBuildCopyWithImpl<$Res>
-    extends _$AppVersionBuildCopyWithImpl<$Res>
+    extends _$AppVersionBuildCopyWithImpl<$Res, _$_AppVersionBuild>
     implements _$$_AppVersionBuildCopyWith<$Res> {
   __$$_AppVersionBuildCopyWithImpl(
       _$_AppVersionBuild _value, $Res Function(_$_AppVersionBuild) _then)
-      : super(_value, (v) => _then(v as _$_AppVersionBuild));
+      : super(_value, _then);
 
-  @override
-  _$_AppVersionBuild get _value => super._value as _$_AppVersionBuild;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? appName = freezed,
-    Object? version = freezed,
-    Object? buildTimestamp = freezed,
+    Object? appName = null,
+    Object? version = null,
+    Object? buildTimestamp = null,
   }) {
     return _then(_$_AppVersionBuild(
-      appName: appName == freezed
+      appName: null == appName
           ? _value.appName
           : appName // ignore: cast_nullable_to_non_nullable
               as String,
-      version: version == freezed
+      version: null == version
           ? _value.version
           : version // ignore: cast_nullable_to_non_nullable
               as String,
-      buildTimestamp: buildTimestamp == freezed
+      buildTimestamp: null == buildTimestamp
           ? _value.buildTimestamp
           : buildTimestamp // ignore: cast_nullable_to_non_nullable
               as String,
@@ -143,22 +145,20 @@ class _$_AppVersionBuild implements _AppVersionBuild {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_AppVersionBuild &&
-            const DeepCollectionEquality().equals(other.appName, appName) &&
-            const DeepCollectionEquality().equals(other.version, version) &&
-            const DeepCollectionEquality()
-                .equals(other.buildTimestamp, buildTimestamp));
+            (identical(other.appName, appName) || other.appName == appName) &&
+            (identical(other.version, version) || other.version == version) &&
+            (identical(other.buildTimestamp, buildTimestamp) ||
+                other.buildTimestamp == buildTimestamp));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(appName),
-      const DeepCollectionEquality().hash(version),
-      const DeepCollectionEquality().hash(buildTimestamp));
+  int get hashCode =>
+      Object.hash(runtimeType, appName, version, buildTimestamp);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_AppVersionBuildCopyWith<_$_AppVersionBuild> get copyWith =>
       __$$_AppVersionBuildCopyWithImpl<_$_AppVersionBuild>(this, _$identity);
 

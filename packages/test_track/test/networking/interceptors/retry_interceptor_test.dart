@@ -44,7 +44,7 @@ void main() {
           );
 
           error = DioError(
-            type: DioErrorType.connectTimeout,
+            type: DioErrorType.connectionTimeout,
             requestOptions: RequestOptions(
               path: 'test.com',
               extra: <String, dynamic>{'is_idempotent': true},

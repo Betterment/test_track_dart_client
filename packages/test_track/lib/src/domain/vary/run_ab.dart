@@ -37,11 +37,11 @@ class RunAb {
       );
     }
 
-    final _trueVariant = trueVariant ?? 'true';
+    trueVariant ??= 'true';
     final unsortedVariants = List.of(split.variants);
     final sortedFalseVariants = unsortedVariants
       ..sort((v1, v2) => v1.name.compareTo(v2.name))
-      ..removeWhere((v) => v.name == _trueVariant);
+      ..removeWhere((v) => v.name == trueVariant);
 
     final falseVariant = sortedFalseVariants.firstOrNull?.name;
 
@@ -53,7 +53,7 @@ class RunAb {
     );
 
     return RunAbResult(
-      _trueVariant == runVaryResult.variant,
+      trueVariant == runVaryResult.variant,
       runVaryResult.visitor,
     );
   }

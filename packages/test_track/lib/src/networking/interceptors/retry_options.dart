@@ -26,7 +26,7 @@ class RetryOptions {
   bool shouldRetry(DioError error, {required bool isIdempotent}) {
     if (attempts <= 0) return false;
 
-    if (error.type == DioErrorType.connectTimeout) return true;
+    if (error.type == DioErrorType.connectionTimeout) return true;
 
     if (error.type == DioErrorType.receiveTimeout && isIdempotent) return true;
 

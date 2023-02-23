@@ -1,3 +1,9 @@
+## 0.0.5
+* fix: add required headers to all requests via Interceptor by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/34
+
+
+**Full Changelog**: https://github.com/Betterment/test_track_dart_client/compare/v0.0.4...v0.0.5
+
 ## 0.0.4
 
 * chore: upgrade dio to 5.0.0 by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/32

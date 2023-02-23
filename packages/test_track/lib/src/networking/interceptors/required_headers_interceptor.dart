@@ -4,7 +4,8 @@ import 'package:dio/dio.dart';
 /// request.
 class RequiredHeadersInterceptor extends Interceptor {
   @override
-  Future onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+  Future onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
     final requiredHeaders = <String, String>{
       Headers.acceptHeader: 'application/json; charset=utf-8',
       Headers.contentTypeHeader: 'application/json; charset=utf-8',

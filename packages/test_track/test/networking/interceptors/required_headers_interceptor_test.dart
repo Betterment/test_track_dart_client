@@ -12,11 +12,13 @@ void main() {
       final subject = RequiredHeadersInterceptor();
       subject.onRequest(
         RequestOptions(path: '/foo', headers: <String, String>{}),
-        FakeRequestInterceptorHandler(onNext: (options) => headers = options.headers),
+        FakeRequestInterceptorHandler(
+            onNext: (options) => headers = options.headers),
       );
 
       expect(headers![Headers.acceptHeader], 'application/json; charset=utf-8');
-      expect(headers![Headers.contentTypeHeader], 'application/json; charset=utf-8');
+      expect(headers![Headers.contentTypeHeader],
+          'application/json; charset=utf-8');
     });
   });
 }

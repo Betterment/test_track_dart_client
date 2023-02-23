@@ -14,13 +14,15 @@ class LoggingInterceptor extends Interceptor {
   }) : _logger = logger;
 
   @override
-  Future onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+  Future onRequest(
+      RequestOptions options, RequestInterceptorHandler handler) async {
     if (!_logger.shouldEnableNetworkLogging) {
       super.onRequest(options, handler);
       return;
     }
 
-    _logger.debug('TestTrack HttpClient - ⬆️ [${options.method}] ${options.uri}');
+    _logger
+        .debug('TestTrack HttpClient - ⬆️ [${options.method}] ${options.uri}');
     _logger.debug('headers: ${options.headers}');
     if (options.data != null) {
       _logger.debug('\t data: ${options.data}');
@@ -35,7 +37,9 @@ class LoggingInterceptor extends Interceptor {
       return;
     }
 
-    final statusCode = err.response?.statusCode != null ? ' [${err.response?.statusCode}]' : '';
+    final statusCode = err.response?.statusCode != null
+        ? ' [${err.response?.statusCode}]'
+        : '';
     final requestUri = ' ${err.requestOptions.uri}';
 
     _logger.debug('TestTrack HttpClient - 🛑 ERROR$statusCode$requestUri');
@@ -49,13 +53,15 @@ class LoggingInterceptor extends Interceptor {
   }
 
   @override
-  Future onResponse(Response response, ResponseInterceptorHandler handler) async {
+  Future onResponse(
+      Response response, ResponseInterceptorHandler handler) async {
     if (!_logger.shouldEnableNetworkLogging) {
       super.onResponse(response, handler);
       return;
     }
 
-    _logger.debug('TestTrack HttpClient - ⬇️ [${response.statusCode}] ${response.requestOptions.uri}');
+    _logger.debug(
+        'TestTrack HttpClient - ⬇️ [${response.statusCode}] ${response.requestOptions.uri}');
     if (response.data != null) {
       _logger.debug('\t data: ${response.data}');
     }

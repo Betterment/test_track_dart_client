@@ -26,12 +26,16 @@ void main() {
         final subject = buildSubject(logger: logger);
         final requestOptions = MockRequestOptions();
         when(() => requestOptions.method).thenReturn('');
+        when(() => requestOptions.headers)
+            .thenReturn(<String, String>{'beep': 'bop'});
         when(() => requestOptions.uri).thenReturn(Uri.base);
 
         await subject.onRequest(requestOptions, RequestInterceptorHandler());
 
-        final logEvent = logger.debugLogs.single;
-        expect(logEvent.message, contains('TestTrack HttpClient - ⬆️'));
+        final mainLogEvent = logger.debugLogs.first;
+        final headersLogEvent = logger.debugLogs.last;
+        expect(mainLogEvent.message, contains('TestTrack HttpClient - ⬆️'));
+        expect(headersLogEvent.message, 'headers: {beep: bop}');
       });
 
       test(

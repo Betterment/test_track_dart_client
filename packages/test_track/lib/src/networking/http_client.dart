@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:test_track/src/helpers/extensions.dart';
 import 'package:test_track/src/logging/logging.dart';
 import 'package:test_track/src/networking/interceptors/logging_interceptor.dart';
+import 'package:test_track/src/networking/interceptors/required_headers_interceptor.dart';
 import 'package:test_track/src/networking/interceptors/retry_interceptor.dart';
 
 /// {@template http_client}
@@ -27,6 +28,7 @@ class HttpClient {
             ..options.receiveTimeout = const Duration(seconds: 20)
             ..map((dio) {
               final interceptors = [
+                RequiredHeadersInterceptor(),
                 LoggingInterceptor(logger: logger),
                 RetryInterceptor(dio: dio),
               ];

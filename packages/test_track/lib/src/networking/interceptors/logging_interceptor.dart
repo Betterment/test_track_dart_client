@@ -23,6 +23,7 @@ class LoggingInterceptor extends Interceptor {
 
     _logger
         .debug('TestTrack HttpClient - ⬆️ [${options.method}] ${options.uri}');
+    _logger.debug('headers: ${options.headers}');
     if (options.data != null) {
       _logger.debug('\t data: ${options.data}');
     }

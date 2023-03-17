@@ -1,4 +1,0 @@
-# melos_managed_dependency_overrides: test_track
-dependency_overrides:
-  test_track:
-    path: ../test_track

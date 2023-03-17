@@ -136,6 +136,18 @@ void main() {
       });
     });
 
+    group('overrideVisitorId', () {
+      test('it updates visitor id', () async {
+        final testTrack = FakeTestTrack();
+        final visitorBefore = testTrack.visitor;
+        await testTrack.overrideVisitorId('overridden');
+        final visitorAfter = testTrack.visitor;
+
+        expect(visitorBefore != visitorAfter, isTrue);
+        expect(visitorAfter.id, 'overridden');
+      });
+    });
+
     group('createAssignmentOverrides', () {
       test('it modifies the current visitors assignments', () async {
         final testTrack = FakeTestTrack();

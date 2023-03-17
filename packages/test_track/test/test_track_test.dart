@@ -180,7 +180,7 @@ void main() {
         });
       });
 
-      group('when given a split name that does not exist in the split registy',
+      group('when given a split name that does not exist in the split registry',
           () {
         test('it throws a SplitNotFoundException', () {
           final split = appVisitorConfig.splits.first;
@@ -195,6 +195,24 @@ void main() {
             throwsA(isA<SplitNotFoundException>()),
           );
         });
+      });
+    });
+
+    group('overrideVisitorId', () {
+      test('it fetches visitor config', () async {
+        final visitorId = 'fake-visitor-id';
+        final config = AppVisitorConfigFactory.build().copyWith(
+          visitor: VisitorFactory.build().copyWith(
+            id: visitorId,
+          ),
+        );
+        charlatan.whenGetVisitorConfig(response: config);
+
+        final subject = await buildSubject();
+        await subject.overrideVisitorId(visitorId);
+
+        final fetchedVisitorId = (await dataStorageProvider.fetchVisitor())!.id;
+        expect(fetchedVisitorId, visitorId);
       });
     });
 

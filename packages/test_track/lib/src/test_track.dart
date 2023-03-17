@@ -54,6 +54,7 @@ class TestTrack {
       client: client,
       getVisitorConfig: getVisitorConfig,
     );
+    final overrideVisitorId = OverrideVisitorId(getVisitorConfig: getVisitorConfig);
     final login = Login(
       httpClient: client,
       dataStorageProvider: dataStorageProvider,
@@ -77,8 +78,7 @@ class TestTrack {
     await dataStorageProvider.initialize();
 
     var visitor = await dataStorageProvider.fetchVisitor() ?? Visitor.build();
-    var splitRegistry =
-        await dataStorageProvider.fetchSplitRegistry() ?? SplitRegistry.empty();
+    var splitRegistry = await dataStorageProvider.fetchSplitRegistry() ?? SplitRegistry.empty();
 
     AppVisitorConfig? appVisitorConfig;
     try {
@@ -103,6 +103,7 @@ class TestTrack {
     return TestTrack._(
       appVersionBuild,
       overrideAssignments,
+      overrideVisitorId,
       login,
       logout,
       runVary,
@@ -115,6 +116,7 @@ class TestTrack {
 
   final AppVersionBuild _appVersionBuild;
   final OverrideAssignments _overrideAssignments;
+  final OverrideVisitorId _overrideVisitorId;
   final Login _login;
   final Logout _logout;
   final RunVary _runVary;
@@ -126,6 +128,7 @@ class TestTrack {
   TestTrack._(
     this._appVersionBuild,
     this._overrideAssignments,
+    this._overrideVisitorId,
     this._login,
     this._logout,
     this._runVary,
@@ -162,6 +165,13 @@ class TestTrack {
         error: e.message,
       );
     }
+  }
+
+  Future<void> overrideVisitorId(String visitorId) async {
+    await _overrideVisitorId(
+      visitorId: visitorId,
+      appVersionBuild: _appVersionBuild,
+    );
   }
 
   /// {@macro test_track_logout}

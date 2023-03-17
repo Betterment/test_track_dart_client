@@ -18,8 +18,7 @@ jobs:
         run: dart pub global activate melos 2.3.1 && melos bs
           
       - name: Run build_runner
-        if: ${{ inputs.code-gen }}
-        run: melos exec --fail-fast -- "dart run build_runner build --delete-conflicting-outputs"
+        run: melos exec --depends-on="build_runner" --fail-fast -- "dart run build_runner build --delete-conflicting-outputs"
 
       - name: Ensure clean git status
         run: melos exec --fail-fast -- "../../tool/ensure_git_clean.sh"

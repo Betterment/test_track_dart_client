@@ -22,7 +22,7 @@ jobs:
         run: melos exec --fail-fast -- "dart run build_runner build --delete-conflicting-outputs"
 
       - name: Ensure clean git status
-        run: melos exec --fail-fast -- ../../tool/ensure_git_clean.sh
+        run: melos exec --fail-fast -- "../../tool/ensure_git_clean.sh"
 
       - name: Verify formatting
         run: melos exec --fail-fast -- "dart format --output=none --set-exit-if-changed ."
@@ -38,7 +38,7 @@ jobs:
           working-directory: packages/test_track_test_support
 
       - name: Run tests and generate coverage report
-        run: melos exec --fail-fast -- ../../tool/generate_code_coverage.sh
+        run: melos exec --fail-fast -- "../../tool/generate_code_coverage.sh"
         
       - name: Upload test_track code coverage
         uses: codecov/codecov-action@v2

@@ -53,7 +53,7 @@ class FakeDataStorageProvider implements DataStorageProvider {
   }
 
   @override
-  Future<bool> fetchLogInState() async {
+  Future<bool> fetchLoginState() async {
     return _isLoggedIn;
   }
 }

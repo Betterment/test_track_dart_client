@@ -29,5 +29,5 @@ abstract class DataStorageProvider {
 
   /// Fetch the current user's login state. Returns [true] if the
   /// user is correctly logged in.
-  Future<bool> fetchLogInState();
+  Future<bool> fetchLoginState();
 }

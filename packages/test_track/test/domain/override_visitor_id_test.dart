@@ -21,7 +21,7 @@ void main() {
           dataStorageProvider: storageProvider,
         );
 
-        expect(await storageProvider.fetchLogInState(), isFalse);
+        expect(await storageProvider.fetchLoginState(), isFalse);
         await subject.call(
           visitorId: VisitorFactory.build().id,
           appVersionBuild: AppVersionBuildFactory.build(),
@@ -44,7 +44,7 @@ void main() {
           dataStorageProvider: storageProvider,
         );
 
-        expect(await storageProvider.fetchLogInState(), isTrue);
+        expect(await storageProvider.fetchLoginState(), isTrue);
         final result = subject.call(
           visitorId: VisitorFactory.build().id,
           appVersionBuild: AppVersionBuildFactory.build(),

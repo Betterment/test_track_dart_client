@@ -35,12 +35,12 @@ void main() {
 
       test('it stores the login state as false', () async {
         await storageProvider.storeLoginState(true);
-        final loginStateBeforeLogout = await storageProvider.fetchLogInState();
+        final loginStateBeforeLogout = await storageProvider.fetchLoginState();
         expect(loginStateBeforeLogout, isTrue);
 
         await subject.call();
 
-        final loginStateAfterLogout = await storageProvider.fetchLogInState();
+        final loginStateAfterLogout = await storageProvider.fetchLoginState();
         expect(loginStateAfterLogout, isFalse);
       });
 

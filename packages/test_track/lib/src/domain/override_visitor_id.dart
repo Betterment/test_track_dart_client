@@ -32,7 +32,7 @@ class OverrideVisitorId {
     required String visitorId,
     required AppVersionBuild appVersionBuild,
   }) async {
-    final isLoggedIn = await _dataStorageProvider.fetchLogInState();
+    final isLoggedIn = await _dataStorageProvider.fetchLoginState();
     if (isLoggedIn) {
       throw TestTrackInvalidVisitorOverrideException();
     }

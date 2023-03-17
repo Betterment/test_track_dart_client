@@ -78,7 +78,8 @@ class TestTrack {
     await dataStorageProvider.initialize();
 
     var visitor = await dataStorageProvider.fetchVisitor() ?? Visitor.build();
-    var splitRegistry = await dataStorageProvider.fetchSplitRegistry() ?? SplitRegistry.empty();
+    var splitRegistry =
+        await dataStorageProvider.fetchSplitRegistry() ?? SplitRegistry.empty();
 
     AppVisitorConfig? appVisitorConfig;
     try {

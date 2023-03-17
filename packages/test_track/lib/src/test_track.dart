@@ -1,13 +1,10 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
-import 'package:test_track/src/analytics/analytics_provider.dart';
 import 'package:test_track/src/domain/domain.dart';
 import 'package:test_track/src/logging/default_test_track_logger.dart';
-import 'package:test_track/src/logging/test_track_logger.dart';
-import 'package:test_track/src/models/models.dart';
 import 'package:test_track/src/networking/http_client.dart';
-import 'package:test_track/src/persistence/persistence.dart';
+import 'package:test_track/test_track.dart';
 
 /// The instance with which to interact to perform
 /// client-side split-testing and feature-toggling.
@@ -54,7 +51,10 @@ class TestTrack {
       client: client,
       getVisitorConfig: getVisitorConfig,
     );
-    final overrideVisitorId = OverrideVisitorId(getVisitorConfig: getVisitorConfig);
+    final overrideVisitorId = OverrideVisitorId(
+      getVisitorConfig: getVisitorConfig,
+      dataStorageProvider: dataStorageProvider,
+    );
     final login = Login(
       httpClient: client,
       dataStorageProvider: dataStorageProvider,
@@ -167,11 +167,13 @@ class TestTrack {
     }
   }
 
+  /// {@macro override_visitor_id}
   Future<void> overrideVisitorId(String visitorId) async {
-    await _overrideVisitorId(
+    final config = await _overrideVisitorId(
       visitorId: visitorId,
       appVersionBuild: _appVersionBuild,
     );
+    _updateAppVisitorConfig(config);
   }
 
   /// {@macro test_track_logout}

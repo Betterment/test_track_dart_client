@@ -33,6 +33,17 @@ void main() {
         expect(storedVisitor?.id, visitorAfterLogout.id);
       });
 
+      test('it stores the login state as false', () async {
+        await storageProvider.storeLoginState(true);
+        final loginStateBeforeLogout = await storageProvider.fetchLogInState();
+        expect(loginStateBeforeLogout, isTrue);
+
+        await subject.call();
+
+        final loginStateAfterLogout = await storageProvider.fetchLogInState();
+        expect(loginStateAfterLogout, isFalse);
+      });
+
       test('it notifies analytics provider of new visitor', () async {
         expect(analyticsProvider.visitorsIdentified, isEmpty);
 

@@ -23,8 +23,7 @@ Future<void> main() async {
 
   // Use `ab` to check if a feature is enabled. It will return true if the
   // feature is enabled for the current visitor.
-  if (testTrack.ab(
-      splitName: 'some_feature_flag_enabled', context: 'app startup')) {
+  if (testTrack.ab(splitName: 'some_feature_flag_enabled', context: 'app startup')) {
     // Do something!
   } else {
     // Do something else!
@@ -34,6 +33,7 @@ Future<void> main() async {
 class DummyDataStorageProvider implements DataStorageProvider {
   Visitor? _visitor;
   SplitRegistry? _splitRegistry;
+  bool isLoggedIn = false;
 
   @override
   Future<SplitRegistry?> fetchSplitRegistry() async {
@@ -58,6 +58,16 @@ class DummyDataStorageProvider implements DataStorageProvider {
   @override
   Future<void> storeVisitor(Visitor visitor) async {
     _visitor = visitor;
+  }
+
+  @override
+  Future<void> storeLoginState(bool isLoggedIn) async {
+    isLoggedIn = isLoggedIn;
+  }
+
+  @override
+  Future<bool> fetchLogInState() async {
+    return isLoggedIn;
   }
 }
 

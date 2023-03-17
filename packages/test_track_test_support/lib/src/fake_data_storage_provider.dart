@@ -12,6 +12,7 @@ class FakeDataStorageProvider implements DataStorageProvider {
   final void Function()? _onInitialize;
   SplitRegistry? _splitRegistry;
   Visitor? _visitor;
+  bool _isLoggedIn = false;
 
   /// {@macro fake_data_storage_provider}
   ///
@@ -44,5 +45,15 @@ class FakeDataStorageProvider implements DataStorageProvider {
   @override
   Future<void> storeVisitor(Visitor visitor) async {
     _visitor = visitor;
+  }
+
+  @override
+  Future<void> storeLoginState(bool isLoggedIn) async {
+    _isLoggedIn = isLoggedIn;
+  }
+
+  @override
+  Future<bool> fetchLogInState() async {
+    return _isLoggedIn;
   }
 }

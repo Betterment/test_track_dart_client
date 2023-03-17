@@ -107,6 +107,11 @@ class FakeTestTrack implements TestTrack {
   }
 
   @override
+  Future<void> overrideVisitorId(String visitorId) async {
+    _visitor = _visitor.copyWith(id: visitorId);
+  }
+
+  @override
   Future<void> createAssignmentOverrides({
     required List<AssignmentOverride> assignmentOverrides,
   }) async {

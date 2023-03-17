@@ -19,7 +19,8 @@ import 'package:test_track/test_track.dart';
 /// [TestTrackLoginFailureException].
 ///
 /// If the linking is successful, the [Visitor] and [SplitRegistry]
-/// contained within the associated [AppVisitorConfig] are persisted.
+/// contained within the associated [AppVisitorConfig] are persisted, and
+/// the [DataStorageProvider] is notified of the new login state.
 ///
 /// {@endtemplate}
 class Login {
@@ -62,8 +63,8 @@ class Login {
     final appVisitorConfig = AppVisitorConfig.fromJson(response.data!);
 
     await _dataStorageProvider.storeVisitor(appVisitorConfig.visitor);
-    await _dataStorageProvider
-        .storeSplitRegistry(appVisitorConfig.splitRegistry);
+    await _dataStorageProvider.storeSplitRegistry(appVisitorConfig.splitRegistry);
+    await _dataStorageProvider.storeLoginState(true);
 
     await _analyticsProvider.identify(visitorId: appVisitorConfig.visitor.id);
 

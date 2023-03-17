@@ -8,8 +8,9 @@ import 'package:test_track/src/persistence/data_storage_provider.dart';
 ///
 /// Allows for overriding the current visitor id with the provided one. This is
 /// useful for cases where your user is assigned a visitor id from another
-/// platform prior to signing up, and you'd like any configuration assigned
-/// to that user to "follow" them to the platform running this client.
+/// platform prior to invoking login on the SDK, and you'd like any
+/// configuration assigned to that user to "follow" them to the
+/// platform running this client.
 ///
 /// If this method is called when a user has already logged in to TestTrack,
 /// a [TestTrackInvalidVisitorOverrideException] will be thrown. This is to

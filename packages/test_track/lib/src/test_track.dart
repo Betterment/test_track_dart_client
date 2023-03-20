@@ -54,6 +54,7 @@ class TestTrack {
     final overrideVisitorId = OverrideVisitorId(
       getVisitorConfig: getVisitorConfig,
       dataStorageProvider: dataStorageProvider,
+      logger: logger,
     );
     final login = Login(
       httpClient: client,
@@ -174,7 +175,9 @@ class TestTrack {
       visitorId: visitorId,
       appVersionBuild: _appVersionBuild,
     );
-    _updateAppVisitorConfig(config);
+    if (config != null) {
+      _updateAppVisitorConfig(config);
+    }
   }
 
   /// {@macro test_track_logout}

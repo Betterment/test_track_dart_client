@@ -15,10 +15,12 @@ void main() {
           () => wasGetVisitorConfigCalled = true,
         );
         final storageProvider = FakeDataStorageProvider();
+        final logger = FakeTestTrackLogger.withoutNetworkLogging();
 
         final subject = OverrideVisitorId(
           getVisitorConfig: getVisitorConfig,
           dataStorageProvider: storageProvider,
+          logger: logger,
         );
 
         expect(await storageProvider.fetchLoginState(), isFalse);
@@ -31,30 +33,33 @@ void main() {
     });
 
     group('when the user is logged in', () {
-      test('it throws a TestTrackInvalidVisitorOverrideException', () async {
+      test('it ignores the request', () async {
         bool wasGetVisitorConfigCalled = false;
         final getVisitorConfig = _FakeGetVisitorConfig(
           () => wasGetVisitorConfigCalled = true,
         );
+        final logger = FakeTestTrackLogger.withoutNetworkLogging();
         final storageProvider = FakeDataStorageProvider();
         await storageProvider.storeLoginState(true);
 
         final subject = OverrideVisitorId(
           getVisitorConfig: getVisitorConfig,
           dataStorageProvider: storageProvider,
+          logger: logger,
         );
 
         expect(await storageProvider.fetchLoginState(), isTrue);
-        final result = subject.call(
+        final config = await subject.call(
           visitorId: VisitorFactory.build().id,
           appVersionBuild: AppVersionBuildFactory.build(),
         );
 
-        expectLater(
-          result,
-          throwsA(isA<TestTrackInvalidVisitorOverrideException>()),
-        );
         expect(wasGetVisitorConfigCalled, isFalse);
+        expect(config, isNull);
+        expect(
+          logger.infoLogs.single.message,
+          contains('Attempt to override visitor id ignored'),
+        );
       });
     });
   });

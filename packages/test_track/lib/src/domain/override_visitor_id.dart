@@ -1,8 +1,5 @@
 import 'package:test_track/src/domain/get_visitor_config.dart';
-import 'package:test_track/src/errors/test_track_exception.dart';
-import 'package:test_track/src/models/app_version_build.dart';
-import 'package:test_track/src/models/app_visitor_config.dart';
-import 'package:test_track/src/persistence/data_storage_provider.dart';
+import 'package:test_track/test_track.dart';
 
 /// {@template override_visitor_id}
 ///
@@ -13,29 +10,36 @@ import 'package:test_track/src/persistence/data_storage_provider.dart';
 /// platform running this client.
 ///
 /// If this method is called when a user has already logged in to TestTrack,
-/// a [TestTrackInvalidVisitorOverrideException] will be thrown. This is to
-/// prevent clobbering the visitor configuration of the existing user.
+/// the request to override the current visitor id will be ignored.
+///
+/// If the visitor id could be overwritten, the [AppVisitorConfig] associated
+/// with the visitor id will be returned. Otherwise, this function will return
+/// null.
 ///
 /// {@endtemplate}
 class OverrideVisitorId {
   final GetVisitorConfig _getVisitorConfig;
   final DataStorageProvider _dataStorageProvider;
+  final TestTrackLogger _logger;
 
   /// {@macro override_visitor_id}
   OverrideVisitorId({
     required GetVisitorConfig getVisitorConfig,
     required DataStorageProvider dataStorageProvider,
+    required TestTrackLogger logger,
   })  : _getVisitorConfig = getVisitorConfig,
-        _dataStorageProvider = dataStorageProvider;
+        _dataStorageProvider = dataStorageProvider,
+        _logger = logger;
 
   /// {@macro override_visitor_id}
-  Future<AppVisitorConfig> call({
+  Future<AppVisitorConfig?> call({
     required String visitorId,
     required AppVersionBuild appVersionBuild,
   }) async {
     final isLoggedIn = await _dataStorageProvider.fetchLoginState();
     if (isLoggedIn) {
-      throw TestTrackInvalidVisitorOverrideException();
+      _logger.info('Attempt to override visitor id ignored because a user is currently logged in.');
+      return null;
     }
     return _getVisitorConfig(
       visitorId: visitorId,
@@ -43,9 +47,3 @@ class OverrideVisitorId {
     );
   }
 }
-
-/// {@template split_not_found_exception}
-/// [TestTrackException] thrown when an attempt is made to override the visitor
-/// id of the existing logged in user.
-/// {@endtemplate}
-class TestTrackInvalidVisitorOverrideException implements TestTrackException {}

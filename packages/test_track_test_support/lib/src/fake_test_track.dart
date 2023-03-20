@@ -102,8 +102,18 @@ class FakeTestTrack implements TestTrack {
 
   @override
   Future<void> logout() async {
+    _isLoggedIn = false;
+  }
+
+  @override
+  Future<void> reset() async {
     _visitor = Visitor.build();
     _isLoggedIn = false;
+  }
+
+  @override
+  Future<void> overrideVisitorId(String visitorId) async {
+    _visitor = _visitor.copyWith(id: visitorId);
   }
 
   @override

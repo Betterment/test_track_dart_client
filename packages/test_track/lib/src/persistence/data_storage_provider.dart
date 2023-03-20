@@ -21,4 +21,13 @@ abstract class DataStorageProvider {
 
   /// Stores the split registry in storage system
   Future<void> storeSplitRegistry(SplitRegistry splitRegistry);
+
+  /// Store the user's login state. [isLoggedIn] will be true
+  /// when the user has successfully been logged in to the TT
+  /// server remotely.
+  Future<void> storeLoginState(bool isLoggedIn);
+
+  /// Fetch the current user's login state. Returns [true] if the
+  /// user is correctly logged in.
+  Future<bool> fetchLoginState();
 }

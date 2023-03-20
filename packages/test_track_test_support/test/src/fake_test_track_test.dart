@@ -118,21 +118,43 @@ void main() {
     });
 
     group('logout', () {
-      test('it changes auth state to logged out and builds a new visitor',
-          () async {
+      test('it changes auth state to logged out', () async {
         final testTrack = FakeTestTrack();
-        final visitor = testTrack.visitor;
-        await testTrack.login(
-          identifierType: 'identifierType',
-          value: 'value',
-        );
+        await testTrack.login(identifierType: 'identifierType', value: 'value');
 
         expect(testTrack.isLoggedIn, isTrue);
 
         await testTrack.logout();
 
         expect(testTrack.isLoggedIn, isFalse);
+      });
+    });
+
+    group('reset', () {
+      test('it changes auth state to logged out and builds a new visitor',
+          () async {
+        final testTrack = FakeTestTrack();
+        final visitor = testTrack.visitor;
+        await testTrack.login(identifierType: 'identifierType', value: 'value');
+
+        expect(testTrack.isLoggedIn, isTrue);
+
+        await testTrack.reset();
+
+        expect(testTrack.isLoggedIn, isFalse);
         expect(testTrack.visitor == visitor, isFalse);
+      });
+    });
+
+    group('overrideVisitorId', () {
+      test('it updates visitor id', () async {
+        final testTrack = FakeTestTrack();
+        final visitorBefore = testTrack.visitor;
+        await testTrack.overrideVisitorId('overridden');
+        final visitorAfter = testTrack.visitor;
+
+        expect(visitorBefore != visitorAfter, isTrue);
+        expect(visitorAfter.id, 'overridden');
       });
     });
 

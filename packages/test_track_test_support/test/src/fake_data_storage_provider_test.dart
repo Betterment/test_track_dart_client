@@ -46,5 +46,15 @@ void main() {
         expect(fetchedVisitor, visitor);
       });
     });
+
+    group('login state', () {
+      test('it updates the login state in memory', () async {
+        expect(await subject.fetchLoginState(), isFalse);
+
+        await subject.storeLoginState(true);
+
+        expect(await subject.fetchLoginState(), isTrue);
+      });
+    });
   });
 }

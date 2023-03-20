@@ -1,4 +1,3 @@
-import 'package:charlatan/charlatan.dart';
 import 'package:dio/dio.dart';
 import 'package:test/test.dart';
 import 'package:test_track/src/networking/interceptors/required_headers_interceptor.dart';

@@ -103,6 +103,20 @@ void main() {
           expect(splitRegistryAfter, isNotNull);
         });
 
+        test('it stores the login state as true', () async {
+          final loginStateBefore = await dataStorageProvider.fetchLoginState();
+          expect(loginStateBefore, isFalse);
+
+          await subject.call(
+            identifier: identifier,
+            visitorId: visitorId,
+            appVersionBuild: appVersionBuild,
+          );
+
+          final loginStateAfter = await dataStorageProvider.fetchLoginState();
+          expect(loginStateAfter, isTrue);
+        });
+
         test('it invokes identify on the analytics provider', () async {
           expect(analyticsProvider.noVisitorsIdentified(), isTrue);
 

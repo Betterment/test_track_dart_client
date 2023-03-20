@@ -1,13 +1,10 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
-import 'package:test_track/src/analytics/analytics_provider.dart';
 import 'package:test_track/src/domain/domain.dart';
 import 'package:test_track/src/logging/default_test_track_logger.dart';
-import 'package:test_track/src/logging/test_track_logger.dart';
-import 'package:test_track/src/models/models.dart';
 import 'package:test_track/src/networking/http_client.dart';
-import 'package:test_track/src/persistence/persistence.dart';
+import 'package:test_track/test_track.dart';
 
 /// The instance with which to interact to perform
 /// client-side split-testing and feature-toggling.
@@ -54,16 +51,23 @@ class TestTrack {
       client: client,
       getVisitorConfig: getVisitorConfig,
     );
+    final overrideVisitorId = OverrideVisitorId(
+      getVisitorConfig: getVisitorConfig,
+      dataStorageProvider: dataStorageProvider,
+      logger: logger,
+    );
     final login = Login(
       httpClient: client,
       dataStorageProvider: dataStorageProvider,
       analyticsProvider: analyticsProvider,
     );
 
-    final logout = Logout(
+    final reset = Reset(
       dataStorageProvider: dataStorageProvider,
       analyticsProvider: analyticsProvider,
     );
+
+    final logout = Logout(dataStorageProvider: dataStorageProvider);
 
     final runVary = RunVary(
       calculateVariant: CalculateVariant(),
@@ -103,8 +107,10 @@ class TestTrack {
     return TestTrack._(
       appVersionBuild,
       overrideAssignments,
+      overrideVisitorId,
       login,
       logout,
+      reset,
       runVary,
       runAb,
       logger,
@@ -115,8 +121,10 @@ class TestTrack {
 
   final AppVersionBuild _appVersionBuild;
   final OverrideAssignments _overrideAssignments;
+  final OverrideVisitorId _overrideVisitorId;
   final Login _login;
   final Logout _logout;
+  final Reset _reset;
   final RunVary _runVary;
   final RunAb _runAb;
   final TestTrackLogger _logger;
@@ -126,8 +134,10 @@ class TestTrack {
   TestTrack._(
     this._appVersionBuild,
     this._overrideAssignments,
+    this._overrideVisitorId,
     this._login,
     this._logout,
+    this._reset,
     this._runVary,
     this._runAb,
     this._logger,
@@ -164,11 +174,26 @@ class TestTrack {
     }
   }
 
+  /// {@macro override_visitor_id}
+  Future<void> overrideVisitorId(String visitorId) async {
+    final config = await _overrideVisitorId(
+      visitorId: visitorId,
+      appVersionBuild: _appVersionBuild,
+    );
+    if (config != null) {
+      _updateAppVisitorConfig(config);
+    }
+  }
+
   /// {@macro test_track_logout}
   Future<void> logout() async {
-    final newVisitor = await _logout();
+    return _logout();
+  }
 
-    _updateVisitor(newVisitor);
+  /// {@macro test_track_reset}
+  Future<void> reset() async {
+    final visitor = await _reset();
+    _updateVisitor(visitor);
   }
 
   /// {@macro override_assignments}

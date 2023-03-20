@@ -38,7 +38,8 @@ class OverrideVisitorId {
   }) async {
     final isLoggedIn = await _dataStorageProvider.fetchLoginState();
     if (isLoggedIn) {
-      _logger.info('Attempt to override visitor id ignored because a user is currently logged in.');
+      _logger.info(
+          'Attempt to override visitor id ignored because a user is currently logged in.');
       return null;
     }
     return _getVisitorConfig(

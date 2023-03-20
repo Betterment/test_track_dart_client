@@ -62,10 +62,12 @@ class TestTrack {
       analyticsProvider: analyticsProvider,
     );
 
-    final logout = Logout(
+    final reset = Reset(
       dataStorageProvider: dataStorageProvider,
       analyticsProvider: analyticsProvider,
     );
+
+    final logout = Logout(dataStorageProvider: dataStorageProvider);
 
     final runVary = RunVary(
       calculateVariant: CalculateVariant(),
@@ -108,6 +110,7 @@ class TestTrack {
       overrideVisitorId,
       login,
       logout,
+      reset,
       runVary,
       runAb,
       logger,
@@ -121,6 +124,7 @@ class TestTrack {
   final OverrideVisitorId _overrideVisitorId;
   final Login _login;
   final Logout _logout;
+  final Reset _reset;
   final RunVary _runVary;
   final RunAb _runAb;
   final TestTrackLogger _logger;
@@ -133,6 +137,7 @@ class TestTrack {
     this._overrideVisitorId,
     this._login,
     this._logout,
+    this._reset,
     this._runVary,
     this._runAb,
     this._logger,
@@ -182,9 +187,13 @@ class TestTrack {
 
   /// {@macro test_track_logout}
   Future<void> logout() async {
-    final newVisitor = await _logout();
+    return _logout();
+  }
 
-    _updateVisitor(newVisitor);
+  /// {@macro test_track_reset}
+  Future<void> reset() async {
+    final visitor = await _reset();
+    _updateVisitor(visitor);
   }
 
   /// {@macro override_assignments}

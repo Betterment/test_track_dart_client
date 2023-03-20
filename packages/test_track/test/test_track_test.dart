@@ -200,7 +200,7 @@ void main() {
 
     group('overrideVisitorId', () {
       test('it fetches visitor config', () async {
-        final visitorId = 'fake-visitor-id';
+        final visitorId = 'overridden-id';
         final config = AppVisitorConfigFactory.build().copyWith(
           visitor: VisitorFactory.build().copyWith(
             id: visitorId,
@@ -213,6 +213,9 @@ void main() {
 
         final fetchedVisitorId = (await dataStorageProvider.fetchVisitor())!.id;
         expect(fetchedVisitorId, visitorId);
+
+        final newVisitorId = subject.visitor.id;
+        expect(newVisitorId, visitorId);
       });
     });
 
@@ -296,7 +299,7 @@ void main() {
       });
     });
 
-    group('logout', () {
+    group('reset', () {
       setUp(() async {
         subject = await buildSubject();
       });
@@ -307,7 +310,7 @@ void main() {
 
         expect(beforeLogoutVisitorId, appVisitorConfig.visitor.id);
 
-        await subject.logout();
+        await subject.reset();
 
         final afterLogoutVisitorId =
             await dataStorageProvider.fetchVisitor().then((value) => value?.id);
@@ -321,12 +324,30 @@ void main() {
         final beforeLogoutVisitorId = subject.visitor.id;
         expect(beforeLogoutVisitorId, appVisitorConfig.visitor.id);
 
-        await subject.logout();
+        await subject.reset();
 
         final afterLogoutVisitorId = subject.visitor.id;
         // Since a fresh visitor has a randomly-generated Id, just verify
         // that the Id no longer matches the previous visitor's
         expect(afterLogoutVisitorId != beforeLogoutVisitorId, isTrue);
+      });
+    });
+
+    group('logout', () {
+      setUp(() async {
+        subject = await buildSubject();
+      });
+
+      test('it sets login state to false in DataStorageProvider', () async {
+        await dataStorageProvider.storeLoginState(true);
+        final isLoggedInBefore = await dataStorageProvider.fetchLoginState();
+
+        expect(isLoggedInBefore, isTrue);
+
+        await subject.reset();
+
+        final isLoggedInAfter = await dataStorageProvider.fetchLoginState();
+        expect(isLoggedInAfter, isFalse);
       });
     });
 
@@ -339,7 +360,7 @@ void main() {
         subject = await buildSubject();
       });
 
-      group('when given a split name that does not exist in the split registy',
+      group('when given a split name that does not exist in the split registry',
           () {
         test('it throws a SplitNotFoundException', () {
           final split = appVisitorConfig.splits.first;

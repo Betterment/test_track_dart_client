@@ -1,7 +1,7 @@
 ## 0.1.0
 * feat: add ability to override visitor id to preserve id across organic installs by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/36
 
-⚠️ **Breaking Changes**
+:warning: **Breaking Changes**
 See breaking changes listed in: https://github.com/Betterment/test_track_dart_client/pull/36
 
 **Full Changelog**: https://github.com/Betterment/test_track_dart_client/compare/v0.0.5...v0.1.0

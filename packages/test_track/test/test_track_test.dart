@@ -60,12 +60,9 @@ void main() {
         setUp(() async {
           subject = await buildSubject();
         });
-        test('it stores the visitor and splitRegistry from the result',
-            () async {
-          expect(await dataStorageProvider.fetchVisitor(),
-              appVisitorConfig.visitor);
-          expect(await dataStorageProvider.fetchSplitRegistry(),
-              appVisitorConfig.splitRegistry);
+        test('it stores the visitor and splitRegistry from the result', () async {
+          expect(await dataStorageProvider.fetchVisitor(), appVisitorConfig.visitor);
+          expect(await dataStorageProvider.fetchSplitRegistry(), appVisitorConfig.splitRegistry);
         });
 
         test('it calls identify on AnalyticsProvider', () async {
@@ -102,8 +99,7 @@ void main() {
           // Store a cached visitor and split registry to prevent TestTrack
           // from generating them for us
           await dataStorageProvider.storeVisitor(appVisitorConfig.visitor);
-          await dataStorageProvider
-              .storeSplitRegistry(appVisitorConfig.splitRegistry);
+          await dataStorageProvider.storeSplitRegistry(appVisitorConfig.splitRegistry);
 
           subject = await buildSubject();
 
@@ -142,21 +138,16 @@ void main() {
         subject = await buildSubject();
       });
 
-      test(
-          'it calls createAssignmentOverrides and updates the AppVisitorConfig',
-          () async {
-        final override =
-            const AssignmentOverride(splitName: 'foo_enabled', variant: 'true');
+      test('it calls createAssignmentOverrides and updates the AppVisitorConfig', () async {
+        final override = const AssignmentOverride(splitName: 'foo_enabled', variant: 'true');
 
-        final result =
-            subject.createAssignmentOverrides(assignmentOverrides: [override]);
+        final result = subject.createAssignmentOverrides(assignmentOverrides: [override]);
         await result;
 
         expect(result, completes);
 
         final visitor = await dataStorageProvider.fetchVisitor();
-        final fooEnabledSplits = visitor!.assignments
-            .where((a) => a.splitName == 'foo_enabled' && a.variant == 'true');
+        final fooEnabledSplits = visitor!.assignments.where((a) => a.splitName == 'foo_enabled' && a.variant == 'true');
 
         expect(fooEnabledSplits, isNotEmpty);
       });
@@ -180,8 +171,7 @@ void main() {
         });
       });
 
-      group('when given a split name that does not exist in the split registry',
-          () {
+      group('when given a split name that does not exist in the split registry', () {
         test('it throws a SplitNotFoundException', () {
           final split = appVisitorConfig.splits.first;
           final fakeName = '${split.name}FAKE';
@@ -250,12 +240,9 @@ void main() {
       });
 
       group('when linkIdentifier succeeds', () {
-        test(
-            'it stores the visitor and splitRegistry from the result in DataStorageProvider',
-            () async {
+        test('it stores the visitor and splitRegistry from the result in DataStorageProvider', () async {
           final visitorBeforeLogin = await dataStorageProvider.fetchVisitor();
-          final splitRegistryBeforeLogin =
-              await dataStorageProvider.fetchSplitRegistry();
+          final splitRegistryBeforeLogin = await dataStorageProvider.fetchSplitRegistry();
 
           expect(visitorBeforeLogin?.id != 'post-login-id', isTrue);
           expect(splitRegistryBeforeLogin?.splits, isNotEmpty);
@@ -263,8 +250,7 @@ void main() {
           await subject.login(identifierType: 'foo', value: '123');
 
           final visitorAfterLogin = await dataStorageProvider.fetchVisitor();
-          final splitRegistryAfterLogin =
-              await dataStorageProvider.fetchSplitRegistry();
+          final splitRegistryAfterLogin = await dataStorageProvider.fetchSplitRegistry();
 
           expect(visitorAfterLogin?.id, 'post-login-id');
           expect(splitRegistryAfterLogin?.splits, isEmpty);
@@ -305,15 +291,13 @@ void main() {
       });
 
       test('it resets the visitor in the DataStorageProvider', () async {
-        final beforeLogoutVisitorId =
-            await dataStorageProvider.fetchVisitor().then((value) => value?.id);
+        final beforeLogoutVisitorId = await dataStorageProvider.fetchVisitor().then((value) => value?.id);
 
         expect(beforeLogoutVisitorId, appVisitorConfig.visitor.id);
 
         await subject.reset();
 
-        final afterLogoutVisitorId =
-            await dataStorageProvider.fetchVisitor().then((value) => value?.id);
+        final afterLogoutVisitorId = await dataStorageProvider.fetchVisitor().then((value) => value?.id);
 
         // Since a fresh visitor has a randomly-generated Id, just verify
         // that the Id no longer matches the previous visitor's
@@ -344,7 +328,7 @@ void main() {
 
         expect(isLoggedInBefore, isTrue);
 
-        await subject.reset();
+        await subject.logout();
 
         final isLoggedInAfter = await dataStorageProvider.fetchLoginState();
         expect(isLoggedInAfter, isFalse);
@@ -360,8 +344,7 @@ void main() {
         subject = await buildSubject();
       });
 
-      group('when given a split name that does not exist in the split registry',
-          () {
+      group('when given a split name that does not exist in the split registry', () {
         test('it throws a SplitNotFoundException', () {
           final split = appVisitorConfig.splits.first;
           final fakeName = '${split.name}FAKE';

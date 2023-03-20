@@ -34,7 +34,7 @@ Future<void> main() async {
 class DummyDataStorageProvider implements DataStorageProvider {
   Visitor? _visitor;
   SplitRegistry? _splitRegistry;
-  bool isLoggedIn = false;
+  bool _isLoggedIn = false;
 
   @override
   Future<SplitRegistry?> fetchSplitRegistry() async {
@@ -63,12 +63,12 @@ class DummyDataStorageProvider implements DataStorageProvider {
 
   @override
   Future<void> storeLoginState(bool isLoggedIn) async {
-    isLoggedIn = isLoggedIn;
+    _isLoggedIn = isLoggedIn;
   }
 
   @override
   Future<bool> fetchLoginState() async {
-    return isLoggedIn;
+    return _isLoggedIn;
   }
 }
 

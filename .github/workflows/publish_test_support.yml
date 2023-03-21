@@ -1,0 +1,12 @@
+name: Publish test_track_test_support to pub.dev
+
+on:
+  push:
+    tags:
+      - 'test_support_v[0-9]+.[0-9]+.[0-9]+*'
+
+jobs:
+  publish_test_track_test_support:
+    uses: dart-lang/setup-dart/.github/workflows/publish.yml
+    with:
+      working-directory: packages/test_track_test_support/

@@ -20,7 +20,7 @@ class RetryInterceptor extends Interceptor {
         _retryOptions = retryOptions ?? RetryOptions();
 
   @override
-  Future onError(DioError err, ErrorInterceptorHandler handler) async {
+  Future<dynamic> onError(DioError err, ErrorInterceptorHandler handler) async {
     var extra =
         RetryOptions.fromRequestOptions(err.requestOptions) ?? _retryOptions;
     final isIdempotent =

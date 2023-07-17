@@ -14,8 +14,10 @@ class LoggingInterceptor extends Interceptor {
   }) : _logger = logger;
 
   @override
-  Future onRequest(
-      RequestOptions options, RequestInterceptorHandler handler) async {
+  Future<dynamic> onRequest(
+    RequestOptions options,
+    RequestInterceptorHandler handler,
+  ) async {
     if (!_logger.shouldEnableNetworkLogging) {
       super.onRequest(options, handler);
       return;
@@ -31,7 +33,7 @@ class LoggingInterceptor extends Interceptor {
   }
 
   @override
-  Future onError(DioError err, ErrorInterceptorHandler handler) async {
+  Future<dynamic> onError(DioError err, ErrorInterceptorHandler handler) async {
     if (!_logger.shouldEnableNetworkLogging) {
       super.onError(err, handler);
       return;
@@ -53,8 +55,10 @@ class LoggingInterceptor extends Interceptor {
   }
 
   @override
-  Future onResponse(
-      Response response, ResponseInterceptorHandler handler) async {
+  Future<dynamic> onResponse(
+    Response<dynamic> response,
+    ResponseInterceptorHandler handler,
+  ) async {
     if (!_logger.shouldEnableNetworkLogging) {
       super.onResponse(response, handler);
       return;

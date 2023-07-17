@@ -52,7 +52,7 @@ void main() {
           );
         });
 
-        When whenDioRequests() {
+        When<dynamic> whenDioRequests() {
           return when<dynamic>(
             () => dio.request<dynamic>(
               any(),

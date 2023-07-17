@@ -8,7 +8,7 @@ class RequiredHeadersInterceptor extends Interceptor {
     Headers.contentTypeHeader: 'application/json; charset=utf-8',
   };
   @override
-  Future onRequest(
+  Future<dynamic> onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
     return super.onRequest(
       options.copyWith(

@@ -23,12 +23,14 @@ class RetryOptions {
   }
 
   /// Whether another retry attempt should be performed
-  bool shouldRetry(DioError error, {required bool isIdempotent}) {
+  bool shouldRetry(DioException error, {required bool isIdempotent}) {
     if (attempts <= 0) return false;
 
-    if (error.type == DioErrorType.connectionTimeout) return true;
+    if (error.type == DioExceptionType.connectionTimeout) return true;
 
-    if (error.type == DioErrorType.receiveTimeout && isIdempotent) return true;
+    if (error.type == DioExceptionType.receiveTimeout && isIdempotent) {
+      return true;
+    }
 
     return false;
   }

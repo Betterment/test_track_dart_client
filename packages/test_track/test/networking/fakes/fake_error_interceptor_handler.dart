@@ -3,16 +3,25 @@ import 'package:test_track/src/helpers/typedefs.dart';
 
 /// A fake [ErrorInterceptorHandler] that will
 /// notify the consumer when [next] is invoked
-/// by passing along the [DioError]
+/// by passing along the [DioException]
 class FakeErrorHandlerInterceptorHandler extends ErrorInterceptorHandler {
-  final ValueSetter<DioError>? _onNextInvoked;
+  final ValueSetter<DioException>? _onNextInvoked;
+  final ValueSetter<Response<dynamic>>? _onResolveInvoked;
 
   FakeErrorHandlerInterceptorHandler({
-    ValueSetter<DioError>? onNextInvoked,
-  }) : _onNextInvoked = onNextInvoked;
+    ValueSetter<DioException>? onNextInvoked,
+    ValueSetter<Response<dynamic>>? onResolveInvoked,
+  })  : _onNextInvoked = onNextInvoked,
+        _onResolveInvoked = onResolveInvoked;
 
   @override
-  void next(DioError err) {
+  void next(DioException err) {
     _onNextInvoked?.call(err);
+  }
+
+  @override
+  void resolve(Response<dynamic> response) {
+    _onResolveInvoked?.call(response);
+    super.resolve(response);
   }
 }

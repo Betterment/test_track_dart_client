@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
+import 'package:test_track/src/logging/test_track_logger.dart';
 import 'package:test_track/src/networking/interceptors/logging_interceptor.dart';
-import 'package:test_track/test_track.dart';
 import 'package:test_track_test_support/test_track_test_support.dart';
 
 import '../fakes/fake_error_interceptor_handler.dart';
@@ -30,7 +30,7 @@ void main() {
             .thenReturn(<String, String>{'beep': 'bop'});
         when(() => requestOptions.uri).thenReturn(Uri.base);
 
-        await subject.onRequest(requestOptions, RequestInterceptorHandler());
+        subject.onRequest(requestOptions, RequestInterceptorHandler());
 
         final mainLogEvent = logger.debugLogs.first;
         final headersLogEvent = logger.debugLogs.last;
@@ -44,8 +44,7 @@ void main() {
         final logger = FakeTestTrackLogger.withoutNetworkLogging();
         final subject = buildSubject(logger: logger);
 
-        await subject.onRequest(
-            MockRequestOptions(), RequestInterceptorHandler());
+        subject.onRequest(MockRequestOptions(), RequestInterceptorHandler());
 
         expect(logger.noDebugLogs, isTrue);
       });
@@ -59,8 +58,8 @@ void main() {
         final logger = FakeTestTrackLogger(shouldEnableNetworkLogging: true);
         final subject = buildSubject(logger: logger);
 
-        await subject.onError(
-          DioError(requestOptions: requestOptions),
+        subject.onError(
+          DioException(requestOptions: requestOptions),
           FakeErrorHandlerInterceptorHandler(),
         );
 
@@ -75,8 +74,8 @@ void main() {
         final logger = FakeTestTrackLogger.withoutNetworkLogging();
         final subject = buildSubject(logger: logger);
 
-        await subject.onError(
-          DioError(requestOptions: requestOptions),
+        subject.onError(
+          DioException(requestOptions: requestOptions),
           FakeErrorHandlerInterceptorHandler(),
         );
 
@@ -92,7 +91,7 @@ void main() {
         final logger = FakeTestTrackLogger(shouldEnableNetworkLogging: true);
         final subject = buildSubject(logger: logger);
 
-        await subject.onResponse(
+        subject.onResponse(
           Response<dynamic>(requestOptions: requestOptions),
           ResponseInterceptorHandler(),
         );
@@ -108,7 +107,7 @@ void main() {
         final logger = FakeTestTrackLogger.withoutNetworkLogging();
         final subject = buildSubject(logger: logger);
 
-        await subject.onResponse(
+        subject.onResponse(
           Response<dynamic>(requestOptions: requestOptions),
           ResponseInterceptorHandler(),
         );

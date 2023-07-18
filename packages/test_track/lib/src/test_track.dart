@@ -1,9 +1,12 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
+import 'package:sturdy_http/sturdy_http.dart';
 import 'package:test_track/src/domain/domain.dart';
 import 'package:test_track/src/logging/default_test_track_logger.dart';
-import 'package:test_track/src/networking/http_client.dart';
+import 'package:test_track/src/networking/interceptors/logging_interceptor.dart';
+import 'package:test_track/src/networking/interceptors/required_headers_interceptor.dart';
+import 'package:test_track/src/networking/interceptors/retry_interceptor.dart';
 import 'package:test_track/test_track.dart';
 
 /// The instance with which to interact to perform
@@ -32,9 +35,14 @@ class TestTrack {
   }) async {
     logger ??= const SilentTestTrackLogger();
 
-    final client = HttpClient(
+    late final SturdyHttp client;
+    client = SturdyHttp(
       baseUrl: baseUrl,
-      logger: logger,
+      interceptors: [
+        RequiredHeadersInterceptor(),
+        LoggingInterceptor(logger: logger),
+        RetryInterceptor(clientGetter: () => client),
+      ],
       customAdapter: customHttpAdapter,
     );
 
@@ -93,11 +101,11 @@ class TestTrack {
 
       visitor = appVisitorConfig.visitor;
       splitRegistry = appVisitorConfig.splitRegistry;
-    } on DioError catch (e) {
+    } on Exception catch (e) {
       logger.info(
         'Failed to fetch app visitor config from server, using cached data',
-        error: e.message,
-        stackTrace: e.stackTrace,
+        error: e,
+        stackTrace: StackTrace.current,
       );
     }
 

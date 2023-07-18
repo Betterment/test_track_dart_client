@@ -1,6 +1,7 @@
+import 'package:sturdy_http/sturdy_http.dart';
 import 'package:test_track/src/logging/logging.dart';
 import 'package:test_track/src/models/models.dart';
-import 'package:test_track/src/networking/http_client.dart';
+import 'package:test_track/src/networking/extras.dart';
 
 /// {@template report_assignment_event}
 /// Reports an [AssignmentEvent] to the TestTrack server
@@ -11,31 +12,36 @@ import 'package:test_track/src/networking/http_client.dart';
 /// are caught and logged to the [TestTrackLogger]
 /// {@endtemplate}
 class ReportAssignmentEvent {
-  final HttpClient _client;
+  final SturdyHttp _client;
   final TestTrackLogger _logger;
 
   /// {@macro report_assignment_event}
   ReportAssignmentEvent({
-    required HttpClient client,
+    required SturdyHttp client,
     required TestTrackLogger logger,
   })  : _client = client,
         _logger = logger;
 
   /// {@macro report_assignment_event}
   Future<void> call(AssignmentEvent assignmentEvent) async {
-    try {
-      await _client.post(
+    await _client.execute(
+      IdempotentPostRequest(
         '/api/v1/assignment_event',
-        data: {
-          'visitor_id': assignmentEvent.visitorId,
-          'split_name': assignmentEvent.splitName,
-          'context': assignmentEvent.context,
-        },
-        isIdempotent: true,
-      );
-    } on Exception catch (error) {
-      _logger.error(
-          'Unable to report assignment event: $assignmentEvent with error: $error');
-    }
+        data: NetworkRequestBody.json(
+          {
+            'visitor_id': assignmentEvent.visitorId,
+            'split_name': assignmentEvent.splitName,
+            'context': assignmentEvent.context,
+          },
+        ),
+      ),
+      onResponse: (r) {
+        return r.maybeWhen(
+          okNoContent: () => null,
+          orElse: () => _logger.error(
+              'Unable to report assignment event: $assignmentEvent with error: $r'),
+        );
+      },
+    );
   }
 }

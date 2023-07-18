@@ -1,5 +1,5 @@
-import 'package:dio/dio.dart';
-import 'package:test_track/src/networking/http_client.dart';
+import 'package:sturdy_http/sturdy_http.dart';
+import 'package:test_track/src/networking/extras.dart';
 import 'package:test_track/test_track.dart';
 
 /// {@template test_track_login}
@@ -24,13 +24,13 @@ import 'package:test_track/test_track.dart';
 ///
 /// {@endtemplate}
 class Login {
-  final HttpClient _client;
+  final SturdyHttp _client;
   final DataStorageProvider _dataStorageProvider;
   final AnalyticsProvider _analyticsProvider;
 
   /// {@macro test_track_login}
   Login({
-    required HttpClient httpClient,
+    required SturdyHttp httpClient,
     required DataStorageProvider dataStorageProvider,
     required AnalyticsProvider analyticsProvider,
   })  : _client = httpClient,
@@ -43,24 +43,26 @@ class Login {
     required String visitorId,
     required AppVersionBuild appVersionBuild,
   }) async {
-    late Response<Map<String, dynamic>> response;
-    try {
-      response = await _client.post<Map<String, dynamic>>(
+    final appVisitorConfig = await _client.execute<Json, AppVisitorConfig>(
+      IdempotentPostRequest(
         '/api/v4/apps/${appVersionBuild.appName}/versions/${appVersionBuild.version}/builds/${appVersionBuild.buildTimestamp}/identifier',
-        data: {
-          'identifier_type': identifier.identifierType,
-          'value': identifier.value,
-          'visitor_id': visitorId,
-        },
-        isIdempotent: true,
-      );
-    } on DioError catch (e) {
-      throw TestTrackLoginFailureException(
-        message: e.message,
-      );
-    }
-
-    final appVisitorConfig = AppVisitorConfig.fromJson(response.data!);
+        data: NetworkRequestBody.json(
+          {
+            'identifier_type': identifier.identifierType,
+            'value': identifier.value,
+            'visitor_id': visitorId,
+          },
+        ),
+      ),
+      onResponse: (r) {
+        return r.maybeWhen(
+          ok: (json) => AppVisitorConfig.fromJson(json),
+          orElse: () => throw TestTrackLoginFailureException(
+            message: r.toString(),
+          ),
+        );
+      },
+    );
 
     await _dataStorageProvider.storeVisitor(appVisitorConfig.visitor);
     await _dataStorageProvider

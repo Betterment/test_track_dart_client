@@ -31,12 +31,12 @@ class RetryInterceptor extends Interceptor {
         RetryOptions.fromRequestOptions(err.requestOptions) ?? _retryOptions;
     final isIdempotent =
         err.requestOptions.extra[isIdempotentOptionsKey] as bool? ?? false;
-    final uppercased = StringBuffer()
-      ..write(err.requestOptions.method.substring(0, 1).toUpperCase())
-      ..write(
-        err.requestOptions.method.substring(1).toLowerCase(),
-      );
-    final requestType = NetworkRequestType.values.byName(uppercased.toString());
+    final originalMethod = err.requestOptions.method;
+    final capitalizedMethod = StringBuffer()
+      ..write(originalMethod.substring(0, 1).toUpperCase())
+      ..write(originalMethod.substring(1).toLowerCase());
+    final requestType =
+        NetworkRequestType.values.byName(capitalizedMethod.toString());
 
     if (extra.shouldRetry(err, isIdempotent: isIdempotent)) {
       if (extra.retryInterval.inMilliseconds > 0) {

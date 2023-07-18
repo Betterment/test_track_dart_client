@@ -13,7 +13,7 @@ import 'package:test_track/test_track.dart';
 /// [AnalyticsProvider.identify] will be invoked with the
 /// [Visitor] id from the [AppVisitorConfig].
 ///
-/// If the fetch is not successful, a DioException will be thrown
+/// If the fetch is not successful, a [Exception] will be thrown
 /// {@endtemplate}
 class GetVisitorConfig {
   final SturdyHttp _client;

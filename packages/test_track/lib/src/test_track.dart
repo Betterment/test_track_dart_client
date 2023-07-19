@@ -5,7 +5,6 @@ import 'package:sturdy_http/sturdy_http.dart';
 import 'package:test_track/src/domain/domain.dart';
 import 'package:test_track/src/logging/default_test_track_logger.dart';
 import 'package:test_track/src/networking/interceptors/logging_interceptor.dart';
-import 'package:test_track/src/networking/interceptors/required_headers_interceptor.dart';
 import 'package:test_track/src/networking/interceptors/retry_interceptor.dart';
 import 'package:test_track/test_track.dart';
 
@@ -39,7 +38,6 @@ class TestTrack {
     client = SturdyHttp(
       baseUrl: baseUrl,
       interceptors: [
-        RequiredHeadersInterceptor(),
         LoggingInterceptor(logger: logger),
         RetryInterceptor(clientGetter: () => client),
       ],

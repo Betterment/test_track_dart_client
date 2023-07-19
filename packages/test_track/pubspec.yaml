@@ -15,10 +15,7 @@ dependencies:
   freezed_annotation: ^2.1.0
   json_annotation: ^4.8.0
   meta: ^1.9.0
-  sturdy_http:
-    git:
-      url: git@github.com:Betterment/sturdy_http.git
-      ref: bt/raw-request
+  sturdy_http: ^0.1.0
   uuid: ^3.0.7
 
 

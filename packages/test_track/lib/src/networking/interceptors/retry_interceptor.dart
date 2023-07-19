@@ -61,23 +61,28 @@ class RetryInterceptor extends Interceptor {
           queryParameters: err.requestOptions.queryParameters,
           options: Options(extra: extraOptions),
         );
-        await _clientGetter().execute<Response<dynamic>, void>(
+        await _clientGetter().execute<dynamic, void>(
           retry,
           onResponse: (r) {
             DioException errorForRequest() {
               return DioException(requestOptions: err.requestOptions);
             }
 
+            // We don't have access to the raw Response from `sturdy_http`, so
+            // for both success cases, fabricate them. This should be fine for
+            // most cases, and would require a `sturdy_http` if we want to gain
+            // access to the raw response.
             r.when(
-              ok: (res) => handler.resolve(res),
+              ok: (res) => handler.resolve(
+                Response(
+                  data: res,
+                  requestOptions: err.requestOptions,
+                ),
+              ),
               okNoContent: () => handler.resolve(
-                // Since we don't have access to the actual response,
-                // fabricate one
                 Response(
                   statusCode: 204,
-                  requestOptions: RequestOptions(
-                    path: err.requestOptions.path,
-                  ),
+                  requestOptions: err.requestOptions,
                 ),
               ),
               genericError: (_, __, error) => throw error ?? errorForRequest(),

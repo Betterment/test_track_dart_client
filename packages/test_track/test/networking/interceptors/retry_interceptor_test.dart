@@ -45,6 +45,7 @@ void main() {
         final DioException initialError = DioException(
           type: DioExceptionType.connectionTimeout,
           requestOptions: RequestOptions(
+            method: 'GET',
             path: '/foo',
             extra: <String, dynamic>{'is_idempotent': true},
             cancelToken: CancelToken(),
@@ -71,9 +72,8 @@ void main() {
             final handler = FakeErrorHandlerInterceptorHandler(
               onResolveInvoked: (res) => response = res,
             );
+            final successBody = {'success': true};
             late final CharlatanHttpRequest request;
-            final successResponse =
-                Response<dynamic>(requestOptions: initialError.requestOptions);
 
             final subject = buildSubject(
               retryOptions: RetryOptions(attempts: 1),
@@ -83,13 +83,13 @@ void main() {
                   '/foo',
                   (req) {
                     request = req;
-                    return response = successResponse;
+                    return CharlatanHttpResponse(body: successBody);
                   },
                 ),
             );
 
             await subject.onError(initialError, handler);
-            expect(response, successResponse);
+            expect(response.data, successBody);
             expectRetryRequestSameAsFailedRequest(request.requestOptions);
             expect(errorFromOnNextInvocation, isNull);
             expect(numberOfErrorHandlerOnNextInvocations, 0);

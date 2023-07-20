@@ -18,14 +18,16 @@ void main() {
     }
 
     group('onRequest', () {
-      test('when network logging is enabled, it logs to loggingService', () async {
+      test('when network logging is enabled, it logs to loggingService',
+          () async {
         final logger = FakeTestTrackLogger(
           shouldEnableNetworkLogging: true,
         );
         final subject = buildSubject(logger: logger);
         final requestOptions = MockRequestOptions();
         when(() => requestOptions.method).thenReturn('');
-        when(() => requestOptions.headers).thenReturn(<String, String>{'beep': 'bop'});
+        when(() => requestOptions.headers)
+            .thenReturn(<String, String>{'beep': 'bop'});
         when(() => requestOptions.uri).thenReturn(Uri.base);
 
         subject.onRequest(requestOptions, RequestInterceptorHandler());
@@ -36,7 +38,9 @@ void main() {
         expect(headersLogEvent.message, 'headers: {beep: bop}');
       });
 
-      test('when network logging is not enabled, it does not log to loggingService', () async {
+      test(
+          'when network logging is not enabled, it does not log to loggingService',
+          () async {
         final logger = FakeTestTrackLogger.withoutNetworkLogging();
         final subject = buildSubject(logger: logger);
 
@@ -47,7 +51,8 @@ void main() {
     });
 
     group('onError', () {
-      test('when network logging is enabled, it logs to loggingService', () async {
+      test('when network logging is enabled, it logs to loggingService',
+          () async {
         final requestOptions = MockRequestOptions();
         when(() => requestOptions.uri).thenReturn(Uri.base);
         final logger = FakeTestTrackLogger(shouldEnableNetworkLogging: true);
@@ -61,7 +66,9 @@ void main() {
         expect(logger.debugLogs.length, 2);
       });
 
-      test('when network logging is not enabled, it does not log to loggingService', () async {
+      test(
+          'when network logging is not enabled, it does not log to loggingService',
+          () async {
         final requestOptions = MockRequestOptions();
         when(() => requestOptions.uri).thenReturn(Uri.base);
         final logger = FakeTestTrackLogger.withoutNetworkLogging();
@@ -77,7 +84,8 @@ void main() {
     });
 
     group('onResponse', () {
-      test('when network logging is enabled, it logs to loggingService', () async {
+      test('when network logging is enabled, it logs to loggingService',
+          () async {
         final requestOptions = MockRequestOptions();
         when(() => requestOptions.uri).thenReturn(Uri.base);
         final logger = FakeTestTrackLogger(shouldEnableNetworkLogging: true);
@@ -91,7 +99,9 @@ void main() {
         expect(logger.debugLogs.length, 1);
       });
 
-      test('when network logging is not enabled, it does not log to loggingService', () async {
+      test(
+          'when network logging is not enabled, it does not log to loggingService',
+          () async {
         final requestOptions = MockRequestOptions();
         when(() => requestOptions.uri).thenReturn(Uri.base);
         final logger = FakeTestTrackLogger.withoutNetworkLogging();

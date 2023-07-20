@@ -65,7 +65,9 @@ void main() {
         }
 
         group('and the retry request succeeds', () {
-          test('it retries the request with dio and returns the successful response', () async {
+          test(
+              'it retries the request with dio and returns the successful response',
+              () async {
             late final Response<dynamic> response;
             final handler = FakeErrorInterceptorHandler(
               onResolveInvoked: (res) => response = res,
@@ -95,8 +97,11 @@ void main() {
         });
 
         group('and the request fails', () {
-          test('it retries the request with dio and calls next on the handler with the retry request error', () async {
-            final retryError = DioException(requestOptions: RequestOptions(path: 'errorPath'));
+          test(
+              'it retries the request with dio and calls next on the handler with the retry request error',
+              () async {
+            final retryError =
+                DioException(requestOptions: RequestOptions(path: 'errorPath'));
             late final CharlatanHttpRequest request;
             final subject = buildSubject(
               retryOptions: RetryOptions(attempts: 1),
@@ -121,7 +126,8 @@ void main() {
       group('when it should not retry the request', () {
         test('it calls next on the handler with the error', () async {
           final subject = buildSubject(retryOptions: RetryOptions());
-          final error = DioException(requestOptions: RequestOptions(path: '/foo'));
+          final error =
+              DioException(requestOptions: RequestOptions(path: '/foo'));
 
           await subject.onError(error, defaultHandler);
 

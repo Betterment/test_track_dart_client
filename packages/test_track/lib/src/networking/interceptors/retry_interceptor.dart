@@ -70,8 +70,8 @@ class RetryInterceptor extends Interceptor {
 
             // We don't have access to the raw Response from `sturdy_http`, so
             // for both success cases, fabricate them. This should be fine for
-            // most cases, and would require a `sturdy_http` if we want to gain
-            // access to the raw response.
+            // most cases, and would require a `sturdy_http` change if we want
+            // to gain access to the raw response.
             r.when(
               ok: (res) => handler.resolve(
                 Response(

@@ -6,6 +6,7 @@ import 'package:test_track/src/domain/domain.dart';
 import 'package:test_track/src/logging/default_test_track_logger.dart';
 import 'package:test_track/src/networking/interceptors/logging_interceptor.dart';
 import 'package:test_track/src/networking/interceptors/retry_interceptor.dart';
+import 'package:test_track/src/networking/interceptors/system_proxy_interceptor.dart';
 import 'package:test_track/test_track.dart';
 
 /// The instance with which to interact to perform
@@ -31,6 +32,7 @@ class TestTrack {
     required AnalyticsProvider analyticsProvider,
     HttpClientAdapter? customHttpAdapter,
     TestTrackLogger? logger,
+    Future<Map<String, String>?> Function()? systemProxyGetter,
   }) async {
     logger ??= const SilentTestTrackLogger();
 
@@ -39,6 +41,8 @@ class TestTrack {
       baseUrl: baseUrl,
       interceptors: [
         LoggingInterceptor(logger: logger),
+        if (systemProxyGetter != null)
+          SystemProxyInterceptor(systemProxyGetter: systemProxyGetter),
         RetryInterceptor(clientGetter: () => client),
       ],
       customAdapter: customHttpAdapter,

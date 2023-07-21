@@ -18,7 +18,7 @@ void main() {
           calculateVariant: CalculateVariant(),
           analyticsProvider: FakeAnalyticsProvider(),
           reportAssignmentEvent: ReportAssignmentEvent(
-            client: FakeHttpClient(charlatan),
+            client: FakeSturdyHttp(charlatan),
             logger: FakeTestTrackLogger.withoutNetworkLogging(),
           ),
           dataStorageProvider: FakeDataStorageProvider(),

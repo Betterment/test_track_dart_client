@@ -1,8 +1,8 @@
 import 'package:charlatan/charlatan.dart';
+import 'package:sturdy_http/sturdy_http.dart';
 import 'package:test/test.dart';
 import 'package:test_track/src/domain/domain.dart';
 import 'package:test_track/src/models/models.dart';
-import 'package:test_track/src/networking/http_client.dart';
 import 'package:test_track_test_support/test_track_test_support.dart';
 
 import '../networking/fakes/fake_http_client.dart';
@@ -11,7 +11,7 @@ import '../networking/fakes/fake_http_defaults.dart';
 void main() {
   group('OverrideAssignments', () {
     group('call(visitorId:, assignmentOverrides:)', () {
-      late HttpClient client;
+      late SturdyHttp client;
       late OverrideAssignments subject;
       late Charlatan charlatan;
 
@@ -54,7 +54,7 @@ void main() {
               visitor: Visitor(id: visitorId, assignments: assignments),
             ),
           );
-        client = FakeHttpClient(charlatan);
+        client = FakeSturdyHttp(charlatan);
         subject = OverrideAssignments(
           client: client,
           getVisitorConfig: GetVisitorConfig(

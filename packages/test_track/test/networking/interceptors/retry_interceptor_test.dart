@@ -1,3 +1,4 @@
+import 'package:charlatan/charlatan.dart';
 import 'package:dio/dio.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
@@ -5,92 +6,91 @@ import 'package:test_track/src/networking/interceptors/retry_interceptor.dart';
 import 'package:test_track/src/networking/interceptors/retry_options.dart';
 
 import '../fakes/fake_error_interceptor_handler.dart';
+import '../fakes/fake_http_client.dart';
 
 class MockDio extends Mock implements Dio {}
 
 void main() {
   group('RetryInterceptor', () {
-    late Dio dio;
-    late ErrorInterceptorHandler handler;
-    late DioError? errorFromOnNextInvocation;
+    late DioException? errorFromOnNextInvocation;
     var numberOfErrorHandlerOnNextInvocations = 0;
+    final defaultHandler = FakeErrorInterceptorHandler(
+      onNextInvoked: (err) {
+        numberOfErrorHandlerOnNextInvocations++;
+        errorFromOnNextInvocation = err;
+      },
+    );
 
     RetryInterceptor buildSubject({
       required RetryOptions retryOptions,
+      ErrorInterceptorHandler? errorInterceptorHandler,
+      Charlatan? charlatan,
     }) {
-      handler = FakeErrorHandlerInterceptorHandler(onNextInvoked: (err) {
-        numberOfErrorHandlerOnNextInvocations++;
-        errorFromOnNextInvocation = err;
-      });
-      return RetryInterceptor(dio: dio, retryOptions: retryOptions);
+      errorInterceptorHandler ??= defaultHandler;
+      charlatan ??= Charlatan();
+      final client = FakeSturdyHttp(charlatan);
+      return RetryInterceptor(
+        clientGetter: () => client,
+        retryOptions: retryOptions,
+      );
     }
 
     setUp(() {
-      dio = MockDio();
       errorFromOnNextInvocation = null;
       numberOfErrorHandlerOnNextInvocations = 0;
     });
 
     group('onError', () {
       group('when it should retry the request', () {
-        late DioError error;
-        late RetryInterceptor subject;
+        final DioException initialError = DioException(
+          type: DioExceptionType.connectionTimeout,
+          requestOptions: RequestOptions(
+            method: 'GET',
+            path: '/foo',
+            extra: <String, dynamic>{'is_idempotent': true},
+            cancelToken: CancelToken(),
+            onReceiveProgress: (_, __) {},
+            onSendProgress: (_, __) {},
+            data: {'foo', 'bar'},
+          ),
+        );
 
-        setUp(() {
-          subject = buildSubject(
-            retryOptions: RetryOptions(
-              attempts: 1,
-            ),
-          );
-
-          error = DioError(
-            type: DioErrorType.connectionTimeout,
-            requestOptions: RequestOptions(
-              path: 'test.com',
-              extra: <String, dynamic>{'is_idempotent': true},
-            ),
-          );
-        });
-
-        When whenDioRequests() {
-          return when<dynamic>(
-            () => dio.request<dynamic>(
-              any(),
-              cancelToken: any(named: 'cancelToken'),
-              data: any<dynamic>(named: 'data'),
-              onReceiveProgress: any(named: 'onReceiveProgress'),
-              onSendProgress: any(named: 'onSendProgress'),
-              queryParameters: any(named: 'queryParameters'),
-              options: any(named: 'options'),
-            ),
-          );
-        }
-
-        void verifyDioRequestCalledOnce() {
-          verify(
-            () => dio.request<dynamic>(
-              'test.com',
-              cancelToken: error.requestOptions.cancelToken,
-              data: error.requestOptions.data,
-              onReceiveProgress: error.requestOptions.onReceiveProgress,
-              onSendProgress: error.requestOptions.onSendProgress,
-              queryParameters: error.requestOptions.queryParameters,
-              options: any(named: 'options'),
-            ),
-          ).called(1);
+        void expectRetryRequestSameAsFailedRequest(RequestOptions request) {
+          final errorOptions = initialError.requestOptions;
+          expect(request.cancelToken, errorOptions.cancelToken);
+          expect(request.data, errorOptions.data);
+          expect(request.onReceiveProgress, errorOptions.onReceiveProgress);
+          expect(request.onSendProgress, errorOptions.onSendProgress);
+          expect(request.queryParameters, errorOptions.queryParameters);
         }
 
         group('and the retry request succeeds', () {
           test(
               'it retries the request with dio and returns the successful response',
               () async {
-            final successResponse =
-                Response<dynamic>(requestOptions: error.requestOptions);
-            whenDioRequests().thenAnswer((_) async => successResponse);
+            late final Response<dynamic> response;
+            final handler = FakeErrorInterceptorHandler(
+              onResolveInvoked: (res) => response = res,
+            );
+            final successBody = {'success': true};
+            late final CharlatanHttpRequest request;
 
-            expect(await subject.onError(error, handler), successResponse);
+            final subject = buildSubject(
+              retryOptions: RetryOptions(attempts: 1),
+              errorInterceptorHandler: handler,
+              charlatan: Charlatan()
+                ..whenGet(
+                  '/foo',
+                  (req) {
+                    request = req;
+                    return CharlatanHttpResponse(body: successBody);
+                  },
+                ),
+            );
 
-            verifyDioRequestCalledOnce();
+            await subject.onError(initialError, handler);
+            expect(response.data, successBody);
+            expectRetryRequestSameAsFailedRequest(request.requestOptions);
             expect(errorFromOnNextInvocation, isNull);
             expect(numberOfErrorHandlerOnNextInvocations, 0);
           });
@@ -101,12 +101,22 @@ void main() {
               'it retries the request with dio and calls next on the handler with the retry request error',
               () async {
             final retryError =
-                DioError(requestOptions: RequestOptions(path: 'errorPath'));
-            whenDioRequests().thenThrow(retryError);
+                DioException(requestOptions: RequestOptions(path: 'errorPath'));
+            late final CharlatanHttpRequest request;
+            final subject = buildSubject(
+              retryOptions: RetryOptions(attempts: 1),
+              charlatan: Charlatan()
+                ..whenGet(
+                  '/foo',
+                  (req) {
+                    request = req;
+                    throw retryError;
+                  },
+                ),
+            );
 
-            await subject.onError(error, handler);
-
-            verifyDioRequestCalledOnce();
+            await subject.onError(initialError, defaultHandler);
+            expectRetryRequestSameAsFailedRequest(request.requestOptions);
             expect(errorFromOnNextInvocation, retryError);
             expect(numberOfErrorHandlerOnNextInvocations, 1);
           });
@@ -114,18 +124,12 @@ void main() {
       });
 
       group('when it should not retry the request', () {
-        late RetryInterceptor subject;
-
-        setUp(() {
-          subject = buildSubject(
-            retryOptions: RetryOptions(),
-          );
-        });
         test('it calls next on the handler with the error', () async {
+          final subject = buildSubject(retryOptions: RetryOptions());
           final error =
-              DioError(requestOptions: RequestOptions(path: 'test.com'));
+              DioException(requestOptions: RequestOptions(path: '/foo'));
 
-          await subject.onError(error, handler);
+          await subject.onError(error, defaultHandler);
 
           expect(errorFromOnNextInvocation, error);
           expect(numberOfErrorHandlerOnNextInvocations, 1);

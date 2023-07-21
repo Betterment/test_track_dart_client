@@ -1,7 +1,7 @@
 import 'package:charlatan/charlatan.dart';
+import 'package:sturdy_http/sturdy_http.dart';
 import 'package:test/test.dart';
 import 'package:test_track/src/domain/test_track_login.dart';
-import 'package:test_track/src/networking/http_client.dart';
 import 'package:test_track/test_track.dart';
 import 'package:test_track_test_support/test_track_test_support.dart';
 
@@ -11,7 +11,7 @@ void main() {
   group('Login', () {
     group('call(identifier:, visitorId:, appVersionBuild:)', () {
       late Charlatan charlatan;
-      late HttpClient client;
+      late SturdyHttp client;
       late DataStorageProvider dataStorageProvider;
       late FakeAnalyticsProvider analyticsProvider;
       late Login subject;
@@ -23,7 +23,7 @@ void main() {
 
       setUp(() async {
         charlatan = Charlatan();
-        client = FakeHttpClient(charlatan);
+        client = FakeSturdyHttp(charlatan);
         dataStorageProvider = FakeDataStorageProvider();
         analyticsProvider = FakeAnalyticsProvider();
         subject = Login(
@@ -51,7 +51,7 @@ void main() {
               visitorIdFromRequest = data?['visitor_id'] as String?;
               isIdempotent =
                   request.requestOptions.extra['is_idempotent'] as bool;
-              return appVisitorConfig;
+              return appVisitorConfig.toJson();
             },
           );
         });

@@ -19,7 +19,7 @@ class _OnlyContains<T> extends Matcher {
   Description describeMismatch(
     dynamic item,
     Description mismatchDescription,
-    Map matchState,
+    Map<dynamic, dynamic> matchState,
     bool verbose,
   ) {
     if (item is List<T>) {
@@ -40,7 +40,7 @@ class _OnlyContains<T> extends Matcher {
   }
 
   @override
-  bool matches(dynamic item, Map matchState) {
+  bool matches(dynamic item, Map<dynamic, dynamic> matchState) {
     if (item is List<T>) {
       final items = [...item];
       if (items.length != _expected.length) {

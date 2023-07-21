@@ -9,8 +9,11 @@ import '../fakes/fake_request_interceptor_handler.dart';
 void main() {
   group('SystemProxyInterceptor', () {
     group('when proxy getter returns null', () {
-      final subject =
-          SystemProxyInterceptor(systemProxyGetter: () async => null);
+      final subject = SystemProxyInterceptor(
+        systemProxyGetter: () async => null,
+      );
+
+      setUp(() => HttpOverrides.global = null);
 
       test('it does not set HttpOverrides', () async {
         await subject.onRequest(

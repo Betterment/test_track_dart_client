@@ -1,7 +1,7 @@
 import 'package:charlatan/charlatan.dart';
+import 'package:sturdy_http/sturdy_http.dart';
 import 'package:test/test.dart';
 import 'package:test_track/src/domain/domain.dart';
-import 'package:test_track/src/networking/http_client.dart';
 import 'package:test_track/test_track.dart';
 import 'package:test_track_test_support/test_track_test_support.dart';
 
@@ -11,7 +11,7 @@ void main() {
   group('ReportAssignmentEvent', () {
     group('call(visitorId:, splitName:, context:)', () {
       late Charlatan charlatan;
-      late HttpClient client;
+      late SturdyHttp client;
 
       final assignmentEvent = AssignmentEvent(
         visitorId: VisitorFactory.build().id,
@@ -30,8 +30,9 @@ void main() {
               final data = request.body as Map<String, Object?>?;
               assignmentEventFromRequest =
                   data != null ? AssignmentEvent.fromJson(data) : null;
-              return isIdempotent =
+              isIdempotent =
                   request.requestOptions.extra['is_idempotent'] as bool;
+              return CharlatanHttpResponse(statusCode: 204);
             },
           );
       });
@@ -39,7 +40,7 @@ void main() {
       ReportAssignmentEvent buildSubject({
         TestTrackLogger? loggerOverride,
       }) {
-        client = FakeHttpClient(charlatan);
+        client = FakeSturdyHttp(charlatan);
         return ReportAssignmentEvent(
           client: client,
           logger: loggerOverride ?? FakeTestTrackLogger.withoutNetworkLogging(),

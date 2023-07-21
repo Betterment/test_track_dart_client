@@ -1,5 +1,5 @@
+import 'package:sturdy_http/sturdy_http.dart';
 import 'package:test_track/src/domain/get_visitor_config.dart';
-import 'package:test_track/src/networking/http_client.dart';
 import 'package:test_track/test_track.dart';
 
 /// {@template override_assignments}
@@ -7,12 +7,12 @@ import 'package:test_track/test_track.dart';
 /// with the provided visitor id
 /// {@endtemplate}
 class OverrideAssignments {
-  final HttpClient _client;
+  final SturdyHttp _client;
   final GetVisitorConfig _getVisitorConfig;
 
   /// {@macro override_assignments}
   OverrideAssignments({
-    required HttpClient client,
+    required SturdyHttp client,
     required GetVisitorConfig getVisitorConfig,
   })  : _client = client,
         _getVisitorConfig = getVisitorConfig;
@@ -23,10 +23,18 @@ class OverrideAssignments {
     required String visitorId,
     required List<AssignmentOverride> assignmentOverrides,
   }) async {
-    await _client.post(
-      '/api/v2/visitors/$visitorId/assignment_overrides',
-      data: {
-        'assignments': assignmentOverrides.map((a) => a.toJson()).toList(),
+    await _client.execute(
+      PostRequest(
+        '/api/v2/visitors/$visitorId/assignment_overrides',
+        data: NetworkRequestBody.json({
+          'assignments': assignmentOverrides.map((a) => a.toJson()).toList(),
+        }),
+      ),
+      onResponse: (r) {
+        return r.maybeWhen(
+          okNoContent: () => null,
+          orElse: () => throw Exception('Failed to override assignments: $r'),
+        );
       },
     );
 

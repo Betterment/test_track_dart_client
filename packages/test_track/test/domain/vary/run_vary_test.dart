@@ -14,7 +14,7 @@ class FakeReportAssignmentEvent extends ReportAssignmentEvent {
     required VoidCallback onInvoked,
   })  : _onInvoked = onInvoked,
         super(
-          client: FakeHttpClient(Charlatan()),
+          client: FakeSturdyHttp(Charlatan()),
           logger: FakeTestTrackLogger.withoutNetworkLogging(),
         );
 
@@ -44,7 +44,7 @@ void main() {
         analyticsProvider: analyticsProvider,
         reportAssignmentEvent: reportAssignmentEventOverride ??
             ReportAssignmentEvent(
-              client: FakeHttpClient(charlatan),
+              client: FakeSturdyHttp(charlatan),
               logger: FakeTestTrackLogger.withoutNetworkLogging(),
             ),
         dataStorageProvider: dataStorageProvider,

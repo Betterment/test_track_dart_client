@@ -93,8 +93,8 @@ void main() {
           );
 
           expect(
-            logger.infoLogs.single.error,
-            'The request returned an invalid status code of 500.',
+            logger.infoLogs.single.error.toString(),
+            contains('The request returned an invalid status code of 500.'),
           );
         });
 
@@ -124,7 +124,7 @@ void main() {
         charlatan
           ..whenPost(
             '/api/v2/visitors/${appVisitorConfig.visitor.id}/assignment_overrides',
-            (request) => null,
+            (request) => CharlatanHttpResponse(statusCode: 204),
           )
           // Configure the follow-up call that's made once assignments
           // have been overridden
@@ -292,8 +292,8 @@ void main() {
           );
 
           expect(
-            logger.infoLogs.single.error,
-            'The request returned an invalid status code of 500.',
+            logger.infoLogs.single.error.toString(),
+            contains('The request returned an invalid status code of 500.'),
           );
         });
       });

@@ -1,4 +1,5 @@
-import 'package:test_track/src/networking/http_client.dart';
+import 'package:sturdy_http/sturdy_http.dart';
+import 'package:test_track/src/networking/extras.dart';
 import 'package:test_track/test_track.dart';
 
 /// {@template get_visitor_config}
@@ -12,16 +13,16 @@ import 'package:test_track/test_track.dart';
 /// [AnalyticsProvider.identify] will be invoked with the
 /// [Visitor] id from the [AppVisitorConfig].
 ///
-/// If the fetch is not successful, a DioError will be thrown
+/// If the fetch is not successful, a [Exception] will be thrown
 /// {@endtemplate}
 class GetVisitorConfig {
-  final HttpClient _client;
+  final SturdyHttp _client;
   final AnalyticsProvider _analyticsProvider;
   final DataStorageProvider _dataStorageProvider;
 
   /// {@macro get_visitor_config}
   GetVisitorConfig({
-    required HttpClient client,
+    required SturdyHttp client,
     required AnalyticsProvider analyticsProvider,
     required DataStorageProvider dataStorageProvider,
   })  : _client = client,
@@ -33,11 +34,19 @@ class GetVisitorConfig {
     required String visitorId,
     required AppVersionBuild appVersionBuild,
   }) async {
-    final response = await _client.get<Map<String, dynamic>>(
-      '/api/v4/apps/${appVersionBuild.appName}/versions/${appVersionBuild.version}/builds/${appVersionBuild.buildTimestamp}/visitors/$visitorId/config',
+    final appVisitorConfig = await _client.execute<Json, AppVisitorConfig>(
+      IdempotentGetRequest(
+        '/api/v4/apps/${appVersionBuild.appName}/versions/'
+        '${appVersionBuild.version}/builds/'
+        '${appVersionBuild.buildTimestamp}/visitors/$visitorId/config',
+      ),
+      onResponse: (r) {
+        return r.maybeWhen(
+          ok: (json) => AppVisitorConfig.fromJson(json),
+          orElse: () => throw Exception(r.toString()),
+        );
+      },
     );
-
-    final appVisitorConfig = AppVisitorConfig.fromJson(response.data!);
 
     await _dataStorageProvider.storeVisitor(appVisitorConfig.visitor);
     await _dataStorageProvider

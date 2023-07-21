@@ -10,8 +10,8 @@ void main() {
           () {
         test('it returns true', () {
           final subject = RetryOptions(attempts: 2);
-          final error = DioError(
-            type: DioErrorType.connectionTimeout,
+          final error = DioException(
+            type: DioExceptionType.connectionTimeout,
             requestOptions: RequestOptions(path: ''),
           );
 
@@ -24,8 +24,8 @@ void main() {
           () {
         test('it returns true', () {
           final subject = RetryOptions(attempts: 2);
-          final error = DioError(
-            type: DioErrorType.receiveTimeout,
+          final error = DioException(
+            type: DioExceptionType.receiveTimeout,
             requestOptions: RequestOptions(path: ''),
           );
 
@@ -38,8 +38,8 @@ void main() {
           () {
         test('it returns true', () {
           final subject = RetryOptions(attempts: 2);
-          final error = DioError(
-            type: DioErrorType.receiveTimeout,
+          final error = DioException(
+            type: DioExceptionType.receiveTimeout,
             requestOptions: RequestOptions(path: ''),
           );
 
@@ -50,8 +50,8 @@ void main() {
       group('when retries is equal to 0', () {
         test('it returns false', () {
           final subject = RetryOptions(attempts: 0);
-          final error = DioError(
-            type: DioErrorType.connectionTimeout,
+          final error = DioException(
+            type: DioExceptionType.connectionTimeout,
             requestOptions: RequestOptions(path: ''),
           );
 
@@ -62,8 +62,8 @@ void main() {
       group('when error type is not CONNECT_TIMEOUT or RECEIVE_TIMEOUT', () {
         test('it returns false', () {
           final subject = RetryOptions(attempts: 2);
-          final error = DioError(
-            type: DioErrorType.cancel,
+          final error = DioException(
+            type: DioExceptionType.cancel,
             requestOptions: RequestOptions(path: ''),
           );
 

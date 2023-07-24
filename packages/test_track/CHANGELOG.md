@@ -1,3 +1,10 @@
+## 0.1.1
+* chore: migrate to `sturdy_http` by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/38
+* chore: tweak codeowners by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/39
+* feat: add systomProxyGetter parameter to allow for proxying requests by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/40
+
+**Full Changelog**: https://github.com/Betterment/test_track_dart_client/compare/v0.1.0...v0.1.1
+
 ## 0.1.0
 * feat: add ability to override visitor id to preserve id across organic installs by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/36
 

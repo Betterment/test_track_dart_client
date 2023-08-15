@@ -65,9 +65,7 @@ void main() {
         }
 
         group('and the retry request succeeds', () {
-          test(
-              'it retries the request with dio and returns the successful response',
-              () async {
+          test('it retries the request with dio and returns the successful response', () async {
             late final Response<dynamic> response;
             final handler = FakeErrorInterceptorHandler(
               onResolveInvoked: (res) => response = res,

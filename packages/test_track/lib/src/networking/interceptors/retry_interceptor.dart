@@ -26,17 +26,16 @@ class RetryInterceptor extends Interceptor {
 
   @override
   Future<void> onError(
-      DioException err, ErrorInterceptorHandler handler) async {
-    var extra =
-        RetryOptions.fromRequestOptions(err.requestOptions) ?? _retryOptions;
-    final isIdempotent =
-        err.requestOptions.extra[isIdempotentOptionsKey] as bool? ?? false;
+    DioException err,
+    ErrorInterceptorHandler handler,
+  ) async {
+    var extra = RetryOptions.fromRequestOptions(err.requestOptions) ?? _retryOptions;
+    final isIdempotent = err.requestOptions.extra[isIdempotentOptionsKey] as bool? ?? false;
     final originalMethod = err.requestOptions.method;
     final capitalizedMethod = StringBuffer()
       ..write(originalMethod.substring(0, 1).toUpperCase())
       ..write(originalMethod.substring(1).toLowerCase());
-    final requestType =
-        NetworkRequestType.values.byName(capitalizedMethod.toString());
+    final requestType = NetworkRequestType.values.byName(capitalizedMethod.toString());
 
     if (extra.shouldRetry(err, isIdempotent: isIdempotent)) {
       if (extra.retryInterval.inMilliseconds > 0) {
@@ -98,8 +97,8 @@ class RetryInterceptor extends Interceptor {
       } on DioException catch (err) {
         return super.onError(err, handler);
       }
+    } else {
+      super.onError(err, handler);
     }
-
-    super.onError(err, handler);
   }
 }

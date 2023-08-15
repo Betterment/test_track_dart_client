@@ -22,6 +22,5 @@ class FakeErrorInterceptorHandler extends ErrorInterceptorHandler {
   @override
   void resolve(Response<dynamic> response) {
     _onResolveInvoked?.call(response);
-    super.resolve(response);
   }
 }

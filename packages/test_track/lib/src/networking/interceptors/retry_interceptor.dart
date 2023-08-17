@@ -29,16 +29,13 @@ class RetryInterceptor extends Interceptor {
     DioException err,
     ErrorInterceptorHandler handler,
   ) async {
-    var extra =
-        RetryOptions.fromRequestOptions(err.requestOptions) ?? _retryOptions;
-    final isIdempotent =
-        err.requestOptions.extra[isIdempotentOptionsKey] as bool? ?? false;
+    var extra = RetryOptions.fromRequestOptions(err.requestOptions) ?? _retryOptions;
+    final isIdempotent = err.requestOptions.extra[isIdempotentOptionsKey] as bool? ?? false;
     final originalMethod = err.requestOptions.method;
     final capitalizedMethod = StringBuffer()
       ..write(originalMethod.substring(0, 1).toUpperCase())
       ..write(originalMethod.substring(1).toLowerCase());
-    final requestType =
-        NetworkRequestType.values.byName(capitalizedMethod.toString());
+    final requestType = NetworkRequestType.values.byName(capitalizedMethod.toString());
 
     if (extra.shouldRetry(err, isIdempotent: isIdempotent)) {
       if (extra.retryInterval.inMilliseconds > 0) {
@@ -51,18 +48,17 @@ class RetryInterceptor extends Interceptor {
         ..addAll(
           <String, dynamic>{isIdempotentOptionsKey: isIdempotent},
         );
-
+      final retry = RawRequest(
+        err.requestOptions.path,
+        type: requestType,
+        cancelToken: err.requestOptions.cancelToken,
+        data: NetworkRequestBody.raw(err.requestOptions.data),
+        onReceiveProgress: err.requestOptions.onReceiveProgress,
+        onSendProgress: err.requestOptions.onSendProgress,
+        queryParameters: err.requestOptions.queryParameters,
+        options: Options(extra: extraOptions),
+      );
       try {
-        final retry = RawRequest(
-          err.requestOptions.path,
-          type: requestType,
-          cancelToken: err.requestOptions.cancelToken,
-          data: NetworkRequestBody.raw(err.requestOptions.data),
-          onReceiveProgress: err.requestOptions.onReceiveProgress,
-          onSendProgress: err.requestOptions.onSendProgress,
-          queryParameters: err.requestOptions.queryParameters,
-          options: Options(extra: extraOptions),
-        );
         await _clientGetter().execute<dynamic, void>(
           retry,
           onResponse: (r) {
@@ -97,8 +93,13 @@ class RetryInterceptor extends Interceptor {
             );
           },
         );
-      } on DioException catch (err) {
-        return super.onError(err, handler);
+      } on DioException catch (dioError) {
+        return super.onError(dioError, handler);
+      } on Exception {
+        return super.onError(
+          DioException(requestOptions: err.requestOptions, error: err),
+          handler,
+        );
       }
     } else {
       super.onError(err, handler);

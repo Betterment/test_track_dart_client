@@ -1,3 +1,9 @@
+## 0..1
+* fix: avoid calling handler.next more than once in RetryInterceptor by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/42
+
+
+**Full Changelog**: https://github.com/Betterment/test_track_dart_client/compare/v0.1.1...v0.1.2
+
 ## 0.1.1
 * chore: migrate to `sturdy_http` by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/38
 * chore: tweak codeowners by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/39

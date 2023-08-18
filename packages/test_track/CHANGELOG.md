@@ -1,4 +1,4 @@
-## 0..1
+## 0.1.2
 * fix: avoid calling handler.next more than once in RetryInterceptor by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/42
 
 

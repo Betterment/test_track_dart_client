@@ -5,6 +5,8 @@ class FakeSturdyHttp extends SturdyHttp {
   FakeSturdyHttp(
     Charlatan charlatan,
   ) : super(
-            baseUrl: 'http://localhost',
-            customAdapter: charlatan.toFakeHttpClientAdapter());
+          baseUrl: 'http://localhost',
+          customAdapter: charlatan.toFakeHttpClientAdapter(),
+          inferContentType: false,
+        );
 }

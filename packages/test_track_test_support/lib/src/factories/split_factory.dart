@@ -11,9 +11,9 @@ import 'package:test_track_test_support/test_track_test_support.dart';
 class SplitFactory {
   /// {@macro split_factory}
   static Split build({bool? isFeatureGate}) {
-    final _isFeatureGate = isFeatureGate ?? Random().nextBool();
+    final isFeatureGateResolved = isFeatureGate ?? Random().nextBool();
     final variants = () {
-      if (_isFeatureGate) {
+      if (isFeatureGateResolved) {
         return const [
           Variant(name: 'true', weight: 50),
           Variant(name: 'false', weight: 50),
@@ -33,11 +33,11 @@ class SplitFactory {
     }();
 
     return Split(
-      name: _isFeatureGate
+      name: isFeatureGateResolved
           ? 'split-${randomAlphaNumeric(10)}_enabled'
           : 'split-${randomAlphaNumeric(10)}_experiment',
       variants: variants,
-      isFeatureGate: _isFeatureGate,
+      isFeatureGate: isFeatureGateResolved,
     );
   }
 }

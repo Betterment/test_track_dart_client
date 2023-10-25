@@ -10,9 +10,8 @@ const isIdempotentOptionsKey = 'is_idempotent';
 /// A convenience class for producing a [GetRequest] that contains the
 /// [isIdempotentOptionsKey]
 class IdempotentGetRequest extends GetRequest {
-  IdempotentGetRequest(String path)
+  IdempotentGetRequest(super.path)
       : super(
-          path,
           options: Options(
             extra: {
               isIdempotentOptionsKey: true,
@@ -25,11 +24,9 @@ class IdempotentGetRequest extends GetRequest {
 /// [isIdempotentOptionsKey]
 class IdempotentPostRequest extends PostRequest {
   IdempotentPostRequest(
-    String path, {
-    required NetworkRequestBody data,
+    super.path, {
+    required super.data,
   }) : super(
-          path,
-          data: data,
           options: Options(
             extra: {
               isIdempotentOptionsKey: true,

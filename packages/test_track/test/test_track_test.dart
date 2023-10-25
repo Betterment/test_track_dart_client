@@ -223,12 +223,15 @@ void main() {
       setUp(() async {
         charlatan.whenPost(
           '/api/v4/apps/${appVersionBuild.appName}/versions/${appVersionBuild.version}/builds/${appVersionBuild.buildTimestamp}/identifier',
-          (request) => appVisitorConfig
-              .copyWith(
-                visitor: appVisitorConfig.visitor.copyWith(id: 'post-login-id'),
-                splits: SplitRegistry.empty().splits,
-              )
-              .toJson(),
+          (request) => CharlatanHttpResponse(
+            body: appVisitorConfig
+                .copyWith(
+                  visitor:
+                      appVisitorConfig.visitor.copyWith(id: 'post-login-id'),
+                  splits: SplitRegistry.empty().splits,
+                )
+                .toJson(),
+          ),
         );
         subject = await buildSubject();
       });
@@ -240,7 +243,7 @@ void main() {
           '/api/v4/apps/${appVersionBuild.appName}/versions/${appVersionBuild.version}/builds/${appVersionBuild.buildTimestamp}/identifier',
           (request) {
             linkIdentifierCalled = true;
-            return appVisitorConfig.toJson();
+            return CharlatanHttpResponse(body: appVisitorConfig.toJson());
           },
         );
 
@@ -275,8 +278,9 @@ void main() {
         test('it completes normally and logs an info', () async {
           charlatan.whenPost(
             '/api/v4/apps/${appVersionBuild.appName}/versions/${appVersionBuild.version}/builds/${appVersionBuild.buildTimestamp}/identifier',
-            (request) => null,
-            statusCode: 500,
+            (request) => CharlatanHttpResponse(
+              statusCode: 500,
+            ),
           );
 
           final result = subject.login(identifierType: 'foo', value: '123');

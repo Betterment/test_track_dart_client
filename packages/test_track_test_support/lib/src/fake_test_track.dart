@@ -122,13 +122,11 @@ class FakeTestTrack implements TestTrack {
   }) async {
     _visitor = _visitor.copyWith(assignments: [
       ..._visitor.assignments,
-      ...assignmentOverrides
-          .map((e) => Assignment(
-                splitName: e.splitName,
-                variant: e.variant,
-                context: e.context,
-              ))
-          .toList(),
+      ...assignmentOverrides.map((e) => Assignment(
+            splitName: e.splitName,
+            variant: e.variant,
+            context: e.context,
+          )),
     ]);
   }
 }

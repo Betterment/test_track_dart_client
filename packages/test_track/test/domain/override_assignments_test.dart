@@ -43,10 +43,10 @@ void main() {
             '/api/v2/visitors/$visitorId/assignment_overrides',
             (request) {
               final data = request.body as Map<String, Object?>?;
-              return assignmentsFromRequest =
+              assignmentsFromRequest =
                   data?['assignments'] as List<Map<String, Object?>>?;
+              return CharlatanHttpResponse(statusCode: 204);
             },
-            statusCode: 204,
           )
           ..whenGetVisitorConfig(
             response: AppVisitorConfig(

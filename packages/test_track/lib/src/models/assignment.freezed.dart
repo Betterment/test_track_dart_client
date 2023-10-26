@@ -74,22 +74,22 @@ class _$AssignmentCopyWithImpl<$Res, $Val extends Assignment>
 }
 
 /// @nodoc
-abstract class _$$_AssignmentCopyWith<$Res>
+abstract class _$$AssignmentImplCopyWith<$Res>
     implements $AssignmentCopyWith<$Res> {
-  factory _$$_AssignmentCopyWith(
-          _$_Assignment value, $Res Function(_$_Assignment) then) =
-      __$$_AssignmentCopyWithImpl<$Res>;
+  factory _$$AssignmentImplCopyWith(
+          _$AssignmentImpl value, $Res Function(_$AssignmentImpl) then) =
+      __$$AssignmentImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String splitName, String variant, String context});
 }
 
 /// @nodoc
-class __$$_AssignmentCopyWithImpl<$Res>
-    extends _$AssignmentCopyWithImpl<$Res, _$_Assignment>
-    implements _$$_AssignmentCopyWith<$Res> {
-  __$$_AssignmentCopyWithImpl(
-      _$_Assignment _value, $Res Function(_$_Assignment) _then)
+class __$$AssignmentImplCopyWithImpl<$Res>
+    extends _$AssignmentCopyWithImpl<$Res, _$AssignmentImpl>
+    implements _$$AssignmentImplCopyWith<$Res> {
+  __$$AssignmentImplCopyWithImpl(
+      _$AssignmentImpl _value, $Res Function(_$AssignmentImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -99,7 +99,7 @@ class __$$_AssignmentCopyWithImpl<$Res>
     Object? variant = null,
     Object? context = null,
   }) {
-    return _then(_$_Assignment(
+    return _then(_$AssignmentImpl(
       splitName: null == splitName
           ? _value.splitName
           : splitName // ignore: cast_nullable_to_non_nullable
@@ -118,12 +118,12 @@ class __$$_AssignmentCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Assignment implements _Assignment {
-  const _$_Assignment(
+class _$AssignmentImpl implements _Assignment {
+  const _$AssignmentImpl(
       {required this.splitName, required this.variant, this.context = ''});
 
-  factory _$_Assignment.fromJson(Map<String, dynamic> json) =>
-      _$$_AssignmentFromJson(json);
+  factory _$AssignmentImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AssignmentImplFromJson(json);
 
   @override
   final String splitName;
@@ -142,7 +142,7 @@ class _$_Assignment implements _Assignment {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Assignment &&
+            other is _$AssignmentImpl &&
             (identical(other.splitName, splitName) ||
                 other.splitName == splitName) &&
             (identical(other.variant, variant) || other.variant == variant) &&
@@ -156,12 +156,12 @@ class _$_Assignment implements _Assignment {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AssignmentCopyWith<_$_Assignment> get copyWith =>
-      __$$_AssignmentCopyWithImpl<_$_Assignment>(this, _$identity);
+  _$$AssignmentImplCopyWith<_$AssignmentImpl> get copyWith =>
+      __$$AssignmentImplCopyWithImpl<_$AssignmentImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AssignmentToJson(
+    return _$$AssignmentImplToJson(
       this,
     );
   }
@@ -171,10 +171,10 @@ abstract class _Assignment implements Assignment {
   const factory _Assignment(
       {required final String splitName,
       required final String variant,
-      final String context}) = _$_Assignment;
+      final String context}) = _$AssignmentImpl;
 
   factory _Assignment.fromJson(Map<String, dynamic> json) =
-      _$_Assignment.fromJson;
+      _$AssignmentImpl.fromJson;
 
   @override
   String get splitName;
@@ -184,6 +184,6 @@ abstract class _Assignment implements Assignment {
   String get context;
   @override
   @JsonKey(ignore: true)
-  _$$_AssignmentCopyWith<_$_Assignment> get copyWith =>
+  _$$AssignmentImplCopyWith<_$AssignmentImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

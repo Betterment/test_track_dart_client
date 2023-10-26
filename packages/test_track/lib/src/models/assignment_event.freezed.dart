@@ -74,22 +74,22 @@ class _$AssignmentEventCopyWithImpl<$Res, $Val extends AssignmentEvent>
 }
 
 /// @nodoc
-abstract class _$$_AssignmentEventCopyWith<$Res>
+abstract class _$$AssignmentEventImplCopyWith<$Res>
     implements $AssignmentEventCopyWith<$Res> {
-  factory _$$_AssignmentEventCopyWith(
-          _$_AssignmentEvent value, $Res Function(_$_AssignmentEvent) then) =
-      __$$_AssignmentEventCopyWithImpl<$Res>;
+  factory _$$AssignmentEventImplCopyWith(_$AssignmentEventImpl value,
+          $Res Function(_$AssignmentEventImpl) then) =
+      __$$AssignmentEventImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String visitorId, String splitName, String context});
 }
 
 /// @nodoc
-class __$$_AssignmentEventCopyWithImpl<$Res>
-    extends _$AssignmentEventCopyWithImpl<$Res, _$_AssignmentEvent>
-    implements _$$_AssignmentEventCopyWith<$Res> {
-  __$$_AssignmentEventCopyWithImpl(
-      _$_AssignmentEvent _value, $Res Function(_$_AssignmentEvent) _then)
+class __$$AssignmentEventImplCopyWithImpl<$Res>
+    extends _$AssignmentEventCopyWithImpl<$Res, _$AssignmentEventImpl>
+    implements _$$AssignmentEventImplCopyWith<$Res> {
+  __$$AssignmentEventImplCopyWithImpl(
+      _$AssignmentEventImpl _value, $Res Function(_$AssignmentEventImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -99,7 +99,7 @@ class __$$_AssignmentEventCopyWithImpl<$Res>
     Object? splitName = null,
     Object? context = null,
   }) {
-    return _then(_$_AssignmentEvent(
+    return _then(_$AssignmentEventImpl(
       visitorId: null == visitorId
           ? _value.visitorId
           : visitorId // ignore: cast_nullable_to_non_nullable
@@ -118,14 +118,14 @@ class __$$_AssignmentEventCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AssignmentEvent implements _AssignmentEvent {
-  const _$_AssignmentEvent(
+class _$AssignmentEventImpl implements _AssignmentEvent {
+  const _$AssignmentEventImpl(
       {required this.visitorId,
       required this.splitName,
       required this.context});
 
-  factory _$_AssignmentEvent.fromJson(Map<String, dynamic> json) =>
-      _$$_AssignmentEventFromJson(json);
+  factory _$AssignmentEventImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AssignmentEventImplFromJson(json);
 
   @override
   final String visitorId;
@@ -143,7 +143,7 @@ class _$_AssignmentEvent implements _AssignmentEvent {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AssignmentEvent &&
+            other is _$AssignmentEventImpl &&
             (identical(other.visitorId, visitorId) ||
                 other.visitorId == visitorId) &&
             (identical(other.splitName, splitName) ||
@@ -158,12 +158,13 @@ class _$_AssignmentEvent implements _AssignmentEvent {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AssignmentEventCopyWith<_$_AssignmentEvent> get copyWith =>
-      __$$_AssignmentEventCopyWithImpl<_$_AssignmentEvent>(this, _$identity);
+  _$$AssignmentEventImplCopyWith<_$AssignmentEventImpl> get copyWith =>
+      __$$AssignmentEventImplCopyWithImpl<_$AssignmentEventImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AssignmentEventToJson(
+    return _$$AssignmentEventImplToJson(
       this,
     );
   }
@@ -173,10 +174,10 @@ abstract class _AssignmentEvent implements AssignmentEvent {
   const factory _AssignmentEvent(
       {required final String visitorId,
       required final String splitName,
-      required final String context}) = _$_AssignmentEvent;
+      required final String context}) = _$AssignmentEventImpl;
 
   factory _AssignmentEvent.fromJson(Map<String, dynamic> json) =
-      _$_AssignmentEvent.fromJson;
+      _$AssignmentEventImpl.fromJson;
 
   @override
   String get visitorId;
@@ -186,6 +187,6 @@ abstract class _AssignmentEvent implements AssignmentEvent {
   String get context;
   @override
   @JsonKey(ignore: true)
-  _$$_AssignmentEventCopyWith<_$_AssignmentEvent> get copyWith =>
+  _$$AssignmentEventImplCopyWith<_$AssignmentEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -15,7 +15,8 @@ extension FakeHttpDefaults on Charlatan {
   void withDefaults() {
     this
       ..whenGetVisitorConfig(response: AppVisitorConfigFactory.build())
-      ..whenPost('/api/v1/assignment_event', (request) => null);
+      ..whenPost(
+          '/api/v1/assignment_event', (request) => CharlatanHttpResponse());
   }
 
   /// Convenience method to set the returned
@@ -26,7 +27,9 @@ extension FakeHttpDefaults on Charlatan {
   }) {
     whenGet(
       '/api/v4/apps/{appName}/versions/{version}/builds/{buildTimestamp}/visitors/{visitorId}/config',
-      (request) => response,
+      (request) => CharlatanHttpResponse(
+        body: response.toJson(),
+      ),
     );
   }
 

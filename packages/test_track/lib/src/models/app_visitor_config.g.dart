@@ -8,12 +8,13 @@ part of 'app_visitor_config.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AppVisitorConfig _$$_AppVisitorConfigFromJson(Map<String, dynamic> json) =>
+_$AppVisitorConfigImpl _$$AppVisitorConfigImplFromJson(
+        Map<String, dynamic> json) =>
     $checkedCreate(
-      r'_$_AppVisitorConfig',
+      r'_$AppVisitorConfigImpl',
       json,
       ($checkedConvert) {
-        final val = _$_AppVisitorConfig(
+        final val = _$AppVisitorConfigImpl(
           splits: $checkedConvert(
               'splits',
               (v) => (v as List<dynamic>)
@@ -26,7 +27,8 @@ _$_AppVisitorConfig _$$_AppVisitorConfigFromJson(Map<String, dynamic> json) =>
       },
     );
 
-Map<String, dynamic> _$$_AppVisitorConfigToJson(_$_AppVisitorConfig instance) =>
+Map<String, dynamic> _$$AppVisitorConfigImplToJson(
+        _$AppVisitorConfigImpl instance) =>
     <String, dynamic>{
       'splits': instance.splits.map((e) => e.toJson()).toList(),
       'visitor': instance.visitor.toJson(),

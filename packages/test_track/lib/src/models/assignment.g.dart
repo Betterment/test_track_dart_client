@@ -8,12 +8,12 @@ part of 'assignment.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Assignment _$$_AssignmentFromJson(Map<String, dynamic> json) =>
+_$AssignmentImpl _$$AssignmentImplFromJson(Map<String, dynamic> json) =>
     $checkedCreate(
-      r'_$_Assignment',
+      r'_$AssignmentImpl',
       json,
       ($checkedConvert) {
-        final val = _$_Assignment(
+        final val = _$AssignmentImpl(
           splitName: $checkedConvert('split_name', (v) => v as String),
           variant: $checkedConvert('variant', (v) => v as String),
           context: $checkedConvert('context', (v) => v as String? ?? ''),
@@ -23,7 +23,7 @@ _$_Assignment _$$_AssignmentFromJson(Map<String, dynamic> json) =>
       fieldKeyMap: const {'splitName': 'split_name'},
     );
 
-Map<String, dynamic> _$$_AssignmentToJson(_$_Assignment instance) =>
+Map<String, dynamic> _$$AssignmentImplToJson(_$AssignmentImpl instance) =>
     <String, dynamic>{
       'split_name': instance.splitName,
       'variant': instance.variant,

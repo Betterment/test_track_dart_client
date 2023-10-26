@@ -8,11 +8,12 @@ part of 'variant.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Variant _$$_VariantFromJson(Map<String, dynamic> json) => $checkedCreate(
-      r'_$_Variant',
+_$VariantImpl _$$VariantImplFromJson(Map<String, dynamic> json) =>
+    $checkedCreate(
+      r'_$VariantImpl',
       json,
       ($checkedConvert) {
-        final val = _$_Variant(
+        final val = _$VariantImpl(
           name: $checkedConvert('name', (v) => v as String),
           weight: $checkedConvert('weight', (v) => v as int),
         );
@@ -20,7 +21,7 @@ _$_Variant _$$_VariantFromJson(Map<String, dynamic> json) => $checkedCreate(
       },
     );
 
-Map<String, dynamic> _$$_VariantToJson(_$_Variant instance) =>
+Map<String, dynamic> _$$VariantImplToJson(_$VariantImpl instance) =>
     <String, dynamic>{
       'name': instance.name,
       'weight': instance.weight,

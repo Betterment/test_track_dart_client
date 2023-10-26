@@ -51,7 +51,7 @@ void main() {
               visitorIdFromRequest = data?['visitor_id'] as String?;
               isIdempotent =
                   request.requestOptions.extra['is_idempotent'] as bool;
-              return appVisitorConfig.toJson();
+              return CharlatanHttpResponse(body: appVisitorConfig.toJson());
             },
           );
         });

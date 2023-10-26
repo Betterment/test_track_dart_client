@@ -78,11 +78,11 @@ class _$AppVisitorConfigCopyWithImpl<$Res, $Val extends AppVisitorConfig>
 }
 
 /// @nodoc
-abstract class _$$_AppVisitorConfigCopyWith<$Res>
+abstract class _$$AppVisitorConfigImplCopyWith<$Res>
     implements $AppVisitorConfigCopyWith<$Res> {
-  factory _$$_AppVisitorConfigCopyWith(
-          _$_AppVisitorConfig value, $Res Function(_$_AppVisitorConfig) then) =
-      __$$_AppVisitorConfigCopyWithImpl<$Res>;
+  factory _$$AppVisitorConfigImplCopyWith(_$AppVisitorConfigImpl value,
+          $Res Function(_$AppVisitorConfigImpl) then) =
+      __$$AppVisitorConfigImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<Split> splits, Visitor visitor});
@@ -92,11 +92,11 @@ abstract class _$$_AppVisitorConfigCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_AppVisitorConfigCopyWithImpl<$Res>
-    extends _$AppVisitorConfigCopyWithImpl<$Res, _$_AppVisitorConfig>
-    implements _$$_AppVisitorConfigCopyWith<$Res> {
-  __$$_AppVisitorConfigCopyWithImpl(
-      _$_AppVisitorConfig _value, $Res Function(_$_AppVisitorConfig) _then)
+class __$$AppVisitorConfigImplCopyWithImpl<$Res>
+    extends _$AppVisitorConfigCopyWithImpl<$Res, _$AppVisitorConfigImpl>
+    implements _$$AppVisitorConfigImplCopyWith<$Res> {
+  __$$AppVisitorConfigImplCopyWithImpl(_$AppVisitorConfigImpl _value,
+      $Res Function(_$AppVisitorConfigImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -105,7 +105,7 @@ class __$$_AppVisitorConfigCopyWithImpl<$Res>
     Object? splits = null,
     Object? visitor = null,
   }) {
-    return _then(_$_AppVisitorConfig(
+    return _then(_$AppVisitorConfigImpl(
       splits: null == splits
           ? _value._splits
           : splits // ignore: cast_nullable_to_non_nullable
@@ -120,13 +120,13 @@ class __$$_AppVisitorConfigCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_AppVisitorConfig implements _AppVisitorConfig {
-  const _$_AppVisitorConfig(
+class _$AppVisitorConfigImpl implements _AppVisitorConfig {
+  const _$AppVisitorConfigImpl(
       {required final List<Split> splits, required this.visitor})
       : _splits = splits;
 
-  factory _$_AppVisitorConfig.fromJson(Map<String, dynamic> json) =>
-      _$$_AppVisitorConfigFromJson(json);
+  factory _$AppVisitorConfigImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AppVisitorConfigImplFromJson(json);
 
   final List<Split> _splits;
   @override
@@ -148,7 +148,7 @@ class _$_AppVisitorConfig implements _AppVisitorConfig {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AppVisitorConfig &&
+            other is _$AppVisitorConfigImpl &&
             const DeepCollectionEquality().equals(other._splits, _splits) &&
             (identical(other.visitor, visitor) || other.visitor == visitor));
   }
@@ -161,12 +161,13 @@ class _$_AppVisitorConfig implements _AppVisitorConfig {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AppVisitorConfigCopyWith<_$_AppVisitorConfig> get copyWith =>
-      __$$_AppVisitorConfigCopyWithImpl<_$_AppVisitorConfig>(this, _$identity);
+  _$$AppVisitorConfigImplCopyWith<_$AppVisitorConfigImpl> get copyWith =>
+      __$$AppVisitorConfigImplCopyWithImpl<_$AppVisitorConfigImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AppVisitorConfigToJson(
+    return _$$AppVisitorConfigImplToJson(
       this,
     );
   }
@@ -175,10 +176,10 @@ class _$_AppVisitorConfig implements _AppVisitorConfig {
 abstract class _AppVisitorConfig implements AppVisitorConfig {
   const factory _AppVisitorConfig(
       {required final List<Split> splits,
-      required final Visitor visitor}) = _$_AppVisitorConfig;
+      required final Visitor visitor}) = _$AppVisitorConfigImpl;
 
   factory _AppVisitorConfig.fromJson(Map<String, dynamic> json) =
-      _$_AppVisitorConfig.fromJson;
+      _$AppVisitorConfigImpl.fromJson;
 
   @override
   List<Split> get splits;
@@ -186,6 +187,6 @@ abstract class _AppVisitorConfig implements AppVisitorConfig {
   Visitor get visitor;
   @override
   @JsonKey(ignore: true)
-  _$$_AppVisitorConfigCopyWith<_$_AppVisitorConfig> get copyWith =>
+  _$$AppVisitorConfigImplCopyWith<_$AppVisitorConfigImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

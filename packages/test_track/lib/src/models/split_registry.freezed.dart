@@ -62,22 +62,22 @@ class _$SplitRegistryCopyWithImpl<$Res, $Val extends SplitRegistry>
 }
 
 /// @nodoc
-abstract class _$$_SplitRegistryCopyWith<$Res>
+abstract class _$$SplitRegistryImplCopyWith<$Res>
     implements $SplitRegistryCopyWith<$Res> {
-  factory _$$_SplitRegistryCopyWith(
-          _$_SplitRegistry value, $Res Function(_$_SplitRegistry) then) =
-      __$$_SplitRegistryCopyWithImpl<$Res>;
+  factory _$$SplitRegistryImplCopyWith(
+          _$SplitRegistryImpl value, $Res Function(_$SplitRegistryImpl) then) =
+      __$$SplitRegistryImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<Split> splits});
 }
 
 /// @nodoc
-class __$$_SplitRegistryCopyWithImpl<$Res>
-    extends _$SplitRegistryCopyWithImpl<$Res, _$_SplitRegistry>
-    implements _$$_SplitRegistryCopyWith<$Res> {
-  __$$_SplitRegistryCopyWithImpl(
-      _$_SplitRegistry _value, $Res Function(_$_SplitRegistry) _then)
+class __$$SplitRegistryImplCopyWithImpl<$Res>
+    extends _$SplitRegistryCopyWithImpl<$Res, _$SplitRegistryImpl>
+    implements _$$SplitRegistryImplCopyWith<$Res> {
+  __$$SplitRegistryImplCopyWithImpl(
+      _$SplitRegistryImpl _value, $Res Function(_$SplitRegistryImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -85,7 +85,7 @@ class __$$_SplitRegistryCopyWithImpl<$Res>
   $Res call({
     Object? splits = null,
   }) {
-    return _then(_$_SplitRegistry(
+    return _then(_$SplitRegistryImpl(
       splits: null == splits
           ? _value._splits
           : splits // ignore: cast_nullable_to_non_nullable
@@ -96,11 +96,11 @@ class __$$_SplitRegistryCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SplitRegistry implements _SplitRegistry {
-  _$_SplitRegistry({required final List<Split> splits}) : _splits = splits;
+class _$SplitRegistryImpl implements _SplitRegistry {
+  _$SplitRegistryImpl({required final List<Split> splits}) : _splits = splits;
 
-  factory _$_SplitRegistry.fromJson(Map<String, dynamic> json) =>
-      _$$_SplitRegistryFromJson(json);
+  factory _$SplitRegistryImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SplitRegistryImplFromJson(json);
 
   final List<Split> _splits;
   @override
@@ -119,7 +119,7 @@ class _$_SplitRegistry implements _SplitRegistry {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SplitRegistry &&
+            other is _$SplitRegistryImpl &&
             const DeepCollectionEquality().equals(other._splits, _splits));
   }
 
@@ -131,12 +131,12 @@ class _$_SplitRegistry implements _SplitRegistry {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SplitRegistryCopyWith<_$_SplitRegistry> get copyWith =>
-      __$$_SplitRegistryCopyWithImpl<_$_SplitRegistry>(this, _$identity);
+  _$$SplitRegistryImplCopyWith<_$SplitRegistryImpl> get copyWith =>
+      __$$SplitRegistryImplCopyWithImpl<_$SplitRegistryImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SplitRegistryToJson(
+    return _$$SplitRegistryImplToJson(
       this,
     );
   }
@@ -144,15 +144,15 @@ class _$_SplitRegistry implements _SplitRegistry {
 
 abstract class _SplitRegistry implements SplitRegistry {
   factory _SplitRegistry({required final List<Split> splits}) =
-      _$_SplitRegistry;
+      _$SplitRegistryImpl;
 
   factory _SplitRegistry.fromJson(Map<String, dynamic> json) =
-      _$_SplitRegistry.fromJson;
+      _$SplitRegistryImpl.fromJson;
 
   @override
   List<Split> get splits;
   @override
   @JsonKey(ignore: true)
-  _$$_SplitRegistryCopyWith<_$_SplitRegistry> get copyWith =>
+  _$$SplitRegistryImplCopyWith<_$SplitRegistryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -74,22 +74,22 @@ class _$AppVersionBuildCopyWithImpl<$Res, $Val extends AppVersionBuild>
 }
 
 /// @nodoc
-abstract class _$$_AppVersionBuildCopyWith<$Res>
+abstract class _$$AppVersionBuildImplCopyWith<$Res>
     implements $AppVersionBuildCopyWith<$Res> {
-  factory _$$_AppVersionBuildCopyWith(
-          _$_AppVersionBuild value, $Res Function(_$_AppVersionBuild) then) =
-      __$$_AppVersionBuildCopyWithImpl<$Res>;
+  factory _$$AppVersionBuildImplCopyWith(_$AppVersionBuildImpl value,
+          $Res Function(_$AppVersionBuildImpl) then) =
+      __$$AppVersionBuildImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String appName, String version, String buildTimestamp});
 }
 
 /// @nodoc
-class __$$_AppVersionBuildCopyWithImpl<$Res>
-    extends _$AppVersionBuildCopyWithImpl<$Res, _$_AppVersionBuild>
-    implements _$$_AppVersionBuildCopyWith<$Res> {
-  __$$_AppVersionBuildCopyWithImpl(
-      _$_AppVersionBuild _value, $Res Function(_$_AppVersionBuild) _then)
+class __$$AppVersionBuildImplCopyWithImpl<$Res>
+    extends _$AppVersionBuildCopyWithImpl<$Res, _$AppVersionBuildImpl>
+    implements _$$AppVersionBuildImplCopyWith<$Res> {
+  __$$AppVersionBuildImplCopyWithImpl(
+      _$AppVersionBuildImpl _value, $Res Function(_$AppVersionBuildImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -99,7 +99,7 @@ class __$$_AppVersionBuildCopyWithImpl<$Res>
     Object? version = null,
     Object? buildTimestamp = null,
   }) {
-    return _then(_$_AppVersionBuild(
+    return _then(_$AppVersionBuildImpl(
       appName: null == appName
           ? _value.appName
           : appName // ignore: cast_nullable_to_non_nullable
@@ -119,14 +119,14 @@ class __$$_AppVersionBuildCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.none)
-class _$_AppVersionBuild implements _AppVersionBuild {
-  const _$_AppVersionBuild(
+class _$AppVersionBuildImpl implements _AppVersionBuild {
+  const _$AppVersionBuildImpl(
       {required this.appName,
       required this.version,
       required this.buildTimestamp});
 
-  factory _$_AppVersionBuild.fromJson(Map<String, dynamic> json) =>
-      _$$_AppVersionBuildFromJson(json);
+  factory _$AppVersionBuildImpl.fromJson(Map<String, dynamic> json) =>
+      _$$AppVersionBuildImplFromJson(json);
 
   @override
   final String appName;
@@ -144,7 +144,7 @@ class _$_AppVersionBuild implements _AppVersionBuild {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_AppVersionBuild &&
+            other is _$AppVersionBuildImpl &&
             (identical(other.appName, appName) || other.appName == appName) &&
             (identical(other.version, version) || other.version == version) &&
             (identical(other.buildTimestamp, buildTimestamp) ||
@@ -159,12 +159,13 @@ class _$_AppVersionBuild implements _AppVersionBuild {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_AppVersionBuildCopyWith<_$_AppVersionBuild> get copyWith =>
-      __$$_AppVersionBuildCopyWithImpl<_$_AppVersionBuild>(this, _$identity);
+  _$$AppVersionBuildImplCopyWith<_$AppVersionBuildImpl> get copyWith =>
+      __$$AppVersionBuildImplCopyWithImpl<_$AppVersionBuildImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_AppVersionBuildToJson(
+    return _$$AppVersionBuildImplToJson(
       this,
     );
   }
@@ -174,10 +175,10 @@ abstract class _AppVersionBuild implements AppVersionBuild {
   const factory _AppVersionBuild(
       {required final String appName,
       required final String version,
-      required final String buildTimestamp}) = _$_AppVersionBuild;
+      required final String buildTimestamp}) = _$AppVersionBuildImpl;
 
   factory _AppVersionBuild.fromJson(Map<String, dynamic> json) =
-      _$_AppVersionBuild.fromJson;
+      _$AppVersionBuildImpl.fromJson;
 
   @override
   String get appName;
@@ -187,6 +188,6 @@ abstract class _AppVersionBuild implements AppVersionBuild {
   String get buildTimestamp;
   @override
   @JsonKey(ignore: true)
-  _$$_AppVersionBuildCopyWith<_$_AppVersionBuild> get copyWith =>
+  _$$AppVersionBuildImplCopyWith<_$AppVersionBuildImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

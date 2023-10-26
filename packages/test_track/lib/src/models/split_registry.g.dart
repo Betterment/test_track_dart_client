@@ -8,12 +8,12 @@ part of 'split_registry.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SplitRegistry _$$_SplitRegistryFromJson(Map<String, dynamic> json) =>
+_$SplitRegistryImpl _$$SplitRegistryImplFromJson(Map<String, dynamic> json) =>
     $checkedCreate(
-      r'_$_SplitRegistry',
+      r'_$SplitRegistryImpl',
       json,
       ($checkedConvert) {
-        final val = _$_SplitRegistry(
+        final val = _$SplitRegistryImpl(
           splits: $checkedConvert(
               'splits',
               (v) => (v as List<dynamic>)
@@ -24,7 +24,7 @@ _$_SplitRegistry _$$_SplitRegistryFromJson(Map<String, dynamic> json) =>
       },
     );
 
-Map<String, dynamic> _$$_SplitRegistryToJson(_$_SplitRegistry instance) =>
+Map<String, dynamic> _$$SplitRegistryImplToJson(_$SplitRegistryImpl instance) =>
     <String, dynamic>{
       'splits': instance.splits.map((e) => e.toJson()).toList(),
     };

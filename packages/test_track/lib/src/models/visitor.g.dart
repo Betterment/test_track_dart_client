@@ -8,11 +8,12 @@ part of 'visitor.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Visitor _$$_VisitorFromJson(Map<String, dynamic> json) => $checkedCreate(
-      r'_$_Visitor',
+_$VisitorImpl _$$VisitorImplFromJson(Map<String, dynamic> json) =>
+    $checkedCreate(
+      r'_$VisitorImpl',
       json,
       ($checkedConvert) {
-        final val = _$_Visitor(
+        final val = _$VisitorImpl(
           assignments: $checkedConvert(
               'assignments',
               (v) => (v as List<dynamic>)
@@ -24,7 +25,7 @@ _$_Visitor _$$_VisitorFromJson(Map<String, dynamic> json) => $checkedCreate(
       },
     );
 
-Map<String, dynamic> _$$_VisitorToJson(_$_Visitor instance) =>
+Map<String, dynamic> _$$VisitorImplToJson(_$VisitorImpl instance) =>
     <String, dynamic>{
       'assignments': instance.assignments.map((e) => e.toJson()).toList(),
       'id': instance.id,

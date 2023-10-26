@@ -66,20 +66,21 @@ class _$VariantCopyWithImpl<$Res, $Val extends Variant>
 }
 
 /// @nodoc
-abstract class _$$_VariantCopyWith<$Res> implements $VariantCopyWith<$Res> {
-  factory _$$_VariantCopyWith(
-          _$_Variant value, $Res Function(_$_Variant) then) =
-      __$$_VariantCopyWithImpl<$Res>;
+abstract class _$$VariantImplCopyWith<$Res> implements $VariantCopyWith<$Res> {
+  factory _$$VariantImplCopyWith(
+          _$VariantImpl value, $Res Function(_$VariantImpl) then) =
+      __$$VariantImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String name, int weight});
 }
 
 /// @nodoc
-class __$$_VariantCopyWithImpl<$Res>
-    extends _$VariantCopyWithImpl<$Res, _$_Variant>
-    implements _$$_VariantCopyWith<$Res> {
-  __$$_VariantCopyWithImpl(_$_Variant _value, $Res Function(_$_Variant) _then)
+class __$$VariantImplCopyWithImpl<$Res>
+    extends _$VariantCopyWithImpl<$Res, _$VariantImpl>
+    implements _$$VariantImplCopyWith<$Res> {
+  __$$VariantImplCopyWithImpl(
+      _$VariantImpl _value, $Res Function(_$VariantImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -88,7 +89,7 @@ class __$$_VariantCopyWithImpl<$Res>
     Object? name = null,
     Object? weight = null,
   }) {
-    return _then(_$_Variant(
+    return _then(_$VariantImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -103,11 +104,11 @@ class __$$_VariantCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Variant implements _Variant {
-  const _$_Variant({required this.name, required this.weight});
+class _$VariantImpl implements _Variant {
+  const _$VariantImpl({required this.name, required this.weight});
 
-  factory _$_Variant.fromJson(Map<String, dynamic> json) =>
-      _$$_VariantFromJson(json);
+  factory _$VariantImpl.fromJson(Map<String, dynamic> json) =>
+      _$$VariantImplFromJson(json);
 
   @override
   final String name;
@@ -123,7 +124,7 @@ class _$_Variant implements _Variant {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Variant &&
+            other is _$VariantImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.weight, weight) || other.weight == weight));
   }
@@ -135,12 +136,12 @@ class _$_Variant implements _Variant {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_VariantCopyWith<_$_Variant> get copyWith =>
-      __$$_VariantCopyWithImpl<_$_Variant>(this, _$identity);
+  _$$VariantImplCopyWith<_$VariantImpl> get copyWith =>
+      __$$VariantImplCopyWithImpl<_$VariantImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_VariantToJson(
+    return _$$VariantImplToJson(
       this,
     );
   }
@@ -148,9 +149,9 @@ class _$_Variant implements _Variant {
 
 abstract class _Variant implements Variant {
   const factory _Variant(
-      {required final String name, required final int weight}) = _$_Variant;
+      {required final String name, required final int weight}) = _$VariantImpl;
 
-  factory _Variant.fromJson(Map<String, dynamic> json) = _$_Variant.fromJson;
+  factory _Variant.fromJson(Map<String, dynamic> json) = _$VariantImpl.fromJson;
 
   @override
   String get name;
@@ -158,6 +159,6 @@ abstract class _Variant implements Variant {
   int get weight;
   @override
   @JsonKey(ignore: true)
-  _$$_VariantCopyWith<_$_Variant> get copyWith =>
+  _$$VariantImplCopyWith<_$VariantImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

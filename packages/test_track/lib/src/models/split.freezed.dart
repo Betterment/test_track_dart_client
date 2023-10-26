@@ -76,9 +76,10 @@ class _$SplitCopyWithImpl<$Res, $Val extends Split>
 }
 
 /// @nodoc
-abstract class _$$_SplitCopyWith<$Res> implements $SplitCopyWith<$Res> {
-  factory _$$_SplitCopyWith(_$_Split value, $Res Function(_$_Split) then) =
-      __$$_SplitCopyWithImpl<$Res>;
+abstract class _$$SplitImplCopyWith<$Res> implements $SplitCopyWith<$Res> {
+  factory _$$SplitImplCopyWith(
+          _$SplitImpl value, $Res Function(_$SplitImpl) then) =
+      __$$SplitImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -88,9 +89,11 @@ abstract class _$$_SplitCopyWith<$Res> implements $SplitCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_SplitCopyWithImpl<$Res> extends _$SplitCopyWithImpl<$Res, _$_Split>
-    implements _$$_SplitCopyWith<$Res> {
-  __$$_SplitCopyWithImpl(_$_Split _value, $Res Function(_$_Split) _then)
+class __$$SplitImplCopyWithImpl<$Res>
+    extends _$SplitCopyWithImpl<$Res, _$SplitImpl>
+    implements _$$SplitImplCopyWith<$Res> {
+  __$$SplitImplCopyWithImpl(
+      _$SplitImpl _value, $Res Function(_$SplitImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -100,7 +103,7 @@ class __$$_SplitCopyWithImpl<$Res> extends _$SplitCopyWithImpl<$Res, _$_Split>
     Object? variants = null,
     Object? isFeatureGate = null,
   }) {
-    return _then(_$_Split(
+    return _then(_$SplitImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -119,15 +122,15 @@ class __$$_SplitCopyWithImpl<$Res> extends _$SplitCopyWithImpl<$Res, _$_Split>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Split implements _Split {
-  const _$_Split(
+class _$SplitImpl implements _Split {
+  const _$SplitImpl(
       {required this.name,
       required final List<Variant> variants,
       @JsonKey(name: 'feature_gate') required this.isFeatureGate})
       : _variants = variants;
 
-  factory _$_Split.fromJson(Map<String, dynamic> json) =>
-      _$$_SplitFromJson(json);
+  factory _$SplitImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SplitImplFromJson(json);
 
   @override
   final String name;
@@ -152,7 +155,7 @@ class _$_Split implements _Split {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Split &&
+            other is _$SplitImpl &&
             (identical(other.name, name) || other.name == name) &&
             const DeepCollectionEquality().equals(other._variants, _variants) &&
             (identical(other.isFeatureGate, isFeatureGate) ||
@@ -167,12 +170,12 @@ class _$_Split implements _Split {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SplitCopyWith<_$_Split> get copyWith =>
-      __$$_SplitCopyWithImpl<_$_Split>(this, _$identity);
+  _$$SplitImplCopyWith<_$SplitImpl> get copyWith =>
+      __$$SplitImplCopyWithImpl<_$SplitImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SplitToJson(
+    return _$$SplitImplToJson(
       this,
     );
   }
@@ -183,9 +186,9 @@ abstract class _Split implements Split {
           {required final String name,
           required final List<Variant> variants,
           @JsonKey(name: 'feature_gate') required final bool isFeatureGate}) =
-      _$_Split;
+      _$SplitImpl;
 
-  factory _Split.fromJson(Map<String, dynamic> json) = _$_Split.fromJson;
+  factory _Split.fromJson(Map<String, dynamic> json) = _$SplitImpl.fromJson;
 
   @override
   String get name;
@@ -196,6 +199,6 @@ abstract class _Split implements Split {
   bool get isFeatureGate;
   @override
   @JsonKey(ignore: true)
-  _$$_SplitCopyWith<_$_Split> get copyWith =>
+  _$$SplitImplCopyWith<_$SplitImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

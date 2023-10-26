@@ -66,20 +66,21 @@ class _$VisitorCopyWithImpl<$Res, $Val extends Visitor>
 }
 
 /// @nodoc
-abstract class _$$_VisitorCopyWith<$Res> implements $VisitorCopyWith<$Res> {
-  factory _$$_VisitorCopyWith(
-          _$_Visitor value, $Res Function(_$_Visitor) then) =
-      __$$_VisitorCopyWithImpl<$Res>;
+abstract class _$$VisitorImplCopyWith<$Res> implements $VisitorCopyWith<$Res> {
+  factory _$$VisitorImplCopyWith(
+          _$VisitorImpl value, $Res Function(_$VisitorImpl) then) =
+      __$$VisitorImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<Assignment> assignments, String id});
 }
 
 /// @nodoc
-class __$$_VisitorCopyWithImpl<$Res>
-    extends _$VisitorCopyWithImpl<$Res, _$_Visitor>
-    implements _$$_VisitorCopyWith<$Res> {
-  __$$_VisitorCopyWithImpl(_$_Visitor _value, $Res Function(_$_Visitor) _then)
+class __$$VisitorImplCopyWithImpl<$Res>
+    extends _$VisitorCopyWithImpl<$Res, _$VisitorImpl>
+    implements _$$VisitorImplCopyWith<$Res> {
+  __$$VisitorImplCopyWithImpl(
+      _$VisitorImpl _value, $Res Function(_$VisitorImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -88,7 +89,7 @@ class __$$_VisitorCopyWithImpl<$Res>
     Object? assignments = null,
     Object? id = null,
   }) {
-    return _then(_$_Visitor(
+    return _then(_$VisitorImpl(
       assignments: null == assignments
           ? _value._assignments
           : assignments // ignore: cast_nullable_to_non_nullable
@@ -103,13 +104,13 @@ class __$$_VisitorCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Visitor implements _Visitor {
-  const _$_Visitor(
+class _$VisitorImpl implements _Visitor {
+  const _$VisitorImpl(
       {required final List<Assignment> assignments, required this.id})
       : _assignments = assignments;
 
-  factory _$_Visitor.fromJson(Map<String, dynamic> json) =>
-      _$$_VisitorFromJson(json);
+  factory _$VisitorImpl.fromJson(Map<String, dynamic> json) =>
+      _$$VisitorImplFromJson(json);
 
   final List<Assignment> _assignments;
   @override
@@ -131,7 +132,7 @@ class _$_Visitor implements _Visitor {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Visitor &&
+            other is _$VisitorImpl &&
             const DeepCollectionEquality()
                 .equals(other._assignments, _assignments) &&
             (identical(other.id, id) || other.id == id));
@@ -145,12 +146,12 @@ class _$_Visitor implements _Visitor {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_VisitorCopyWith<_$_Visitor> get copyWith =>
-      __$$_VisitorCopyWithImpl<_$_Visitor>(this, _$identity);
+  _$$VisitorImplCopyWith<_$VisitorImpl> get copyWith =>
+      __$$VisitorImplCopyWithImpl<_$VisitorImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_VisitorToJson(
+    return _$$VisitorImplToJson(
       this,
     );
   }
@@ -159,9 +160,9 @@ class _$_Visitor implements _Visitor {
 abstract class _Visitor implements Visitor {
   const factory _Visitor(
       {required final List<Assignment> assignments,
-      required final String id}) = _$_Visitor;
+      required final String id}) = _$VisitorImpl;
 
-  factory _Visitor.fromJson(Map<String, dynamic> json) = _$_Visitor.fromJson;
+  factory _Visitor.fromJson(Map<String, dynamic> json) = _$VisitorImpl.fromJson;
 
   @override
   List<Assignment> get assignments;
@@ -169,6 +170,6 @@ abstract class _Visitor implements Visitor {
   String get id;
   @override
   @JsonKey(ignore: true)
-  _$$_VisitorCopyWith<_$_Visitor> get copyWith =>
+  _$$VisitorImplCopyWith<_$VisitorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -68,22 +68,22 @@ class _$IdentifierCopyWithImpl<$Res, $Val extends Identifier>
 }
 
 /// @nodoc
-abstract class _$$_IdentifierCopyWith<$Res>
+abstract class _$$IdentifierImplCopyWith<$Res>
     implements $IdentifierCopyWith<$Res> {
-  factory _$$_IdentifierCopyWith(
-          _$_Identifier value, $Res Function(_$_Identifier) then) =
-      __$$_IdentifierCopyWithImpl<$Res>;
+  factory _$$IdentifierImplCopyWith(
+          _$IdentifierImpl value, $Res Function(_$IdentifierImpl) then) =
+      __$$IdentifierImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String identifierType, String value});
 }
 
 /// @nodoc
-class __$$_IdentifierCopyWithImpl<$Res>
-    extends _$IdentifierCopyWithImpl<$Res, _$_Identifier>
-    implements _$$_IdentifierCopyWith<$Res> {
-  __$$_IdentifierCopyWithImpl(
-      _$_Identifier _value, $Res Function(_$_Identifier) _then)
+class __$$IdentifierImplCopyWithImpl<$Res>
+    extends _$IdentifierCopyWithImpl<$Res, _$IdentifierImpl>
+    implements _$$IdentifierImplCopyWith<$Res> {
+  __$$IdentifierImplCopyWithImpl(
+      _$IdentifierImpl _value, $Res Function(_$IdentifierImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -92,7 +92,7 @@ class __$$_IdentifierCopyWithImpl<$Res>
     Object? identifierType = null,
     Object? value = null,
   }) {
-    return _then(_$_Identifier(
+    return _then(_$IdentifierImpl(
       identifierType: null == identifierType
           ? _value.identifierType
           : identifierType // ignore: cast_nullable_to_non_nullable
@@ -107,11 +107,11 @@ class __$$_IdentifierCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Identifier implements _Identifier {
-  const _$_Identifier({required this.identifierType, required this.value});
+class _$IdentifierImpl implements _Identifier {
+  const _$IdentifierImpl({required this.identifierType, required this.value});
 
-  factory _$_Identifier.fromJson(Map<String, dynamic> json) =>
-      _$$_IdentifierFromJson(json);
+  factory _$IdentifierImpl.fromJson(Map<String, dynamic> json) =>
+      _$$IdentifierImplFromJson(json);
 
   @override
   final String identifierType;
@@ -127,7 +127,7 @@ class _$_Identifier implements _Identifier {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Identifier &&
+            other is _$IdentifierImpl &&
             (identical(other.identifierType, identifierType) ||
                 other.identifierType == identifierType) &&
             (identical(other.value, value) || other.value == value));
@@ -140,12 +140,12 @@ class _$_Identifier implements _Identifier {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_IdentifierCopyWith<_$_Identifier> get copyWith =>
-      __$$_IdentifierCopyWithImpl<_$_Identifier>(this, _$identity);
+  _$$IdentifierImplCopyWith<_$IdentifierImpl> get copyWith =>
+      __$$IdentifierImplCopyWithImpl<_$IdentifierImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_IdentifierToJson(
+    return _$$IdentifierImplToJson(
       this,
     );
   }
@@ -154,10 +154,10 @@ class _$_Identifier implements _Identifier {
 abstract class _Identifier implements Identifier {
   const factory _Identifier(
       {required final String identifierType,
-      required final String value}) = _$_Identifier;
+      required final String value}) = _$IdentifierImpl;
 
   factory _Identifier.fromJson(Map<String, dynamic> json) =
-      _$_Identifier.fromJson;
+      _$IdentifierImpl.fromJson;
 
   @override
   String get identifierType;
@@ -165,6 +165,6 @@ abstract class _Identifier implements Identifier {
   String get value;
   @override
   @JsonKey(ignore: true)
-  _$$_IdentifierCopyWith<_$_Identifier> get copyWith =>
+  _$$IdentifierImplCopyWith<_$IdentifierImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

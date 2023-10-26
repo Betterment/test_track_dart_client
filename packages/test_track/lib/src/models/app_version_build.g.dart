@@ -8,12 +8,13 @@ part of 'app_version_build.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_AppVersionBuild _$$_AppVersionBuildFromJson(Map<String, dynamic> json) =>
+_$AppVersionBuildImpl _$$AppVersionBuildImplFromJson(
+        Map<String, dynamic> json) =>
     $checkedCreate(
-      r'_$_AppVersionBuild',
+      r'_$AppVersionBuildImpl',
       json,
       ($checkedConvert) {
-        final val = _$_AppVersionBuild(
+        final val = _$AppVersionBuildImpl(
           appName: $checkedConvert('appName', (v) => v as String),
           version: $checkedConvert('version', (v) => v as String),
           buildTimestamp: $checkedConvert('buildTimestamp', (v) => v as String),
@@ -22,7 +23,8 @@ _$_AppVersionBuild _$$_AppVersionBuildFromJson(Map<String, dynamic> json) =>
       },
     );
 
-Map<String, dynamic> _$$_AppVersionBuildToJson(_$_AppVersionBuild instance) =>
+Map<String, dynamic> _$$AppVersionBuildImplToJson(
+        _$AppVersionBuildImpl instance) =>
     <String, dynamic>{
       'appName': instance.appName,
       'version': instance.version,

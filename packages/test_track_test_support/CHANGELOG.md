@@ -1,3 +1,9 @@
+## 0.1.3
+
+* chore: upgrade dependencies by @ClaireDavis in https://github.com/Betterment/test_track_dart_client/pull/44
+
+**Full Changelog**: https://github.com/Betterment/test_track_dart_client/compare/v0.1.3...v0.1.4
+
 ## 0.1.0
 * feat: add ability to override visitor id to preserve id across organic installs by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/36
 

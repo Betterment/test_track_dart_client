@@ -1,4 +1,4 @@
-## 0.1.4
+## 0.1.3
 
 * chore: upgrade dependencies by @ClaireDavis in https://github.com/Betterment/test_track_dart_client/pull/44
 

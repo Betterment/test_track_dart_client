@@ -1,8 +1,11 @@
+## 0.1.4
+
+**Full Changelog**: https://github.com/Betterment/test_track_dart_client/compare/v0.1.3...v0.1.4
+
 ## 0.1.3
 
 ## What's Changed
 * fix: avoid calling handler.next more than once in RetryInterceptor by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/42
-* chore: prep 0.1.2 release by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/43
 * chore: upgrade dependencies by @ClaireDavis in https://github.com/Betterment/test_track_dart_client/pull/44
 
 ## New Contributors

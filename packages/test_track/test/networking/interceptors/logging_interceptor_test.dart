@@ -88,6 +88,7 @@ void main() {
           () async {
         final requestOptions = MockRequestOptions();
         when(() => requestOptions.uri).thenReturn(Uri.base);
+        when(() => requestOptions.preserveHeaderCase).thenReturn(true);
         final logger = FakeTestTrackLogger(shouldEnableNetworkLogging: true);
         final subject = buildSubject(logger: logger);
 
@@ -104,6 +105,7 @@ void main() {
           () async {
         final requestOptions = MockRequestOptions();
         when(() => requestOptions.uri).thenReturn(Uri.base);
+        when(() => requestOptions.preserveHeaderCase).thenReturn(true);
         final logger = FakeTestTrackLogger.withoutNetworkLogging();
         final subject = buildSubject(logger: logger);
 

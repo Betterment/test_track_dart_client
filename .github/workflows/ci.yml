@@ -11,8 +11,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3.3.0
-      - uses: dart-lang/setup-dart@v1.4
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.2
+      - uses: dart-lang/setup-dart@65c82982aa686933bf10d50aced7a27b2b63f2a6 #v1.6.3
         with:
           sdk: 3.3.1
       - name: Install dependencies
@@ -28,12 +28,12 @@ jobs:
         run: melos exec --fail-fast -- "dart format --output=none --set-exit-if-changed ."
 
       - name: Analyze test_track
-        uses: invertase/github-action-dart-analyzer@v1
+        uses: invertase/github-action-dart-analyzer@e981b01a458d0bab71ee5da182e5b26687b7101b #v3.0.0
         with:
           working-directory: packages/test_track
 
       - name: Analyze test_track_test_support
-        uses: invertase/github-action-dart-analyzer@v1
+        uses: invertase/github-action-dart-analyzer@e981b01a458d0bab71ee5da182e5b26687b7101b #v3.0.0
         with:
           working-directory: packages/test_track_test_support
 
@@ -41,13 +41,13 @@ jobs:
         run: melos exec --fail-fast -- "../../tool/generate_code_coverage.sh"
         
       - name: Upload test_track code coverage
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@84508663e988701840491b86de86b666e8a86bed #v4.3.0
         with:
           files: coverage/lcov.info
           working-directory: packages/test_track
 
       - name: Upload test_track_test_support code coverage
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@84508663e988701840491b86de86b666e8a86bed #v4.3.0
         with:
           files: coverage/lcov.info
           working-directory: packages/test_track_test_support
@@ -56,8 +56,8 @@ jobs:
       runs-on: ubuntu-latest
 
       steps:
-        - uses: actions/checkout@v3.3.0
-        - uses: dart-lang/setup-dart@v1.4
+        - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.2
+        - uses: dart-lang/setup-dart@65c82982aa686933bf10d50aced7a27b2b63f2a6 #v1.6.3
           with:
             sdk: 3.3.1
         - name: Install dependencies

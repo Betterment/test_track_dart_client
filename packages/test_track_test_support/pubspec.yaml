@@ -5,7 +5,7 @@ homepage: https://github.com/Betterment/test_track_dart_client
 repository: https://github.com/Betterment/test_track_dart_client
 
 environment:
-  sdk: ">=3.3.1 <4.0.0"
+  sdk: ">=3.0.7 <4.0.0"
 
 dependencies:
   equatable: ^2.0.5

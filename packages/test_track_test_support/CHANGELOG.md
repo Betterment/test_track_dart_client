@@ -1,3 +1,9 @@
+## What's Changed
+* chore: update dependencies and dart by @ClaireDavis in https://github.com/Betterment/test_track_dart_client/pull/47
+
+
+**Full Changelog**: https://github.com/Betterment/test_track_dart_client/compare/v0.1.3...v0.1.4
+
 ## 0.1.3
 
 * chore: upgrade dependencies by @ClaireDavis in https://github.com/Betterment/test_track_dart_client/pull/44

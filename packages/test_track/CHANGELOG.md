@@ -1,7 +1,16 @@
+## 0.1.5
+
+## What's Changed
+* chore: Upgrade `dio`, `sturdy_http` by @willlockwood in https://github.com/Betterment/test_track_dart_client/pull/50
+
+## New Contributors
+* @willlockwood made their first contribution in https://github.com/Betterment/test_track_dart_client/pull/50
+
+**Full Changelog**: https://github.com/Betterment/test_track_dart_client/compare/v0.1.4...v.0.1.5
+
 ## 0.1.4
 
 * chore: update dependencies and dart by @ClaireDavis in https://github.com/Betterment/test_track_dart_client/pull/47
-
 
 **Full Changelog**: https://github.com/Betterment/test_track_dart_client/compare/v0.1.3...v0.1.4
 

@@ -15,7 +15,7 @@ _$VariantImpl _$$VariantImplFromJson(Map<String, dynamic> json) =>
       ($checkedConvert) {
         final val = _$VariantImpl(
           name: $checkedConvert('name', (v) => v as String),
-          weight: $checkedConvert('weight', (v) => v as int),
+          weight: $checkedConvert('weight', (v) => (v as num).toInt()),
         );
         return val;
       },

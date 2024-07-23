@@ -88,6 +88,7 @@ class RetryInterceptor extends Interceptor {
               ),
               genericError: (_, __, error) => throw error ?? errorForRequest(),
               unprocessableEntity: (error, _) => throw error,
+              upgradeRequired: (error) => throw error,
               unauthorized: (error) => throw error,
               forbidden: (error) => throw error,
               notFound: (error) => throw error,

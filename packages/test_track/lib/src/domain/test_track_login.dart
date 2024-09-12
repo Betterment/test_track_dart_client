@@ -55,7 +55,7 @@ class Login {
         ),
       ),
       onResponse: (r) => switch (r) {
-        Ok(:final response) => AppVisitorConfig.fromJson(response),
+        OkResponse(:final response) => AppVisitorConfig.fromJson(response),
         _ => throw TestTrackLoginFailureException(message: r.toString()),
       },
     );

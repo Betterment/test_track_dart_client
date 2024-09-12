@@ -71,14 +71,14 @@ class RetryInterceptor extends Interceptor {
             // most cases, and would require a `sturdy_http` change if we want
             // to gain access to the raw response.
             switch (r) {
-              case Ok(:final response):
+              case OkResponse(:final response):
                 handler.resolve(
                   Response(
                     data: response,
                     requestOptions: err.requestOptions,
                   ),
                 );
-              case NoContent():
+              case OkNoContent():
                 handler.resolve(
                   Response(
                     statusCode: 204,

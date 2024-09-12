@@ -31,7 +31,7 @@ class OverrideAssignments {
         }),
       ),
       onResponse: (r) => switch (r) {
-        NoContent() => null,
+        OkNoContent() => null,
         _ => throw Exception('Failed to override assignments: $r'),
       },
     );

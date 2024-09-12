@@ -36,7 +36,7 @@ class ReportAssignmentEvent {
         ),
       ),
       onResponse: (r) => switch (r) {
-        NoContent() => null,
+        OkNoContent() => null,
         _ => _logger.error('Unable to report assignment event: $assignmentEvent with error: $r'),
       },
     );

@@ -41,7 +41,7 @@ class GetVisitorConfig {
         '${appVersionBuild.buildTimestamp}/visitors/$visitorId/config',
       ),
       onResponse: (r) => switch (r) {
-        Ok(:final response) => AppVisitorConfig.fromJson(response),
+        OkResponse(:final response) => AppVisitorConfig.fromJson(response),
         _ => throw Exception(r.toString()),
       },
     );

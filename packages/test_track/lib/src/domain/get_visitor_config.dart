@@ -40,17 +40,14 @@ class GetVisitorConfig {
         '${appVersionBuild.version}/builds/'
         '${appVersionBuild.buildTimestamp}/visitors/$visitorId/config',
       ),
-      onResponse: (r) {
-        return r.maybeWhen(
-          ok: (json) => AppVisitorConfig.fromJson(json),
-          orElse: () => throw Exception(r.toString()),
-        );
+      onResponse: (r) => switch (r) {
+        Ok(:final response) => AppVisitorConfig.fromJson(response),
+        _ => throw Exception(r.toString()),
       },
     );
 
     await _dataStorageProvider.storeVisitor(appVisitorConfig.visitor);
-    await _dataStorageProvider
-        .storeSplitRegistry(appVisitorConfig.splitRegistry);
+    await _dataStorageProvider.storeSplitRegistry(appVisitorConfig.splitRegistry);
 
     await _analyticsProvider.identify(visitorId: appVisitorConfig.visitor.id);
 

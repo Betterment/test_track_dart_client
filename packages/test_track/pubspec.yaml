@@ -15,9 +15,11 @@ dependencies:
   freezed_annotation: ^2.4.1
   json_annotation: ^4.8.1
   meta: ^1.14.0
-  sturdy_http: ^0.4.0
+  sturdy_http:
+    git:
+      url: https://github.com/Betterment/sturdy_http.git
+      ref: bt/response-changes
   uuid: ^4.4.0
-
 
 dev_dependencies:
   build_runner: ^2.4.9
@@ -29,5 +31,5 @@ dev_dependencies:
   lints: ^3.0.0
   mocktail: ^1.0.3
   test: ^1.25.3
-  test_track_test_support: 
+  test_track_test_support:
     path: ../test_track_test_support

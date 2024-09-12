@@ -29,16 +29,13 @@ class RetryInterceptor extends Interceptor {
     DioException err,
     ErrorInterceptorHandler handler,
   ) async {
-    var extra =
-        RetryOptions.fromRequestOptions(err.requestOptions) ?? _retryOptions;
-    final isIdempotent =
-        err.requestOptions.extra[isIdempotentOptionsKey] as bool? ?? false;
+    var extra = RetryOptions.fromRequestOptions(err.requestOptions) ?? _retryOptions;
+    final isIdempotent = err.requestOptions.extra[isIdempotentOptionsKey] as bool? ?? false;
     final originalMethod = err.requestOptions.method;
     final capitalizedMethod = StringBuffer()
       ..write(originalMethod.substring(0, 1).toUpperCase())
       ..write(originalMethod.substring(1).toLowerCase());
-    final requestType =
-        NetworkRequestType.values.byName(capitalizedMethod.toString());
+    final requestType = NetworkRequestType.values.byName(capitalizedMethod.toString());
 
     if (extra.shouldRetry(err, isIdempotent: isIdempotent)) {
       if (extra.retryInterval.inMilliseconds > 0) {
@@ -73,28 +70,38 @@ class RetryInterceptor extends Interceptor {
             // for both success cases, fabricate them. This should be fine for
             // most cases, and would require a `sturdy_http` change if we want
             // to gain access to the raw response.
-            r.when(
-              ok: (res) => handler.resolve(
-                Response(
-                  data: res,
-                  requestOptions: err.requestOptions,
-                ),
-              ),
-              okNoContent: () => handler.resolve(
-                Response(
-                  statusCode: 204,
-                  requestOptions: err.requestOptions,
-                ),
-              ),
-              genericError: (_, __, error) => throw error ?? errorForRequest(),
-              unprocessableEntity: (error, _) => throw error,
-              upgradeRequired: (error) => throw error,
-              unauthorized: (error) => throw error,
-              forbidden: (error) => throw error,
-              notFound: (error) => throw error,
-              serverError: (error) => throw error,
-              serviceUnavailable: (error) => throw error,
-            );
+            switch (r) {
+              case Ok(:final response):
+                handler.resolve(
+                  Response(
+                    data: response,
+                    requestOptions: err.requestOptions,
+                  ),
+                );
+              case NoContent():
+                handler.resolve(
+                  Response(
+                    statusCode: 204,
+                    requestOptions: err.requestOptions,
+                  ),
+                );
+              case GenericError(:final error):
+                throw error ?? errorForRequest();
+              case UnprocessableEntity(:final error):
+                throw error;
+              case UpgradeRequired(:final error):
+                throw error;
+              case Unauthorized(:final error):
+                throw error;
+              case Forbidden(:final error):
+                throw error;
+              case NotFound(:final error):
+                throw error;
+              case ServerError(:final error):
+                throw error;
+              case ServiceUnavailable(:final error):
+                throw error;
+            }
           },
         );
       } on DioException catch (dioError) {

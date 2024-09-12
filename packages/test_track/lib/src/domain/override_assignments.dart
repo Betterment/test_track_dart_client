@@ -30,11 +30,9 @@ class OverrideAssignments {
           'assignments': assignmentOverrides.map((a) => a.toJson()).toList(),
         }),
       ),
-      onResponse: (r) {
-        return r.maybeWhen(
-          okNoContent: () => null,
-          orElse: () => throw Exception('Failed to override assignments: $r'),
-        );
+      onResponse: (r) => switch (r) {
+        NoContent() => null,
+        _ => throw Exception('Failed to override assignments: $r'),
       },
     );
 

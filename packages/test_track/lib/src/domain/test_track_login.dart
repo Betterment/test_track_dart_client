@@ -54,19 +54,14 @@ class Login {
           },
         ),
       ),
-      onResponse: (r) {
-        return r.maybeWhen(
-          ok: (json) => AppVisitorConfig.fromJson(json),
-          orElse: () => throw TestTrackLoginFailureException(
-            message: r.toString(),
-          ),
-        );
+      onResponse: (r) => switch (r) {
+        Ok(:final response) => AppVisitorConfig.fromJson(response),
+        _ => throw TestTrackLoginFailureException(message: r.toString()),
       },
     );
 
     await _dataStorageProvider.storeVisitor(appVisitorConfig.visitor);
-    await _dataStorageProvider
-        .storeSplitRegistry(appVisitorConfig.splitRegistry);
+    await _dataStorageProvider.storeSplitRegistry(appVisitorConfig.splitRegistry);
     await _dataStorageProvider.storeLoginState(true);
 
     await _analyticsProvider.identify(visitorId: appVisitorConfig.visitor.id);

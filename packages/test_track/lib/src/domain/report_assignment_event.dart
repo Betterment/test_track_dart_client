@@ -35,12 +35,9 @@ class ReportAssignmentEvent {
           },
         ),
       ),
-      onResponse: (r) {
-        return r.maybeWhen(
-          okNoContent: () => null,
-          orElse: () => _logger.error(
-              'Unable to report assignment event: $assignmentEvent with error: $r'),
-        );
+      onResponse: (r) => switch (r) {
+        NoContent() => null,
+        _ => _logger.error('Unable to report assignment event: $assignmentEvent with error: $r'),
       },
     );
   }

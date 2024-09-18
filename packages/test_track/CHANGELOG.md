@@ -1,3 +1,13 @@
+## 0.1.6
+
+## What's Changed
+* chore(sturdy): Update to version 0.5.0 by @nhannah in https://github.com/Betterment/test_track_dart_client/pull/52
+
+## New Contributors
+* @nhannah made their first contribution in https://github.com/Betterment/test_track_dart_client/pull/52
+
+**Full Changelog**: https://github.com/Betterment/test_track_dart_client/compare/v.0.1.5...v0.1.6
+
 ## 0.1.5
 
 ## What's Changed

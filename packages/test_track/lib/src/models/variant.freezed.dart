@@ -23,8 +23,12 @@ mixin _$Variant {
   String get name => throw _privateConstructorUsedError;
   int get weight => throw _privateConstructorUsedError;
 
+  /// Serializes this Variant to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Variant
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $VariantCopyWith<Variant> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -46,6 +50,8 @@ class _$VariantCopyWithImpl<$Res, $Val extends Variant>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Variant
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -83,6 +89,8 @@ class __$$VariantImplCopyWithImpl<$Res>
       _$VariantImpl _value, $Res Function(_$VariantImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Variant
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -129,11 +137,13 @@ class _$VariantImpl implements _Variant {
             (identical(other.weight, weight) || other.weight == weight));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, name, weight);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Variant
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$VariantImplCopyWith<_$VariantImpl> get copyWith =>
@@ -157,8 +167,11 @@ abstract class _Variant implements Variant {
   String get name;
   @override
   int get weight;
+
+  /// Create a copy of Variant
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$VariantImplCopyWith<_$VariantImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

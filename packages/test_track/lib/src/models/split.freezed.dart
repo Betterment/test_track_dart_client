@@ -25,8 +25,12 @@ mixin _$Split {
   @JsonKey(name: 'feature_gate')
   bool get isFeatureGate => throw _privateConstructorUsedError;
 
+  /// Serializes this Split to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Split
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SplitCopyWith<Split> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -51,6 +55,8 @@ class _$SplitCopyWithImpl<$Res, $Val extends Split>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Split
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -96,6 +102,8 @@ class __$$SplitImplCopyWithImpl<$Res>
       _$SplitImpl _value, $Res Function(_$SplitImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Split
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -162,12 +170,14 @@ class _$SplitImpl implements _Split {
                 other.isFeatureGate == isFeatureGate));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, name,
       const DeepCollectionEquality().hash(_variants), isFeatureGate);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Split
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SplitImplCopyWith<_$SplitImpl> get copyWith =>
@@ -197,8 +207,11 @@ abstract class _Split implements Split {
   @override
   @JsonKey(name: 'feature_gate')
   bool get isFeatureGate;
+
+  /// Create a copy of Split
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SplitImplCopyWith<_$SplitImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

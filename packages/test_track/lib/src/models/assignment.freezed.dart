@@ -24,8 +24,12 @@ mixin _$Assignment {
   String get variant => throw _privateConstructorUsedError;
   String get context => throw _privateConstructorUsedError;
 
+  /// Serializes this Assignment to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Assignment
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AssignmentCopyWith<Assignment> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +53,8 @@ class _$AssignmentCopyWithImpl<$Res, $Val extends Assignment>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Assignment
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -92,6 +98,8 @@ class __$$AssignmentImplCopyWithImpl<$Res>
       _$AssignmentImpl _value, $Res Function(_$AssignmentImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Assignment
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -149,11 +157,13 @@ class _$AssignmentImpl implements _Assignment {
             (identical(other.context, context) || other.context == context));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, splitName, variant, context);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Assignment
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AssignmentImplCopyWith<_$AssignmentImpl> get copyWith =>
@@ -182,8 +192,11 @@ abstract class _Assignment implements Assignment {
   String get variant;
   @override
   String get context;
+
+  /// Create a copy of Assignment
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AssignmentImplCopyWith<_$AssignmentImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

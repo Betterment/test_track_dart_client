@@ -23,8 +23,12 @@ mixin _$Visitor {
   List<Assignment> get assignments => throw _privateConstructorUsedError;
   String get id => throw _privateConstructorUsedError;
 
+  /// Serializes this Visitor to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Visitor
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $VisitorCopyWith<Visitor> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -46,6 +50,8 @@ class _$VisitorCopyWithImpl<$Res, $Val extends Visitor>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Visitor
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -83,6 +89,8 @@ class __$$VisitorImplCopyWithImpl<$Res>
       _$VisitorImpl _value, $Res Function(_$VisitorImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Visitor
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -138,12 +146,14 @@ class _$VisitorImpl implements _Visitor {
             (identical(other.id, id) || other.id == id));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_assignments), id);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Visitor
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$VisitorImplCopyWith<_$VisitorImpl> get copyWith =>
@@ -168,8 +178,11 @@ abstract class _Visitor implements Visitor {
   List<Assignment> get assignments;
   @override
   String get id;
+
+  /// Create a copy of Visitor
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$VisitorImplCopyWith<_$VisitorImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

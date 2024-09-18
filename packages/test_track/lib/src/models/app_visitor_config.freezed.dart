@@ -23,8 +23,12 @@ mixin _$AppVisitorConfig {
   List<Split> get splits => throw _privateConstructorUsedError;
   Visitor get visitor => throw _privateConstructorUsedError;
 
+  /// Serializes this AppVisitorConfig to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AppVisitorConfig
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AppVisitorConfigCopyWith<AppVisitorConfig> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -50,6 +54,8 @@ class _$AppVisitorConfigCopyWithImpl<$Res, $Val extends AppVisitorConfig>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AppVisitorConfig
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -68,6 +74,8 @@ class _$AppVisitorConfigCopyWithImpl<$Res, $Val extends AppVisitorConfig>
     ) as $Val);
   }
 
+  /// Create a copy of AppVisitorConfig
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $VisitorCopyWith<$Res> get visitor {
@@ -99,6 +107,8 @@ class __$$AppVisitorConfigImplCopyWithImpl<$Res>
       $Res Function(_$AppVisitorConfigImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AppVisitorConfig
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -153,12 +163,14 @@ class _$AppVisitorConfigImpl implements _AppVisitorConfig {
             (identical(other.visitor, visitor) || other.visitor == visitor));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, const DeepCollectionEquality().hash(_splits), visitor);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppVisitorConfig
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AppVisitorConfigImplCopyWith<_$AppVisitorConfigImpl> get copyWith =>
@@ -185,8 +197,11 @@ abstract class _AppVisitorConfig implements AppVisitorConfig {
   List<Split> get splits;
   @override
   Visitor get visitor;
+
+  /// Create a copy of AppVisitorConfig
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AppVisitorConfigImplCopyWith<_$AppVisitorConfigImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -22,8 +22,12 @@ SplitRegistry _$SplitRegistryFromJson(Map<String, dynamic> json) {
 mixin _$SplitRegistry {
   List<Split> get splits => throw _privateConstructorUsedError;
 
+  /// Serializes this SplitRegistry to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SplitRegistry
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SplitRegistryCopyWith<SplitRegistry> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -47,6 +51,8 @@ class _$SplitRegistryCopyWithImpl<$Res, $Val extends SplitRegistry>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SplitRegistry
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -80,6 +86,8 @@ class __$$SplitRegistryImplCopyWithImpl<$Res>
       _$SplitRegistryImpl _value, $Res Function(_$SplitRegistryImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SplitRegistry
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -123,12 +131,14 @@ class _$SplitRegistryImpl implements _SplitRegistry {
             const DeepCollectionEquality().equals(other._splits, _splits));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode =>
       Object.hash(runtimeType, const DeepCollectionEquality().hash(_splits));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SplitRegistry
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SplitRegistryImplCopyWith<_$SplitRegistryImpl> get copyWith =>
@@ -151,8 +161,11 @@ abstract class _SplitRegistry implements SplitRegistry {
 
   @override
   List<Split> get splits;
+
+  /// Create a copy of SplitRegistry
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SplitRegistryImplCopyWith<_$SplitRegistryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

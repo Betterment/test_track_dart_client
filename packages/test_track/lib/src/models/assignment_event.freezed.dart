@@ -24,8 +24,12 @@ mixin _$AssignmentEvent {
   String get splitName => throw _privateConstructorUsedError;
   String get context => throw _privateConstructorUsedError;
 
+  /// Serializes this AssignmentEvent to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AssignmentEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AssignmentEventCopyWith<AssignmentEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,6 +53,8 @@ class _$AssignmentEventCopyWithImpl<$Res, $Val extends AssignmentEvent>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AssignmentEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -92,6 +98,8 @@ class __$$AssignmentEventImplCopyWithImpl<$Res>
       _$AssignmentEventImpl _value, $Res Function(_$AssignmentEventImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AssignmentEvent
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -151,11 +159,13 @@ class _$AssignmentEventImpl implements _AssignmentEvent {
             (identical(other.context, context) || other.context == context));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, visitorId, splitName, context);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AssignmentEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AssignmentEventImplCopyWith<_$AssignmentEventImpl> get copyWith =>
@@ -185,8 +195,11 @@ abstract class _AssignmentEvent implements AssignmentEvent {
   String get splitName;
   @override
   String get context;
+
+  /// Create a copy of AssignmentEvent
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AssignmentEventImplCopyWith<_$AssignmentEventImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

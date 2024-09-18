@@ -2,9 +2,12 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
+
+env:
+  DART_VERSION: 3.5.0
 
 jobs:
   build:
@@ -14,10 +17,10 @@ jobs:
       - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.2
       - uses: dart-lang/setup-dart@65c82982aa686933bf10d50aced7a27b2b63f2a6 #v1.6.3
         with:
-          sdk: 3.0.7
+          sdk: ${{ env.DART_VERSION }}
       - name: Install dependencies
         run: dart pub global activate melos 2.3.1 && melos bs
-          
+
       - name: Run build_runner
         run: melos exec --depends-on="build_runner" --fail-fast -- "dart run build_runner build --delete-conflicting-outputs"
 
@@ -39,7 +42,7 @@ jobs:
 
       - name: Run tests and generate coverage report
         run: melos exec --fail-fast -- "../../tool/generate_code_coverage.sh"
-        
+
       - name: Upload test_track code coverage
         uses: codecov/codecov-action@84508663e988701840491b86de86b666e8a86bed #v4.3.0
         with:
@@ -53,16 +56,16 @@ jobs:
           working-directory: packages/test_track_test_support
 
   pana:
-      runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
 
-      steps:
-        - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.2
-        - uses: dart-lang/setup-dart@65c82982aa686933bf10d50aced7a27b2b63f2a6 #v1.6.3
-          with:
-            sdk: 3.0.7
-        - name: Install dependencies
-          run: |
-            dart pub global activate melos 2.3.1 && melos bs
-            dart pub global activate pana
-        - name: Verify pub score
-          run: melos exec -- "../../tool/verify_pub_score.sh 110"
+    steps:
+      - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.2
+      - uses: dart-lang/setup-dart@65c82982aa686933bf10d50aced7a27b2b63f2a6 #v1.6.3
+        with:
+          sdk: ${{ env.DART_VERSION }}
+      - name: Install dependencies
+        run: |
+          dart pub global activate melos 2.3.1 && melos bs
+          dart pub global activate pana
+      - name: Verify pub score
+        run: melos exec -- "../../tool/verify_pub_score.sh"

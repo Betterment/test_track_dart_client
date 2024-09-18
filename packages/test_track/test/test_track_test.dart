@@ -94,7 +94,7 @@ void main() {
 
           expect(
             logger.infoLogs.single.error.toString(),
-            contains('status code of 500'),
+            contains('ServerError'),
           );
         });
 
@@ -297,7 +297,7 @@ void main() {
 
           expect(
             logger.infoLogs.single.error.toString(),
-            contains('status code of 500'),
+            contains('ServerError'),
           );
         });
       });

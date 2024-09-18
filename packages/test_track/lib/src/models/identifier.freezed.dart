@@ -23,8 +23,12 @@ mixin _$Identifier {
   String get identifierType => throw _privateConstructorUsedError;
   String get value => throw _privateConstructorUsedError;
 
+  /// Serializes this Identifier to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Identifier
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $IdentifierCopyWith<Identifier> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -48,6 +52,8 @@ class _$IdentifierCopyWithImpl<$Res, $Val extends Identifier>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Identifier
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -86,6 +92,8 @@ class __$$IdentifierImplCopyWithImpl<$Res>
       _$IdentifierImpl _value, $Res Function(_$IdentifierImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Identifier
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -133,11 +141,13 @@ class _$IdentifierImpl implements _Identifier {
             (identical(other.value, value) || other.value == value));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, identifierType, value);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Identifier
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$IdentifierImplCopyWith<_$IdentifierImpl> get copyWith =>
@@ -163,8 +173,11 @@ abstract class _Identifier implements Identifier {
   String get identifierType;
   @override
   String get value;
+
+  /// Create a copy of Identifier
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$IdentifierImplCopyWith<_$IdentifierImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

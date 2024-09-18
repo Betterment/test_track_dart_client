@@ -73,28 +73,38 @@ class RetryInterceptor extends Interceptor {
             // for both success cases, fabricate them. This should be fine for
             // most cases, and would require a `sturdy_http` change if we want
             // to gain access to the raw response.
-            r.when(
-              ok: (res) => handler.resolve(
-                Response(
-                  data: res,
-                  requestOptions: err.requestOptions,
-                ),
-              ),
-              okNoContent: () => handler.resolve(
-                Response(
-                  statusCode: 204,
-                  requestOptions: err.requestOptions,
-                ),
-              ),
-              genericError: (_, __, error) => throw error ?? errorForRequest(),
-              unprocessableEntity: (error, _) => throw error,
-              upgradeRequired: (error) => throw error,
-              unauthorized: (error) => throw error,
-              forbidden: (error) => throw error,
-              notFound: (error) => throw error,
-              serverError: (error) => throw error,
-              serviceUnavailable: (error) => throw error,
-            );
+            switch (r) {
+              case OkResponse(:final response):
+                handler.resolve(
+                  Response(
+                    data: response,
+                    requestOptions: err.requestOptions,
+                  ),
+                );
+              case OkNoContent():
+                handler.resolve(
+                  Response(
+                    statusCode: 204,
+                    requestOptions: err.requestOptions,
+                  ),
+                );
+              case GenericError(:final error):
+                throw error ?? errorForRequest();
+              case UnprocessableEntity(:final error):
+                throw error;
+              case UpgradeRequired(:final error):
+                throw error;
+              case Unauthorized(:final error):
+                throw error;
+              case Forbidden(:final error):
+                throw error;
+              case NotFound(:final error):
+                throw error;
+              case ServerError(:final error):
+                throw error;
+              case ServiceUnavailable(:final error):
+                throw error;
+            }
           },
         );
       } on DioException catch (dioError) {

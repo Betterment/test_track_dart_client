@@ -54,13 +54,9 @@ class Login {
           },
         ),
       ),
-      onResponse: (r) {
-        return r.maybeWhen(
-          ok: (json) => AppVisitorConfig.fromJson(json),
-          orElse: () => throw TestTrackLoginFailureException(
-            message: r.toString(),
-          ),
-        );
+      onResponse: (r) => switch (r) {
+        OkResponse(:final response) => AppVisitorConfig.fromJson(response),
+        _ => throw TestTrackLoginFailureException(message: r.toString()),
       },
     );
 

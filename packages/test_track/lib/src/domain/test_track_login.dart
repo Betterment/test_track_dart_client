@@ -61,7 +61,8 @@ class Login {
     );
 
     await _dataStorageProvider.storeVisitor(appVisitorConfig.visitor);
-    await _dataStorageProvider.storeSplitRegistry(appVisitorConfig.splitRegistry);
+    await _dataStorageProvider
+        .storeSplitRegistry(appVisitorConfig.splitRegistry);
     await _dataStorageProvider.storeLoginState(true);
 
     await _analyticsProvider.identify(visitorId: appVisitorConfig.visitor.id);

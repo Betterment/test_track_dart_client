@@ -209,11 +209,15 @@ class TestTrack {
   /// {@macro override_assignments}
   Future<void> createAssignmentOverrides({
     required List<AssignmentOverride> assignmentOverrides,
+    String? username,
+    String? password,
   }) async {
     final appVisitorConfig = await _overrideAssignments(
       appVersionBuild: _appVersionBuild,
       visitorId: _visitor.id,
       assignmentOverrides: assignmentOverrides,
+      username: username,
+      password: password,
     );
     _updateAppVisitorConfig(appVisitorConfig);
   }

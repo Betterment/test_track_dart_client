@@ -36,6 +36,7 @@ void main() {
         )
       ];
       late List<Map<String, dynamic>>? assignmentsFromRequest;
+      late String? authorizationHeaderFromRequest;
 
       setUp(() async {
         charlatan = Charlatan()
@@ -45,6 +46,8 @@ void main() {
               final data = request.body as Map<String, Object?>?;
               assignmentsFromRequest =
                   data?['assignments'] as List<Map<String, Object?>>?;
+              authorizationHeaderFromRequest =
+                  request.headers['Authorization'] as String?;
               return CharlatanHttpResponse(statusCode: 204);
             },
           )
@@ -81,6 +84,21 @@ void main() {
             'context': AssignmentOverride.assignmentContext,
           },
         );
+      });
+
+      test(
+          'it includes the username and password in the request if they are provided',
+          () async {
+        await subject.call(
+          appVersionBuild: AppVersionBuildFactory.build(),
+          visitorId: visitorId,
+          assignmentOverrides: assignmentOverrides,
+          username: 'username',
+          password: 'password',
+        );
+
+        expect(
+            authorizationHeaderFromRequest, 'Basic dXNlcm5hbWU6cGFzc3dvcmQ=');
       });
 
       test('it invokes GetVisitorConfig and returns refreshed AppVisitorConfig',

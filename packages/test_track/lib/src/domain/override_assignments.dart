@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:sturdy_http/sturdy_http.dart';
 import 'package:test_track/src/domain/get_visitor_config.dart';
 import 'package:test_track/test_track.dart';
@@ -22,6 +25,8 @@ class OverrideAssignments {
     required AppVersionBuild appVersionBuild,
     required String visitorId,
     required List<AssignmentOverride> assignmentOverrides,
+    String? username,
+    String? password,
   }) async {
     await _client.execute(
       PostRequest(
@@ -29,6 +34,14 @@ class OverrideAssignments {
         data: NetworkRequestBody.json({
           'assignments': assignmentOverrides.map((a) => a.toJson()).toList(),
         }),
+        options: username != null && password != null
+            ? Options(
+                headers: {
+                  'Authorization':
+                      'Basic ${base64Encode(utf8.encode('$username:$password'))}',
+                },
+              )
+            : null,
       ),
       onResponse: (r) => switch (r) {
         OkNoContent() => null,

@@ -1,3 +1,6 @@
 **/pubspec_overrides.yaml
 *.lock
 .dart_tool/
+
+# FVM Version Cache
+.fvm/

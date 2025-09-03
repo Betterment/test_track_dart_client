@@ -1,3 +1,10 @@
+## 0.2.0
+
+* feat: allow basic auth to be provided to assign overrides by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/54
+
+
+**Full Changelog**: https://github.com/Betterment/test_track_dart_client/compare/v0.1.6...v0.2.0
+
 ## 0.1.4
 
 * chore: update dependencies and dart by @ClaireDavis in https://github.com/Betterment/test_track_dart_client/pull/47

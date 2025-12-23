@@ -1,10 +1,7 @@
-// ignore_for_file: invalid_annotation_target
-
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:test_track/src/models/variant.dart';
 
-part 'split.freezed.dart';
-part 'split.g.dart';
+part 'split.mapper.dart';
 
 /// {@template split}
 /// A representation of a number of potential [Variant]s
@@ -12,15 +9,17 @@ part 'split.g.dart';
 /// be a feature gate with just two potential [Variant]s
 /// or an experiment with many [Variant]s
 /// {@endtemplate}
-@freezed
-class Split with _$Split {
+@MappableClass()
+class Split with SplitMappable {
   /// {@macro split}
-  const factory Split({
-    required String name,
-    required List<Variant> variants,
-    @JsonKey(name: 'feature_gate') required bool isFeatureGate,
-  }) = _Split;
+  const Split({
+    required this.name,
+    required this.variants,
+    required this.isFeatureGate,
+  });
 
-  // ignore: public_member_api_docs
-  factory Split.fromJson(Map<String, dynamic> json) => _$SplitFromJson(json);
+  final String name;
+  final List<Variant> variants;
+  @MappableField(key: 'feature_gate')
+  final bool isFeatureGate;
 }

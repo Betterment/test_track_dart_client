@@ -1,7 +1,6 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 
-part 'variant.freezed.dart';
-part 'variant.g.dart';
+part 'variant.mapper.dart';
 
 /// {@template variant}
 /// Represents a single experience or outcome within a split
@@ -14,15 +13,11 @@ part 'variant.g.dart';
 /// of this experiment for various flavors of the redesign, to see which
 /// one performs the best
 /// {@endtemplate}
-@freezed
-class Variant with _$Variant {
+@MappableClass()
+class Variant with VariantMappable {
   /// {@macro variant}
-  const factory Variant({
-    required String name,
-    required int weight,
-  }) = _Variant;
+  const Variant({required this.name, required this.weight});
 
-  // ignore: public_member_api_docs
-  factory Variant.fromJson(Map<String, dynamic> json) =>
-      _$VariantFromJson(json);
+  final String name;
+  final int weight;
 }

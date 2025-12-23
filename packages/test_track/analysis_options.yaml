@@ -1,9 +1,11 @@
 include: package:lints/recommended.yaml
 
-analyzer: 
+page_formatter:
+  width: 80
+
+analyzer:
   exclude:
-    - "**/*.freezed.dart"
-    - "**/*.g.dart"
+    - '**/*.mapper.dart'
   language:
     strict-casts: true
     strict-raw-types: true

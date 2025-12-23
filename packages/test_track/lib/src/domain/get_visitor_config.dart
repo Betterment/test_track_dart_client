@@ -25,9 +25,9 @@ class GetVisitorConfig {
     required SturdyHttp client,
     required AnalyticsProvider analyticsProvider,
     required DataStorageProvider dataStorageProvider,
-  })  : _client = client,
-        _analyticsProvider = analyticsProvider,
-        _dataStorageProvider = dataStorageProvider;
+  }) : _client = client,
+       _analyticsProvider = analyticsProvider,
+       _dataStorageProvider = dataStorageProvider;
 
   /// {@macro get_visitor_config}
   Future<AppVisitorConfig> call({
@@ -41,14 +41,15 @@ class GetVisitorConfig {
         '${appVersionBuild.buildTimestamp}/visitors/$visitorId/config',
       ),
       onResponse: (r) => switch (r) {
-        OkResponse(:final response) => AppVisitorConfig.fromJson(response),
+        OkResponse(:final response) => AppVisitorConfigMapper.fromMap(response),
         _ => throw Exception(r.toString()),
       },
     );
 
     await _dataStorageProvider.storeVisitor(appVisitorConfig.visitor);
-    await _dataStorageProvider
-        .storeSplitRegistry(appVisitorConfig.splitRegistry);
+    await _dataStorageProvider.storeSplitRegistry(
+      appVisitorConfig.splitRegistry,
+    );
 
     await _analyticsProvider.identify(visitorId: appVisitorConfig.visitor.id);
 

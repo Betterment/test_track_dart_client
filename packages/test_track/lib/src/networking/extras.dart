@@ -11,26 +11,12 @@ const isIdempotentOptionsKey = 'is_idempotent';
 /// [isIdempotentOptionsKey]
 class IdempotentGetRequest extends GetRequest {
   IdempotentGetRequest(super.path)
-      : super(
-          options: Options(
-            extra: {
-              isIdempotentOptionsKey: true,
-            },
-          ),
-        );
+    : super(options: Options(extra: {isIdempotentOptionsKey: true}));
 }
 
 /// A convenience class for producing a [PostRequest] that contains the
 /// [isIdempotentOptionsKey]
 class IdempotentPostRequest extends PostRequest {
-  IdempotentPostRequest(
-    super.path, {
-    required super.data,
-  }) : super(
-          options: Options(
-            extra: {
-              isIdempotentOptionsKey: true,
-            },
-          ),
-        );
+  IdempotentPostRequest(super.path, {required super.data})
+    : super(options: Options(extra: {isIdempotentOptionsKey: true}));
 }

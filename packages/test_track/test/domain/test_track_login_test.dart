@@ -17,8 +17,10 @@ void main() {
       late Login subject;
 
       final visitorId = VisitorFactory.build().id;
-      final identifier =
-          const Identifier(identifierType: 'foo_id', value: '123');
+      final identifier = const Identifier(
+        identifierType: 'foo_id',
+        value: '123',
+      );
       final appVersionBuild = AppVersionBuildFactory.build();
 
       setUp(() async {
@@ -51,57 +53,62 @@ void main() {
               visitorIdFromRequest = data?['visitor_id'] as String?;
               isIdempotent =
                   request.requestOptions.extra['is_idempotent'] as bool;
-              return CharlatanHttpResponse(body: appVisitorConfig.toJson());
+              return CharlatanHttpResponse(body: appVisitorConfig.toMap());
             },
           );
         });
 
         test(
-            'it makes a POST request to the correct url with the correct body and returns an AppVisitorConfig',
-            () async {
-          final appVisitorConfig = await subject.call(
-            identifier: identifier,
-            visitorId: visitorId,
-            appVersionBuild: appVersionBuild,
-          );
-          expect(identifierValueFromRequest, identifier.value);
-          expect(identifierTypeFromRequest, identifier.identifierType);
-          expect(visitorIdFromRequest, visitorId);
-          expect(isIdempotent, isTrue);
-          expect(appVisitorConfig, isA<AppVisitorConfig>());
-        });
+          'it makes a POST request to the correct url with the correct body and returns an AppVisitorConfig',
+          () async {
+            final appVisitorConfig = await subject.call(
+              identifier: identifier,
+              visitorId: visitorId,
+              appVersionBuild: appVersionBuild,
+            );
+            expect(identifierValueFromRequest, identifier.value);
+            expect(identifierTypeFromRequest, identifier.identifierType);
+            expect(visitorIdFromRequest, visitorId);
+            expect(isIdempotent, isTrue);
+            expect(appVisitorConfig, isA<AppVisitorConfig>());
+          },
+        );
 
-        test('it stores the visitor from the returned AppVisitorConfig',
-            () async {
-          final visitorBefore = await dataStorageProvider.fetchVisitor();
-          expect(visitorBefore, isNull);
+        test(
+          'it stores the visitor from the returned AppVisitorConfig',
+          () async {
+            final visitorBefore = await dataStorageProvider.fetchVisitor();
+            expect(visitorBefore, isNull);
 
-          await subject.call(
-            identifier: identifier,
-            visitorId: visitorId,
-            appVersionBuild: appVersionBuild,
-          );
+            await subject.call(
+              identifier: identifier,
+              visitorId: visitorId,
+              appVersionBuild: appVersionBuild,
+            );
 
-          final visitorAfter = await dataStorageProvider.fetchVisitor();
-          expect(visitorAfter, isNotNull);
-        });
+            final visitorAfter = await dataStorageProvider.fetchVisitor();
+            expect(visitorAfter, isNotNull);
+          },
+        );
 
-        test('it stores the splitRegistry from the returned AppVisitorConfig',
-            () async {
-          final splitRegistryBefore =
-              await dataStorageProvider.fetchSplitRegistry();
-          expect(splitRegistryBefore, isNull);
+        test(
+          'it stores the splitRegistry from the returned AppVisitorConfig',
+          () async {
+            final splitRegistryBefore = await dataStorageProvider
+                .fetchSplitRegistry();
+            expect(splitRegistryBefore, isNull);
 
-          await subject.call(
-            identifier: identifier,
-            visitorId: visitorId,
-            appVersionBuild: appVersionBuild,
-          );
+            await subject.call(
+              identifier: identifier,
+              visitorId: visitorId,
+              appVersionBuild: appVersionBuild,
+            );
 
-          final splitRegistryAfter =
-              await dataStorageProvider.fetchSplitRegistry();
-          expect(splitRegistryAfter, isNotNull);
-        });
+            final splitRegistryAfter = await dataStorageProvider
+                .fetchSplitRegistry();
+            expect(splitRegistryAfter, isNotNull);
+          },
+        );
 
         test('it stores the login state as true', () async {
           final loginStateBefore = await dataStorageProvider.fetchLoginState();
@@ -138,17 +145,19 @@ void main() {
           );
         });
 
-        test('throws TestTrackLoginFailureException when network request fails',
-            () async {
-          expect(
-            () => subject.call(
-              identifier: identifier,
-              visitorId: visitorId,
-              appVersionBuild: appVersionBuild,
-            ),
-            throwsA(isA<TestTrackLoginFailureException>()),
-          );
-        });
+        test(
+          'throws TestTrackLoginFailureException when network request fails',
+          () async {
+            expect(
+              () => subject.call(
+                identifier: identifier,
+                visitorId: visitorId,
+                appVersionBuild: appVersionBuild,
+              ),
+              throwsA(isA<TestTrackLoginFailureException>()),
+            );
+          },
+        );
       });
     });
   });

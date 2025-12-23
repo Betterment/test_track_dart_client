@@ -39,10 +39,10 @@ class RunVary {
     required AnalyticsProvider analyticsProvider,
     required ReportAssignmentEvent reportAssignmentEvent,
     required DataStorageProvider dataStorageProvider,
-  })  : _calculateVariant = calculateVariant,
-        _analyticsProvider = analyticsProvider,
-        _reportAssignmentEvent = reportAssignmentEvent,
-        _dataStorageProvider = dataStorageProvider;
+  }) : _calculateVariant = calculateVariant,
+       _analyticsProvider = analyticsProvider,
+       _reportAssignmentEvent = reportAssignmentEvent,
+       _dataStorageProvider = dataStorageProvider;
 
   /// {@macro run_vary}
   RunVaryResult call({
@@ -85,10 +85,9 @@ class RunVary {
     // If for some reason the visitor was previously assigned
     // to a variant that no longer exists, return the default
     // variant
-    final resultingVariantName = split.variants
-            .singleWhereOrNull(
-              (v) => v.name == assignment!.variant,
-            )
+    final resultingVariantName =
+        split.variants
+            .singleWhereOrNull((v) => v.name == assignment!.variant)
             ?.name ??
         defaultVariant;
 
@@ -105,15 +104,10 @@ class RunVary {
         ),
       );
 
-    final updatedVisitor = visitor.copyWith(
-      assignments: visitorAssignments,
-    );
+    final updatedVisitor = visitor.copyWith(assignments: visitorAssignments);
 
     _dataStorageProvider.storeVisitor(updatedVisitor);
 
-    return RunVaryResult(
-      resultingVariantName,
-      updatedVisitor,
-    );
+    return RunVaryResult(resultingVariantName, updatedVisitor);
   }
 }

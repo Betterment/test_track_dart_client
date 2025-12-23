@@ -18,9 +18,8 @@ class FakeDataStorageProvider implements DataStorageProvider {
   ///
   /// [onInitialize] can be provided if you wish to be notified
   /// when [TestTrack] attempts to initialize the [DataStorageProvider]
-  FakeDataStorageProvider({
-    void Function()? onInitialize,
-  }) : _onInitialize = onInitialize;
+  FakeDataStorageProvider({void Function()? onInitialize})
+    : _onInitialize = onInitialize;
 
   @override
   Future<SplitRegistry?> fetchSplitRegistry() async {

@@ -24,7 +24,9 @@ Future<void> main() async {
   // Use `ab` to check if a feature is enabled. It will return true if the
   // feature is enabled for the current visitor.
   if (testTrack.ab(
-      splitName: 'some_feature_flag_enabled', context: 'app startup')) {
+    splitName: 'some_feature_flag_enabled',
+    context: 'app startup',
+  )) {
     // Do something!
   } else {
     // Do something else!

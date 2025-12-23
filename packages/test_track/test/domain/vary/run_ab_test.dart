@@ -33,11 +33,7 @@ void main() {
           final visitor = VisitorFactory.build();
 
           expect(
-            subject.call(
-              visitor: visitor,
-              split: split,
-              context: 'none',
-            ),
+            subject.call(visitor: visitor, split: split, context: 'none'),
             isA<RunAbResult>(),
           );
         });
@@ -56,32 +52,28 @@ void main() {
             context: 'none',
             trueVariant: 'thisOneIsTrue',
           );
-          expect(
-            result.isTrueVariant,
-            isTrue,
-          );
+          expect(result.isTrueVariant, isTrue);
         });
 
-        test('it returns false if calculated variant is not the true variant',
-            () {
-          final trueVariant = const Variant(name: 'thisOneIsTrue', weight: 0);
-          final split = SplitFactory.build().withVariants([
-            trueVariant,
-            const Variant(name: 'thisOneIsFalse', weight: 100),
-          ]);
-          final visitor = VisitorFactory.build();
+        test(
+          'it returns false if calculated variant is not the true variant',
+          () {
+            final trueVariant = const Variant(name: 'thisOneIsTrue', weight: 0);
+            final split = SplitFactory.build().withVariants([
+              trueVariant,
+              const Variant(name: 'thisOneIsFalse', weight: 100),
+            ]);
+            final visitor = VisitorFactory.build();
 
-          final result = subject.call(
-            visitor: visitor,
-            split: split,
-            context: 'none',
-            trueVariant: 'thisOneIsTrue',
-          );
-          expect(
-            result.isTrueVariant,
-            false,
-          );
-        });
+            final result = subject.call(
+              visitor: visitor,
+              split: split,
+              context: 'none',
+              trueVariant: 'thisOneIsTrue',
+            );
+            expect(result.isTrueVariant, false);
+          },
+        );
 
         test('it returns the updated visitor produced by RunVary', () {
           final trueVariant = const Variant(name: 'thisOneIsTrue', weight: 100);
@@ -121,11 +113,7 @@ void main() {
 
         test('it completes normally', () {
           expect(
-            subject.call(
-              visitor: visitor,
-              split: split,
-              context: 'none',
-            ),
+            subject.call(visitor: visitor, split: split, context: 'none'),
             isA<RunAbResult>(),
           );
         });
@@ -137,32 +125,26 @@ void main() {
             context: 'none',
             trueVariant: 'thisOneIsTrue',
           );
-          expect(
-            result.isTrueVariant,
-            true,
-          );
+          expect(result.isTrueVariant, true);
         });
 
-        test('it returns false if the single variant is not the true variant',
-            () {
-          final result = subject.call(
-            visitor: visitor,
-            split: split,
-            context: 'none',
-            trueVariant: 'randomTrueVariant',
-          );
-          expect(
-            result.isTrueVariant,
-            false,
-          );
-        });
+        test(
+          'it returns false if the single variant is not the true variant',
+          () {
+            final result = subject.call(
+              visitor: visitor,
+              split: split,
+              context: 'none',
+              trueVariant: 'randomTrueVariant',
+            );
+            expect(result.isTrueVariant, false);
+          },
+        );
 
         test('it defaults the trueVariant to "true" if none is supplied', () {
-          final split = SplitFactory.build().withVariants(
-            const [
-              Variant(name: 'true', weight: 100),
-            ],
-          );
+          final split = SplitFactory.build().withVariants(const [
+            Variant(name: 'true', weight: 100),
+          ]);
           final visitor = VisitorFactory.build();
 
           final result = subject.call(
@@ -171,10 +153,7 @@ void main() {
             context: 'none',
             /* trueVariant not supplied */
           );
-          expect(
-            result.isTrueVariant,
-            true,
-          );
+          expect(result.isTrueVariant, true);
         });
       });
 
@@ -188,11 +167,7 @@ void main() {
           final visitor = VisitorFactory.build();
 
           expect(
-            () => subject.call(
-              visitor: visitor,
-              split: split,
-              context: 'none',
-            ),
+            () => subject.call(visitor: visitor, split: split, context: 'none'),
             throwsA(isA<InvalidSplitConfigurationForAbTestingException>()),
           );
         });

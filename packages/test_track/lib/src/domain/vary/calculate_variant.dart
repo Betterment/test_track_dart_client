@@ -19,10 +19,7 @@ import 'package:test_track/test_track.dart';
 /// {@endtemplate}
 class CalculateVariant {
   /// {@macro calculate_variant}
-  Variant call({
-    required String visitorId,
-    required Split split,
-  }) {
+  Variant call({required String visitorId, required Split split}) {
     var bucketCeiling = 0;
     final assignmentBucket = _assignmentBucket(visitorId, split);
     final sortedVariants = _sortedVariants(split);
@@ -37,17 +34,11 @@ class CalculateVariant {
     throw AssignmentBucketOutOfRangeException();
   }
 
-  String _splitVisitorHash(
-    String visitorId,
-    Split split,
-  ) {
+  String _splitVisitorHash(String visitorId, Split split) {
     return md5.convert(utf8.encode('${split.name}$visitorId')).toString();
   }
 
-  int _hashFixNum(
-    String visitorId,
-    Split split,
-  ) {
+  int _hashFixNum(String visitorId, Split split) {
     final substring = _splitVisitorHash(visitorId, split).substring(0, 8);
     return int.parse(substring, radix: 16);
   }
@@ -57,10 +48,7 @@ class CalculateVariant {
   }
 
   List<Variant> _sortedVariants(Split split) {
-    return List.of(split.variants)
-      ..sort(
-        (a, b) => a.name.compareTo(b.name),
-      );
+    return List.of(split.variants)..sort((a, b) => a.name.compareTo(b.name));
   }
 }
 

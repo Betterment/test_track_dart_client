@@ -9,9 +9,7 @@ class LoggingInterceptor extends Interceptor {
   final TestTrackLogger _logger;
 
   /// {@macro logging_interceptor}
-  LoggingInterceptor({
-    required TestTrackLogger logger,
-  }) : _logger = logger;
+  LoggingInterceptor({required TestTrackLogger logger}) : _logger = logger;
 
   @override
   void onRequest(
@@ -23,8 +21,9 @@ class LoggingInterceptor extends Interceptor {
       return;
     }
 
-    _logger
-        .debug('TestTrack HttpClient - ⬆️ [${options.method}] ${options.uri}');
+    _logger.debug(
+      'TestTrack HttpClient - ⬆️ [${options.method}] ${options.uri}',
+    );
     _logger.debug('headers: ${options.headers}');
     if (options.data != null) {
       _logger.debug('\t data: ${options.data}');
@@ -65,7 +64,8 @@ class LoggingInterceptor extends Interceptor {
     }
 
     _logger.debug(
-        'TestTrack HttpClient - ⬇️ [${response.statusCode}] ${response.requestOptions.uri}');
+      'TestTrack HttpClient - ⬇️ [${response.statusCode}] ${response.requestOptions.uri}',
+    );
     if (response.data != null) {
       _logger.debug('\t data: ${response.data}');
     }

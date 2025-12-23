@@ -1,5 +1,3 @@
-library test_track;
-
 export 'src/analytics/analytics.dart';
 export 'src/errors/errors.dart';
 export 'src/logging/logging.dart';

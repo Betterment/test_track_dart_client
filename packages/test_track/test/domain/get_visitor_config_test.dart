@@ -23,9 +23,7 @@ void main() {
         appVisitorConfig = AppVisitorConfigFactory.build();
         final charlatan = Charlatan()
           ..withDefaults()
-          ..whenGetVisitorConfig(
-            response: appVisitorConfig,
-          );
+          ..whenGetVisitorConfig(response: appVisitorConfig);
         client = FakeSturdyHttp(charlatan);
         dataStorageProvider = FakeDataStorageProvider();
         analyticsProvider = FakeAnalyticsProvider();
@@ -37,30 +35,33 @@ void main() {
       });
 
       test(
-          'it makes a GET request to the correct url and returns an AppVisitorConfig',
-          () async {
-        final result = await subject.call(
-          visitorId: visitorId,
-          appVersionBuild: appVersionBuild,
-        );
-        expect(result, appVisitorConfig);
-      });
+        'it makes a GET request to the correct url and returns an AppVisitorConfig',
+        () async {
+          final result = await subject.call(
+            visitorId: visitorId,
+            appVersionBuild: appVersionBuild,
+          );
+          expect(result, appVisitorConfig);
+        },
+      );
 
-      test('it stores new visitor and split registry in data storage',
-          () async {
-        final initialVisitor = Visitor.build();
-        await dataStorageProvider.storeVisitor(initialVisitor);
-        await dataStorageProvider.storeSplitRegistry(SplitRegistry.empty());
-        await subject.call(
-          visitorId: visitorId,
-          appVersionBuild: appVersionBuild,
-        );
-        final storedVisitor = await dataStorageProvider.fetchVisitor();
-        final storedSplitRegistry =
-            await dataStorageProvider.fetchSplitRegistry();
-        expect(initialVisitor.id == storedVisitor!.id, isFalse);
-        expect(storedSplitRegistry!.splits, isNotEmpty);
-      });
+      test(
+        'it stores new visitor and split registry in data storage',
+        () async {
+          final initialVisitor = Visitor.build();
+          await dataStorageProvider.storeVisitor(initialVisitor);
+          await dataStorageProvider.storeSplitRegistry(SplitRegistry.empty());
+          await subject.call(
+            visitorId: visitorId,
+            appVersionBuild: appVersionBuild,
+          );
+          final storedVisitor = await dataStorageProvider.fetchVisitor();
+          final storedSplitRegistry = await dataStorageProvider
+              .fetchSplitRegistry();
+          expect(initialVisitor.id == storedVisitor!.id, isFalse);
+          expect(storedSplitRegistry!.splits, isNotEmpty);
+        },
+      );
 
       test('it invokes identify on the analytics provider ', () async {
         expect(analyticsProvider.visitorsIdentified, isEmpty);

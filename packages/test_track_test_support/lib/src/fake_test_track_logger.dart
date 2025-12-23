@@ -25,9 +25,7 @@ class FakeTestTrackLogger implements TestTrackLogger {
   List<LogEvent> get errorLogs => UnmodifiableListView(_errorLogs);
 
   ///{@macro fake_test_track_logger}
-  FakeTestTrackLogger({
-    required this.shouldEnableNetworkLogging,
-  });
+  FakeTestTrackLogger({required this.shouldEnableNetworkLogging});
 
   /// A convenience constructor to produce a [FakeTestTrackLogger]
   /// with [shouldEnableNetworkLogging] set to false

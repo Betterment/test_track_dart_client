@@ -27,9 +27,9 @@ class OverrideVisitorId {
     required GetVisitorConfig getVisitorConfig,
     required DataStorageProvider dataStorageProvider,
     required TestTrackLogger logger,
-  })  : _getVisitorConfig = getVisitorConfig,
-        _dataStorageProvider = dataStorageProvider,
-        _logger = logger;
+  }) : _getVisitorConfig = getVisitorConfig,
+       _dataStorageProvider = dataStorageProvider,
+       _logger = logger;
 
   /// {@macro override_visitor_id}
   Future<AppVisitorConfig?> call({
@@ -39,7 +39,8 @@ class OverrideVisitorId {
     final isLoggedIn = await _dataStorageProvider.fetchLoginState();
     if (isLoggedIn) {
       _logger.info(
-          'Attempt to override visitor id ignored because a user is currently logged in.');
+        'Attempt to override visitor id ignored because a user is currently logged in.',
+      );
       return null;
     }
     return _getVisitorConfig(

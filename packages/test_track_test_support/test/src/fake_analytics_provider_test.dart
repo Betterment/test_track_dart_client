@@ -14,20 +14,11 @@ void main() {
       test('it collects tracked assignments', () {
         final assignment1 = AssignmentFactory.build();
         final assignment2 = AssignmentFactory.build();
-        subject.trackAssignment(
-          visitorId: '123',
-          assignment: assignment1,
-        );
-        subject.trackAssignment(
-          visitorId: '456',
-          assignment: assignment2,
-        );
+        subject.trackAssignment(visitorId: '123', assignment: assignment1);
+        subject.trackAssignment(visitorId: '456', assignment: assignment2);
         expect(
           subject.assignmentsTracked,
-          onlyContains([
-            Pair('123', assignment1),
-            Pair('456', assignment2),
-          ]),
+          onlyContains([Pair('123', assignment1), Pair('456', assignment2)]),
         );
       });
     });
@@ -36,45 +27,27 @@ void main() {
       test('it returns true if the assignment was tracked', () {
         final assignment1 = AssignmentFactory.build();
 
-        subject.trackAssignment(
-          visitorId: '123',
-          assignment: assignment1,
-        );
+        subject.trackAssignment(visitorId: '123', assignment: assignment1);
 
-        expect(
-          subject.tracked(assignment: Pair('123', assignment1)),
-          isTrue,
-        );
+        expect(subject.tracked(assignment: Pair('123', assignment1)), isTrue);
       });
 
       test('it returns false if the assignment was not tracked', () {
         final assignment1 = AssignmentFactory.build();
 
-        expect(
-          subject.tracked(assignment: Pair('123', assignment1)),
-          isFalse,
-        );
+        expect(subject.tracked(assignment: Pair('123', assignment1)), isFalse);
       });
     });
 
     group('noAssignmentsTracked', () {
       test('it returns true if no assignments were tracked', () {
-        expect(
-          subject.noAssignmentsTracked(),
-          isTrue,
-        );
+        expect(subject.noAssignmentsTracked(), isTrue);
       });
 
       test('it returns false if assignments were tracked', () {
         final assignment1 = AssignmentFactory.build();
-        subject.trackAssignment(
-          visitorId: '123',
-          assignment: assignment1,
-        );
-        expect(
-          subject.noAssignmentsTracked(),
-          isFalse,
-        );
+        subject.trackAssignment(visitorId: '123', assignment: assignment1);
+        expect(subject.noAssignmentsTracked(), isFalse);
       });
     });
 
@@ -83,10 +56,7 @@ void main() {
         subject.identify(visitorId: '123');
         subject.identify(visitorId: '456');
 
-        expect(
-          subject.visitorsIdentified,
-          onlyContains(['123', '456']),
-        );
+        expect(subject.visitorsIdentified, onlyContains(['123', '456']));
       });
     });
 
@@ -94,37 +64,25 @@ void main() {
       test('it returns true if the visitor was identified', () {
         subject.identify(visitorId: '123');
 
-        expect(
-          subject.identified(visitorId: '123'),
-          isTrue,
-        );
+        expect(subject.identified(visitorId: '123'), isTrue);
       });
 
       test('it returns false if the visitor was not identified', () {
         subject.identify(visitorId: '123');
 
-        expect(
-          subject.identified(visitorId: '456'),
-          isFalse,
-        );
+        expect(subject.identified(visitorId: '456'), isFalse);
       });
     });
 
     group('noVisitorsIdentified', () {
       test('it returns true if no visitors were identified', () {
-        expect(
-          subject.noVisitorsIdentified(),
-          isTrue,
-        );
+        expect(subject.noVisitorsIdentified(), isTrue);
       });
 
       test('it returns false if any visitors were identified', () {
         subject.identify(visitorId: '123');
 
-        expect(
-          subject.noVisitorsIdentified(),
-          isFalse,
-        );
+        expect(subject.noVisitorsIdentified(), isFalse);
       });
     });
   });

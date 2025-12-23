@@ -1,22 +1,19 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:test_track/src/errors/errors.dart';
 import 'package:test_track/src/models/split.dart';
 
-part 'split_registry.freezed.dart';
-part 'split_registry.g.dart';
+part 'split_registry.mapper.dart';
 
 /// {@template split_registry}
 /// The registry of [Split]s, usually associated
 /// with the current TestTrack visitor
 /// {@endtemplate}
-@freezed
-class SplitRegistry with _$SplitRegistry {
+@MappableClass()
+class SplitRegistry with SplitRegistryMappable {
   /// {@macro split_registry}
-  factory SplitRegistry({required List<Split> splits}) = _SplitRegistry;
+  const SplitRegistry({required this.splits});
 
-  // ignore: public_member_api_docs
-  factory SplitRegistry.fromJson(Map<String, dynamic> json) =>
-      _$SplitRegistryFromJson(json);
+  final List<Split> splits;
 
   /// Produces a [SplitRegistry] with no [Split]s
   factory SplitRegistry.empty() => SplitRegistry(splits: []);

@@ -69,9 +69,7 @@ class InvalidSplitConfigurationForAbTestingException
   final String splitName;
 
   /// {@macro invalid_split_configuration_for_ab_testing_exception}
-  InvalidSplitConfigurationForAbTestingException({
-    required this.splitName,
-  });
+  InvalidSplitConfigurationForAbTestingException({required this.splitName});
 
   @override
   String toString() =>

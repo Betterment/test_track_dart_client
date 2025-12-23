@@ -15,15 +15,16 @@ typedef SystemProxyGetter = Future<Map<String, String>?> Function();
 /// {@endtemplate}
 class SystemProxyInterceptor extends Interceptor {
   /// {@macro system_proxy_interceptor}
-  SystemProxyInterceptor({
-    required SystemProxyGetter systemProxyGetter,
-  }) : _systemProxyGetter = systemProxyGetter;
+  SystemProxyInterceptor({required SystemProxyGetter systemProxyGetter})
+    : _systemProxyGetter = systemProxyGetter;
 
   final SystemProxyGetter _systemProxyGetter;
 
   @override
   Future<void> onRequest(
-      RequestOptions options, RequestInterceptorHandler handler) async {
+    RequestOptions options,
+    RequestInterceptorHandler handler,
+  ) async {
     final proxy = await _systemProxyGetter();
 
     if (proxy != null) {

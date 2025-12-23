@@ -19,10 +19,7 @@ class AssignmentOverride extends Equatable {
   final String variant;
 
   /// {@macro assignment_override}
-  const AssignmentOverride({
-    required this.splitName,
-    required this.variant,
-  });
+  const AssignmentOverride({required this.splitName, required this.variant});
 
   /// The context of the override
   String get context => assignmentContext;

@@ -10,6 +10,9 @@ class Identifier with IdentifierMappable {
   /// {@macro identifier}
   const Identifier({required this.identifierType, required this.value});
 
+  /// The type of identifier (e.g., "user_id")
   final String identifierType;
+
+  /// The value of the identifier (e.g., "12345")
   final String value;
 }

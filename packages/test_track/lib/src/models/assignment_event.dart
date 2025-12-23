@@ -19,7 +19,12 @@ class AssignmentEvent with AssignmentEventMappable {
     required this.context,
   });
 
+  /// The visitor ID associated with the assignment
   final String visitorId;
+
+  /// The split name associated with the assignment
   final String splitName;
+
+  /// The context in which the assignment was made
   final String context;
 }

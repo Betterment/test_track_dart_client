@@ -15,7 +15,10 @@ class AppVisitorConfig with AppVisitorConfigMappable {
   /// {@macro app_visitor_config}
   const AppVisitorConfig({required this.splits, required this.visitor});
 
+  /// The list of [Split]s associated with the current visitor
   final List<Split> splits;
+
+  /// The current [Visitor]
   final Visitor visitor;
 }
 

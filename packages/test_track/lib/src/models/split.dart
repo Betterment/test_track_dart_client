@@ -18,8 +18,13 @@ class Split with SplitMappable {
     required this.isFeatureGate,
   });
 
+  /// The name of the split
   final String name;
+
+  /// The list of potential [Variant]s for this split
   final List<Variant> variants;
+
+  /// Whether this split is a feature gate
   @MappableField(key: 'feature_gate')
   final bool isFeatureGate;
 }

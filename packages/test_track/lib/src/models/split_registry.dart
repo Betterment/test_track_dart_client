@@ -13,6 +13,7 @@ class SplitRegistry with SplitRegistryMappable {
   /// {@macro split_registry}
   const SplitRegistry({required this.splits});
 
+  /// The list of [Split]s in this registry
   final List<Split> splits;
 
   /// Produces a [SplitRegistry] with no [Split]s

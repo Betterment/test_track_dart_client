@@ -18,6 +18,9 @@ class Variant with VariantMappable {
   /// {@macro variant}
   const Variant({required this.name, required this.weight});
 
+  /// The name of the variant
   final String name;
+
+  /// The weight of the variant
   final int weight;
 }

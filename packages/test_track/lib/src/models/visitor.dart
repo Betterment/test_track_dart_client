@@ -12,7 +12,10 @@ class Visitor with VisitorMappable {
   /// {@macro visitor}
   const Visitor({required this.assignments, required this.id});
 
+  /// The list of [Assignment]s associated with this visitor
   final List<Assignment> assignments;
+
+  /// The unique ID of the visitor
   final String id;
 
   /// {@macro visitor}

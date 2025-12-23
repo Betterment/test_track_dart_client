@@ -6,7 +6,7 @@ part 'app_version_build.mapper.dart';
 /// Encapsulates the metadata associated with
 /// a specific version of your application
 /// {@endtemplate}
-@MappableClass()
+@MappableClass(caseStyle: CaseStyle.camelCase)
 class AppVersionBuild with AppVersionBuildMappable {
   /// {@macro app_version_build}
   ///
@@ -19,7 +19,12 @@ class AppVersionBuild with AppVersionBuildMappable {
     required this.buildTimestamp,
   });
 
+  /// The name of the application
   final String appName;
+
+  /// The version of the application
   final String version;
+
+  /// The build timestamp of the application
   final String buildTimestamp;
 }

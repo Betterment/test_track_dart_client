@@ -24,8 +24,13 @@ class Assignment with AssignmentMappable {
     return Assignment(splitName: splitName, variant: variant, context: context);
   }
 
+  /// The name of the split
   final String splitName;
+
+  /// The assigned variant
   final String variant;
+
+  /// The context in which the assignment was made
   final String context;
 }
 

@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 env:
-  DART_VERSION: 3.5.0
+  DART_VERSION: 3.10.4
 
 jobs:
   build:

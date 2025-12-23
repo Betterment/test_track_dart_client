@@ -25,7 +25,6 @@ class AppVersionBuildMapper extends ClassMapperBase<AppVersionBuild> {
   static const Field<AppVersionBuild, String> _f$appName = Field(
     'appName',
     _$appName,
-    key: r'app_name',
   );
   static String _$version(AppVersionBuild v) => v.version;
   static const Field<AppVersionBuild, String> _f$version = Field(
@@ -36,7 +35,6 @@ class AppVersionBuildMapper extends ClassMapperBase<AppVersionBuild> {
   static const Field<AppVersionBuild, String> _f$buildTimestamp = Field(
     'buildTimestamp',
     _$buildTimestamp,
-    key: r'build_timestamp',
   );
 
   @override

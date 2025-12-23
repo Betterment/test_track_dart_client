@@ -19,7 +19,8 @@ jobs:
         with:
           sdk: ${{ env.DART_VERSION }}
       - name: Install dependencies
-        run: dart pub get && melos bootstrap
+        run: |
+          dart pub global activate melos && melos bootstrap
 
       - name: Run build_runner
         run: melos exec --depends-on="build_runner" --fail-fast -- "dart run build_runner build --delete-conflicting-outputs"
@@ -65,6 +66,6 @@ jobs:
           sdk: ${{ env.DART_VERSION }}
       - name: Install dependencies
         run: |
-          dart pub get && melos bootstrap
+          dart pub global activate melos && melos bootstrap
       - name: Verify pub score
         run: melos exec -- "../../tool/verify_pub_score.sh 150"

@@ -1,5 +1,4 @@
 import 'package:charlatan/charlatan.dart';
-import 'package:sturdy_http/sturdy_http.dart';
 import 'package:test/test.dart';
 import 'package:test_track/src/domain/domain.dart';
 import 'package:test_track/test_track.dart';

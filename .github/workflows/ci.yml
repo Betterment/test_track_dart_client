@@ -67,5 +67,6 @@ jobs:
       - name: Install dependencies
         run: |
           dart pub global activate melos && melos bootstrap
+          dart pub global activate pana
       - name: Verify pub score
         run: melos exec -- "../../tool/verify_pub_score.sh 150"

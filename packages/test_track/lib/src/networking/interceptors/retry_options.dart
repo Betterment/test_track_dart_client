@@ -14,7 +14,7 @@ class RetryOptions {
 
   /// {@macro retry_options}
   RetryOptions({this.attempts = 3, Duration? retryInterval})
-      : retryInterval = retryInterval ?? const Duration(seconds: 1);
+    : retryInterval = retryInterval ?? const Duration(seconds: 1);
 
   /// Produces a [RetryOptions] object given a [RequestOptions] by
   /// parsing the extra produced by [toExtraOptions]
@@ -39,16 +39,11 @@ class RetryOptions {
   /// the current state of retries, which can then be parsed
   /// from [RequestOptions] extras via [fromRequestOptions]
   Map<String, dynamic> toExtraOptions() {
-    return <String, dynamic>{
-      _retryRequestKey: this,
-    };
+    return <String, dynamic>{_retryRequestKey: this};
   }
 
   // ignore: public_member_api_docs
-  RetryOptions copyWith({
-    int? attempts,
-    Duration? retryInterval,
-  }) =>
+  RetryOptions copyWith({int? attempts, Duration? retryInterval}) =>
       RetryOptions(
         attempts: attempts ?? this.attempts,
         retryInterval: retryInterval ?? this.retryInterval,

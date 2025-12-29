@@ -18,33 +18,25 @@ void main() {
           splits: [
             const Split(
               name: 'name',
-              variants: [
-                Variant(name: 'name', weight: 100),
-              ],
+              variants: [Variant(name: 'name', weight: 100)],
               isFeatureGate: true,
             ),
           ],
         );
-        final testTrack = FakeTestTrack(
-          splitRegistry: splitRegistry,
-        );
+        final testTrack = FakeTestTrack(splitRegistry: splitRegistry);
         expect(splitRegistry, testTrack.splitRegistry);
       });
     });
 
     group('visitorAssignments', () {
       test('it returns provided visitors assignments', () {
-        final visitor = Visitor.build().copyWith(assignments: [
-          const Assignment(
-            splitName: 'foo_enabled',
-            variant: 'true',
-          )
-        ]);
-        final testTrack = FakeTestTrack(visitor: visitor);
-        expect(
-          visitor.assignments,
-          testTrack.visitorAssignments,
+        final visitor = Visitor.build().copyWith(
+          assignments: [
+            const Assignment(splitName: 'foo_enabled', variant: 'true'),
+          ],
         );
+        final testTrack = FakeTestTrack(visitor: visitor);
+        expect(visitor.assignments, testTrack.visitorAssignments);
       });
     });
 
@@ -52,23 +44,15 @@ void main() {
       test('it returns true by default', () {
         final testTrack = FakeTestTrack();
         expect(
-          testTrack.ab(
-            splitName: 'splitName',
-            context: 'context',
-          ),
+          testTrack.ab(splitName: 'splitName', context: 'context'),
           isTrue,
         );
       });
 
       test('it returns delegated logic if provided', () {
-        final testTrack = FakeTestTrack(
-          ab: (_, __, ___) => false,
-        );
+        final testTrack = FakeTestTrack(ab: (_, _, _) => false);
         expect(
-          testTrack.ab(
-            splitName: 'splitName',
-            context: 'context',
-          ),
+          testTrack.ab(splitName: 'splitName', context: 'context'),
           isFalse,
         );
       });
@@ -88,9 +72,7 @@ void main() {
       });
 
       test('it returns delegated logic if provided', () {
-        final testTrack = FakeTestTrack(
-          vary: (_, __, ___) => 'dude',
-        );
+        final testTrack = FakeTestTrack(vary: (_, _, _) => 'dude');
         expect(
           testTrack.vary(
             splitName: 'splitName',
@@ -108,10 +90,7 @@ void main() {
 
         expect(testTrack.isLoggedIn, isFalse);
 
-        await testTrack.login(
-          identifierType: 'identifierType',
-          value: 'value',
-        );
+        await testTrack.login(identifierType: 'identifierType', value: 'value');
 
         expect(testTrack.isLoggedIn, isTrue);
       });
@@ -131,19 +110,24 @@ void main() {
     });
 
     group('reset', () {
-      test('it changes auth state to logged out and builds a new visitor',
-          () async {
-        final testTrack = FakeTestTrack();
-        final visitor = testTrack.visitor;
-        await testTrack.login(identifierType: 'identifierType', value: 'value');
+      test(
+        'it changes auth state to logged out and builds a new visitor',
+        () async {
+          final testTrack = FakeTestTrack();
+          final visitor = testTrack.visitor;
+          await testTrack.login(
+            identifierType: 'identifierType',
+            value: 'value',
+          );
 
-        expect(testTrack.isLoggedIn, isTrue);
+          expect(testTrack.isLoggedIn, isTrue);
 
-        await testTrack.reset();
+          await testTrack.reset();
 
-        expect(testTrack.isLoggedIn, isFalse);
-        expect(testTrack.visitor == visitor, isFalse);
-      });
+          expect(testTrack.isLoggedIn, isFalse);
+          expect(testTrack.visitor == visitor, isFalse);
+        },
+      );
     });
 
     group('overrideVisitorId', () {

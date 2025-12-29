@@ -4,3 +4,7 @@
 
 # FVM Version Cache
 .fvm/
+
+# FVM Config
+.fvmrc
+.vscode/settings.json

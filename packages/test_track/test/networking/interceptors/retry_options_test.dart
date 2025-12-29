@@ -6,46 +6,49 @@ void main() {
   group('RetryOptions', () {
     group('shouldRetry', () {
       group(
-          'when retries > 0 and the request is idempotent and the error type is CONNECT_TIMEOUT',
-          () {
-        test('it returns true', () {
-          final subject = RetryOptions(attempts: 2);
-          final error = DioException(
-            type: DioExceptionType.connectionTimeout,
-            requestOptions: RequestOptions(path: ''),
-          );
+        'when retries > 0 and the request is idempotent and the error type is CONNECT_TIMEOUT',
+        () {
+          test('it returns true', () {
+            final subject = RetryOptions(attempts: 2);
+            final error = DioException(
+              type: DioExceptionType.connectionTimeout,
+              requestOptions: RequestOptions(path: ''),
+            );
 
-          expect(subject.shouldRetry(error, isIdempotent: true), true);
-        });
-      });
-
-      group(
-          'when retries > 0 and the error type is RECEIVE_TIMEOUT and the request is idempotent',
-          () {
-        test('it returns true', () {
-          final subject = RetryOptions(attempts: 2);
-          final error = DioException(
-            type: DioExceptionType.receiveTimeout,
-            requestOptions: RequestOptions(path: ''),
-          );
-
-          expect(subject.shouldRetry(error, isIdempotent: false), false);
-        });
-      });
+            expect(subject.shouldRetry(error, isIdempotent: true), true);
+          });
+        },
+      );
 
       group(
-          'when retries >   and the error type is RECEIVE_TIMEOUT and the request is not idempotent',
-          () {
-        test('it returns true', () {
-          final subject = RetryOptions(attempts: 2);
-          final error = DioException(
-            type: DioExceptionType.receiveTimeout,
-            requestOptions: RequestOptions(path: ''),
-          );
+        'when retries > 0 and the error type is RECEIVE_TIMEOUT and the request is idempotent',
+        () {
+          test('it returns true', () {
+            final subject = RetryOptions(attempts: 2);
+            final error = DioException(
+              type: DioExceptionType.receiveTimeout,
+              requestOptions: RequestOptions(path: ''),
+            );
 
-          expect(subject.shouldRetry(error, isIdempotent: true), true);
-        });
-      });
+            expect(subject.shouldRetry(error, isIdempotent: false), false);
+          });
+        },
+      );
+
+      group(
+        'when retries >   and the error type is RECEIVE_TIMEOUT and the request is not idempotent',
+        () {
+          test('it returns true', () {
+            final subject = RetryOptions(attempts: 2);
+            final error = DioException(
+              type: DioExceptionType.receiveTimeout,
+              requestOptions: RequestOptions(path: ''),
+            );
+
+            expect(subject.shouldRetry(error, isIdempotent: true), true);
+          });
+        },
+      );
 
       group('when retries is equal to 0', () {
         test('it returns false', () {
@@ -73,12 +76,14 @@ void main() {
     });
 
     group('toExtraOptions', () {
-      test('it returns a map with retry options located at retry_request key',
-          () {
-        final subject = RetryOptions(attempts: 2);
+      test(
+        'it returns a map with retry options located at retry_request key',
+        () {
+          final subject = RetryOptions(attempts: 2);
 
-        expect(subject.toExtraOptions(), {'retry_request': subject});
-      });
+          expect(subject.toExtraOptions(), {'retry_request': subject});
+        },
+      );
     });
   });
 }

@@ -19,26 +19,25 @@ class ReportAssignmentEvent {
   ReportAssignmentEvent({
     required SturdyHttp client,
     required TestTrackLogger logger,
-  })  : _client = client,
-        _logger = logger;
+  }) : _client = client,
+       _logger = logger;
 
   /// {@macro report_assignment_event}
   Future<void> call(AssignmentEvent assignmentEvent) async {
     await _client.execute(
       IdempotentPostRequest(
         '/api/v1/assignment_event',
-        data: NetworkRequestBody.json(
-          {
-            'visitor_id': assignmentEvent.visitorId,
-            'split_name': assignmentEvent.splitName,
-            'context': assignmentEvent.context,
-          },
-        ),
+        data: JsonRequestBody({
+          'visitor_id': assignmentEvent.visitorId,
+          'split_name': assignmentEvent.splitName,
+          'context': assignmentEvent.context,
+        }),
       ),
       onResponse: (r) => switch (r) {
         OkNoContent() => null,
         _ => _logger.error(
-            'Unable to report assignment event: $assignmentEvent with error: $r'),
+          'Unable to report assignment event: $assignmentEvent with error: $r',
+        ),
       },
     );
   }

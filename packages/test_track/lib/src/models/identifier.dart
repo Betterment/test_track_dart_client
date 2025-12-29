@@ -1,20 +1,18 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 
-part 'identifier.freezed.dart';
-part 'identifier.g.dart';
+part 'identifier.mapper.dart';
 
 /// {@template identifier}
 /// Uniquely identifies a TestTrack visitor
 /// {@endtemplate}
-@freezed
-class Identifier with _$Identifier {
+@MappableClass()
+class Identifier with IdentifierMappable {
   /// {@macro identifier}
-  const factory Identifier({
-    required String identifierType,
-    required String value,
-  }) = _Identifier;
+  const Identifier({required this.identifierType, required this.value});
 
-  // ignore: public_member_api_docs
-  factory Identifier.fromJson(Map<String, dynamic> json) =>
-      _$IdentifierFromJson(json);
+  /// The type of identifier (e.g., "user_id")
+  final String identifierType;
+
+  /// The value of the identifier (e.g., "12345")
+  final String value;
 }

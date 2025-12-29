@@ -31,9 +31,11 @@ void main() {
       dataStorageInitialized = false;
 
       analyticsProvider = FakeAnalyticsProvider();
-      dataStorageProvider = FakeDataStorageProvider(onInitialize: () {
-        dataStorageInitialized = true;
-      });
+      dataStorageProvider = FakeDataStorageProvider(
+        onInitialize: () {
+          dataStorageInitialized = true;
+        },
+      );
 
       appVersionBuild = AppVersionBuildFactory.build();
       final visitor = VisitorFactory.build();
@@ -60,13 +62,19 @@ void main() {
         setUp(() async {
           subject = await buildSubject();
         });
-        test('it stores the visitor and splitRegistry from the result',
-            () async {
-          expect(await dataStorageProvider.fetchVisitor(),
-              appVisitorConfig.visitor);
-          expect(await dataStorageProvider.fetchSplitRegistry(),
-              appVisitorConfig.splitRegistry);
-        });
+        test(
+          'it stores the visitor and splitRegistry from the result',
+          () async {
+            expect(
+              await dataStorageProvider.fetchVisitor(),
+              appVisitorConfig.visitor,
+            );
+            expect(
+              await dataStorageProvider.fetchSplitRegistry(),
+              appVisitorConfig.splitRegistry,
+            );
+          },
+        );
 
         test('it calls identify on AnalyticsProvider', () async {
           expect(analyticsProvider.visitorsIdentified.length, 1);
@@ -102,8 +110,9 @@ void main() {
           // Store a cached visitor and split registry to prevent TestTrack
           // from generating them for us
           await dataStorageProvider.storeVisitor(appVisitorConfig.visitor);
-          await dataStorageProvider
-              .storeSplitRegistry(appVisitorConfig.splitRegistry);
+          await dataStorageProvider.storeSplitRegistry(
+            appVisitorConfig.splitRegistry,
+          );
 
           subject = await buildSubject();
 
@@ -143,23 +152,28 @@ void main() {
       });
 
       test(
-          'it calls createAssignmentOverrides and updates the AppVisitorConfig',
-          () async {
-        final override =
-            const AssignmentOverride(splitName: 'foo_enabled', variant: 'true');
+        'it calls createAssignmentOverrides and updates the AppVisitorConfig',
+        () async {
+          final override = const AssignmentOverride(
+            splitName: 'foo_enabled',
+            variant: 'true',
+          );
 
-        final result =
-            subject.createAssignmentOverrides(assignmentOverrides: [override]);
-        await result;
+          final result = subject.createAssignmentOverrides(
+            assignmentOverrides: [override],
+          );
+          await result;
 
-        expect(result, completes);
+          expect(result, completes);
 
-        final visitor = await dataStorageProvider.fetchVisitor();
-        final fooEnabledSplits = visitor!.assignments
-            .where((a) => a.splitName == 'foo_enabled' && a.variant == 'true');
+          final visitor = await dataStorageProvider.fetchVisitor();
+          final fooEnabledSplits = visitor!.assignments.where(
+            (a) => a.splitName == 'foo_enabled' && a.variant == 'true',
+          );
 
-        expect(fooEnabledSplits, isNotEmpty);
-      });
+          expect(fooEnabledSplits, isNotEmpty);
+        },
+      );
     });
 
     group('vary', () {
@@ -180,31 +194,31 @@ void main() {
         });
       });
 
-      group('when given a split name that does not exist in the split registry',
-          () {
-        test('it throws a SplitNotFoundException', () {
-          final split = appVisitorConfig.splits.first;
-          final fakeName = '${split.name}FAKE';
+      group(
+        'when given a split name that does not exist in the split registry',
+        () {
+          test('it throws a SplitNotFoundException', () {
+            final split = appVisitorConfig.splits.first;
+            final fakeName = '${split.name}FAKE';
 
-          expect(
-            () => subject.vary(
-              splitName: fakeName,
-              defaultVariant: '',
-              context: '',
-            ),
-            throwsA(isA<SplitNotFoundException>()),
-          );
-        });
-      });
+            expect(
+              () => subject.vary(
+                splitName: fakeName,
+                defaultVariant: '',
+                context: '',
+              ),
+              throwsA(isA<SplitNotFoundException>()),
+            );
+          });
+        },
+      );
     });
 
     group('overrideVisitorId', () {
       test('it fetches visitor config', () async {
         final visitorId = 'overridden-id';
         final config = AppVisitorConfigFactory.build().copyWith(
-          visitor: VisitorFactory.build().copyWith(
-            id: visitorId,
-          ),
+          visitor: VisitorFactory.build().copyWith(id: visitorId),
         );
         charlatan.whenGetVisitorConfig(response: config);
 
@@ -226,11 +240,12 @@ void main() {
           (request) => CharlatanHttpResponse(
             body: appVisitorConfig
                 .copyWith(
-                  visitor:
-                      appVisitorConfig.visitor.copyWith(id: 'post-login-id'),
+                  visitor: appVisitorConfig.visitor.copyWith(
+                    id: 'post-login-id',
+                  ),
                   splits: SplitRegistry.empty().splits,
                 )
-                .toJson(),
+                .toMap(),
           ),
         );
         subject = await buildSubject();
@@ -254,41 +269,37 @@ void main() {
 
       group('when linkIdentifier succeeds', () {
         test(
-            'it stores the visitor and splitRegistry from the result in DataStorageProvider',
-            () async {
-          final visitorBeforeLogin = await dataStorageProvider.fetchVisitor();
-          final splitRegistryBeforeLogin =
-              await dataStorageProvider.fetchSplitRegistry();
+          'it stores the visitor and splitRegistry from the result in DataStorageProvider',
+          () async {
+            final visitorBeforeLogin = await dataStorageProvider.fetchVisitor();
+            final splitRegistryBeforeLogin = await dataStorageProvider
+                .fetchSplitRegistry();
 
-          expect(visitorBeforeLogin?.id != 'post-login-id', isTrue);
-          expect(splitRegistryBeforeLogin?.splits, isNotEmpty);
+            expect(visitorBeforeLogin?.id != 'post-login-id', isTrue);
+            expect(splitRegistryBeforeLogin?.splits, isNotEmpty);
 
-          await subject.login(identifierType: 'foo', value: '123');
+            await subject.login(identifierType: 'foo', value: '123');
 
-          final visitorAfterLogin = await dataStorageProvider.fetchVisitor();
-          final splitRegistryAfterLogin =
-              await dataStorageProvider.fetchSplitRegistry();
+            final visitorAfterLogin = await dataStorageProvider.fetchVisitor();
+            final splitRegistryAfterLogin = await dataStorageProvider
+                .fetchSplitRegistry();
 
-          expect(visitorAfterLogin?.id, 'post-login-id');
-          expect(splitRegistryAfterLogin?.splits, isEmpty);
-        });
+            expect(visitorAfterLogin?.id, 'post-login-id');
+            expect(splitRegistryAfterLogin?.splits, isEmpty);
+          },
+        );
       });
 
       group('when linkIdentifier fails', () {
         test('it completes normally and logs an info', () async {
           charlatan.whenPost(
             '/api/v4/apps/${appVersionBuild.appName}/versions/${appVersionBuild.version}/builds/${appVersionBuild.buildTimestamp}/identifier',
-            (request) => CharlatanHttpResponse(
-              statusCode: 500,
-            ),
+            (request) => CharlatanHttpResponse(statusCode: 500),
           );
 
           final result = subject.login(identifierType: 'foo', value: '123');
 
-          await expectLater(
-            result,
-            completes,
-          );
+          await expectLater(result, completes);
 
           expect(
             logger.infoLogs.single.message,
@@ -309,15 +320,17 @@ void main() {
       });
 
       test('it resets the visitor in the DataStorageProvider', () async {
-        final beforeLogoutVisitorId =
-            await dataStorageProvider.fetchVisitor().then((value) => value?.id);
+        final beforeLogoutVisitorId = await dataStorageProvider
+            .fetchVisitor()
+            .then((value) => value?.id);
 
         expect(beforeLogoutVisitorId, appVisitorConfig.visitor.id);
 
         await subject.reset();
 
-        final afterLogoutVisitorId =
-            await dataStorageProvider.fetchVisitor().then((value) => value?.id);
+        final afterLogoutVisitorId = await dataStorageProvider
+            .fetchVisitor()
+            .then((value) => value?.id);
 
         // Since a fresh visitor has a randomly-generated Id, just verify
         // that the Id no longer matches the previous visitor's
@@ -358,28 +371,31 @@ void main() {
     group('ab', () {
       setUp(() async {
         charlatan.whenGetVisitorConfig(
-            response: appVisitorConfig.copyWith(
-          splits: [SplitFactory.build(isFeatureGate: true)],
-        ));
+          response: appVisitorConfig.copyWith(
+            splits: [SplitFactory.build(isFeatureGate: true)],
+          ),
+        );
         subject = await buildSubject();
       });
 
-      group('when given a split name that does not exist in the split registry',
-          () {
-        test('it throws a SplitNotFoundException', () {
-          final split = appVisitorConfig.splits.first;
-          final fakeName = '${split.name}FAKE';
+      group(
+        'when given a split name that does not exist in the split registry',
+        () {
+          test('it throws a SplitNotFoundException', () {
+            final split = appVisitorConfig.splits.first;
+            final fakeName = '${split.name}FAKE';
 
-          expect(
-            () => subject.ab(
-              splitName: fakeName,
-              context: 'none',
-              trueVariant: 'true',
-            ),
-            throwsA(isA<SplitNotFoundException>()),
-          );
-        });
-      });
+            expect(
+              () => subject.ab(
+                splitName: fakeName,
+                context: 'none',
+                trueVariant: 'true',
+              ),
+              throwsA(isA<SplitNotFoundException>()),
+            );
+          });
+        },
+      );
 
       group('when trueVariant is supplied', () {
         late Split split;
@@ -395,9 +411,7 @@ void main() {
           );
 
           charlatan.whenGetVisitorConfig(
-            response: appVisitorConfig.copyWith(
-              splits: [split],
-            ),
+            response: appVisitorConfig.copyWith(splits: [split]),
           );
 
           subject = await buildSubject();

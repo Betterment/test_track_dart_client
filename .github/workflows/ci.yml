@@ -7,7 +7,7 @@ on:
     branches: [main]
 
 env:
-  DART_VERSION: 3.5.0
+  DART_VERSION: 3.10.4
 
 jobs:
   build:
@@ -19,7 +19,8 @@ jobs:
         with:
           sdk: ${{ env.DART_VERSION }}
       - name: Install dependencies
-        run: dart pub global activate melos 2.3.1 && melos bs
+        run: |
+          dart pub global activate melos && melos bootstrap
 
       - name: Run build_runner
         run: melos exec --depends-on="build_runner" --fail-fast -- "dart run build_runner build --delete-conflicting-outputs"
@@ -41,7 +42,7 @@ jobs:
           working-directory: packages/test_track_test_support
 
       - name: Run tests and generate coverage report
-        run: melos exec --fail-fast -- "../../tool/generate_code_coverage.sh"
+        run: melos exec -c 1 --fail-fast -- "../../tool/generate_code_coverage.sh"
 
       - name: Upload test_track code coverage
         uses: codecov/codecov-action@84508663e988701840491b86de86b666e8a86bed #v4.3.0
@@ -65,7 +66,7 @@ jobs:
           sdk: ${{ env.DART_VERSION }}
       - name: Install dependencies
         run: |
-          dart pub global activate melos 2.3.1 && melos bs
+          dart pub global activate melos && melos bootstrap
           dart pub global activate pana
       - name: Verify pub score
         run: melos exec -- "../../tool/verify_pub_score.sh 150"

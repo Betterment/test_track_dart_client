@@ -12,9 +12,8 @@ class Logout {
   final DataStorageProvider _dataStorageProvider;
 
   /// {@macro test_track_logout}
-  Logout({
-    required DataStorageProvider dataStorageProvider,
-  }) : _dataStorageProvider = dataStorageProvider;
+  Logout({required DataStorageProvider dataStorageProvider})
+    : _dataStorageProvider = dataStorageProvider;
 
   /// {@macro test_track_logout}
   Future<void> call() async {

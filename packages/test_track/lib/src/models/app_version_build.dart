@@ -1,28 +1,30 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:dart_mappable/dart_mappable.dart';
 
-part 'app_version_build.freezed.dart';
-part 'app_version_build.g.dart';
+part 'app_version_build.mapper.dart';
 
 /// {@template app_version_build}
 /// Encapsulates the metadata associated with
 /// a specific version of your application
 /// {@endtemplate}
-@freezed
-class AppVersionBuild with _$AppVersionBuild {
+@MappableClass(caseStyle: CaseStyle.camelCase)
+class AppVersionBuild with AppVersionBuildMappable {
   /// {@macro app_version_build}
   ///
   /// The [appName], [version], and [buildTimestamp] are
   /// utilized to uniquely identify a particular build
   /// so that TestTrack can configure the app correctly
-  // ignore: invalid_annotation_target
-  @JsonSerializable(fieldRename: FieldRename.none)
-  const factory AppVersionBuild({
-    required String appName,
-    required String version,
-    required String buildTimestamp,
-  }) = _AppVersionBuild;
+  const AppVersionBuild({
+    required this.appName,
+    required this.version,
+    required this.buildTimestamp,
+  });
 
-  // ignore: public_member_api_docs
-  factory AppVersionBuild.fromJson(Map<String, dynamic> json) =>
-      _$AppVersionBuildFromJson(json);
+  /// The name of the application
+  final String appName;
+
+  /// The version of the application
+  final String version;
+
+  /// The build timestamp of the application
+  final String buildTimestamp;
 }

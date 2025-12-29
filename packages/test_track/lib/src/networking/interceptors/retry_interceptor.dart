@@ -21,8 +21,8 @@ class RetryInterceptor extends Interceptor {
   RetryInterceptor({
     required SturdyHttpGetter clientGetter,
     RetryOptions? retryOptions,
-  })  : _clientGetter = clientGetter,
-        _retryOptions = retryOptions ?? RetryOptions();
+  }) : _clientGetter = clientGetter,
+       _retryOptions = retryOptions ?? RetryOptions();
 
   @override
   Future<void> onError(
@@ -37,8 +37,9 @@ class RetryInterceptor extends Interceptor {
     final capitalizedMethod = StringBuffer()
       ..write(originalMethod.substring(0, 1).toUpperCase())
       ..write(originalMethod.substring(1).toLowerCase());
-    final requestType =
-        NetworkRequestType.values.byName(capitalizedMethod.toString());
+    final requestType = NetworkRequestType.values.byName(
+      capitalizedMethod.toString(),
+    );
 
     if (extra.shouldRetry(err, isIdempotent: isIdempotent)) {
       if (extra.retryInterval.inMilliseconds > 0) {
@@ -48,14 +49,12 @@ class RetryInterceptor extends Interceptor {
       extra = extra.copyWith(attempts: extra.attempts - 1);
 
       final extraOptions = extra.toExtraOptions()
-        ..addAll(
-          <String, dynamic>{isIdempotentOptionsKey: isIdempotent},
-        );
+        ..addAll(<String, dynamic>{isIdempotentOptionsKey: isIdempotent});
       final retry = RawRequest(
         err.requestOptions.path,
         type: requestType,
         cancelToken: err.requestOptions.cancelToken,
-        data: NetworkRequestBody.raw(err.requestOptions.data),
+        data: RawRequestBody(err.requestOptions.data),
         onReceiveProgress: err.requestOptions.onReceiveProgress,
         onSendProgress: err.requestOptions.onSendProgress,
         queryParameters: err.requestOptions.queryParameters,
@@ -76,17 +75,11 @@ class RetryInterceptor extends Interceptor {
             switch (r) {
               case OkResponse(:final response):
                 handler.resolve(
-                  Response(
-                    data: response,
-                    requestOptions: err.requestOptions,
-                  ),
+                  Response(data: response, requestOptions: err.requestOptions),
                 );
               case OkNoContent():
                 handler.resolve(
-                  Response(
-                    statusCode: 204,
-                    requestOptions: err.requestOptions,
-                  ),
+                  Response(statusCode: 204, requestOptions: err.requestOptions),
                 );
               case GenericError(:final error):
                 throw error ?? errorForRequest();

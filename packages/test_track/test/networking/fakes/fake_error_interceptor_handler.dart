@@ -11,8 +11,8 @@ class FakeErrorInterceptorHandler extends ErrorInterceptorHandler {
   FakeErrorInterceptorHandler({
     ValueSetter<DioException>? onNextInvoked,
     ValueSetter<Response<dynamic>>? onResolveInvoked,
-  })  : _onNextInvoked = onNextInvoked,
-        _onResolveInvoked = onResolveInvoked;
+  }) : _onNextInvoked = onNextInvoked,
+       _onResolveInvoked = onResolveInvoked;
 
   @override
   void next(DioException err) {

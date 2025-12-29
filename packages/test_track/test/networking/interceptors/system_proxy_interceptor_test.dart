@@ -18,9 +18,7 @@ void main() {
       test('it does not set HttpOverrides', () async {
         await subject.onRequest(
           RequestOptions(path: '/foo'),
-          FakeRequestInterceptorHandler(
-            onNext: (_) {},
-          ),
+          FakeRequestInterceptorHandler(onNext: (_) {}),
         );
         expect(HttpOverrides.current, isNull);
       });
@@ -34,9 +32,7 @@ void main() {
       test('it sets HttpOverrides', () async {
         await subject.onRequest(
           RequestOptions(path: '/foo'),
-          FakeRequestInterceptorHandler(
-            onNext: (_) {},
-          ),
+          FakeRequestInterceptorHandler(onNext: (_) {}),
         );
         expect(HttpOverrides.current, isNotNull);
       });

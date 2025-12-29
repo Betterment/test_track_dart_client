@@ -1,18 +1,12 @@
 import 'package:test_track/test_track.dart';
 
 /// A function representing the invocation of an `ab`
-typedef Ab = bool Function(
-  String splitName,
-  String context,
-  String? trueVariant,
-);
+typedef Ab =
+    bool Function(String splitName, String context, String? trueVariant);
 
 /// A function representing the invocation of a `vary`
-typedef Vary = String Function(
-  String splitName,
-  String defaultVariant,
-  String context,
-);
+typedef Vary =
+    String Function(String splitName, String defaultVariant, String context);
 
 /// {@template fake_test_track}
 /// A fake [TestTrack] that offers sane default functionality
@@ -22,11 +16,7 @@ typedef Vary = String Function(
 class FakeTestTrack implements TestTrack {
   /// Default behavior for the [ab] operation,
   /// which always returns `true`
-  static bool defaultAb(
-    String splitName,
-    String context,
-    String? trueVariant,
-  ) {
+  static bool defaultAb(String splitName, String context, String? trueVariant) {
     return true;
   }
 
@@ -46,10 +36,10 @@ class FakeTestTrack implements TestTrack {
     SplitRegistry? splitRegistry,
     Ab ab = defaultAb,
     Vary vary = defaultVary,
-  })  : _visitor = visitor ?? Visitor.build(),
-        _splitRegistry = splitRegistry ?? SplitRegistry.empty(),
-        _ab = ab,
-        _vary = vary;
+  }) : _visitor = visitor ?? Visitor.build(),
+       _splitRegistry = splitRegistry ?? SplitRegistry.empty(),
+       _ab = ab,
+       _vary = vary;
 
   Visitor _visitor;
 
@@ -117,17 +107,22 @@ class FakeTestTrack implements TestTrack {
   }
 
   @override
-  Future<void> createAssignmentOverrides(
-      {required List<AssignmentOverride> assignmentOverrides,
-      String? username,
-      String? password}) async {
-    _visitor = _visitor.copyWith(assignments: [
-      ..._visitor.assignments,
-      ...assignmentOverrides.map((e) => Assignment(
+  Future<void> createAssignmentOverrides({
+    required List<AssignmentOverride> assignmentOverrides,
+    String? username,
+    String? password,
+  }) async {
+    _visitor = _visitor.copyWith(
+      assignments: [
+        ..._visitor.assignments,
+        ...assignmentOverrides.map(
+          (e) => Assignment(
             splitName: e.splitName,
             variant: e.variant,
             context: e.context,
-          )),
-    ]);
+          ),
+        ),
+      ],
+    );
   }
 }

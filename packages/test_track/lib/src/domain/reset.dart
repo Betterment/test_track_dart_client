@@ -21,8 +21,8 @@ class Reset {
   Reset({
     required DataStorageProvider dataStorageProvider,
     required AnalyticsProvider analyticsProvider,
-  })  : _dataStorageProvider = dataStorageProvider,
-        _analyticsProvider = analyticsProvider;
+  }) : _dataStorageProvider = dataStorageProvider,
+       _analyticsProvider = analyticsProvider;
 
   /// {@macro test_track_reset}
   Future<Visitor> call() async {

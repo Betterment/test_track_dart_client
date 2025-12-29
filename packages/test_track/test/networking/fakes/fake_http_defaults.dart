@@ -16,20 +16,18 @@ extension FakeHttpDefaults on Charlatan {
     this
       ..whenGetVisitorConfig(response: AppVisitorConfigFactory.build())
       ..whenPost(
-          '/api/v1/assignment_event', (request) => CharlatanHttpResponse());
+        '/api/v1/assignment_event',
+        (request) => CharlatanHttpResponse(),
+      );
   }
 
   /// Convenience method to set the returned
   /// [AppVisitorConfig] when `/config` is called
   /// on a [Charlatan]
-  void whenGetVisitorConfig({
-    required AppVisitorConfig response,
-  }) {
+  void whenGetVisitorConfig({required AppVisitorConfig response}) {
     whenGet(
       '/api/v4/apps/{appName}/versions/{version}/builds/{buildTimestamp}/visitors/{visitorId}/config',
-      (request) => CharlatanHttpResponse(
-        body: response.toJson(),
-      ),
+      (request) => CharlatanHttpResponse(body: response.toMap()),
     );
   }
 

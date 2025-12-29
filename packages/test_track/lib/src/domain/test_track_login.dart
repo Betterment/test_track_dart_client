@@ -33,9 +33,9 @@ class Login {
     required SturdyHttp httpClient,
     required DataStorageProvider dataStorageProvider,
     required AnalyticsProvider analyticsProvider,
-  })  : _client = httpClient,
-        _dataStorageProvider = dataStorageProvider,
-        _analyticsProvider = analyticsProvider;
+  }) : _client = httpClient,
+       _dataStorageProvider = dataStorageProvider,
+       _analyticsProvider = analyticsProvider;
 
   /// {@macro test_track_login}
   Future<AppVisitorConfig> call({
@@ -46,23 +46,22 @@ class Login {
     final appVisitorConfig = await _client.execute<Json, AppVisitorConfig>(
       IdempotentPostRequest(
         '/api/v4/apps/${appVersionBuild.appName}/versions/${appVersionBuild.version}/builds/${appVersionBuild.buildTimestamp}/identifier',
-        data: NetworkRequestBody.json(
-          {
-            'identifier_type': identifier.identifierType,
-            'value': identifier.value,
-            'visitor_id': visitorId,
-          },
-        ),
+        data: JsonRequestBody({
+          'identifier_type': identifier.identifierType,
+          'value': identifier.value,
+          'visitor_id': visitorId,
+        }),
       ),
       onResponse: (r) => switch (r) {
-        OkResponse(:final response) => AppVisitorConfig.fromJson(response),
+        OkResponse(:final response) => AppVisitorConfigMapper.fromMap(response),
         _ => throw TestTrackLoginFailureException(message: r.toString()),
       },
     );
 
     await _dataStorageProvider.storeVisitor(appVisitorConfig.visitor);
-    await _dataStorageProvider
-        .storeSplitRegistry(appVisitorConfig.splitRegistry);
+    await _dataStorageProvider.storeSplitRegistry(
+      appVisitorConfig.splitRegistry,
+    );
     await _dataStorageProvider.storeLoginState(true);
 
     await _analyticsProvider.identify(visitorId: appVisitorConfig.visitor.id);

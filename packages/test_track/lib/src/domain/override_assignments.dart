@@ -17,8 +17,8 @@ class OverrideAssignments {
   OverrideAssignments({
     required SturdyHttp client,
     required GetVisitorConfig getVisitorConfig,
-  })  : _client = client,
-        _getVisitorConfig = getVisitorConfig;
+  }) : _client = client,
+       _getVisitorConfig = getVisitorConfig;
 
   /// {@macro override_assignments}
   Future<AppVisitorConfig> call({
@@ -31,7 +31,7 @@ class OverrideAssignments {
     await _client.execute(
       PostRequest(
         '/api/v2/visitors/$visitorId/assignment_overrides',
-        data: NetworkRequestBody.json({
+        data: JsonRequestBody({
           'assignments': assignmentOverrides.map((a) => a.toJson()).toList(),
         }),
         options: username != null && password != null

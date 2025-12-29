@@ -1,5 +1,4 @@
 name: test_track_workspace
-publish_to: none
 
 workspace:
   - packages/test_track

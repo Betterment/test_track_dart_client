@@ -1,3 +1,9 @@
+## 0.3.0
+
+- chore: upgrades, migrate from freezed to dart_mappable, new dart formatting by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/57
+
+**Full Changelog**: https://github.com/Betterment/test_track_dart_client/compare/v0.2.0...v0.3.0
+
 ## 0.2.0
 
 - feat: allow basic auth to be provided to assign overrides by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/54

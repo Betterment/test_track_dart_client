@@ -21,7 +21,6 @@ jobs:
       - name: Install dependencies
         run: |
           dart pub global activate melos && melos bootstrap
-          dart pub global activate coverage
 
       - name: Run build_runner
         run: melos exec --depends-on="build_runner" --fail-fast -- "dart run build_runner build --delete-conflicting-outputs"

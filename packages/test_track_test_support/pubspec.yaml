@@ -7,7 +7,7 @@ repository: https://github.com/Betterment/test_track_dart_client
 resolution: workspace
 
 environment:
-  sdk: '>=3.10.0 <4.0.0'
+  sdk: '>=3.7.2 <4.0.0'
 
 dependencies:
   equatable: ^2.0.7

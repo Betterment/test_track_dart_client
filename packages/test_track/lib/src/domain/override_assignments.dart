@@ -34,19 +34,21 @@ class OverrideAssignments {
         data: JsonRequestBody({
           'assignments': assignmentOverrides.map((a) => a.toJson()).toList(),
         }),
-        options: username != null && password != null
-            ? Options(
-                headers: {
-                  'Authorization':
-                      'Basic ${base64Encode(utf8.encode('$username:$password'))}',
-                },
-              )
-            : null,
+        options:
+            username != null && password != null
+                ? Options(
+                  headers: {
+                    'Authorization':
+                        'Basic ${base64Encode(utf8.encode('$username:$password'))}',
+                  },
+                )
+                : null,
       ),
-      onResponse: (r) => switch (r) {
-        OkNoContent() => null,
-        _ => throw Exception('Failed to override assignments: $r'),
-      },
+      onResponse:
+          (r) => switch (r) {
+            OkNoContent() => null,
+            _ => throw Exception('Failed to override assignments: $r'),
+          },
     );
 
     final refreshedAppVisitorConfig = await _getVisitorConfig(

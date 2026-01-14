@@ -38,9 +38,10 @@ class LoggingInterceptor extends Interceptor {
       return;
     }
 
-    final statusCode = err.response?.statusCode != null
-        ? ' [${err.response?.statusCode}]'
-        : '';
+    final statusCode =
+        err.response?.statusCode != null
+            ? ' [${err.response?.statusCode}]'
+            : '';
     final requestUri = ' ${err.requestOptions.uri}';
 
     _logger.debug('TestTrack HttpClient - 🛑 ERROR$statusCode$requestUri');

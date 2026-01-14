@@ -34,9 +34,10 @@ class RetryInterceptor extends Interceptor {
     final isIdempotent =
         err.requestOptions.extra[isIdempotentOptionsKey] as bool? ?? false;
     final originalMethod = err.requestOptions.method;
-    final capitalizedMethod = StringBuffer()
-      ..write(originalMethod.substring(0, 1).toUpperCase())
-      ..write(originalMethod.substring(1).toLowerCase());
+    final capitalizedMethod =
+        StringBuffer()
+          ..write(originalMethod.substring(0, 1).toUpperCase())
+          ..write(originalMethod.substring(1).toLowerCase());
     final requestType = NetworkRequestType.values.byName(
       capitalizedMethod.toString(),
     );
@@ -48,8 +49,9 @@ class RetryInterceptor extends Interceptor {
 
       extra = extra.copyWith(attempts: extra.attempts - 1);
 
-      final extraOptions = extra.toExtraOptions()
-        ..addAll(<String, dynamic>{isIdempotentOptionsKey: isIdempotent});
+      final extraOptions =
+          extra.toExtraOptions()
+            ..addAll(<String, dynamic>{isIdempotentOptionsKey: isIdempotent});
       final retry = RawRequest(
         err.requestOptions.path,
         type: requestType,

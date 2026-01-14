@@ -52,10 +52,13 @@ class Login {
           'visitor_id': visitorId,
         }),
       ),
-      onResponse: (r) => switch (r) {
-        OkResponse(:final response) => AppVisitorConfigMapper.fromMap(response),
-        _ => throw TestTrackLoginFailureException(message: r.toString()),
-      },
+      onResponse:
+          (r) => switch (r) {
+            OkResponse(:final response) => AppVisitorConfigMapper.fromMap(
+              response,
+            ),
+            _ => throw TestTrackLoginFailureException(message: r.toString()),
+          },
     );
 
     await _dataStorageProvider.storeVisitor(appVisitorConfig.visitor);

@@ -6,8 +6,9 @@ void main() {
     final fakeTestTrack = FakeTestTrack(
       visitor: VisitorFactory.build().withId('abc123'),
       ab: (splitName, context, trueVariant) => splitName == 'test_enabled',
-      vary: (splitName, defaultVariant, context) =>
-          splitName == 'test_experiment' ? 'treatment' : 'control',
+      vary:
+          (splitName, defaultVariant, context) =>
+              splitName == 'test_experiment' ? 'treatment' : 'control',
     );
 
     expect(fakeTestTrack.visitor.id, 'abc123');

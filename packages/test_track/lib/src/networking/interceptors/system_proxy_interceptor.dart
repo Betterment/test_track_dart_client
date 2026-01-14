@@ -33,11 +33,13 @@ class SystemProxyInterceptor extends Interceptor {
       final proxyString = '$host:$port';
 
       HttpOverrides.global = _HttpOverrides(
-        clientBuilder: (client) => client
-          ..badCertificateCallback = (cert, host, port) {
-            return Platform.isAndroid && isDebug();
-          }
-          ..findProxy = (_) => 'PROXY $proxyString',
+        clientBuilder:
+            (client) =>
+                client
+                  ..badCertificateCallback = (cert, host, port) {
+                    return Platform.isAndroid && isDebug();
+                  }
+                  ..findProxy = (_) => 'PROXY $proxyString',
       );
     }
 

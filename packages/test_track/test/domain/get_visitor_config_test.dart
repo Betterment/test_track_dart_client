@@ -21,9 +21,10 @@ void main() {
 
       setUp(() async {
         appVisitorConfig = AppVisitorConfigFactory.build();
-        final charlatan = Charlatan()
-          ..withDefaults()
-          ..whenGetVisitorConfig(response: appVisitorConfig);
+        final charlatan =
+            Charlatan()
+              ..withDefaults()
+              ..whenGetVisitorConfig(response: appVisitorConfig);
         client = FakeSturdyHttp(charlatan);
         dataStorageProvider = FakeDataStorageProvider();
         analyticsProvider = FakeAnalyticsProvider();
@@ -56,8 +57,8 @@ void main() {
             appVersionBuild: appVersionBuild,
           );
           final storedVisitor = await dataStorageProvider.fetchVisitor();
-          final storedSplitRegistry = await dataStorageProvider
-              .fetchSplitRegistry();
+          final storedSplitRegistry =
+              await dataStorageProvider.fetchSplitRegistry();
           expect(initialVisitor.id == storedVisitor!.id, isFalse);
           expect(storedSplitRegistry!.splits, isNotEmpty);
         },

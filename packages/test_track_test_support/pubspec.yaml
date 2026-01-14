@@ -1,6 +1,6 @@
 name: test_track_test_support
 description: Test utilities for working with package:test_track, including a FakeTestTrack allowing you to test your integration with TestTrack with predetermined behavior.
-version: 0.3.1
+version: 0.3.2
 homepage: https://github.com/Betterment/test_track_dart_client
 repository: https://github.com/Betterment/test_track_dart_client
 

@@ -1,3 +1,9 @@
+## 0.3.2
+
+- chore: bump test track version in support package by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/65
+
+**Full Changelog**: https://github.com/Betterment/test_track_dart_client/compare/v0.3.1...v0.3.2
+
 ## 0.3.1
 
 - chore: upgrade test_track dependency in support by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/61

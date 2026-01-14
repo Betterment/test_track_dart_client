@@ -33,12 +33,13 @@ class ReportAssignmentEvent {
           'context': assignmentEvent.context,
         }),
       ),
-      onResponse: (r) => switch (r) {
-        OkNoContent() => null,
-        _ => _logger.error(
-          'Unable to report assignment event: $assignmentEvent with error: $r',
-        ),
-      },
+      onResponse:
+          (r) => switch (r) {
+            OkNoContent() => null,
+            _ => _logger.error(
+              'Unable to report assignment event: $assignmentEvent with error: $r',
+            ),
+          },
     );
   }
 }

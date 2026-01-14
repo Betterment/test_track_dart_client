@@ -36,23 +36,24 @@ void main() {
       late String? authorizationHeaderFromRequest;
 
       setUp(() async {
-        charlatan = Charlatan()
-          ..whenPost('/api/v2/visitors/$visitorId/assignment_overrides', (
-            request,
-          ) {
-            final data = request.body as Map<String, Object?>?;
-            assignmentsFromRequest =
-                data?['assignments'] as List<Map<String, Object?>>?;
-            authorizationHeaderFromRequest =
-                request.headers['Authorization'] as String?;
-            return CharlatanHttpResponse(statusCode: 204);
-          })
-          ..whenGetVisitorConfig(
-            response: AppVisitorConfig(
-              splits: splits,
-              visitor: Visitor(id: visitorId, assignments: assignments),
-            ),
-          );
+        charlatan =
+            Charlatan()
+              ..whenPost('/api/v2/visitors/$visitorId/assignment_overrides', (
+                request,
+              ) {
+                final data = request.body as Map<String, Object?>?;
+                assignmentsFromRequest =
+                    data?['assignments'] as List<Map<String, Object?>>?;
+                authorizationHeaderFromRequest =
+                    request.headers['Authorization'] as String?;
+                return CharlatanHttpResponse(statusCode: 204);
+              })
+              ..whenGetVisitorConfig(
+                response: AppVisitorConfig(
+                  splits: splits,
+                  visitor: Visitor(id: visitorId, assignments: assignments),
+                ),
+              );
         client = FakeSturdyHttp(charlatan);
         subject = OverrideAssignments(
           client: client,

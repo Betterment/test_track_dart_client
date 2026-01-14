@@ -42,9 +42,10 @@ void main() {
       appVisitorConfig = AppVisitorConfigFactory.build();
 
       logger = FakeTestTrackLogger.withoutNetworkLogging();
-      charlatan = Charlatan()
-        ..withDefaults()
-        ..whenGetVisitorConfig(response: appVisitorConfig);
+      charlatan =
+          Charlatan()
+            ..withDefaults()
+            ..whenGetVisitorConfig(response: appVisitorConfig);
 
       // Pre-populate Visitor so call to GetVisitorConfig will be faked --
       // otherwise `test_track` generates a visitor with a random UUID
@@ -238,14 +239,15 @@ void main() {
         charlatan.whenPost(
           '/api/v4/apps/${appVersionBuild.appName}/versions/${appVersionBuild.version}/builds/${appVersionBuild.buildTimestamp}/identifier',
           (request) => CharlatanHttpResponse(
-            body: appVisitorConfig
-                .copyWith(
-                  visitor: appVisitorConfig.visitor.copyWith(
-                    id: 'post-login-id',
-                  ),
-                  splits: SplitRegistry.empty().splits,
-                )
-                .toMap(),
+            body:
+                appVisitorConfig
+                    .copyWith(
+                      visitor: appVisitorConfig.visitor.copyWith(
+                        id: 'post-login-id',
+                      ),
+                      splits: SplitRegistry.empty().splits,
+                    )
+                    .toMap(),
           ),
         );
         subject = await buildSubject();
@@ -272,8 +274,8 @@ void main() {
           'it stores the visitor and splitRegistry from the result in DataStorageProvider',
           () async {
             final visitorBeforeLogin = await dataStorageProvider.fetchVisitor();
-            final splitRegistryBeforeLogin = await dataStorageProvider
-                .fetchSplitRegistry();
+            final splitRegistryBeforeLogin =
+                await dataStorageProvider.fetchSplitRegistry();
 
             expect(visitorBeforeLogin?.id != 'post-login-id', isTrue);
             expect(splitRegistryBeforeLogin?.splits, isNotEmpty);
@@ -281,8 +283,8 @@ void main() {
             await subject.login(identifierType: 'foo', value: '123');
 
             final visitorAfterLogin = await dataStorageProvider.fetchVisitor();
-            final splitRegistryAfterLogin = await dataStorageProvider
-                .fetchSplitRegistry();
+            final splitRegistryAfterLogin =
+                await dataStorageProvider.fetchSplitRegistry();
 
             expect(visitorAfterLogin?.id, 'post-login-id');
             expect(splitRegistryAfterLogin?.splits, isEmpty);

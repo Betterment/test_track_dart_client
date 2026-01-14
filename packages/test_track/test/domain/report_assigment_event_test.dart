@@ -32,20 +32,19 @@ void main() {
         () async {
           late final AssignmentEvent? assignmentEventFromRequest;
           late final bool isIdempotent;
-          final charlatan = Charlatan()
-            ..whenPost('/api/v1/assignment_event', (request) {
-              final data = request.body as Map<String, Object?>?;
-              print('Setting assignmentEventFromRequest with data: $data');
-              assignmentEventFromRequest = data != null
-                  ? AssignmentEventMapper.fromMap(data)
-                  : null;
-              print(
-                'assignmentEventFromRequest set to: $assignmentEventFromRequest',
-              );
-              isIdempotent =
-                  request.requestOptions.extra['is_idempotent'] as bool;
-              return CharlatanHttpResponse(statusCode: 204);
-            });
+          final charlatan =
+              Charlatan()..whenPost('/api/v1/assignment_event', (request) {
+                final data = request.body as Map<String, Object?>?;
+                print('Setting assignmentEventFromRequest with data: $data');
+                assignmentEventFromRequest =
+                    data != null ? AssignmentEventMapper.fromMap(data) : null;
+                print(
+                  'assignmentEventFromRequest set to: $assignmentEventFromRequest',
+                );
+                isIdempotent =
+                    request.requestOptions.extra['is_idempotent'] as bool;
+                return CharlatanHttpResponse(statusCode: 204);
+              });
           final subject = buildSubject(charlatan: charlatan);
           await subject.call(assignmentEvent);
           expect(assignmentEventFromRequest, assignmentEvent);
@@ -55,10 +54,10 @@ void main() {
 
       group('when the api call fails', () {
         test('it does not throw', () async {
-          final charlatan = Charlatan()
-            ..whenPost('/api/v1/assignment_event', (request) {
-              return CharlatanHttpResponse(statusCode: 500);
-            });
+          final charlatan =
+              Charlatan()..whenPost('/api/v1/assignment_event', (request) {
+                return CharlatanHttpResponse(statusCode: 500);
+              });
 
           final logger = FakeTestTrackLogger(shouldEnableNetworkLogging: true);
 

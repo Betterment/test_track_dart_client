@@ -196,11 +196,12 @@ void main() {
           'it reports assignment events for non-feature-gate assignments',
           () async {
             final visitor = VisitorFactory.build().withAssignments([]);
-            final split = SplitFactory.build(isFeatureGate: false)
-                .withVariants([
-                  const Variant(name: 'true', weight: 100),
-                  const Variant(name: 'false', weight: 0),
-                ]);
+            final split = SplitFactory.build(
+              isFeatureGate: false,
+            ).withVariants([
+              const Variant(name: 'true', weight: 100),
+              const Variant(name: 'false', weight: 0),
+            ]);
 
             var reportAssignmentEventCalled = false;
             // Use a fake `ReportAssignmentEvent` because in source code its

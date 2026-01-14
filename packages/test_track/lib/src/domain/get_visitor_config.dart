@@ -40,10 +40,13 @@ class GetVisitorConfig {
         '${appVersionBuild.version}/builds/'
         '${appVersionBuild.buildTimestamp}/visitors/$visitorId/config',
       ),
-      onResponse: (r) => switch (r) {
-        OkResponse(:final response) => AppVisitorConfigMapper.fromMap(response),
-        _ => throw Exception(r.toString()),
-      },
+      onResponse:
+          (r) => switch (r) {
+            OkResponse(:final response) => AppVisitorConfigMapper.fromMap(
+              response,
+            ),
+            _ => throw Exception(r.toString()),
+          },
     );
 
     await _dataStorageProvider.storeVisitor(appVisitorConfig.visitor);

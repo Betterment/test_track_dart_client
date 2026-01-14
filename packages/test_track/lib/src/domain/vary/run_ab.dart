@@ -39,9 +39,10 @@ class RunAb {
 
     trueVariant ??= 'true';
     final unsortedVariants = List.of(split.variants);
-    final sortedFalseVariants = unsortedVariants
-      ..sort((v1, v2) => v1.name.compareTo(v2.name))
-      ..removeWhere((v) => v.name == trueVariant);
+    final sortedFalseVariants =
+        unsortedVariants
+          ..sort((v1, v2) => v1.name.compareTo(v2.name))
+          ..removeWhere((v) => v.name == trueVariant);
 
     final falseVariant = sortedFalseVariants.firstOrNull?.name;
 

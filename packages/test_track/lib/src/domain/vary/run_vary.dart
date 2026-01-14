@@ -94,15 +94,16 @@ class RunVary {
     // Ensure we're returning the correct updated assignments
     // by removing any previous assignment and replacing it
     // with the up-to-date one
-    final visitorAssignments = [...visitor.assignments]
-      ..removeWhere((a) => a.splitName == split.name)
-      ..add(
-        Assignment(
-          splitName: split.name,
-          variant: resultingVariantName,
-          context: context,
-        ),
-      );
+    final visitorAssignments =
+        [...visitor.assignments]
+          ..removeWhere((a) => a.splitName == split.name)
+          ..add(
+            Assignment(
+              splitName: split.name,
+              variant: resultingVariantName,
+              context: context,
+            ),
+          );
 
     final updatedVisitor = visitor.copyWith(assignments: visitorAssignments);
 

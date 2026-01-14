@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-<module fileurl="file://$PROJECT_DIR$/packages/test_track/melos_test_track.iml" filepath="$PROJECT_DIR$/packages/test_track/melos_test_track.iml"/>
-<module fileurl="file://$PROJECT_DIR$/packages/test_track_test_support/melos_test_track_test_support.iml" filepath="$PROJECT_DIR$/packages/test_track_test_support/melos_test_track_test_support.iml"/>
-<module fileurl="file://$PROJECT_DIR$/melos_test_track_workspace.iml" filepath="$PROJECT_DIR$/melos_test_track_workspace.iml"/>
-<module fileurl="file://$PROJECT_DIR$/melos_test_track.iml" filepath="$PROJECT_DIR$/melos_test_track.iml"/>
+      <module fileurl="file://$PROJECT_DIR$/packages/test_track/melos_test_track.iml" filepath="$PROJECT_DIR$/packages/test_track/melos_test_track.iml" />
+      <module fileurl="file://$PROJECT_DIR$/packages/test_track_test_support/melos_test_track_test_support.iml" filepath="$PROJECT_DIR$/packages/test_track_test_support/melos_test_track_test_support.iml" />
+      <module fileurl="file://$PROJECT_DIR$/melos_test_track.iml" filepath="$PROJECT_DIR$/melos_test_track.iml" />
     </modules>
   </component>
 </project>

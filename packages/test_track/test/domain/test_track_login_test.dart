@@ -94,8 +94,8 @@ void main() {
         test(
           'it stores the splitRegistry from the returned AppVisitorConfig',
           () async {
-            final splitRegistryBefore = await dataStorageProvider
-                .fetchSplitRegistry();
+            final splitRegistryBefore =
+                await dataStorageProvider.fetchSplitRegistry();
             expect(splitRegistryBefore, isNull);
 
             await subject.call(
@@ -104,8 +104,8 @@ void main() {
               appVersionBuild: appVersionBuild,
             );
 
-            final splitRegistryAfter = await dataStorageProvider
-                .fetchSplitRegistry();
+            final splitRegistryAfter =
+                await dataStorageProvider.fetchSplitRegistry();
             expect(splitRegistryAfter, isNotNull);
           },
         );

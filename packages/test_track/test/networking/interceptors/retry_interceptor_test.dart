@@ -78,11 +78,11 @@ void main() {
               final subject = buildSubject(
                 retryOptions: RetryOptions(attempts: 1),
                 errorInterceptorHandler: handler,
-                charlatan: Charlatan()
-                  ..whenGet('/foo', (req) {
-                    request = req;
-                    return CharlatanHttpResponse(body: successBody);
-                  }),
+                charlatan:
+                    Charlatan()..whenGet('/foo', (req) {
+                      request = req;
+                      return CharlatanHttpResponse(body: successBody);
+                    }),
               );
 
               await subject.onError(initialError, handler);
@@ -104,11 +104,11 @@ void main() {
               late final CharlatanHttpRequest request;
               final subject = buildSubject(
                 retryOptions: RetryOptions(attempts: 1),
-                charlatan: Charlatan()
-                  ..whenGet('/foo', (req) {
-                    request = req;
-                    throw retryError;
-                  }),
+                charlatan:
+                    Charlatan()..whenGet('/foo', (req) {
+                      request = req;
+                      throw retryError;
+                    }),
               );
 
               await subject.onError(initialError, defaultHandler);

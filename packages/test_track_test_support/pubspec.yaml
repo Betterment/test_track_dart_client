@@ -11,7 +11,7 @@ dependencies:
   equatable: ^2.0.8
   meta: ^1.17.0
   random_string: ^2.3.1
-  test_track: ^0.2.0
+  test_track: ^0.3.1
 
 dev_dependencies:
   coverage: ^1.15.0

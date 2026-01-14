@@ -1,3 +1,9 @@
+## 0.3.1
+
+- chore: upgrade test_track dependency in support by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/61
+
+**Full Changelog**: https://github.com/Betterment/test_track_dart_client/compare/v0.3.0...v0.3.1
+
 ## 0.3.0
 
 - chore: upgrades, migrate from freezed to dart_mappable, new dart formatting by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/57

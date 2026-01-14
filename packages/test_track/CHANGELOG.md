@@ -1,3 +1,10 @@
+## 0.3.2
+
+* chore: loosen meta constraint by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/63
+
+
+**Full Changelog**: https://github.com/Betterment/test_track_dart_client/compare/v0.3.1...v0.3.2
+
 ## 0.3.1
 
 - chore: loosen dart constraint by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/59

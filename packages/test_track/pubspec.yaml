@@ -14,7 +14,7 @@ dependencies:
   dio: ^5.9.0
   equatable: ^2.0.8
   meta: ^1.16.0
-  sturdy_http: ^0.6.2
+  sturdy_http: ^0.7.0
   uuid: ^4.5.2
 
 dev_dependencies:

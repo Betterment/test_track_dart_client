@@ -1,3 +1,9 @@
+## 0.3.3
+
+- chore: bump sturdy_http to 0.7.0 by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/67
+
+**Full Changelog**: https://github.com/Betterment/test_track_dart_client/compare/v0.3.2...v0.3.3
+
 ## 0.3.2
 
 - chore: loosen meta constraint by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/63

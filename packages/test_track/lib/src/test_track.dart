@@ -6,7 +6,6 @@ import 'package:test_track/src/domain/domain.dart';
 import 'package:test_track/src/logging/default_test_track_logger.dart';
 import 'package:test_track/src/networking/interceptors/logging_interceptor.dart';
 import 'package:test_track/src/networking/interceptors/retry_interceptor.dart';
-import 'package:test_track/src/networking/interceptors/system_proxy_interceptor.dart';
 import 'package:test_track/test_track.dart';
 
 /// The instance with which to interact to perform
@@ -25,6 +24,12 @@ class TestTrack {
   /// will be instantiated with the cached version, or
   /// a new [Visitor] and empty [SplitRegistry] in the
   /// case that they couldn't be located in cache.
+  ///
+  /// On mobile, pass a `NativeAdapter()` from
+  /// `package:native_dio_adapter` as [customHttpAdapter] to delegate HTTP
+  /// requests to the platform's native networking stack (NSURLSession on iOS,
+  /// OkHttp on Android). This ensures proxy and VPN configurations are
+  /// respected and avoids connectivity issues when switching networks.
   static Future<TestTrack> initialize({
     required String baseUrl,
     required AppVersionBuild appVersionBuild,
@@ -32,7 +37,6 @@ class TestTrack {
     required AnalyticsProvider analyticsProvider,
     HttpClientAdapter? customHttpAdapter,
     TestTrackLogger? logger,
-    Future<Map<String, String>?> Function()? systemProxyGetter,
   }) async {
     logger ??= const SilentTestTrackLogger();
 
@@ -41,8 +45,6 @@ class TestTrack {
       baseUrl: baseUrl,
       interceptors: [
         LoggingInterceptor(logger: logger),
-        if (systemProxyGetter != null)
-          SystemProxyInterceptor(systemProxyGetter: systemProxyGetter),
         RetryInterceptor(clientGetter: () => client),
       ],
       customAdapter: customHttpAdapter,

@@ -1,3 +1,10 @@
+## 0.4.0
+
+* chore: remove SystemProxyInterceptor and systemProxyGetter param by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/69
+
+
+**Full Changelog**: https://github.com/Betterment/test_track_dart_client/compare/v0.3.3...v0.4.0
+
 ## 0.3.3
 
 - chore: bump sturdy_http to 0.7.0 by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/67

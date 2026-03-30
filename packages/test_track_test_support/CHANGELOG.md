@@ -1,3 +1,9 @@
+## 0.4.0
+
+* chore: bump TT version in support package by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/71
+
+**Full Changelog**: https://github.com/Betterment/test_track_dart_client/compare/v0.3.3...v.0.4.0
+
 ## 0.3.2
 
 - chore: bump test track version in support package by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/65

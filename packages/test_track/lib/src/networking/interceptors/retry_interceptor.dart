@@ -52,6 +52,10 @@ class RetryInterceptor extends Interceptor {
       final extraOptions =
           extra.toExtraOptions()
             ..addAll(<String, dynamic>{isIdempotentOptionsKey: isIdempotent});
+      final deadline = err.requestOptions.extra[callDeadlineExtraKey];
+      if (deadline != null) {
+        extraOptions[callDeadlineExtraKey] = deadline;
+      }
       final retry = RawRequest(
         err.requestOptions.path,
         type: requestType,
@@ -60,7 +64,12 @@ class RetryInterceptor extends Interceptor {
         onReceiveProgress: err.requestOptions.onReceiveProgress,
         onSendProgress: err.requestOptions.onSendProgress,
         queryParameters: err.requestOptions.queryParameters,
-        options: Options(extra: extraOptions),
+        options: Options(
+          extra: extraOptions,
+          connectTimeout: err.requestOptions.connectTimeout,
+          receiveTimeout: err.requestOptions.receiveTimeout,
+          sendTimeout: err.requestOptions.sendTimeout,
+        ),
       );
       try {
         await _clientGetter().execute<dynamic, void>(

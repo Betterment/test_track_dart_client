@@ -1,3 +1,8 @@
+## 0.5.0
+
+* feat!: `FakeTestTrack` implements the new `login` return type and accepts `loginResult` by @mrtnrst in https://github.com/Betterment/test_track_dart_client/pull/73
+* chore: require test_track ^0.5.0 by @mrtnrst in https://github.com/Betterment/test_track_dart_client/pull/74
+
 ## 0.4.0
 
 * chore: bump TT version in support package by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/71

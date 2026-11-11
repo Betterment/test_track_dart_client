@@ -10,13 +10,13 @@ const isIdempotentOptionsKey = 'is_idempotent';
 /// A convenience class for producing a [GetRequest] that contains the
 /// [isIdempotentOptionsKey]
 class IdempotentGetRequest extends GetRequest {
-  IdempotentGetRequest(super.path)
+  IdempotentGetRequest(super.path, {super.timeouts})
     : super(options: Options(extra: {isIdempotentOptionsKey: true}));
 }
 
 /// A convenience class for producing a [PostRequest] that contains the
 /// [isIdempotentOptionsKey]
 class IdempotentPostRequest extends PostRequest {
-  IdempotentPostRequest(super.path, {required super.data})
+  IdempotentPostRequest(super.path, {required super.data, super.timeouts})
     : super(options: Options(extra: {isIdempotentOptionsKey: true}));
 }

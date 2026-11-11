@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:charlatan/charlatan.dart';
 import 'package:sturdy_http/sturdy_http.dart';
 import 'package:test/test.dart';
@@ -156,6 +158,31 @@ void main() {
               ),
               throwsA(isA<TestTrackLoginFailureException>()),
             );
+          },
+        );
+      });
+
+      group('when a call timeout is set', () {
+        setUp(() {
+          charlatan.whenPost(
+            '/api/v4/apps/${appVersionBuild.appName}/versions/${appVersionBuild.version}/builds/${appVersionBuild.buildTimestamp}/identifier',
+            (_) => Completer<CharlatanHttpResponse>().future,
+          );
+        });
+
+        test(
+          'it throws TestTrackTimeoutException and does not store login state',
+          () async {
+            await expectLater(
+              subject.call(
+                identifier: identifier,
+                visitorId: visitorId,
+                appVersionBuild: appVersionBuild,
+                timeouts: HttpTimeouts(call: const Duration(milliseconds: 100)),
+              ),
+              throwsA(isA<TestTrackTimeoutException>()),
+            );
+            expect(await dataStorageProvider.fetchLoginState(), isFalse);
           },
         );
       });

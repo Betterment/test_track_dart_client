@@ -1,3 +1,4 @@
+import 'package:sturdy_http/sturdy_http.dart';
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
 import 'package:test_track/src/domain/domain.dart';
@@ -74,6 +75,7 @@ class _FakeGetVisitorConfig implements GetVisitorConfig {
   Future<AppVisitorConfig> call({
     required String visitorId,
     required AppVersionBuild appVersionBuild,
+    HttpTimeouts? timeouts,
   }) async {
     onCall();
     return AppVisitorConfigFactory.build();

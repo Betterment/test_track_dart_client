@@ -42,6 +42,7 @@ class Login {
     required Identifier identifier,
     required String visitorId,
     required AppVersionBuild appVersionBuild,
+    HttpTimeouts? timeouts,
   }) async {
     final appVisitorConfig = await _client.execute<Json, AppVisitorConfig>(
       IdempotentPostRequest(
@@ -51,9 +52,14 @@ class Login {
           'value': identifier.value,
           'visitor_id': visitorId,
         }),
+        timeouts: timeouts,
       ),
       onResponse:
           (r) => switch (r) {
+            GenericError(:final isCallTimeout) when isCallTimeout =>
+              throw TestTrackTimeoutException(
+                (r.error!.error as CallTimeoutException).timeout,
+              ),
             OkResponse(:final response) => AppVisitorConfigMapper.fromMap(
               response,
             ),

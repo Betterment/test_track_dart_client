@@ -170,9 +170,9 @@ class TestTrack {
   /// The current [SplitRegistry]
   SplitRegistry get splitRegistry => _splitRegistry;
 
-  /// {@macro test_track_login}
+  /// Links [identifierType] and [value] to the current visitor.
   ///
-  /// Returns a [TestTrackLoginFailure] if the login fails or times out.
+  /// Returns a [TestTrackLoginFailure] instead of throwing if the login fails or times out.
   Future<TestTrackLoginResult> login({
     required String identifierType,
     required String value,

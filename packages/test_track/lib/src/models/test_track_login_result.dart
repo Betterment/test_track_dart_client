@@ -1,6 +1,6 @@
 import 'package:test_track/src/errors/errors.dart';
 
-/// The outcome of [TestTrack.login].
+/// The outcome of `TestTrack.login`.
 sealed class TestTrackLoginResult {
   const TestTrackLoginResult();
 }

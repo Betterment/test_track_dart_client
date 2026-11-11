@@ -70,6 +70,27 @@ The `logIn` method is used to ensure a consistent experience across devices. For
 - `identifier` -- The first argument is the name of the identifier. This will be a snake_case string, e.g. `"myapp_user_id"`.
 - `value` -- The second argument is a primitive value, e.g. `12345`, `"abcd"`
 
+### Timeouts
+
+All timeouts are optional and default to no limit. `defaultTimeouts` applies to every call, `initializeTimeouts` overrides it for the startup fetch, and `login(timeouts:)` overrides it for one login.
+
+```dart
+final testTrack = await TestTrack.initialize(
+    // ...
+    defaultTimeouts: const HttpTimeouts(call: Duration(seconds: 10)),
+    initializeTimeouts: const HttpTimeouts(call: Duration(seconds: 5)),
+);
+
+final result = await testTrack.login(
+    identifierType: 'myapp_user_id',
+    value: '12345',
+    timeouts: const HttpTimeouts(call: Duration(seconds: 10)),
+);
+if (result is TestTrackLoginFailure && result.isTimeout) {
+    // The existing visitor config is still in use.
+}
+```
+
 ### DataStorageProvider
 
 The [`DataStorageProvider`][data_storage_provider] is a required argument when instantiating `TestTrack`. The client will use your implementation to store the `Visitor` and their associated `SplitRegistry`. It will attempt to use these cached values when initialized in the future, and update them as the `Visitor` and `SplitRegistry` change.

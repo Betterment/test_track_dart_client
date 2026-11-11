@@ -156,6 +156,7 @@ void main() {
             subject.visitor.id,
             (await dataStorageProvider.fetchVisitor())!.id,
           );
+          expect(subject.visitor.id, isNot(appVisitorConfig.visitor.id));
         },
       );
 
@@ -358,6 +359,10 @@ void main() {
         expect(result, isA<TestTrackLoginFailure>());
         expect((result as TestTrackLoginFailure).isTimeout, isFalse);
         expect(
+          logger.infoLogs.single.message,
+          'Failed to login user, continuing to use existing app visitor config',
+        );
+        expect(
           logger.infoLogs.single.error.toString(),
           contains('ServerError'),
         );
@@ -418,32 +423,6 @@ void main() {
             expect(splitRegistryAfterLogin?.splits, isEmpty);
           },
         );
-      });
-
-      group('when linkIdentifier fails', () {
-        test('it returns a failure result and logs an info', () async {
-          charlatan.whenPost(
-            '/api/v4/apps/${appVersionBuild.appName}/versions/${appVersionBuild.version}/builds/${appVersionBuild.buildTimestamp}/identifier',
-            (request) => CharlatanHttpResponse(statusCode: 500),
-          );
-
-          final result = await subject.login(
-            identifierType: 'foo',
-            value: '123',
-          );
-
-          expect(result, isA<TestTrackLoginFailure>());
-
-          expect(
-            logger.infoLogs.single.message,
-            'Failed to login user, continuing to use existing app visitor config',
-          );
-
-          expect(
-            logger.infoLogs.single.error.toString(),
-            contains('ServerError'),
-          );
-        });
       });
     });
 

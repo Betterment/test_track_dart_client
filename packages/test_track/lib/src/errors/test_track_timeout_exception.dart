@@ -11,4 +11,7 @@ class TestTrackTimeoutException implements TestTrackException {
 
   /// A description of the timeout.
   String get message => 'No response within ${timeout.inMilliseconds} ms';
+
+  @override
+  String toString() => 'TestTrackTimeoutException: $message';
 }

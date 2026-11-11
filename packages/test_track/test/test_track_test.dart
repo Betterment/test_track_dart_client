@@ -181,10 +181,16 @@ void main() {
         () async {
           charlatan.whenGet(configPath, never);
 
-          await buildSubject(
+          subject = await buildSubject(
             defaultTimeouts: const HttpTimeouts(call: Duration(seconds: 10)),
             initializeTimeouts: shortTimeout,
           ).timeout(const Duration(seconds: 1));
+
+          expect(
+            subject.visitor.id,
+            (await dataStorageProvider.fetchVisitor())!.id,
+          );
+          expect(subject.visitor.id, isNot(appVisitorConfig.visitor.id));
         },
       );
     });
@@ -372,6 +378,8 @@ void main() {
         const identifierPath =
             '/api/v4/apps/{appName}/versions/{version}/builds/{buildTimestamp}/identifier';
         final visitorIdBefore = subject.visitor.id;
+        final splitRegistryBefore =
+            await dataStorageProvider.fetchSplitRegistry();
         charlatan.whenPost(identifierPath, never);
 
         final first = await subject.login(
@@ -382,6 +390,11 @@ void main() {
 
         expect((first as TestTrackLoginFailure).isTimeout, isTrue);
         expect(subject.visitor.id, visitorIdBefore);
+        expect(splitRegistryBefore?.splits, isNotEmpty);
+        expect(
+          (await dataStorageProvider.fetchSplitRegistry())?.splits,
+          splitRegistryBefore?.splits,
+        );
 
         charlatan.whenPost(
           identifierPath,
@@ -392,6 +405,7 @@ void main() {
                       visitor: appVisitorConfig.visitor.copyWith(
                         id: 'post-login-id',
                       ),
+                      splits: SplitRegistry.empty().splits,
                     )
                     .toMap(),
           ),
@@ -400,6 +414,10 @@ void main() {
 
         expect(second, isA<TestTrackLoginSuccess>());
         expect(subject.visitor.id, 'post-login-id');
+        expect(
+          (await dataStorageProvider.fetchSplitRegistry())?.splits,
+          isEmpty,
+        );
       });
 
       group('when linkIdentifier succeeds', () {

@@ -56,10 +56,8 @@ class Login {
       ),
       onResponse:
           (r) => switch (r) {
-            GenericError(:final isCallTimeout) when isCallTimeout =>
-              throw TestTrackTimeoutException(
-                (r.error!.error as CallTimeoutException).timeout,
-              ),
+            GenericError(:final callTimeout?) =>
+              throw TestTrackTimeoutException(callTimeout.timeout),
             OkResponse(:final response) => AppVisitorConfigMapper.fromMap(
               response,
             ),

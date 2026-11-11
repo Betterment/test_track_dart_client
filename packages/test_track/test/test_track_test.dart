@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:charlatan/charlatan.dart';
 import 'package:test/test.dart';
 import 'package:test_track/test_track.dart';
@@ -16,7 +18,10 @@ void main() {
     late bool dataStorageInitialized;
     late TestTrack subject;
 
-    Future<TestTrack> buildSubject() async {
+    Future<TestTrack> buildSubject({
+      HttpTimeouts? defaultTimeouts,
+      HttpTimeouts? initializeTimeouts,
+    }) async {
       return TestTrack.initialize(
         baseUrl: 'http://localhost',
         appVersionBuild: appVersionBuild,
@@ -24,8 +29,16 @@ void main() {
         analyticsProvider: analyticsProvider,
         customHttpAdapter: charlatan.toFakeHttpClientAdapter(),
         logger: logger,
+        defaultTimeouts: defaultTimeouts,
+        initializeTimeouts: initializeTimeouts,
       );
     }
+
+    const configPath =
+        '/api/v4/apps/{appName}/versions/{version}/builds/{buildTimestamp}/visitors/{visitorId}/config';
+    const shortTimeout = HttpTimeouts(call: Duration(milliseconds: 100));
+    Future<CharlatanHttpResponse> never(Object? _) =>
+        Completer<CharlatanHttpResponse>().future;
 
     setUp(() async {
       dataStorageInitialized = false;
@@ -127,6 +140,52 @@ void main() {
           expect(analyticsProvider.visitorsIdentified, isEmpty);
         });
       });
+    });
+
+    group('initialize timeouts', () {
+      test(
+        'it applies defaultTimeouts to the startup fetch when initializeTimeouts is null',
+        () async {
+          charlatan.whenGet(configPath, never);
+
+          subject = await buildSubject(
+            defaultTimeouts: shortTimeout,
+          ).timeout(const Duration(seconds: 1));
+
+          expect(
+            subject.visitor.id,
+            (await dataStorageProvider.fetchVisitor())!.id,
+          );
+        },
+      );
+
+      test(
+        'it logs the TestTrackTimeoutException when the startup fetch times out',
+        () async {
+          charlatan.whenGet(configPath, never);
+
+          await buildSubject(
+            initializeTimeouts: shortTimeout,
+          ).timeout(const Duration(seconds: 1));
+
+          expect(
+            logger.infoLogs.single.error,
+            isA<TestTrackTimeoutException>(),
+          );
+        },
+      );
+
+      test(
+        'initializeTimeouts overrides defaultTimeouts for the startup fetch',
+        () async {
+          charlatan.whenGet(configPath, never);
+
+          await buildSubject(
+            defaultTimeouts: const HttpTimeouts(call: Duration(seconds: 10)),
+            initializeTimeouts: shortTimeout,
+          ).timeout(const Duration(seconds: 1));
+        },
+      );
     });
 
     group('createAssignmentOverrides', () {
@@ -232,6 +291,19 @@ void main() {
         final newVisitorId = subject.visitor.id;
         expect(newVisitorId, visitorId);
       });
+
+      test(
+        'it throws TestTrackTimeoutException when the call times out',
+        () async {
+          final subject = await buildSubject();
+          charlatan.whenGet(configPath, never);
+
+          await expectLater(
+            subject.overrideVisitorId('overridden-id', timeouts: shortTimeout),
+            throwsA(isA<TestTrackTimeoutException>()),
+          );
+        },
+      );
     });
 
     group('login', () {
@@ -269,6 +341,62 @@ void main() {
         expect(linkIdentifierCalled, isTrue);
       });
 
+      test('it returns TestTrackLoginSuccess when linking succeeds', () async {
+        final result = await subject.login(identifierType: 'foo', value: '123');
+
+        expect(result, isA<TestTrackLoginSuccess>());
+      });
+
+      test('it returns a TestTrackLoginFailure for a server error', () async {
+        charlatan.whenPost(
+          '/api/v4/apps/${appVersionBuild.appName}/versions/${appVersionBuild.version}/builds/${appVersionBuild.buildTimestamp}/identifier',
+          (request) => CharlatanHttpResponse(statusCode: 500),
+        );
+
+        final result = await subject.login(identifierType: 'foo', value: '123');
+
+        expect(result, isA<TestTrackLoginFailure>());
+        expect((result as TestTrackLoginFailure).isTimeout, isFalse);
+        expect(
+          logger.infoLogs.single.error.toString(),
+          contains('ServerError'),
+        );
+      });
+
+      test('it returns a timeout failure, then a later login succeeds', () async {
+        const identifierPath =
+            '/api/v4/apps/{appName}/versions/{version}/builds/{buildTimestamp}/identifier';
+        final visitorIdBefore = subject.visitor.id;
+        charlatan.whenPost(identifierPath, never);
+
+        final first = await subject.login(
+          identifierType: 'foo',
+          value: '123',
+          timeouts: shortTimeout,
+        );
+
+        expect((first as TestTrackLoginFailure).isTimeout, isTrue);
+        expect(subject.visitor.id, visitorIdBefore);
+
+        charlatan.whenPost(
+          identifierPath,
+          (request) => CharlatanHttpResponse(
+            body:
+                appVisitorConfig
+                    .copyWith(
+                      visitor: appVisitorConfig.visitor.copyWith(
+                        id: 'post-login-id',
+                      ),
+                    )
+                    .toMap(),
+          ),
+        );
+        final second = await subject.login(identifierType: 'foo', value: '123');
+
+        expect(second, isA<TestTrackLoginSuccess>());
+        expect(subject.visitor.id, 'post-login-id');
+      });
+
       group('when linkIdentifier succeeds', () {
         test(
           'it stores the visitor and splitRegistry from the result in DataStorageProvider',
@@ -293,15 +421,18 @@ void main() {
       });
 
       group('when linkIdentifier fails', () {
-        test('it completes normally and logs an info', () async {
+        test('it returns a failure result and logs an info', () async {
           charlatan.whenPost(
             '/api/v4/apps/${appVersionBuild.appName}/versions/${appVersionBuild.version}/builds/${appVersionBuild.buildTimestamp}/identifier',
             (request) => CharlatanHttpResponse(statusCode: 500),
           );
 
-          final result = subject.login(identifierType: 'foo', value: '123');
+          final result = await subject.login(
+            identifierType: 'foo',
+            value: '123',
+          );
 
-          await expectLater(result, completes);
+          expect(result, isA<TestTrackLoginFailure>());
 
           expect(
             logger.infoLogs.single.message,

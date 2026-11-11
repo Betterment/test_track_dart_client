@@ -35,6 +35,7 @@ class OverrideVisitorId {
   Future<AppVisitorConfig?> call({
     required String visitorId,
     required AppVersionBuild appVersionBuild,
+    HttpTimeouts? timeouts,
   }) async {
     final isLoggedIn = await _dataStorageProvider.fetchLoginState();
     if (isLoggedIn) {
@@ -46,6 +47,7 @@ class OverrideVisitorId {
     return _getVisitorConfig(
       visitorId: visitorId,
       appVersionBuild: appVersionBuild,
+      timeouts: timeouts,
     );
   }
 }

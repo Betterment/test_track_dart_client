@@ -87,4 +87,7 @@ class TestTrackLoginFailureException implements TestTrackException {
 
   /// {@macro test_track_login_failure_exception}
   TestTrackLoginFailureException({this.message});
+
+  @override
+  String toString() => 'TestTrackLoginFailureException: $message';
 }

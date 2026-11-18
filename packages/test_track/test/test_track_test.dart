@@ -364,6 +364,7 @@ void main() {
 
         expect(result, isA<TestTrackLoginFailure>());
         expect((result as TestTrackLoginFailure).isTimeout, isFalse);
+        expect(result.error.toString(), contains('ServerError'));
         expect(
           logger.infoLogs.single.message,
           'Failed to login user, continuing to use existing app visitor config',
@@ -372,6 +373,20 @@ void main() {
           logger.infoLogs.single.error.toString(),
           contains('ServerError'),
         );
+      });
+
+      test('it applies defaultTimeouts to login when timeouts is null', () async {
+        subject = await buildSubject(defaultTimeouts: shortTimeout);
+        charlatan.whenPost(
+          '/api/v4/apps/{appName}/versions/{version}/builds/{buildTimestamp}/identifier',
+          never,
+        );
+
+        final result = await subject
+            .login(identifierType: 'foo', value: '123')
+            .timeout(const Duration(seconds: 1));
+
+        expect((result as TestTrackLoginFailure).isTimeout, isTrue);
       });
 
       test('it returns a timeout failure, then a later login succeeds', () async {

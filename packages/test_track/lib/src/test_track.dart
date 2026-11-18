@@ -20,7 +20,9 @@ class TestTrack {
   /// If they exist, a [Visitor] and [SplitRegistry] will
   /// be fetched from cache, and an attempt will be made
   /// to fetch the latest [AppVisitorConfig] from the
-  /// server. If this fails, the [TestTrack] instance
+  /// server. A fetch that times out is logged to [logger] as an info log
+  /// whose `error` is a [TestTrackTimeoutException].
+  /// If the fetch fails, the [TestTrack] instance
   /// will be instantiated with the cached version, or
   /// a new [Visitor] and empty [SplitRegistry] in the
   /// case that they couldn't be located in cache.
@@ -172,7 +174,8 @@ class TestTrack {
 
   /// Links [identifierType] and [value] to the current visitor.
   ///
-  /// Returns a [TestTrackLoginFailure] instead of throwing if the login fails or times out.
+  /// Returns a [TestTrackLoginFailure] when the server rejects the login or
+  /// the call times out.
   Future<TestTrackLoginResult> login({
     required String identifierType,
     required String value,

@@ -11,7 +11,7 @@ dependencies:
   collection: ^1.19.1
   crypto: ^3.0.7
   dart_mappable: ^4.6.1
-  dio: ^5.9.0
+  dio: ^5.9.1
   equatable: ^2.0.8
   meta: ^1.16.0
   sturdy_http: ^0.8.0

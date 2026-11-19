@@ -1,6 +1,6 @@
 ## 0.5.0
 
-* feat!: update FakeTestTrack for test_track 0.5.0 by @mrtnrst in https://github.com/Betterment/test_track_dart_client/pull/75
+* feat!: support HTTP timeouts in TestTrack by @mrtnrst in https://github.com/Betterment/test_track_dart_client/pull/73
 
 **Full Changelog**: https://github.com/Betterment/test_track_dart_client/compare/v0.4.0...v0.5.0
 

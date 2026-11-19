@@ -36,12 +36,10 @@ class FakeTestTrack implements TestTrack {
     SplitRegistry? splitRegistry,
     Ab ab = defaultAb,
     Vary vary = defaultVary,
-    TestTrackLoginResult loginResult = const TestTrackLoginSuccess(),
   }) : _visitor = visitor ?? Visitor.build(),
        _splitRegistry = splitRegistry ?? SplitRegistry.empty(),
        _ab = ab,
-       _vary = vary,
-       _loginResult = loginResult;
+       _vary = vary;
 
   Visitor _visitor;
 
@@ -51,12 +49,10 @@ class FakeTestTrack implements TestTrack {
 
   final Vary _vary;
 
-  final TestTrackLoginResult _loginResult;
-
   var _isLoggedIn = false;
 
-  /// Returns true if [login] has succeeded
-  /// and [logout] has not been invoked
+  /// Returns true if [login] has been invoked
+  /// but [logout] has not been invoked
   bool get isLoggedIn => _isLoggedIn;
 
   @override
@@ -87,15 +83,11 @@ class FakeTestTrack implements TestTrack {
   }
 
   @override
-  Future<TestTrackLoginResult> login({
+  Future<void> login({
     required String identifierType,
     required String value,
-    HttpTimeouts? timeouts,
   }) async {
-    if (_loginResult is TestTrackLoginSuccess) {
-      _isLoggedIn = true;
-    }
-    return _loginResult;
+    _isLoggedIn = true;
   }
 
   @override
@@ -110,10 +102,7 @@ class FakeTestTrack implements TestTrack {
   }
 
   @override
-  Future<void> overrideVisitorId(
-    String visitorId, {
-    HttpTimeouts? timeouts,
-  }) async {
+  Future<void> overrideVisitorId(String visitorId) async {
     _visitor = _visitor.copyWith(id: visitorId);
   }
 

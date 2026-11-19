@@ -94,31 +94,6 @@ void main() {
 
         expect(testTrack.isLoggedIn, isTrue);
       });
-
-      test('it returns TestTrackLoginSuccess by default', () async {
-        final result = await FakeTestTrack().login(
-          identifierType: 'identifierType',
-          value: 'value',
-        );
-
-        expect(result, isA<TestTrackLoginSuccess>());
-      });
-
-      test('it returns loginResult and stays logged out on failure', () async {
-        final failure = TestTrackLoginFailure(
-          TestTrackTimeoutException(const Duration(seconds: 1)),
-        );
-        final testTrack = FakeTestTrack(loginResult: failure);
-
-        final result = await testTrack.login(
-          identifierType: 'identifierType',
-          value: 'value',
-          timeouts: const HttpTimeouts(call: Duration(seconds: 1)),
-        );
-
-        expect(result, same(failure));
-        expect(testTrack.isLoggedIn, isFalse);
-      });
     });
 
     group('logout', () {

@@ -1,3 +1,9 @@
+## 0.5.0
+
+* feat!: support HTTP timeouts in TestTrack by @mrtnrst in https://github.com/Betterment/test_track_dart_client/pull/73
+
+**Full Changelog**: https://github.com/Betterment/test_track_dart_client/compare/v0.4.0...v0.5.0
+
 ## 0.4.0
 
 * chore: bump TT version in support package by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/71

@@ -73,4 +73,4 @@ jobs:
           dart pub global activate melos && melos bootstrap
           dart pub global activate pana
       - name: Verify pub score
-        run: melos exec --ignore=test_track_test_support -- "../../tool/verify_pub_score.sh 150"
+        run: melos exec -- "../../tool/verify_pub_score.sh 150"

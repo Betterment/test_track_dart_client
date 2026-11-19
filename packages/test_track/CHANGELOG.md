@@ -1,3 +1,10 @@
+## 0.5.0
+
+* feat!: `TestTrack.login` returns a `TestTrackLoginResult` (`TestTrackLoginSuccess` or `TestTrackLoginFailure`) instead of `void` by @mrtnrst in https://github.com/Betterment/test_track_dart_client/pull/73
+* feat!: `login` and `overrideVisitorId` take an optional `timeouts` parameter, which breaks classes that implement `TestTrack` by @mrtnrst in https://github.com/Betterment/test_track_dart_client/pull/73
+* feat: `initialize` takes `defaultTimeouts` and `initializeTimeouts` by @mrtnrst in https://github.com/Betterment/test_track_dart_client/pull/73
+* feat: add `TestTrackTimeoutException` and re-export `HttpTimeouts`; bump sturdy_http to 0.8.0 and dio to 5.9.1 by @mrtnrst in https://github.com/Betterment/test_track_dart_client/pull/73
+
 ## 0.4.0
 
 * chore: remove SystemProxyInterceptor and systemProxyGetter param by @btrautmann in https://github.com/Betterment/test_track_dart_client/pull/69

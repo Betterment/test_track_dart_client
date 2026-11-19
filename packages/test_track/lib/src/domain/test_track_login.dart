@@ -42,6 +42,7 @@ class Login {
     required Identifier identifier,
     required String visitorId,
     required AppVersionBuild appVersionBuild,
+    HttpTimeouts? timeouts,
   }) async {
     final appVisitorConfig = await _client.execute<Json, AppVisitorConfig>(
       IdempotentPostRequest(
@@ -51,9 +52,12 @@ class Login {
           'value': identifier.value,
           'visitor_id': visitorId,
         }),
+        timeouts: timeouts,
       ),
       onResponse:
           (r) => switch (r) {
+            GenericError(:final callTimeout?) =>
+              throw TestTrackTimeoutException(callTimeout.timeout),
             OkResponse(:final response) => AppVisitorConfigMapper.fromMap(
               response,
             ),
@@ -83,4 +87,7 @@ class TestTrackLoginFailureException implements TestTrackException {
 
   /// {@macro test_track_login_failure_exception}
   TestTrackLoginFailureException({this.message});
+
+  @override
+  String toString() => 'TestTrackLoginFailureException: $message';
 }

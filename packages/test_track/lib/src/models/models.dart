@@ -8,5 +8,6 @@ export 'run_ab_result.dart';
 export 'run_vary_result.dart';
 export 'split.dart';
 export 'split_registry.dart';
+export 'test_track_login_result.dart';
 export 'variant.dart';
 export 'visitor.dart';

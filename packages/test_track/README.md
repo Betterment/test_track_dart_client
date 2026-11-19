@@ -63,12 +63,36 @@ The `ab` method is used exclusively for two-way splits and feature toggles. It t
 - `context` -- is a string that the developer provides so that the test track server can record where an assignment was first created. If a call to `ab` is made in more than one place for a given split, you'll be able to see which codepath was hit first.
 - `trueVariant` -- an optional parameter that specifies which variant is the "true" variant and the other variant will be used as the default. Without the true variant, `ab` will assume that the variants for the split are named `'true'` and `'false'`.
 
-#### `.logIn(identifier, value)`
+#### `.login(identifierType:, value:)`
 
-The `logIn` method is used to ensure a consistent experience across devices. For instance, when a user logs in to your app on a new device, you should also log the user into Test Track in order to grab their existing split assignments instead of treating them like a new visitor. It takes 2 arguments.
+The `login` method is used to ensure a consistent experience across devices. For instance, when a user logs in to your app on a new device, you should also log the user into Test Track in order to grab their existing split assignments instead of treating them like a new visitor. It returns `TestTrackLoginSuccess`, or `TestTrackLoginFailure` when the server rejects the login or the call times out; on failure the existing visitor config stays in use.
 
-- `identifier` -- The first argument is the name of the identifier. This will be a snake_case string, e.g. `"myapp_user_id"`.
-- `value` -- The second argument is a primitive value, e.g. `12345`, `"abcd"`
+- `identifierType` -- The name of the identifier. This will be a snake_case string, e.g. `"myapp_user_id"`.
+- `value` -- The identifier value as a string, e.g. `"12345"`, `"abcd"`.
+- `timeouts` -- Optional timeouts for this call. See [Timeouts](#timeouts).
+
+### Timeouts
+
+All timeouts are optional and default to no limit. `defaultTimeouts` applies to every call. `initializeTimeouts` overrides it for the startup fetch, and `login(timeouts:)` and `overrideVisitorId(id, timeouts:)` override it for one call. Overrides apply per field: a null field keeps the value from `defaultTimeouts`.
+
+A startup fetch that times out is logged to `TestTrackLogger.info` with a `TestTrackTimeoutException` as `error`, and `initialize` continues with the cached visitor config, or a new visitor if none is cached.
+
+```dart
+final testTrack = await TestTrack.initialize(
+    // ...
+    defaultTimeouts: const HttpTimeouts(call: Duration(seconds: 10)),
+    initializeTimeouts: const HttpTimeouts(call: Duration(seconds: 5)),
+);
+
+final result = await testTrack.login(
+    identifierType: 'myapp_user_id',
+    value: '12345',
+    timeouts: const HttpTimeouts(call: Duration(seconds: 15)),
+);
+if (result is TestTrackLoginFailure && result.isTimeout) {
+    // The existing visitor config is still in use.
+}
+```
 
 ### DataStorageProvider
 

@@ -20,7 +20,9 @@ class TestTrack {
   /// If they exist, a [Visitor] and [SplitRegistry] will
   /// be fetched from cache, and an attempt will be made
   /// to fetch the latest [AppVisitorConfig] from the
-  /// server. If this fails, the [TestTrack] instance
+  /// server. A fetch that times out is logged to [logger] as an info log
+  /// whose `error` is a [TestTrackTimeoutException].
+  /// If the fetch fails, the [TestTrack] instance
   /// will be instantiated with the cached version, or
   /// a new [Visitor] and empty [SplitRegistry] in the
   /// case that they couldn't be located in cache.
@@ -37,6 +39,8 @@ class TestTrack {
     required AnalyticsProvider analyticsProvider,
     HttpClientAdapter? customHttpAdapter,
     TestTrackLogger? logger,
+    HttpTimeouts? defaultTimeouts,
+    HttpTimeouts? initializeTimeouts,
   }) async {
     logger ??= const SilentTestTrackLogger();
 
@@ -48,6 +52,7 @@ class TestTrack {
         RetryInterceptor(clientGetter: () => client),
       ],
       customAdapter: customHttpAdapter,
+      timeouts: defaultTimeouts,
     );
 
     final getVisitorConfig = GetVisitorConfig(
@@ -101,6 +106,7 @@ class TestTrack {
       appVisitorConfig = await getVisitorConfig(
         visitorId: visitor.id,
         appVersionBuild: appVersionBuild,
+        timeouts: initializeTimeouts,
       );
 
       visitor = appVisitorConfig.visitor;
@@ -166,31 +172,48 @@ class TestTrack {
   /// The current [SplitRegistry]
   SplitRegistry get splitRegistry => _splitRegistry;
 
-  /// {@macro test_track_login}
-  Future<void> login({
+  /// Links [identifierType] and [value] to the current visitor.
+  ///
+  /// Returns a [TestTrackLoginFailure] when the server rejects the login or
+  /// the call times out.
+  Future<TestTrackLoginResult> login({
     required String identifierType,
     required String value,
+    HttpTimeouts? timeouts,
   }) async {
     try {
       final appVisitorConfig = await _login(
         identifier: Identifier(identifierType: identifierType, value: value),
         visitorId: _visitor.id,
         appVersionBuild: _appVersionBuild,
+        timeouts: timeouts,
       );
       _updateAppVisitorConfig(appVisitorConfig);
+      return const TestTrackLoginSuccess();
     } on TestTrackLoginFailureException catch (e) {
-      _logger.info(
-        'Failed to login user, continuing to use existing app visitor config',
-        error: e.message,
-      );
+      return _loginFailed(e, e.message);
+    } on TestTrackTimeoutException catch (e) {
+      return _loginFailed(e, e.message);
     }
   }
 
+  TestTrackLoginFailure _loginFailed(TestTrackException e, String? message) {
+    _logger.info(
+      'Failed to login user, continuing to use existing app visitor config',
+      error: message,
+    );
+    return TestTrackLoginFailure(e);
+  }
+
   /// {@macro override_visitor_id}
-  Future<void> overrideVisitorId(String visitorId) async {
+  Future<void> overrideVisitorId(
+    String visitorId, {
+    HttpTimeouts? timeouts,
+  }) async {
     final config = await _overrideVisitorId(
       visitorId: visitorId,
       appVersionBuild: _appVersionBuild,
+      timeouts: timeouts,
     );
     if (config != null) {
       _updateAppVisitorConfig(config);
